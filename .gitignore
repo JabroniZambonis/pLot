@@ -1,0 +1,4 @@
+node_modules/
+knexfile.js
+.env
+.DS_Store

@@ -1,0 +1,18 @@
+{
+  "name": "pLot",
+  "version": "1.0.0",
+  "description": "Parking lot application",
+  "main": "index.js",
+  "repository": {
+    "url": "https://github.com/JabroniZambonis/pLot.git",
+    "type": "git"
+  },
+  "author": "JabroniZambonis",
+  "license": "MIT",
+  "dependencies": {
+    "native": "^0.2.0",
+    "node-less-endpoint": "^0.2.0",
+    "react": "^15.3.2",
+    "webpack": "^1.13.3"
+  }
+}
