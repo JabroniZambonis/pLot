@@ -6,8 +6,14 @@ router.get('/', users.home)
 
 router.get('/userId', users.userId)
 
-router.get('/userId/saved', users.saved)
+router.put('/userId', users.userId)
 
-router.get('/userId/saved', users.created)
+router.post('/userId/saved', users.saved)
+
+router.delete('/userId/saved', users.saved)
+
+router.post('/userId/created', users.created)
+
+router.delete('/userId/created', users.created)
 
 module.exports = router
