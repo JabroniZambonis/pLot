@@ -1,5 +1,5 @@
 var createUser = function(req, res) {
-
+  
 }
 
 var getUser = function(req, res) {
