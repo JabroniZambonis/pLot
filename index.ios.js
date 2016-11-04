@@ -4,20 +4,21 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   AppRegistry,
   StyleSheet,
   Text,
   View
-} from 'react-native';
+} from 'react-native'
+import HomeMap from './Client/Components/HomeMap'
 
 export default class pLot extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Nativee!
+          Welcome to React Nativ!
         </Text>
         <Text style={styles.instructions}>
           To get started, edit index.ios.js
@@ -26,6 +27,7 @@ export default class pLot extends Component {
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
         </Text>
+        <HomeMap />
       </View>
     );
   }
@@ -50,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('pLot', () => pLot);
+AppRegistry.registerComponent('pLot', () => pLot)
