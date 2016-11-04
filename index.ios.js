@@ -4,13 +4,14 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   AppRegistry,
   StyleSheet,
   Text,
   View
-} from 'react-native';
+} from 'react-native'
+import HomeMap from './Client/Components/HomeMap'
 
 import LoginPage from './Client/Components/Login'
 
@@ -19,7 +20,7 @@ export default class pLot extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Nativee!
+          Welcome to React Nativ!
         </Text>
         <LoginPage />
         <Text style={styles.instructions}>
@@ -29,6 +30,7 @@ export default class pLot extends Component {
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
         </Text>
+        <HomeMap />
       </View>
     );
   }
@@ -53,4 +55,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('pLot', () => pLot);
+AppRegistry.registerComponent('pLot', () => pLot)
