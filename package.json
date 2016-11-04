@@ -11,7 +11,9 @@
   "license": "MIT",
    "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "server": "node Server/server.js",
+    "server:watch": "nodemon Server/server.js"
   },
   "dependencies": {
     "axios": "^0.15.2",
