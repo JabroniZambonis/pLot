@@ -12,6 +12,8 @@ import {
   View
 } from 'react-native';
 
+import LoginPage from './Client/Components/Login'
+
 export default class pLot extends Component {
   render() {
     return (
@@ -19,6 +21,7 @@ export default class pLot extends Component {
         <Text style={styles.welcome}>
           Welcome to React Nativee!
         </Text>
+        <LoginPage />
         <Text style={styles.instructions}>
           To get started, edit index.ios.js
         </Text>
