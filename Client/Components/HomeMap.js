@@ -25,13 +25,25 @@ export default class HomeMap extends Component {
           subtitle: '456 Zamboni Ave'
         }
       ],
-      searchText: {text: 'Search for spots...'}
+      searchText: 'Search for spots...'
     }
   }
 
-  // componentDidMoutn () {
-  //   fetch('')
-  // }
+  componentDidMount () {
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.setState({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          latitudeDelta: 0.1,
+          longitudeDelta: 0.1
+        })
+      },
+      (error) => alert(error.message),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    )
+  }
 
   render () {
     return (
@@ -39,7 +51,7 @@ export default class HomeMap extends Component {
         <TextInput
           style={{height: 30, width: 300, borderColor: 'gray', borderWidth: 1}}
           onChangeText={(text) => this.setState({text})}
-          value={this.state.text}
+          placeholder={this.state.searchText}
         />
         <MapView
           region={this.state.currentLocation}
