@@ -35,7 +35,6 @@ export default class HomeMap extends Component {
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
-
         let currentLocation = {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
@@ -52,7 +51,6 @@ export default class HomeMap extends Component {
           .catch((err) => {
             console.log('err', err)
           })
-
       },
       (error) => alert(error.message),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}

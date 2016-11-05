@@ -12,7 +12,6 @@ import {
   View
 } from 'react-native'
 import HomeMap from './Client/Components/HomeMap'
-
 import LoginPage from './Client/Components/Login'
 
 export default class pLot extends Component {
