@@ -19,6 +19,7 @@ export default class pLot extends Component {
     return (
       <View style={styles.container}>
         <HomeMap />
+        <LoginPage/>
       </View>
     );
   }
