@@ -70,8 +70,14 @@ export default class HomeMap extends Component {
     console.log('searchString: ',event.nativeEvent.text)
     let searchString = event.nativeEvent.text
     return fetch(`/locations/byaddr?q=${searchString}`)
-      .then((results) => {
-        this.setState({nearbyPins: results})
+      .then((response) => {
+        // search location location
+        // array of nearby pin objects
+
+        // re-center the map at the coords of the search location
+
+        // render pins for the nearby parking spots
+
       })
       .catch((err) => {
         console.log('err', err)
