@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 
-import LoginPage from './Client/Components/Login'
+import LoginPage from './Client/Components/LoginPage'
 
 export default class pLot extends Component {
   render() {
