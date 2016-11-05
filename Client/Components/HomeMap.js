@@ -11,7 +11,7 @@ export default class HomeMap extends Component {
         latitudeDelta: 0.1,
         longitudeDelta: 0.1
       },
-      pins: [
+      nearbyPins: [
         {
           latitude: 30.26,
           longitude: -97.74,
@@ -42,6 +42,15 @@ export default class HomeMap extends Component {
         }
 
         this.setState({currentLocation: currentLocation})
+
+        fetch(`/locations/bycoords?long=${position.coords.longitude}&lat=${position.coords.latitude}`)
+        .then((pins) => {
+          this.setState({nearbyPins: pins})
+        })
+        .catch((err) => {
+          console.log('err',err)
+        })
+        
       },
       (error) => alert(error.message),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
@@ -65,7 +74,7 @@ export default class HomeMap extends Component {
         />
         <MapView
           region={this.state.currentLocation}
-          annotations={this.state.pins}
+          annotations={this.state.nearbyPins}
           style={{height: 500, width: 300}}
           showsUserLocation={true}
         />
