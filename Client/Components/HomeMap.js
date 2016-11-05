@@ -5,6 +5,7 @@ export default class HomeMap extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      currentUser: {},
       currentLocation: {
         latitude: 0,
         longitude: 0,
@@ -31,6 +32,7 @@ export default class HomeMap extends Component {
   }
 
   componentDidMount () {
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
 
@@ -43,14 +45,14 @@ export default class HomeMap extends Component {
 
         this.setState({currentLocation: currentLocation})
 
-        fetch(`/locations/bycoords?long=${position.coords.longitude}&lat=${position.coords.latitude}`)
-        .then((pins) => {
-          this.setState({nearbyPins: pins})
-        })
-        .catch((err) => {
-          console.log('err',err)
-        })
-        
+        return fetch(`/locations/bycoords?long=${position.coords.longitude}&lat=${position.coords.latitude}`)
+          .then((pins) => {
+            this.setState({nearbyPins: pins})
+          })
+          .catch((err) => {
+            console.log('err', err)
+          })
+
       },
       (error) => alert(error.message),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
@@ -64,6 +66,18 @@ export default class HomeMap extends Component {
     // console.log('watchID: ',this.watchID)
   }
 
+  searchLocationSubmit (event) {
+    console.log('searchString: ',event.nativeEvent.text)
+    let searchString = event.nativeEvent.text
+    return fetch(`/locations/byaddr?q=${searchString}`)
+      .then((results) => {
+        this.setState({nearbyPins: results})
+      })
+      .catch((err) => {
+        console.log('err', err)
+      })
+  }
+
   render () {
     return (
       <View>
@@ -71,6 +85,7 @@ export default class HomeMap extends Component {
           style={{height: 30, width: 300, borderColor: 'gray', borderWidth: 1}}
           onChangeText={(text) => this.setState({text})}
           placeholder={this.state.searchText}
+          onSubmitEditing={(event) => this.searchLocationSubmit(event)}
         />
         <MapView
           region={this.state.currentLocation}
