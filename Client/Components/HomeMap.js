@@ -6,8 +6,8 @@ export default class HomeMap extends Component {
     super(props)
     this.state = {
       currentLocation: {
-        latitude: 30.26,
-        longitude: -97.74,
+        latitude: 0,
+        longitude: 0,
         latitudeDelta: 0.1,
         longitudeDelta: 0.1
       },
@@ -25,24 +25,34 @@ export default class HomeMap extends Component {
           subtitle: '456 Zamboni Ave'
         }
       ],
-      searchText: 'Search for spots...'
+      searchText: 'Search for spots...',
+      lastPosition: {}
     }
   }
 
   componentDidMount () {
-
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        this.setState({
+
+        let currentLocation = {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
           latitudeDelta: 0.1,
           longitudeDelta: 0.1
-        })
+        }
+
+        this.setState({currentLocation: currentLocation})
       },
       (error) => alert(error.message),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
     )
+
+    //Probably not needed for now
+    // this.watchID = navigator.geolocation.watchPosition((position) => {
+    //   let lastPosition = JSON.stringify(position);
+    //   this.setState({lastPosition});
+    // })
+    // console.log('watchID: ',this.watchID)
   }
 
   render () {
