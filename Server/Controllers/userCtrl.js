@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
-
 const User = require('../Models/usersModel')
+const db = require('../db.js')
 
 exports.createUser = function(req, res) {
+  console.log("˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜: ", req.body)
   new User({name: req.body.name,
     photo: req.body.photo,
     email: req.body.email,
@@ -11,6 +12,7 @@ exports.createUser = function(req, res) {
       .save()
       .then(function(data) {
         console.log("createUser add User successful: ", data)
+        res.send("Your mom is in my database bro")
       })
       .catch(function(err) {
         console.log("ERROR createUser add User: ", err)
