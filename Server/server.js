@@ -10,8 +10,10 @@ const bodyParser = require('body-parser')
 //app level middleware
 
 app.use(bodyParser.urlencoded({extended: false}))
-
 app.use(bodyParser.json())
+
+const authRouter = require('./routes/authRouter')
+const bodyParser = require('body-parser')
 
 app.get('/test', function (req, res) {
   res.send('Hey there')
@@ -19,6 +21,7 @@ app.get('/test', function (req, res) {
 
 app.use('/users', userRouter) //Mounts route for 'users'
 app.use('/locations', locationRouter)
+app.use('/auth', authRouter)
 
 app.listen(process.env.PORT, () =>
   console.log(`Running at http://localhost:${process.env.PORT}`)
