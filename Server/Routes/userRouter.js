@@ -6,22 +6,22 @@ counst router = express.Router()
 router.route('/')
   .post(users.createUser) //add user
 
-router.route('/userId')
+router.route('/:userId')
   .get(users.getUser) //get user
 
-router.route('/userId')
+router.route('/:userId')
   .put(users.updateUser) //update user information
 
-router.route('/userId/saved')
+router.route('/:userId/saved')
   .post(users.createPin) //add new pin
 
-router.route('/userId/saved')
+router.route('/:userId/saved')
   .delete(users.deletePin) //delete pin
 
-router.route('/userId/created')
+router.route('/:userId/created')
   .post(users.createSpot) //add new spot
 
-router.route('/userId/created')
+router.route('/:userId/created')
   .delete(users.deleteSpot) //delete spot
 
 module.exports = router
