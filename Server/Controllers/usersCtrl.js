@@ -4,10 +4,19 @@ var User = require('../Models/usersModel')
 
 var createUser = function(req, res) {
   new User({name: req.body.name, photo: req.body.photo, email: req.body.email, fbId: req.body.fbId, googleId: req.body.googleId})
+    .save()
+    .then(function(data) {
+      console.log("createUser add User successful: ", data)
+    })
+    .catch(function(err) {
+      console.log("ERROR createUser add User: ", err)
+    })
 }
 
 var getUser = function(req, res) {
+  //Take in name
   return User.find({ name: req.body.name }) //Can take a callback as a second argument if needed
+  //Return what? May need to utilize callback to return data in specific format
 }
 
 var updateUser = function(req, res) {
