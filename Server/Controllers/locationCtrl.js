@@ -30,7 +30,3 @@ exports.addPhoto = function (req, res) {
 exports.addReview = function (req, res) {
 
 }
-
-
-
-
