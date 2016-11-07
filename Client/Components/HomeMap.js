@@ -119,6 +119,7 @@ export default class HomeMap extends Component {
           style={{height: 500, width: 300}}
           showsUserLocation={true}
         />
+        <CreateLocation addLocation={this.addLocation} />
       </View>
     )
   }
