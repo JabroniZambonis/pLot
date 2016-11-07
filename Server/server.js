@@ -3,7 +3,7 @@ require('dotenv').config({silent: true})
 
 const express = require('express')
 const app = express()
-const userRouter = require('/routes/userRouter')
+const userRouter = require('./routes/userRouter')
 const locationRouter = require('./routes/locationRouter')
 
 app.get('/test', function (req, res) {
