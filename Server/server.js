@@ -5,15 +5,13 @@ const express = require('express')
 const app = express()
 const userRouter = require('./routes/userRouter')
 const locationRouter = require('./routes/locationRouter')
+const authRouter = require('./routes/authRouter')
 const bodyParser = require('body-parser')
 
 //app level middleware
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
-
-const authRouter = require('./routes/authRouter')
-const bodyParser = require('body-parser')
 
 app.get('/test', function (req, res) {
   res.send('Hey there')
