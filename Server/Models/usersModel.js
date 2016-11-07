@@ -10,9 +10,9 @@ var userSchema = mongoose.Schema({
     fbId: type: String,
     googleId: type: String
     createdPins: [{type:Schema.ObjectId, ref:'locations'}],
-    savedPins: ,
+    savedPins: [],
     createdSpots: [],
-    savedSpots: ,
+    savedSpots: [],
 });
 
 var user = mongoose.model('User', userSchema)

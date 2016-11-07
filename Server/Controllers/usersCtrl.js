@@ -23,7 +23,7 @@ var getUser = function(req, res) {
 }
 
 var updateUser = function(req, res) {
-  //What should they be able to update
+  //What should they be able to update?
 
   User.update({ name: req.body.name},
     { email: req.body.email },
@@ -37,7 +37,9 @@ var updateUser = function(req, res) {
 }
 
 var createPin = function(req, res) {
+  let pinArray = []
   //Query user to pull pin array, push into array variable
+  User.find({ name: req.body.name}, function())
 
   //push req.body.pin into array variable
 
