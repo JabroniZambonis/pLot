@@ -7,8 +7,8 @@ var userSchema = mongoose.Schema({
     name: {type: String, required: true},
     photo: {type: String, required: true},
     email: {type: String, required: true, unique: true},
-    fbId: type: String,
-    googleId: type: String
+    fbId: {type: String},
+    googleId: {type: String},
     createdPins: [{type:Schema.ObjectId, ref:'locations'}],
     savedPins: [],
     createdSpots: [],
