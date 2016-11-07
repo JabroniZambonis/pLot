@@ -14,7 +14,7 @@ export default class FBlogin extends Component {
     return (
       <View>
         <LoginButton
-          readPermissions={["public_profile"]}
+          readPermissions={["public_profile email"]}
           onLoginFinished={
             (error, result) => {
               if (error) {
