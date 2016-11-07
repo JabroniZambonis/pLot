@@ -10,26 +10,40 @@ import {
 } from 'react-native' 
       
 export default class FBlogin extends Component {
+
+  constructor(props) {
+    super(props)
+  }
+
+  finishedLogin (error, result) {
+    if (error) {
+      alert('Login failed with error: ' + error);
+    } else if (result.isCancelled) {
+      alert('Login was cancelleed')
+    } else {
+      AccessToken.getCurrentAccessToken()
+        .then( data => {
+          console.log('Access Token: ', data.accessToken)
+         return fetch('/auth', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              fbAccessToken: data.accessToken
+            })
+          })
+        })
+    }
+  }
+
   render() {
     return (
       <View>
         <LoginButton
           readPermissions={["public_profile email"]}
-          onLoginFinished={
-            (error, result) => {
-              if (error) {
-                console.log("Login failed with error: " + error);
-              } else if (result.isCancelled) {
-                alert("Login was cancelled");
-              } else {
-                // alert("Login was successful with permissions: " + result.grantedPermissions)
-                AccessToken.getCurrentAccessToken().then(
-                  (data) => {
-                    console.log("Access Token:", data.accessToken)
-                  })
-              }
-            }
-          }
+          onLoginFinished={this.finishedLogin.bind(this)}
           onLogoutFinished={() => alert("User logged out")}/>
       </View>
     );
