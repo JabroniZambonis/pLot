@@ -2,7 +2,7 @@ const request = require('request-promise')
 const baseGoogleURL = 
   `https://maps.googleapis.com/maps/api/geocode/json?key=${process.env.GOOGLE_API_KEY}`
 exports.create = function (req, res) {
-  var user = req.name, email = req.email, 
+
 }
 
 exports.findByCoords = function (req, res) {

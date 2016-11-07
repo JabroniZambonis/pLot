@@ -1,6 +1,7 @@
 const express = require('express')
-counst router = express.Router()
 const users = require('/Controllers/userCtrl')
+
+counst router = express.Router()
 
 router.route('/')
   .post(users.createUser) //add user
@@ -20,7 +21,7 @@ router.route('/userId/saved')
 router.route('/userId/created')
   .post(users.createSpot) //add new spot
 
-router.route('/userId/created') 
+router.route('/userId/created')
   .delete(users.deleteSpot) //delete spot
 
 module.exports = router
