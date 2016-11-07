@@ -1,7 +1,7 @@
 const express = require('express')
-const users = require('/Controllers/userCtrl')
+const users = require('../Controllers/userCtrl')
 
-counst router = express.Router()
+const router = express.Router()
 
 router.route('/')
   .post(users.createUser) //add user

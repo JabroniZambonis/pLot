@@ -1,8 +1,8 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var User = require('../Models/usersModel')
+const User = require('../Models/usersModel')
 
-var createUser = function(req, res) {
+exports.createUser = function(req, res) {
   new User({name: req.body.name,
     photo: req.body.photo,
     email: req.body.email,
@@ -17,12 +17,12 @@ var createUser = function(req, res) {
       })
 }
 
-var getUser = function(req, res) {
+exports.getUser = function(req, res) {
   return User.find({ name: req.body.name }) //Can take a callback as a second argument if needed
   //Return what? May need to utilize callback to return data in specific format
 }
 
-var updateUser = function(req, res) {
+exports.updateUser = function(req, res) {
   //What should they be able to update?
 
   User.update({ name: req.body.name},
@@ -36,17 +36,17 @@ var updateUser = function(req, res) {
   });
 }
 
-var createPin = function(req, res) {
+exports.createPin = function(req, res) {
   let pinArray = []
   //Query user to pull pin array, push into array variable
-  User.find({ name: req.body.name}, function())
+  // User.find({ name: req.body.name}, function())
 
   //push req.body.pin into array variable
 
   //Update user field with pin array
 }
 
-var deletePin = function(req, res) {
+exports.deletePin = function(req, res) {
   //Query user to pull pin array, find index of req.body.pin
 
   //splice req.body.pin out of pin array with index
@@ -54,7 +54,7 @@ var deletePin = function(req, res) {
   //Update user field with pin array
 }
 
-var createSpot = function(req, res) {
+exports.createSpot = function(req, res) {
   //Query user to pull spot array, push into array variable
 
   //push req.body.spot into array variable
@@ -62,12 +62,10 @@ var createSpot = function(req, res) {
   //Update user field with spot array
 }
 
-var deleteSpot = function(req, res) {
+exports.deleteSpot = function(req, res) {
   //Query user to pull spot array, find index of req.body.spot
 
   //splice req.body.spot out of spot array with index
 
   //Update user field with spot array
 }
-
-module.exports = userCtrl
