@@ -3,7 +3,6 @@ const User = require('../Models/usersModel')
 const db = require('../db.js')
 
 exports.createUser = function(req, res) {
-  console.log("˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜_˜: ", req.body)
   new User({name: req.body.name,
     photo: req.body.photo,
     email: req.body.email,
@@ -11,17 +10,19 @@ exports.createUser = function(req, res) {
     googleId: req.body.googleId})
       .save()
       .then(function(data) {
-        console.log("createUser add User successful: ", data)
-        res.send("Your mom is in my database bro")
+        res.status(200).send(data)
       })
       .catch(function(err) {
-        console.log("ERROR createUser add User: ", err)
+        console.log("ERROR, USER NOT CREATED: ", err)
       })
 }
 
 exports.getUser = function(req, res) {
-  return User.find({ name: req.body.name }) //Can take a callback as a second argument if needed
-  //Return what? May need to utilize callback to return data in specific format
+  console.log(req)
+  User.find({_id: req.params.userId}, function(err, docs) {
+    if (!err) res.status(200).send(docs)
+    else console.log("ERROR getUser: ", err)
+  })
 }
 
 exports.updateUser = function(req, res) {
