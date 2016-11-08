@@ -1,9 +1,10 @@
+
 import React, { Component } from 'react'
 import {
   View,
-  Text  
+  Text
 
-} from 'react-native' 
+} from 'react-native'
 import FBlogin from './FBlogin'
 
 export default class LoginPage extends Component {
@@ -13,11 +14,10 @@ export default class LoginPage extends Component {
 
   render() {
     return (
-      <View>        
+      <View>
         <Text> THIS WORKS! </Text>
         <FBlogin setUser={this.props.setUser}/>
-      </View>  
+      </View>
     )
   }
 }
-
