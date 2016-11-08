@@ -25,17 +25,16 @@ exports.getUser = function(req, res) {
 }
 
 exports.updateUser = function(req, res) {
-  //What should they be able to update?
 
-  // User.update({ name: req.body.name},
-  //   { email: req.body.email },
-  //   { photo: req.body.photo },
-  //   function (err, raw) {
-  //     if (err) {
-  //       console.log(err)
-  //     }
-  //     res.send('ERROR updateUser: ', raw);
-  // });
+  User.findByIdAndUpdate(req.body._id,
+    { email: req.body.email,
+    { photo: req.body.photo },
+    function (err, result) {
+      if (err) {
+        console.log(err)
+      }
+      res.status(201).send(result);
+  });
 }
 
 exports.createPin = function(req, res) {
