@@ -7,7 +7,6 @@ const baseGoogleURL =
   `https://maps.googleapis.com/maps/api/geocode/json?key=${process.env.GOOGLE_API_KEY}`
 
 exports.create = function (req, res) {
-  
   const searchURL = baseGoogleURL + `&latlng=${req.body.lat},${req.body.long}`
 
   console.log('search: ',searchURL)
@@ -16,8 +15,20 @@ exports.create = function (req, res) {
     .then((response) => {
       const resultAddress = JSON.parse(response).results[0].formatted_address
 
-      console.log('response address: ',resultAddress)
-      
+      new Location({
+        address: resultAddress,
+        rating: 0,
+        photos: []
+        description: 
+        loc:
+      })
+      .save()
+      .then((data) => {
+        console.log('Created location: ', data)
+      })
+      .catch((err) => {
+        console.log('Location not saved: ',err)
+      })
     })
     .catch((err) => {
       console.log('create location error: ',err)
@@ -25,7 +36,15 @@ exports.create = function (req, res) {
 }
 
 exports.findByCoords = function (req, res) {
-
+  const searchURL = baseGoogleURL + `&latlng=${req.body.lat},${req.body.long}`
+  request(searchURL)
+    .then((response) => {
+      const resultAddress = JSON.parse(response).results[0].formatted_address 
+      res.json(resultAddress)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 }
 
 exports.findByAddr = function (req, res) {
