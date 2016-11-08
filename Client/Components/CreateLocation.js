@@ -6,6 +6,7 @@ export default class CreateLocation extends Component {
     super(props)
     this.state = {
       modalVisible: false,
+      description: 'How much space, hours, etc',
       address: 'fetching address...'
     }
     this.submitLocation = this.submitLocation.bind(this)
@@ -28,7 +29,12 @@ export default class CreateLocation extends Component {
     })
   }
 
-  submitLocation (location) {
+  submitLocation () {
+    let locationObj = {}
+    locationObj.address = this.state.address
+    locationObj.description = this.state.description
+    locationObj.loc = [this.props.currentLocation.longitude, this.props.currentLocation.latitude]
+
     fetch('http://localhost:3000/locations', {
       method: 'POST',
       headers: {
@@ -36,7 +42,7 @@ export default class CreateLocation extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        location: location
+        location: locationObj
       })
     })
   }
@@ -45,7 +51,11 @@ export default class CreateLocation extends Component {
     return (
       <View>
         <TouchableHighlight
-          onPress={() => {this.props.addLocation(); this.setModalVisible(!this.state.modalVisible); this.getAddressByCoords(this.props.currentLocation.latitude, this.props.currentLocation.longitude)}}
+          onPress={() => {
+            this.props.addLocation();
+            this.setModalVisible(!this.state.modalVisible);
+            this.getAddressByCoords(this.props.currentLocation.latitude, this.props.currentLocation.longitude)
+          }}
         >
           <Text style={styles.buttonStyle}>Add</Text>
         </TouchableHighlight>
@@ -58,17 +68,25 @@ export default class CreateLocation extends Component {
         >
           <View style={{marginTop: 22}}>
             <View style={styles.createForm}>
+
               <Text style={styles.createFormHeader}>Tell us about this spot</Text>
+              
               <Text>{this.state.address}</Text>
-              <TextInput style={{height: 30, width: 300, borderColor: '#d7d7d7', borderWidth: 1}}>
+
+              <TextInput
+                style={{height: 30, width: 300, borderColor: '#d7d7d7', borderWidth: 1}}
+                onChange={(event) => this.setState({description: event.nativeEvent.text})}
+              >
               </TextInput>
+
               <TouchableHighlight>
                 <Text onPress={this.submitLocation}>Submit</Text>
               </TouchableHighlight>
+
               <TouchableHighlight onPress={() => this.setModalVisible(!this.state.modalVisible)}>
                 <Text style={styles.createFormClose}>close</Text>
               </TouchableHighlight>
-              
+
             </View>
           </View>
         </Modal>
