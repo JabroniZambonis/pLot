@@ -5,7 +5,8 @@ export default class CreateLocation extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      modalVisible: false
+      modalVisible: false,
+      address: 'fetching address...'
     }
     this.submitLocation = this.submitLocation.bind(this)
     this.getAddressByCoords = this.getAddressByCoords.bind(this)
@@ -16,21 +17,15 @@ export default class CreateLocation extends Component {
   }
 
   getAddressByCoords (lat, long) {
-    fetch('http://localhost:3000/bycoords', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: {
-        lat: lat,
-        long: long
-      }
-    })
+    fetch(`http://localhost:3000/locations/googlebycoords?lat=${lat}&long=${long}`)
+    .then((response) => response.json())
     .then((data) => {
-      console.log('Got data: ',data)
+      console.log('Got data: ', data)
+      this.setState({address: data})
     })
-    .catch(console.log('this did not work'))
+    .catch((err) => {
+      console.log('This did not work: ', err)
+    })
   }
 
   submitLocation (location) {
@@ -50,10 +45,12 @@ export default class CreateLocation extends Component {
     return (
       <View>
         <TouchableHighlight
-          onPress={() => {this.props.addLocation(); this.setModalVisible(!this.state.modalVisible)}}
+          onPress={() => {this.props.addLocation(); this.setModalVisible(!this.state.modalVisible); this.getAddressByCoords(this.props.currentLocation.latitude, this.props.currentLocation.longitude)}}
         >
           <Text style={styles.buttonStyle}>Add</Text>
         </TouchableHighlight>
+
+
         <Modal
           animationType={"slide"}
           transparent={true}
@@ -62,6 +59,7 @@ export default class CreateLocation extends Component {
           <View style={{marginTop: 22}}>
             <View style={styles.createForm}>
               <Text style={styles.createFormHeader}>Tell us about this spot</Text>
+              <Text>{this.state.address}</Text>
               <TextInput style={{height: 30, width: 300, borderColor: '#d7d7d7', borderWidth: 1}}>
               </TextInput>
               <TouchableHighlight>
@@ -70,9 +68,7 @@ export default class CreateLocation extends Component {
               <TouchableHighlight onPress={() => this.setModalVisible(!this.state.modalVisible)}>
                 <Text style={styles.createFormClose}>close</Text>
               </TouchableHighlight>
-              <TouchableHighlight onPress={() => this.getAddressByCoords(this.props.currentLocation.latitude, this.props.currentLocation.longitude)}>
-                <Text style={styles.createFormClose}>test</Text>
-              </TouchableHighlight>
+              
             </View>
           </View>
         </Modal>
