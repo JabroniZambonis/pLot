@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, AsyncStorage, StyleSheet } from 'react-native'
 import HomeMap from './HomeMap'
 import LoginPage from './LoginPage'
+
 
 
 
@@ -10,8 +11,8 @@ export default class App extends Component {
   constructor(props) {
     super(props) 
     this.state = {
-      userToken: {},
-      userObj: {}
+      userToken:'',
+      userObj: ''
     }
   }
 
@@ -20,7 +21,9 @@ export default class App extends Component {
       userToken: userInfo.accessToken, 
       userObj: userInfo.user
       })
+    AsyncStorage.setItem('pLotLoginKey',userInfo.accessToken)
     console.log('this is the state after Set User', this.state)
+    })
   }
 
   render () {
