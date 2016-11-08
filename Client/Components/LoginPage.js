@@ -15,7 +15,7 @@ export default class LoginPage extends Component {
     return (
       <View>        
         <Text> THIS WORKS! </Text>
-        <FBlogin />
+        <FBlogin setUser={this.props.setUser}/>
       </View>  
     )
   }
