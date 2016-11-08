@@ -18,7 +18,6 @@ exports.createUser = function(req, res) {
 }
 
 exports.getUser = function(req, res) {
-  console.log(req)
   User.find({_id: req.params.userId}, function(err, docs) {
     if (!err) res.status(200).send(docs)
     else console.log("ERROR getUser: ", err)
