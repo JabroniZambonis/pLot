@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, MapView, TextInput } from 'react-native'
+import CreateLocation from './CreateLocation'
 
 export default class HomeMap extends Component {
   constructor(props) {
@@ -29,6 +30,7 @@ export default class HomeMap extends Component {
       searchText: 'Search for spots...',
       lastPosition: {}
     }
+    this.addLocation = this.addLocation.bind(this)
   }
 
   componentDidMount () {
@@ -38,8 +40,8 @@ export default class HomeMap extends Component {
         let currentLocation = {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
-          latitudeDelta: 0.1,
-          longitudeDelta: 0.1
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01
         }
 
         this.setState({currentLocation: currentLocation})
@@ -82,6 +84,25 @@ export default class HomeMap extends Component {
       })
   }
 
+  addLocation () {
+    let lat = this.state.currentLocation.latitude
+    let long = this.state.currentLocation.longitude
+
+    let newPin = {
+      latitude: lat,
+      longitude: long,
+      animateDrop: true,
+      draggable: true
+    }
+
+    let newNearby = this.state.nearbyPins.slice()
+
+    newNearby.push(newPin)
+    this.setState({
+      nearbyPins: newNearby
+    })
+  }
+
   render () {
     return (
       <View>
@@ -96,6 +117,10 @@ export default class HomeMap extends Component {
           annotations={this.state.nearbyPins}
           style={{height: 500, width: 300}}
           showsUserLocation={true}
+        />
+        <CreateLocation
+          addLocation={this.addLocation}
+          currentLocation={this.state.currentLocation}
         />
       </View>
     )

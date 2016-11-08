@@ -8,6 +8,9 @@ router.route('/')
 router.route('/bycoords')
   .get(locations.findByCoords)
 
+router.route('/googlebycoords')
+  .get(locations.searchGoogleByCoords)
+
 router.route('/byaddr')
   .get(locations.findByAddr)
 
