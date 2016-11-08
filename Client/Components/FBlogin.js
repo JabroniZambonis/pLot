@@ -24,17 +24,26 @@ export default class FBlogin extends Component {
       AccessToken.getCurrentAccessToken()
         .then( (data) => {
           console.log('Access Token: ', data.accessToken)
-          return fetch('/auth', {
+          return fetch('http://localhost:3000/auth', {
             method: 'POST',
-            body: data.accessToken
-          })
-        .then( res => {
-          console.log('RES? ', res)
+            headers:{
+               'Accept': 'application/json',
+               'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              fbAccessToken: data.accessToken
+            })
         })
+        .then( (response) => response.json())
+        .then( (data) => {
+          console.log('DATA', data)
         })
-      }   
-    }
-  
+        .catch( (err) => {
+          console.log(err)
+        })
+      })
+  }
+}
 
   render() {
     return (
@@ -47,19 +56,3 @@ export default class FBlogin extends Component {
     );
   }
 };
-
-
-// console.log('Access Token: ', data.accessToken)
-//          return fetch('/auth', {
-//             method: 'POST',
-//             headers: {
-//               'Accept': 'application/json',
-//               'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify({
-//               'fbAccessToken': data.accessToken
-//             })
-//           })
-//          .then( (data) => {
-//           console.log('JWT REs', data)
-//         })
