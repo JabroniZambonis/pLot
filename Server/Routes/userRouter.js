@@ -8,14 +8,13 @@ const isAuthenticated = function(req, res, next) {
   const token = req.get("Authorization")
 
   const decoded = jwt.decode(token)
-  // console.log("token successfuly decoded: ", decoded, "\n")
 
   if (typeof decoded === 'object') {
-    console.log("token successfuly decoded: ", decoded, "\n")
+    console.log("token successfuly decoded: ", decoded)
     res.status(200)
     next()
   } else {
-    console.log("ERROR, INCORRECT ACCESS TOKEN \n")
+    console.log("ERROR, INCORRECT ACCESS TOKEN")
     res.status(400).end()
 
   }
