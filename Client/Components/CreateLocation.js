@@ -15,7 +15,7 @@ export default class CreateLocation extends Component {
   }
 
   submitCoordinates (lat, long) {
-    fetch('/locations/', {
+    fetch('http://localhost:3000/locations', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

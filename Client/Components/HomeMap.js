@@ -85,7 +85,6 @@ export default class HomeMap extends Component {
   }
 
   addLocation () {
-    console.log('pressed')
     let lat = this.state.currentLocation.latitude
     let long = this.state.currentLocation.longitude
 
