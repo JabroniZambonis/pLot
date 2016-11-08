@@ -1,14 +1,23 @@
-require('../db')
+const mongoose = require('mongoose')
+const Location = require('../Models/locations')
+const db = require('../db')
 const request = require('request-promise')
+
 const baseGoogleURL = 
   `https://maps.googleapis.com/maps/api/geocode/json?key=${process.env.GOOGLE_API_KEY}`
 
 exports.create = function (req, res) {
+  
   const searchURL = baseGoogleURL + `&latlng=${req.body.lat},${req.body.long}`
+
+  console.log('search: ',searchURL)
+
   request(searchURL)
     .then((response) => {
-      console.log(response.results[0].formatted_address)
-      res.json(response.results[0].formatted_address)
+      const resultAddress = JSON.parse(response).results[0].formatted_address
+
+      console.log('response address: ',resultAddress)
+      
     })
     .catch((err) => {
       console.log('create location error: ',err)
