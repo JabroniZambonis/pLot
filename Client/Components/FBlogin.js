@@ -22,21 +22,19 @@ export default class FBlogin extends Component {
       alert('Login was cancelleed')
     } else {
       AccessToken.getCurrentAccessToken()
-        .then( data => {
+        .then( (data) => {
           console.log('Access Token: ', data.accessToken)
-         fetch('/auth', {
+          return fetch('/auth', {
             method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              fbAccessToken: data.accessToken
-            })
+            body: data.accessToken
           })
+        .then( res => {
+          console.log('RES? ', res)
         })
+        })
+      }   
     }
-  }
+  
 
   render() {
     return (
@@ -49,3 +47,19 @@ export default class FBlogin extends Component {
     );
   }
 };
+
+
+// console.log('Access Token: ', data.accessToken)
+//          return fetch('/auth', {
+//             method: 'POST',
+//             headers: {
+//               'Accept': 'application/json',
+//               'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({
+//               'fbAccessToken': data.accessToken
+//             })
+//           })
+//          .then( (data) => {
+//           console.log('JWT REs', data)
+//         })
