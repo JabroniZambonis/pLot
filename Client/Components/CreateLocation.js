@@ -7,14 +7,33 @@ export default class CreateLocation extends Component {
     this.state = {
       modalVisible: false
     }
-    this.submitCoordinates = this.submitCoordinates.bind(this)
+    this.submitLocation = this.submitLocation.bind(this)
+    this.getAddressByCoords = this.getAddressByCoords.bind(this)
   }
 
   setModalVisible (visible) {
     this.setState({modalVisible: visible})
   }
 
-  submitCoordinates (lat, long) {
+  getAddressByCoords (lat, long) {
+    fetch('http://localhost:3000/bycoords', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: {
+        lat: lat,
+        long: long
+      }
+    })
+    .then((data) => {
+      console.log('Got data: ',data)
+    })
+    .catch(console.log('this did not work'))
+  }
+
+  submitLocation (location) {
     fetch('http://localhost:3000/locations', {
       method: 'POST',
       headers: {
@@ -22,8 +41,7 @@ export default class CreateLocation extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        lat: lat,
-        long: long
+        location: location
       })
     })
   }
@@ -47,10 +65,13 @@ export default class CreateLocation extends Component {
               <TextInput style={{height: 30, width: 300, borderColor: '#d7d7d7', borderWidth: 1}}>
               </TextInput>
               <TouchableHighlight>
-                <Text onPress={() => this.submitCoordinates(this.props.currentLocation.latitude, this.props.currentLocation.longitude)}>Submit</Text>
+                <Text onPress={this.submitLocation}>Submit</Text>
               </TouchableHighlight>
               <TouchableHighlight onPress={() => this.setModalVisible(!this.state.modalVisible)}>
                 <Text style={styles.createFormClose}>close</Text>
+              </TouchableHighlight>
+              <TouchableHighlight onPress={() => this.getAddressByCoords(this.props.currentLocation.latitude, this.props.currentLocation.longitude)}>
+                <Text style={styles.createFormClose}>test</Text>
               </TouchableHighlight>
             </View>
           </View>

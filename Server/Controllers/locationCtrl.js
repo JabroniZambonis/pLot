@@ -11,40 +11,46 @@ exports.create = function (req, res) {
 
   console.log('search: ',searchURL)
 
-  request(searchURL)
-    .then((response) => {
-      const resultAddress = JSON.parse(response).results[0].formatted_address
+  // request(searchURL)
+  //   .then((response) => {
+  //     const resultAddress = JSON.parse(response).results[0].formatted_address
 
-      new Location({
-        address: resultAddress,
-        rating: 0,
-        photos: []
-        description: 
-        loc:
-      })
-      .save()
-      .then((data) => {
-        console.log('Created location: ', data)
-      })
-      .catch((err) => {
-        console.log('Location not saved: ',err)
-      })
-    })
-    .catch((err) => {
-      console.log('create location error: ',err)
-    })
+  //     new Location({
+  //       address: resultAddress,
+  //       rating: 0,
+  //       photos: []
+  //       description: 
+  //       loc:
+  //     })
+  //     .save()
+  //     .then((data) => {
+  //       console.log('Created location: ', data)
+  //     })
+  //     .catch((err) => {
+  //       console.log('Location not saved: ',err)
+  //     })
+  //   })
+  //   .catch((err) => {
+  //     console.log('create location error: ',err)
+  //   })
 }
 
-exports.findByCoords = function (req, res) {
+exports.searchGoogleByCoords = function() {
+  console.log('req', req.body.lat)
   const searchURL = baseGoogleURL + `&latlng=${req.body.lat},${req.body.long}`
   request(searchURL)
     .then((response) => {
       const resultAddress = JSON.parse(response).results[0].formatted_address 
+      console.log('result address:', resultAddress)
       res.json(resultAddress)
     })
     .catch((err) => {
-      console.log(err)
+      console.log('search error: ',err)
     })
+}
+
+exports.findByCoords = function (req, res) {
+
 }
 
 exports.findByAddr = function (req, res) {
