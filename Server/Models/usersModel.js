@@ -7,6 +7,7 @@ var userSchema = new Schema({
     photo: {type: String, required: true},
     email: {type: String, required: true, unique: true},
     fbId: {type: String},
+    fbAccessToken: {type: String},
     googleId: {type: String},
     createdPins: [{type: Schema.ObjectId, ref:'locations'}],
     savedPins: [],

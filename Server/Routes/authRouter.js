@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const request = require('request-promise')
+const jwt = require('../lib/jwt')
 const User = require('../Models/usersModel')
 const fb = "https://graph.facebook.com/v2.8/me?fields=id,name,email,picture"
 
@@ -19,7 +20,8 @@ router.route('/')
         .then(function (user) {
           // user was successfully saved
           // respond with jwt access_token
-          res.send(user)
+          const token = jwt.create(user)
+          res.status(200).json(token)
         })
         .catch(function (err) {
           // if error code 11000 then that means duplicate key
