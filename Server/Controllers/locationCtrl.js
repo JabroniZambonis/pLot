@@ -38,7 +38,13 @@ exports.searchGoogleByCoords = function(req, res) {
 }
 
 exports.findByCoords = function (req, res) {
-
+  
+  const { long, lat } = req.query
+  
+  Location.find().where('loc').near({ center: { coordinates: [long, lat], type: 'Point' }, maxDistance: 2000 })
+  .then((locations) => {
+    res.json(locations)
+  })
 }
 
 exports.findByAddr = function (req, res) {
