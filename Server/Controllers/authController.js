@@ -30,7 +30,10 @@ exports.loginUser = function (req, res) {
       // respond with jwt token to frontend
       .then(user => {
         const token = jwt.create(user)
-        return res.status(201).json(token)
+        return res.status(201).json({
+          accessToken: token,
+          user: user
+        })
       })
       // potential error creating user
       .catch(err => {
@@ -47,7 +50,10 @@ exports.loginUser = function (req, res) {
           .then(user => {
             // user has been updated now send jwt
             const token = jwt.create(user)
-            return res.status(200).json(token)   
+            return res.status(200).json({ 
+              accessToken: token,
+              user: user
+            })   
           })
         } else {
           // unknown server error
