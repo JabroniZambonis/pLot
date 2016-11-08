@@ -40,8 +40,8 @@ export default class HomeMap extends Component {
         let currentLocation = {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
-          latitudeDelta: 0.1,
-          longitudeDelta: 0.1
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01
         }
 
         this.setState({currentLocation: currentLocation})
@@ -119,7 +119,10 @@ export default class HomeMap extends Component {
           style={{height: 500, width: 300}}
           showsUserLocation={true}
         />
-        <CreateLocation addLocation={this.addLocation} />
+        <CreateLocation
+          addLocation={this.addLocation}
+          currentLocation={this.state.currentLocation}
+        />
       </View>
     )
   }

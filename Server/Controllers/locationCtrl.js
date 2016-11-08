@@ -1,8 +1,18 @@
+require('../db')
 const request = require('request-promise')
 const baseGoogleURL = 
   `https://maps.googleapis.com/maps/api/geocode/json?key=${process.env.GOOGLE_API_KEY}`
-exports.create = function (req, res) {
 
+exports.create = function (req, res) {
+  const searchURL = baseGoogleURL + `&latlng=${req.body.lat},${req.body.long}`
+  request(searchURL)
+    .then((response) => {
+      console.log(response.results[0].formatted_address)
+      res.json(response.results[0].formatted_address)
+    })
+    .catch((err) => {
+      console.log('create location error: ',err)
+    })
 }
 
 exports.findByCoords = function (req, res) {

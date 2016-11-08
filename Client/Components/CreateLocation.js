@@ -7,10 +7,25 @@ export default class CreateLocation extends Component {
     this.state = {
       modalVisible: false
     }
+    this.submitCoordinates = this.submitCoordinates.bind(this)
   }
 
   setModalVisible (visible) {
     this.setState({modalVisible: visible})
+  }
+
+  submitCoordinates (lat, long) {
+    fetch('/locations/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        lat: lat,
+        long: long
+      })
+    })
   }
 
   render () {
@@ -31,6 +46,9 @@ export default class CreateLocation extends Component {
               <Text style={styles.createFormHeader}>Tell us about this spot</Text>
               <TextInput style={{height: 30, width: 300, borderColor: '#d7d7d7', borderWidth: 1}}>
               </TextInput>
+              <TouchableHighlight>
+                <Text onPress={() => this.submitCoordinates(this.props.currentLocation.latitude, this.props.currentLocation.longitude)}>Submit</Text>
+              </TouchableHighlight>
               <TouchableHighlight onPress={() => this.setModalVisible(!this.state.modalVisible)}>
                 <Text style={styles.createFormClose}>close</Text>
               </TouchableHighlight>
