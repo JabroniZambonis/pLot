@@ -35,14 +35,14 @@ exports.create = function (req, res) {
   //   })
 }
 
-exports.searchGoogleByCoords = function() {
-  console.log('req', req.body.lat)
-  const searchURL = baseGoogleURL + `&latlng=${req.body.lat},${req.body.long}`
+exports.searchGoogleByCoords = function(req, res) {
+  const { lat, long } = req.query
+  const searchURL = baseGoogleURL + `&latlng=${lat},${long}`
   request(searchURL)
     .then((response) => {
       const resultAddress = JSON.parse(response).results[0].formatted_address 
       console.log('result address:', resultAddress)
-      res.json(resultAddress)
+      res.status(200).json(resultAddress)
     })
     .catch((err) => {
       console.log('search error: ',err)
