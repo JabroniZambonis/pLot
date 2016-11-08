@@ -16,7 +16,10 @@ export default class App extends Component {
   }
 
   setUser (userInfo) {
-    this.setState({userToken: userInfo.accessToken, userObj: userInfo.user})
+    this.setState({
+      userToken: userInfo.accessToken, 
+      userObj: userInfo.user
+      })
     console.log('this is the state after Set User', this.state)
   }
 

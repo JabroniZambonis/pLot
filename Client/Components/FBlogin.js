@@ -23,8 +23,7 @@ export default class FBlogin extends Component {
     } else {
       AccessToken.getCurrentAccessToken()
         .then( (data) => {
-          console.log('Access Token: ', data.accessToken)
-          return fetch('http://localhost:3000/auth', {
+          fetch('http://localhost:3000/auth', {
             method: 'POST',
             headers:{
                'Accept': 'application/json',
