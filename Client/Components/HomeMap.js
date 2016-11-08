@@ -8,25 +8,12 @@ export default class HomeMap extends Component {
     this.state = {
       currentUser: {},
       currentLocation: {
-        latitude: 0,
-        longitude: 0,
+        latitude: 30.2689941,
+        longitude: -97.7405441,
         latitudeDelta: 0.1,
         longitudeDelta: 0.1
       },
-      nearbyPins: [
-        {
-          latitude: 30.26,
-          longitude: -97.74,
-          title: 'Cool Parking',
-          subtitle: '123 Jabroni Street'
-        },
-        {
-          latitude: 30.27,
-          longitude: -97.75,
-          title: 'Cool Parking',
-          subtitle: '456 Zamboni Ave'
-        }
-      ],
+      nearbyLocations: [],
       searchText: 'Search for spots...',
       lastPosition: {}
     }
@@ -46,9 +33,24 @@ export default class HomeMap extends Component {
 
         this.setState({currentLocation: currentLocation})
 
-        return fetch(`/locations/bycoords?long=${position.coords.longitude}&lat=${position.coords.latitude}`)
-          .then((pins) => {
-            this.setState({nearbyPins: pins})
+        fetch(`http://localhost:3000/locations/bycoords?long=${position.coords.longitude}&lat=${position.coords.latitude}`)
+          .then((response) => response.json())
+          .then((locations) => {
+            console.log('locations: ',locations)
+            //get lat, long, title(address)
+            const nearby = []
+
+            locations.forEach(function(location) {
+              let loca = {}
+              loca.latitude = location.loc[1]
+              loca.longitude = location.loc[0]
+              loca.title = location.address
+              loca.subtitle = location.description
+              loca.animateDrop = true
+              nearby.push(loca)
+            })
+
+            this.setState({nearbyLocations: nearby})
           })
           .catch((err) => {
             console.log('err', err)
@@ -95,11 +97,11 @@ export default class HomeMap extends Component {
       draggable: true
     }
 
-    let newNearby = this.state.nearbyPins.slice()
+    let newNearby = this.state.nearbyLocations.slice()
 
     newNearby.push(newPin)
     this.setState({
-      nearbyPins: newNearby
+      nearbyLocations: newNearby
     })
   }
 
@@ -114,7 +116,7 @@ export default class HomeMap extends Component {
         />
         <MapView
           region={this.state.currentLocation}
-          annotations={this.state.nearbyPins}
+          annotations={this.state.nearbyLocations}
           style={{height: 500, width: 300}}
           showsUserLocation={true}
         />
