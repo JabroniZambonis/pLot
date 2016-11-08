@@ -60,7 +60,7 @@ exports.deletePin = function(req, res) {
     else console.log("ERROR getUser: ", err)
   })
 
-  pinArray.splice()
+  pinArray.splice((pinArray.indexOf(req.body.createdPin), 1))
 
   findOneAndUpdate({ _id: req.body.userID }, {createdPins: pinArray}) //set pins attribute to pinArray
   //There should be a good way to refactor this rather than using
@@ -81,9 +81,15 @@ exports.createSpot = function(req, res) {
 }
 
 exports.deleteSpot = function(req, res) {
-  //Query user to pull spot array, find index of req.body.spot
+  let spotArray = [] //setPin variable
 
-  //splice req.body.spot out of spot array with index
+  User.find({_id: req.body.userId}, function(err, result) { //Find user
+    if (!err) spotArray = result.createdSpots //set pinArray to existing
+    else console.log("ERROR getUser: ", err)
+  })
 
-  //Update user field with spot array
+  spotArray.splice((spotArray.indexOf(req.body.createdSpots), 1))
+
+  findOneAndUpdate({ _id: req.body.userID }, {createdSpots: spotArray}) //set pins attribute to pinArray
+  //There should be a good way to refactor this rather than using
 }
