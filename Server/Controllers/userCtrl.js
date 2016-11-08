@@ -28,7 +28,7 @@ exports.updateUser = function(req, res) {
 
   User.findByIdAndUpdate(req.body._id,
     { email: req.body.email,
-    { photo: req.body.photo },
+    photo: req.body.photo },
     function (err, result) {
       if (err) {
         console.log(err)

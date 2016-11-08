@@ -3481,6 +3481,10 @@ jstransform@^11.0.3:
     object-assign "^2.0.0"
     source-map "^0.4.2"
 
+jwt-simple:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/jwt-simple/-/jwt-simple-0.5.0.tgz#06b1d5f5c2e34aca56746166f7e41e932a10e573"
+
 kareem@1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/kareem/-/kareem-1.1.3.tgz#0877610d8879c38da62d1dbafde4e17f2692f041"
