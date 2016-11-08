@@ -5,7 +5,7 @@ const qs = require('querystring')
 
 const fbBase = 'https://graph.facebook.com/v2.8/me?'
 
-exports.loginUser = function (req, res) {
+exports.fbAuthenticate = function (req, res) {
   const fbAccessToken = req.body.fbAccessToken
   // build up query to facebook
   const queryString = {
@@ -63,4 +63,11 @@ exports.loginUser = function (req, res) {
     })
     // error sending access token to facebook
     .catch(err => res.status(500).json(err))
+}
+
+exports.login = function (req, res) {
+  // read the authorization header and decode user
+  const token = req.get('Authorization')
+  const user = jwt.decode(token)
+  res.status(200).json(user)
 }
