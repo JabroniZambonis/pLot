@@ -22,6 +22,7 @@
     "body-parser": "^1.15.2",
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
+    "jwt-simple": "^0.5.0",
     "mongoose": "^4.6.6",
     "native": "^0.2.0",
     "node-less-endpoint": "^0.2.0",

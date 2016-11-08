@@ -130,6 +130,13 @@
 			remoteGlobalIDString = 2D2A28131D9B038B00D4039D;
 			remoteInfo = "React-tvOS";
 		};
+		0162D4191DD0F80F007F46ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7AAC82A45BC24F71B166D557 /* AirMaps.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 11FA5C511C4A1296003AC2EE;
+			remoteInfo = AirMaps;
+		};
 		139105C01AF99BAD00B5F7CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */;
@@ -298,6 +305,14 @@
 			isa = PBXGroup;
 			children = (
 				0162D2F31DCE4C9F007F46ED /* libRCTFBSDK.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0162D4161DD0F80F007F46ED /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0162D41A1DD0F80F007F46ED /* libAirMaps.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -481,6 +496,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 0162D4161DD0F80F007F46ED /* Products */;
+					ProjectRef = 7AAC82A45BC24F71B166D557 /* AirMaps.xcodeproj */;
+				},
+				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
 				},
@@ -623,6 +642,13 @@
 			fileType = archive.ar;
 			path = "libReact-tvOS.a";
 			remoteRef = 0162D3101DCE4C9F007F46ED /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0162D41A1DD0F80F007F46ED /* libAirMaps.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAirMaps.a;
+			remoteRef = 0162D4191DD0F80F007F46ED /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		139105C11AF99BAD00B5F7CC /* libRCTSettings.a */ = {
