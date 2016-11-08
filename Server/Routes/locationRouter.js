@@ -6,7 +6,10 @@ router.route('/')
   .post(locations.create)
 
 router.route('/bycoords')
-  .post(locations.findByCoords)
+  .get(locations.findByCoords)
+
+router.route('/latlong')
+  .get(locations.searchGoogleByCoords)
 
 router.route('/byaddr')
   .get(locations.findByAddr)
