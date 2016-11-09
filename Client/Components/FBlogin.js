@@ -44,7 +44,6 @@ export default class FBlogin extends Component {
   }
 }
   finishedLogout (error, result) {
-    console.log('f your mom',this.props)
     this.props.logOut()
   }
  
