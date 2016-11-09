@@ -22,7 +22,7 @@ export default class App extends Component {
       })
     AsyncStorage.setItem('pLotLoginKey',userInfo.accessToken)
     console.log('this is the state after Set User', this.state)
-    }
+  }
 
   render () {
     return (
