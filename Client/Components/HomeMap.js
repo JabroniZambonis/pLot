@@ -1,7 +1,7 @@
 const styles = require('../Style/style.js')
-
 import React, { Component } from 'react'
-import { View, StyleSheet, MapView, TextInput, Alert } from 'react-native'
+import MapView from 'react-native-maps'
+import { View, StyleSheet, TextInput, Alert } from 'react-native'
 import CreateLocation from './CreateLocation'
 import ProfileView from './ProfileView'
 
@@ -25,7 +25,6 @@ export default class HomeMap extends Component {
   }
 
   componentDidMount () {
-
     fetch('http://localhost:3000/auth/login', {
       method: 'GET',
       headers:{
@@ -45,7 +44,6 @@ export default class HomeMap extends Component {
     .catch( (err) => {
       console.log(err)
     })
-
     navigator.geolocation.getCurrentPosition(
       (position) => {
         let currentLocation = {
@@ -54,7 +52,7 @@ export default class HomeMap extends Component {
           latitudeDelta: 0.01,
           longitudeDelta: 0.01
         }
-
+        console.log('got here')
         this.setState({currentLocation: currentLocation})
 
         fetch(`http://localhost:3000/locations/bycoords?long=${position.coords.longitude}&lat=${position.coords.latitude}`)
@@ -65,11 +63,12 @@ export default class HomeMap extends Component {
 
             locations.forEach(function(location) {
               let loca = {}
-              loca.latitude = location.loc[1]
-              loca.longitude = location.loc[0]
+              loca.coordinate = {
+                latitude: location.loc[1],
+                longitude: location.loc[0]
+              }
               loca.title = location.address
-              loca.subtitle = location.description
-              loca.animateDrop = true
+              loca.description = location.description
               nearby.push(loca)
             })
 
@@ -119,11 +118,12 @@ export default class HomeMap extends Component {
 
           locationsAndCoords.locations.forEach(function(location) {
             let loca = {}
-            loca.latitude = location.loc[1]
-            loca.longitude = location.loc[0]
+            loca.coordinate = {
+              latitude: location.loc[1],
+              longitude: location.loc[0]
+            }
             loca.title = location.address
-            loca.subtitle = location.description
-            loca.animateDrop = true
+            loca.description = location.description
             nearby.push(loca)
           })
 
@@ -187,9 +187,16 @@ export default class HomeMap extends Component {
         <MapView
           style={styles.homeMap}
           region={this.state.currentLocation}
-          annotations={this.state.nearbyLocations}
-          showsUserLocation={true}
-        />
+          style={{height: 500, width: 300}}
+        >
+          {this.state.nearbyLocations.map(marker =>(
+            <MapView.Marker
+              coordinate={marker.coordinate}
+              title={marker.title}
+              description={marker.description}
+            />
+          ))}
+        </MapView>
         <CreateLocation
           addLocation={this.addLocation}
           cancelLocationAdd={this.cancelLocationAdd}
