@@ -11,12 +11,12 @@ export default class HomeMap extends Component {
   }
 
   render () {
-    console.log("ProfileView.js this.props: ", this.props.props.props.userObj.photo)
+    // console.log("ProfileView.js this.props: ", this.props.currentUser.photo)
     return (
       <View>
         <Image
           style={styles.profileImageButton}
-          source={{uri: this.props.props.props.userObj.photo}}
+          source={{uri: this.props.currentUser.photo}}
         />
       </View>
     )

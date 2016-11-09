@@ -6,7 +6,6 @@ import HomeMap from './HomeMap'
 import LoginPage from './LoginPage'
 import LoadingPage from './LoadingPage'
 
-
 export default class App extends Component {
   constructor(props) {
     super(props)
@@ -28,6 +27,7 @@ export default class App extends Component {
 
 
   componentDidMount() {
+
     AsyncStorage.getItem('pLotLoginKey')
     .then( (userKey) => {
       console.log('DOT THEN', userKey)

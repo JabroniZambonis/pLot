@@ -26,6 +26,26 @@ export default class HomeMap extends Component {
 
   componentDidMount () {
 
+    fetch('http://localhost:3000/auth/login', {
+      method: 'GET',
+      headers:{
+         'Accept': 'application/json',
+         'Content-Type': 'application/json',
+         'Authorization': this.props.userToken
+      }
+    })
+    .then( (response) => {
+      console.log("response: ", response)
+      return response.json()
+    })
+    .then( (data) => {
+      console.log("DATA: ", data)
+      this.setState({currentUser: data})
+    })
+    .catch( (err) => {
+      console.log(err)
+    })
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
         let currentLocation = {
@@ -40,7 +60,7 @@ export default class HomeMap extends Component {
         fetch(`http://localhost:3000/locations/bycoords?long=${position.coords.longitude}&lat=${position.coords.latitude}`)
           .then((response) => response.json())
           .then((locations) => {
-         
+
             const nearby = []
 
             locations.forEach(function(location) {
@@ -115,7 +135,7 @@ export default class HomeMap extends Component {
               latitudeDelta: 0.01,
               longitudeDelta: 0.01
             }
-          }) 
+          })
         }
 
       })
@@ -154,7 +174,7 @@ export default class HomeMap extends Component {
   }
 
   render () {
-    console.log("HomeMap.js this.props: ", this.props)
+    console.log("HomeMap.js this.props: ", this.state.currentUser)
     return (
       <View>
         <TextInput
@@ -175,7 +195,7 @@ export default class HomeMap extends Component {
           cancelLocationAdd={this.cancelLocationAdd}
           currentLocation={this.state.currentLocation}
         />
-        <ProfileView props={this.props} />
+      <ProfileView currentUser={this.props.currentUser} />
       </View>
     )
   }
