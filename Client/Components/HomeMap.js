@@ -163,12 +163,13 @@ export default class HomeMap extends Component {
           onSubmitEditing={(event) => this.searchLocationSubmit(event)}
         />
         <MapView
+          style={styles.homeMap}
           region={this.state.currentLocation}
           annotations={this.state.nearbyLocations}
-          style={{height: 500, width: 300}}
           showsUserLocation={true}
         />
         <CreateLocation
+          style={styles.addLocation}
           addLocation={this.addLocation}
           cancelLocationAdd={this.cancelLocationAdd}
           currentLocation={this.state.currentLocation}

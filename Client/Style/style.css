@@ -23,6 +23,23 @@ instructions {
 }
 /*App.js*/
 
+/*HomeMap.js*/
+homeMap {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: #64AFCB;
+  height: 500;
+  width: 300;
+}
+
+addLocation {
+  border-style: solid;
+  border-radius: 5px;
+  border-color: #64AFCB;
+}
+/*HomeMap.js*/
+
 /*CreateLocation.js*/
 buttonStyle {
   text-align: center;
