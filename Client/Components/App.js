@@ -1,15 +1,14 @@
+const styles = require('../Style/style.js')
+
 import React, { Component } from 'react'
 import { View, AsyncStorage, StyleSheet } from 'react-native'
 import HomeMap from './HomeMap'
 import LoginPage from './LoginPage'
 
 
-
-
-
 export default class App extends Component {
   constructor(props) {
-    super(props) 
+    super(props)
     this.state = {
       userToken:'',
       userObj: ''
@@ -18,13 +17,12 @@ export default class App extends Component {
 
   setUser (userInfo) {
     this.setState({
-      userToken: userInfo.accessToken, 
+      userToken: userInfo.accessToken,
       userObj: userInfo.user
       })
     AsyncStorage.setItem('pLotLoginKey',userInfo.accessToken)
     console.log('this is the state after Set User', this.state)
-    })
-  }
+    }
 
   render () {
     return (
@@ -35,22 +33,3 @@ export default class App extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});

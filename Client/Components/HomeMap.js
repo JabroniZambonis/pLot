@@ -1,3 +1,5 @@
+const styles = require('../Style/style.js')
+
 import React, { Component } from 'react'
 import { View, StyleSheet, MapView, TextInput } from 'react-native'
 import CreateLocation from './CreateLocation'
