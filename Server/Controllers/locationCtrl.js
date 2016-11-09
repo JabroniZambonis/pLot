@@ -29,7 +29,7 @@ exports.searchGoogleByCoords = function(req, res) {
   request(searchURL)
     .then((response) => {
       const resultAddress = JSON.parse(response).results[0].formatted_address 
-      console.log('result address:', resultAddress)
+      
       res.status(200).json(resultAddress)
     })
     .catch((err) => {
@@ -55,7 +55,6 @@ exports.findByAddr = function (req, res) {
 
       const responseObj = JSON.parse(response).results[0]
       
-
       const long = responseObj.geometry.location.lng
       const lat = responseObj.geometry.location.lat
 

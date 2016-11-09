@@ -39,8 +39,7 @@ export default class HomeMap extends Component {
         fetch(`http://localhost:3000/locations/bycoords?long=${position.coords.longitude}&lat=${position.coords.latitude}`)
           .then((response) => response.json())
           .then((locations) => {
-            console.log('locations: ',locations)
-            //get lat, long, title(address)
+         
             const nearby = []
 
             locations.forEach(function(location) {
@@ -72,12 +71,10 @@ export default class HomeMap extends Component {
   }
 
   searchLocationSubmit (event) {
-    console.log('searchString: ',event.nativeEvent.text)
     let searchString = event.nativeEvent.text
     fetch(`http://localhost:3000/locations/byaddr?q=${searchString}`)
       .then((response) => response.json())
       .then((locationsAndCoords) => {
-        console.log('locationsAndCoords: ',locationsAndCoords)
 
         if (locationsAndCoords.locations.length === 0) {
           console.log('no spots')
