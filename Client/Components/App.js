@@ -25,7 +25,7 @@ export default class App extends Component {
     AsyncStorage.setItem('pLotLoginKey',userInfo.accessToken)
     console.log('this is the state after Set User', this.state)
     }
-  
+
 
   componentDidMount() {
     AsyncStorage.getItem('pLotLoginKey')
@@ -40,7 +40,7 @@ export default class App extends Component {
         this.setState({
           animating: false
         })
-      }  
+      }
       console.log('user key ?', this.state.userToken)
     })
   }
@@ -50,7 +50,7 @@ export default class App extends Component {
       return (
       <LoadingPage
             animating={this.state.animating}/>
-      )  
+      )
     } else if (this.state.userToken && !this.state.animating) {
       return (
         <View style={styles.container}>

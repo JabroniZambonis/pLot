@@ -3,6 +3,7 @@ const styles = require('../Style/style.js')
 import React, { Component } from 'react'
 import { View, StyleSheet, MapView, TextInput, Alert } from 'react-native'
 import CreateLocation from './CreateLocation'
+import ProfileView from './ProfileView'
 
 export default class HomeMap extends Component {
   constructor(props) {
@@ -153,8 +154,10 @@ export default class HomeMap extends Component {
   }
 
   render () {
+    console.log("HomeMap.js this.props: ", this.props)
     return (
       <View>
+        <ProfileView props={this.props} />
         <TextInput
           returnKeyType="search"
           style={{height: 30, width: 300, borderColor: 'gray', borderWidth: 1}}
