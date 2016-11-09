@@ -1,7 +1,7 @@
 const styles = require('../Style/style.js')
 
 import React, { Component } from 'react'
-import { View, StyleSheet, MapView, TextInput } from 'react-native'
+import { View, StyleSheet, MapView, TextInput, Alert } from 'react-native'
 import CreateLocation from './CreateLocation'
 
 export default class HomeMap extends Component {
@@ -39,8 +39,7 @@ export default class HomeMap extends Component {
         fetch(`http://localhost:3000/locations/bycoords?long=${position.coords.longitude}&lat=${position.coords.latitude}`)
           .then((response) => response.json())
           .then((locations) => {
-            console.log('locations: ',locations)
-            //get lat, long, title(address)
+         
             const nearby = []
 
             locations.forEach(function(location) {
@@ -72,42 +71,52 @@ export default class HomeMap extends Component {
   }
 
   searchLocationSubmit (event) {
-    console.log('searchString: ',event.nativeEvent.text)
     let searchString = event.nativeEvent.text
     fetch(`http://localhost:3000/locations/byaddr?q=${searchString}`)
       .then((response) => response.json())
       .then((locationsAndCoords) => {
-        console.log('locationsAndCoords: ',locationsAndCoords)
 
-        if (locationsAndCoords.locations.length === 0) {
-          console.log('no spots')
-          // Display a message "Sorry, no parking spot near that address"
-          // Prompt the user to search another area or add a parking spot
+        if (!locationsAndCoords.coords) {
+          Alert.alert(
+          'Try Again',
+          'No address found at that location',
+          {text: 'OK', onPress: () => console.log('OK Pressed')}
+        )
+
+        } else {
+          console.log('thisiisisi',locationsAndCoords)
+          if (locationsAndCoords.locations.length === 0) {
+            Alert.alert(
+              'Sorry',
+              'No parking spots found near that address',
+              {text: 'OK', onPress: () => console.log('OK Pressed')}
+            )
+          }
+
+
+          const nearby = []
+
+          locationsAndCoords.locations.forEach(function(location) {
+            let loca = {}
+            loca.latitude = location.loc[1]
+            loca.longitude = location.loc[0]
+            loca.title = location.address
+            loca.subtitle = location.description
+            loca.animateDrop = true
+            nearby.push(loca)
+          })
+
+          this.setState({
+            nearbyLocations: nearby,
+            currentLocation: {
+              latitude: locationsAndCoords.coords[0],
+              longitude: locationsAndCoords.coords[1],
+              latitudeDelta: 0.01,
+              longitudeDelta: 0.01
+            }
+          }) 
         }
 
-        // TODO: center the user's map on the address they searched
-
-        const nearby = []
-
-        locationsAndCoords.locations.forEach(function(location) {
-          let loca = {}
-          loca.latitude = location.loc[1]
-          loca.longitude = location.loc[0]
-          loca.title = location.address
-          loca.subtitle = location.description
-          loca.animateDrop = true
-          nearby.push(loca)
-        })
-
-        this.setState({
-          nearbyLocations: nearby,
-          currentLocation: {
-            latitude: locationsAndCoords.coords[0],
-            longitude: locationsAndCoords.coords[1],
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01
-          }
-        })
       })
       .catch((err) => {
         console.log('err', err)
