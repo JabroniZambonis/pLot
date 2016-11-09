@@ -11,6 +11,7 @@ export default class CreateLocation extends Component {
       description: '',
       address: 'fetching address...'
     }
+    this.setModalVisible = this.setModalVisible.bind(this)
     this.submitLocation = this.submitLocation.bind(this)
     this.getAddressByCoords = this.getAddressByCoords.bind(this)
   }
@@ -47,6 +48,7 @@ export default class CreateLocation extends Component {
         location: locationObj
       })
     })
+    .then(this.setModalVisible(!this.state.modalVisible))
   }
 
   render () {

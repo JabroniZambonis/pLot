@@ -52,6 +52,12 @@ exports.findByAddr = function (req, res) {
   const query = baseGoogleURL + `&address=${address}`
   request(query)
     .then(function(response) {
+      console.log('got here',response)
+
+      // TODO: handle case where there are no results
+      if (JSON.parse(response).results.length === 0) {
+        
+      }
 
       const responseObj = JSON.parse(response).results[0]
       
