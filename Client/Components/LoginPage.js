@@ -16,8 +16,8 @@ export default class LoginPage extends Component {
   render() {
     return (
       <View>
-        <Text style={styles.loginText}> Please Login </Text>
-        <FBlogin setUser={this.props.setUser}/>
+        <Text style={styles.splashText}> pLot </Text>
+        <FBlogin setUser={this.props.setUser} />
       </View>
     )
   }

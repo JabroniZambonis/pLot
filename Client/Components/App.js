@@ -5,6 +5,7 @@ import { View, AsyncStorage, StyleSheet, Text } from 'react-native'
 import HomeMap from './HomeMap'
 import LoginPage from './LoginPage'
 import LoadingPage from './LoadingPage'
+import FBlogin from './FBlogin'
 
 export default class App extends Component {
   constructor(props) {
@@ -25,6 +26,18 @@ export default class App extends Component {
     console.log('this is the state after Set User', this.state)
     }
 
+  logOut () {
+    console.log('we make it into logout')
+    AsyncStorage.removeItem('pLotLoginKey')
+    .then( () => {
+      this.setState({
+        userToken: '',
+        userObj: '',
+      })
+    }).then( () => {
+      console.log('userToken after logout',this.state)
+    })
+  }
 
   componentDidMount() {
 
@@ -55,12 +68,13 @@ export default class App extends Component {
       return (
         <View style={styles.container}>
           <HomeMap currentUser={this.state.userObj} userToken={this.state.userToken} />
+          <FBlogin logOut={this.logOut.bind(this)}/>
         </View>
       )
-    } else if (!this.state.animating) {
+    } else {
       return (
         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-          <LoginPage setUser={this.setUser.bind(this)}/>
+          <LoginPage setUser={this.setUser.bind(this)} />
         </View>
       )
     }

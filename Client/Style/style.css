@@ -70,6 +70,7 @@ createFormClose {
 /*CreateLocation.js*/
 
 /*LoginPage.js*/
+
 loginText {
   font-size: 14px;
   font-weight: bold;
@@ -87,3 +88,26 @@ profileImageButton {
   right: 0;
 }
 /*ProfileView.js*/
+
+splashText {
+  font-weight: bold;
+  font-size: 50px;
+  text-align: center;
+  color: gray;
+<<<<<<< 3ac81dbdce6160c80c0bb6b48b1790843ade2893
+  height: 90px;
+}
+
+=======
+  padding-bottom:100px;
+}
+
+
+
+
+
+
+
+
+
+>>>>>>> working on fb logout
