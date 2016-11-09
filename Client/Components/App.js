@@ -22,14 +22,35 @@ export default class App extends Component {
       })
     AsyncStorage.setItem('pLotLoginKey',userInfo.accessToken)
     console.log('this is the state after Set User', this.state)
+    }
+  
+
+  componentDidMount() {
+    AsyncStorage.getItem('pLotLoginKey')
+    .then( (userKey) => {
+      console.log('DOT THEN', userKey)
+      if(userKey) {
+        this.setState({
+        userToken: userKey
+      })
+      }  
+      console.log('user key ?', this.state.userToken)
+    })
   }
 
   render () {
-    return (
-      <View style={styles.container}>
-        <HomeMap />
-       <LoginPage setUser={this.setUser.bind(this)}/>
-      </View>
-    )
+    if(this.state.userToken) {
+      return (
+        <View style={styles.container}>
+          <HomeMap currentUser={this.state.userObj} userToken={this.state.userToken} />
+        </View>
+      )
+    } else {
+      return (
+        <View>
+         <LoginPage setUser={this.setUser.bind(this)}/>
+        </View>
+      )
+    }
   }
 }
