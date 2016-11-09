@@ -157,7 +157,6 @@ export default class HomeMap extends Component {
     console.log("HomeMap.js this.props: ", this.props)
     return (
       <View>
-        <ProfileView props={this.props} />
         <TextInput
           returnKeyType="search"
           style={{height: 30, width: 300, borderColor: 'gray', borderWidth: 1}}
@@ -165,6 +164,7 @@ export default class HomeMap extends Component {
           placeholder={this.state.searchText}
           onSubmitEditing={(event) => this.searchLocationSubmit(event)}
         />
+        <ProfileView props={this.props} />
         <MapView
           style={styles.homeMap}
           region={this.state.currentLocation}
