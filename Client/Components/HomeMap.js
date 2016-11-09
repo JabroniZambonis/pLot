@@ -18,6 +18,7 @@ export default class HomeMap extends Component {
       lastPosition: {}
     }
     this.addLocation = this.addLocation.bind(this)
+    this.cancelLocationAdd = this.cancelLocationAdd.bind(this)
   }
 
   componentDidMount () {
@@ -86,6 +87,7 @@ export default class HomeMap extends Component {
       })
   }
 
+  //adds a pins to the map if the user opens the create location form
   addLocation () {
     let lat = this.state.currentLocation.latitude
     let long = this.state.currentLocation.longitude
@@ -102,6 +104,15 @@ export default class HomeMap extends Component {
     newNearby.push(newPin)
     this.setState({
       nearbyLocations: newNearby
+    })
+  }
+
+  //Removes the pin from the map if the user does not save the new location
+  cancelLocationAdd () {
+    let nearby = this.state.nearbyLocations.slice()
+    nearby.pop()
+    this.setState({
+      nearbyLocations: nearby
     })
   }
 
@@ -122,6 +133,7 @@ export default class HomeMap extends Component {
         />
         <CreateLocation
           addLocation={this.addLocation}
+          cancelLocationAdd={this.cancelLocationAdd}
           currentLocation={this.state.currentLocation}
         />
       </View>
