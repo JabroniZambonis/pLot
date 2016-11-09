@@ -59,7 +59,7 @@ exports.findByAddr = function (req, res) {
       const long = responseObj.geometry.location.lng
       const lat = responseObj.geometry.location.lat
 
-      Location.find().where('loc').near({ center: { coordinates: [long, lat], type: 'Point' }, maxDistance: 2 })
+      Location.find().where('loc').near({ center: { coordinates: [long, lat], type: 'Point' }, maxDistance: 2000 })
       .then((locations) => {
 
         const locationsAndCoords = {}
