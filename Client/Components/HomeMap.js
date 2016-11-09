@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import MapView from 'react-native-maps'
 import { View, StyleSheet, TextInput, Alert } from 'react-native'
 import CreateLocation from './CreateLocation'
+import ProfileView from './ProfileView'
 
 export default class HomeMap extends Component {
   constructor(props) {
@@ -24,7 +25,26 @@ export default class HomeMap extends Component {
   }
 
   componentDidMount () {
-    
+    fetch('http://localhost:3000/auth/login', {
+      method: 'GET',
+      headers:{
+         'Accept': 'application/json',
+         'Content-Type': 'application/json',
+         'Authorization': this.props.userToken
+      }
+    })
+    .then( (response) => {
+      console.log("response: ", response)
+      return response.json()
+    })
+    .then( (data) => {
+      console.log("DATA: ", data)
+      this.setState({currentUser: data})
+    })
+    .catch( (err) => {
+      console.log(err)
+    })
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
         let currentLocation = {
@@ -39,7 +59,7 @@ export default class HomeMap extends Component {
         fetch(`http://localhost:3000/locations/bycoords?long=${position.coords.longitude}&lat=${position.coords.latitude}`)
           .then((response) => response.json())
           .then((locations) => {
-         
+
             const nearby = []
 
             locations.forEach(function(location) {
@@ -116,7 +136,7 @@ export default class HomeMap extends Component {
               latitudeDelta: 0.01,
               longitudeDelta: 0.01
             }
-          }) 
+          })
         }
 
       })
@@ -155,23 +175,31 @@ export default class HomeMap extends Component {
   }
 
   render () {
+    console.log("HomeMap.js this.props: ", this.state.currentUser)
     return (
-      <View>
+      <View style={styles.container}>
         <TextInput
           returnKeyType="search"
-          style={{height: 30, width: 300, borderColor: 'gray', borderWidth: 1}}
+          style={styles.searchBar}
           onChangeText={(text) => this.setState({text})}
           placeholder={this.state.searchText}
           onSubmitEditing={(event) => this.searchLocationSubmit(event)}
         />
         <MapView
+          style={styles.homeMap}
           region={this.state.currentLocation}
+<<<<<<< HEAD
           style={{height: 500, width: 300}}
           showsUserLocation={true}
         >
           {this.state.nearbyLocations.map((marker, key) => (
             <MapView.Marker
               key={key}
+=======
+        >
+          {this.state.nearbyLocations.map(marker =>(
+            <MapView.Marker
+>>>>>>> 6ff312f17d784bf62fc5d8edec172ca1b99da778
               coordinate={marker.coordinate}
               title={marker.title}
               description={marker.description}
@@ -183,6 +211,7 @@ export default class HomeMap extends Component {
           cancelLocationAdd={this.cancelLocationAdd}
           currentLocation={this.state.currentLocation}
         />
+      <ProfileView currentUser={this.props.currentUser} />
       </View>
     )
   }
