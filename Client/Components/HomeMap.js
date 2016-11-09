@@ -176,10 +176,10 @@ export default class HomeMap extends Component {
   render () {
     console.log("HomeMap.js this.props: ", this.state.currentUser)
     return (
-      <View>
+      <View style={styles.container}>
         <TextInput
           returnKeyType="search"
-          style={{height: 30, width: 300, borderColor: 'gray', borderWidth: 1}}
+          style={styles.searchBar}
           onChangeText={(text) => this.setState({text})}
           placeholder={this.state.searchText}
           onSubmitEditing={(event) => this.searchLocationSubmit(event)}
