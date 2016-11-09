@@ -131,10 +131,10 @@ export default class HomeMap extends Component {
     let long = this.state.currentLocation.longitude
 
     let newPin = {
-      latitude: lat,
-      longitude: long,
-      animateDrop: true,
-      draggable: true
+      coordinate: {
+        latitude: lat,
+        longitude: long
+      }
     }
 
     let newNearby = this.state.nearbyLocations.slice()
@@ -167,9 +167,11 @@ export default class HomeMap extends Component {
         <MapView
           region={this.state.currentLocation}
           style={{height: 500, width: 300}}
+          showsUserLocation={true}
         >
-          {this.state.nearbyLocations.map(marker =>(
+          {this.state.nearbyLocations.map((marker, key) => (
             <MapView.Marker
+              key={key}
               coordinate={marker.coordinate}
               title={marker.title}
               description={marker.description}
