@@ -76,16 +76,21 @@ export default class CreateLocation extends Component {
               <Text>{this.state.address}</Text>
 
               <TextInput
-                style={{height: 30, width: 300, borderColor: '#d7d7d7', borderWidth: 1}}
+                style={{height: 60, width: 300, borderColor: '#d7d7d7', borderWidth: 1}}
                 onChange={(event) => this.setState({description: event.nativeEvent.text})}
-              >
-              </TextInput>
+                placeholder={this.state.description}
+              />
 
               <TouchableHighlight>
                 <Text onPress={this.submitLocation}>Submit</Text>
               </TouchableHighlight>
 
-              <TouchableHighlight onPress={() => this.setModalVisible(!this.state.modalVisible)}>
+              <TouchableHighlight
+                onPress={() => {
+                  this.setModalVisible(!this.state.modalVisible);
+                  this.props.cancelLocationAdd()
+                }}
+              >
                 <Text style={styles.createFormClose}>close</Text>
               </TouchableHighlight>
 
