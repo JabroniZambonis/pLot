@@ -70,7 +70,7 @@ export default class CreateLocation extends Component {
             <View style={styles.createForm}>
 
               <Text style={styles.createFormHeader}>Tell us about this spot</Text>
-              
+
               <Text>{this.state.address}</Text>
 
               <TextInput
@@ -98,13 +98,13 @@ export default class CreateLocation extends Component {
 const styles = StyleSheet.create({
   buttonStyle: {
     textAlign: 'center',
-    backgroundColor: '#d7d7d7',
+    backgroundColor: '#d8d8d8',
     lineHeight: 50,
     height: 50,
   },
   createForm: {
-    backgroundColor: '#fff',
-    height: 200
+    backgroundColor: '#F5FCFF',
+    height: 150
   },
   createFormHeader: {
     textAlign: 'center',
