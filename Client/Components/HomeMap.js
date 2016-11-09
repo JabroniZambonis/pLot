@@ -74,15 +74,40 @@ export default class HomeMap extends Component {
   searchLocationSubmit (event) {
     console.log('searchString: ',event.nativeEvent.text)
     let searchString = event.nativeEvent.text
-    return fetch(`/locations/byaddr?q=${searchString}`)
-      .then((response) => {
-        // search location location
-        // array of nearby pin objects
+    fetch(`http://localhost:3000/locations/byaddr?q=${searchString}`)
+      .then((response) => response.json())
+      .then((locationsAndCoords) => {
+        console.log('locationsAndCoords: ',locationsAndCoords)
 
-        // re-center the map at the coords of the search location
+        if (locationsAndCoords.locations.length === 0) {
+          console.log('no spots')
+          // Display a message "Sorry, no parking spot near that address"
+          // Prompt the user to search another area or add a parking spot
+        }
 
-        // render pins for the nearby parking spots
+        // TODO: center the user's map on the address they searched
 
+        const nearby = []
+
+        locationsAndCoords.locations.forEach(function(location) {
+          let loca = {}
+          loca.latitude = location.loc[1]
+          loca.longitude = location.loc[0]
+          loca.title = location.address
+          loca.subtitle = location.description
+          loca.animateDrop = true
+          nearby.push(loca)
+        })
+
+        this.setState({
+          nearbyLocations: nearby,
+          currentLocation: {
+            latitude: locationsAndCoords.coords[0],
+            longitude: locationsAndCoords.coords[1],
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01
+          }
+        })
       })
       .catch((err) => {
         console.log('err', err)
@@ -122,6 +147,7 @@ export default class HomeMap extends Component {
     return (
       <View>
         <TextInput
+          returnKeyType="search"
           style={{height: 30, width: 300, borderColor: 'gray', borderWidth: 1}}
           onChangeText={(text) => this.setState({text})}
           placeholder={this.state.searchText}

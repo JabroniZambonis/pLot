@@ -48,12 +48,27 @@ exports.findByCoords = function (req, res) {
 }
 
 exports.findByAddr = function (req, res) {
-  const { address } = req.query
+  const address = req.query.q
   const query = baseGoogleURL + `&address=${address}`
-  console.log(query)
   request(query)
     .then(function(response) {
-      res.json(response.location)
+
+      const responseObj = JSON.parse(response).results[0]
+      
+
+      const long = responseObj.geometry.location.lng
+      const lat = responseObj.geometry.location.lat
+
+      Location.find().where('loc').near({ center: { coordinates: [long, lat], type: 'Point' }, maxDistance: 2000 })
+      .then((locations) => {
+
+        const locationsAndCoords = {}
+        locationsAndCoords.coords = [lat, long]
+        locationsAndCoords.locations = locations
+
+        res.json(locationsAndCoords)
+      })    
+
     })
 }
 
