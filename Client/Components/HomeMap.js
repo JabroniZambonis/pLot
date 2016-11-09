@@ -87,6 +87,7 @@ export default class HomeMap extends Component {
       })
   }
 
+  //adds a pins to the map if the user opens the create location form
   addLocation () {
     let lat = this.state.currentLocation.latitude
     let long = this.state.currentLocation.longitude
@@ -106,6 +107,7 @@ export default class HomeMap extends Component {
     })
   }
 
+  //Removes the pin from the map if the user does not save the new location
   cancelLocationAdd () {
     let nearby = this.state.nearbyLocations.slice()
     nearby.pop()

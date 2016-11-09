@@ -6,7 +6,7 @@ export default class CreateLocation extends Component {
     super(props)
     this.state = {
       modalVisible: false,
-      description: 'How much space, hours, etc',
+      description: '',
       address: 'fetching address...'
     }
     this.submitLocation = this.submitLocation.bind(this)
@@ -48,6 +48,10 @@ export default class CreateLocation extends Component {
   }
 
   render () {
+    const limit = 30
+    let remainder = limit - this.state.description.length
+    let remainderColor = remainder > 5 ? 'blue' : 'red'
+
     return (
       <View>
         <TouchableHighlight
@@ -75,9 +79,13 @@ export default class CreateLocation extends Component {
 
               <TextInput
                 style={{height: 60, width: 300, borderColor: '#d7d7d7', borderWidth: 1}}
+                maxLength={limit}
                 onChange={(event) => this.setState({description: event.nativeEvent.text})}
-                placeholder={this.state.description}
+                placeholder={'Your thoughts go here...'}
               />
+              <Text style={{color: remainderColor}}>
+                {remainder} characters remaining
+              </Text>
 
               <TouchableHighlight>
                 <Text onPress={this.submitLocation}>Submit</Text>
