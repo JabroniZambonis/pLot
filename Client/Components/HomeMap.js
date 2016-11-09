@@ -169,7 +169,6 @@ export default class HomeMap extends Component {
           showsUserLocation={true}
         />
         <CreateLocation
-          style={styles.addLocation}
           addLocation={this.addLocation}
           cancelLocationAdd={this.cancelLocationAdd}
           currentLocation={this.state.currentLocation}

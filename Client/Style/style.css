@@ -32,20 +32,20 @@ homeMap {
   height: 500;
   width: 300;
 }
-
-addLocation {
-  border-style: solid;
-  border-radius: 5px;
-  border-color: #64AFCB;
-}
 /*HomeMap.js*/
 
 /*CreateLocation.js*/
 buttonStyle {
   text-align: center;
-  background-color: #d8d8d8;
+  color: #64AFCB;
+  font-weight: bold;
+  background-color: #efefef;
   line-height: 50;
   height: 50;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: #64AFCB;
 }
 
 createForm {
@@ -66,6 +66,7 @@ createFormClose {
 /*LoginPage.js*/
 loginText {
   font-size: 14px;
+  font-weight: bold;
   text-align: center;
   color: #64AFCB;
 }
