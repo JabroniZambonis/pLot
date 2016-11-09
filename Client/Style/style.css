@@ -23,12 +23,29 @@ instructions {
 }
 /*App.js*/
 
+/*HomeMap.js*/
+homeMap {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: #64AFCB;
+  height: 500;
+  width: 300;
+}
+/*HomeMap.js*/
+
 /*CreateLocation.js*/
 buttonStyle {
   text-align: center;
-  background-color: #d8d8d8;
+  color: #64AFCB;
+  font-weight: bold;
+  background-color: #efefef;
   line-height: 50;
   height: 50;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: #64AFCB;
 }
 
 createForm {
@@ -49,7 +66,18 @@ createFormClose {
 /*LoginPage.js*/
 loginText {
   font-size: 14px;
+  font-weight: bold;
   text-align: center;
   color: #64AFCB;
 }
 /*LoginPage.js*/
+
+/*ProfileView.js*/
+profileImageButton {
+  width: 50px;
+  height: 50px;
+  border-radius: 20px;
+  position: absolute;
+  right: 0;
+}
+/*ProfileView.js*/
