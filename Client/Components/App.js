@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { View, AsyncStorage, StyleSheet, Text } from 'react-native'
 import HomeMap from './HomeMap'
 import LoginPage from './LoginPage'
+import LoadingPage from './LoadingPage'
 
 
 export default class App extends Component {
@@ -12,7 +13,7 @@ export default class App extends Component {
     this.state = {
       userToken:'',
       userObj: '',
-      pageLoading: true
+      animating: true
     }
   }
 
@@ -33,11 +34,11 @@ export default class App extends Component {
       if(userKey) {
         this.setState({
         userToken: userKey,
-        pageLoading: false
+        animating: false
       })
       } else {
         this.setState({
-          pageLoading: false
+          animating: false
         })
       }  
       console.log('user key ?', this.state.userToken)
@@ -45,21 +46,18 @@ export default class App extends Component {
   }
 
   render () {
-    if(this.state.pageLoading) {
+    if(this.state.animating) {
       return (
-      <View style={styles.container}>
-          <Text> Loading... </Text>
-        </View>
+      <LoadingPage
+            animating={this.state.animating}/>
       )  
-    }
-    
-   else if(this.state.userToken && !this.state.pageLoading) {
+    } else if (this.state.userToken && !this.state.animating) {
       return (
         <View style={styles.container}>
           <HomeMap currentUser={this.state.userObj} userToken={this.state.userToken} />
         </View>
       )
-    } else if (!this.state.pageLoading) {
+    } else if (!this.state.animating) {
       return (
         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
           <LoginPage setUser={this.setUser.bind(this)}/>
