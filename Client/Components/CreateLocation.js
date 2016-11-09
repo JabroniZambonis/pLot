@@ -1,3 +1,5 @@
+const styles = require('../Style/style.js')
+
 import React, { Component } from 'react'
 import { TouchableHighlight, Text, StyleSheet, View, Modal, TextInput } from 'react-native'
 
@@ -6,7 +8,7 @@ export default class CreateLocation extends Component {
     super(props)
     this.state = {
       modalVisible: false,
-      description: 'How much space, hours, etc',
+      description: '',
       address: 'fetching address...'
     }
     this.submitLocation = this.submitLocation.bind(this)
@@ -48,6 +50,10 @@ export default class CreateLocation extends Component {
   }
 
   render () {
+    const limit = 200
+    let remainder = limit - this.state.description.length
+    let remainderColor = remainder > 20 ? 'green' : 'red'
+
     return (
       <View>
         <TouchableHighlight
@@ -70,20 +76,29 @@ export default class CreateLocation extends Component {
             <View style={styles.createForm}>
 
               <Text style={styles.createFormHeader}>Tell us about this spot</Text>
-              
+
               <Text>{this.state.address}</Text>
 
               <TextInput
                 style={{height: 30, width: 300, borderColor: '#d7d7d7', borderWidth: 1}}
+                maxLength={limit}
                 onChange={(event) => this.setState({description: event.nativeEvent.text})}
-              >
-              </TextInput>
+                placeholder={'Your thoughts go here...'}
+              />
+              <Text style={{color: remainderColor}}>
+                {remainder}
+              </Text>
 
               <TouchableHighlight>
                 <Text onPress={this.submitLocation}>Submit</Text>
               </TouchableHighlight>
 
-              <TouchableHighlight onPress={() => this.setModalVisible(!this.state.modalVisible)}>
+              <TouchableHighlight
+                onPress={() => {
+                  this.setModalVisible(!this.state.modalVisible);
+                  this.props.cancelLocationAdd()
+                }}
+              >
                 <Text style={styles.createFormClose}>close</Text>
               </TouchableHighlight>
 
@@ -94,23 +109,3 @@ export default class CreateLocation extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  buttonStyle: {
-    textAlign: 'center',
-    backgroundColor: '#d7d7d7',
-    lineHeight: 50,
-    height: 50,
-  },
-  createForm: {
-    backgroundColor: '#fff',
-    height: 200
-  },
-  createFormHeader: {
-    textAlign: 'center',
-    fontSize: 20
-  },
-  createFormClose: {
-    textAlign: 'center'
-  }
-})

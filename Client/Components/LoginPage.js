@@ -1,9 +1,11 @@
+const styles = require('../Style/style.js')
+
 import React, { Component } from 'react'
 import {
   View,
-  Text  
+  Text
 
-} from 'react-native' 
+} from 'react-native'
 import FBlogin from './FBlogin'
 
 export default class LoginPage extends Component {
@@ -13,11 +15,10 @@ export default class LoginPage extends Component {
 
   render() {
     return (
-      <View>        
-        <Text> THIS WORKS! </Text>
+      <View>
+        <Text style={styles.loginText}> Please Login </Text>
         <FBlogin setUser={this.props.setUser}/>
-      </View>  
+      </View>
     )
   }
 }
-
