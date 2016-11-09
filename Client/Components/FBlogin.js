@@ -1,5 +1,3 @@
-const styles = require('../Style/style.js')
-
 const FBSDK = require('react-native-fbsdk');
 const {
   LoginButton,
@@ -8,9 +6,9 @@ const {
 
 import React, { Component } from 'react'
 import {
-  View
-} from 'react-native'
-
+  View  
+} from 'react-native' 
+      
 export default class FBlogin extends Component {
 
   constructor(props) {
@@ -45,6 +43,11 @@ export default class FBlogin extends Component {
       })
   }
 }
+  finishedLogout (error, result) {
+    console.log('f your mom',this.props)
+    this.props.logOut()
+  }
+ 
 
   render() {
     return (
@@ -52,7 +55,7 @@ export default class FBlogin extends Component {
         <LoginButton
           readPermissions={["public_profile email"]}
           onLoginFinished={this.finishedLogin.bind(this)}
-          onLogoutFinished={() => alert("User logged out")}/>
+          onLogoutFinished={this.finishedLogout.bind(this)}/>
       </View>
     );
   }

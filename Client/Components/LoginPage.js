@@ -17,7 +17,7 @@ export default class LoginPage extends Component {
     return (
       <View>
         <Text style={styles.splashText}> pLot </Text>
-        <FBlogin setUser={this.props.setUser}/>
+        <FBlogin setUser={this.props.setUser} />
       </View>
     )
   }
