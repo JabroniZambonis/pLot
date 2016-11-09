@@ -78,7 +78,6 @@ profileImageButton {
   height: 50px;
   border-radius: 20px;
   position: absolute;
-  top: 0;
   right: 0;
 }
 /*ProfileView.js*/

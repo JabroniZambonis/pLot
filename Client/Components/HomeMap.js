@@ -164,7 +164,6 @@ export default class HomeMap extends Component {
           placeholder={this.state.searchText}
           onSubmitEditing={(event) => this.searchLocationSubmit(event)}
         />
-        <ProfileView props={this.props} />
         <MapView
           style={styles.homeMap}
           region={this.state.currentLocation}
@@ -176,6 +175,7 @@ export default class HomeMap extends Component {
           cancelLocationAdd={this.cancelLocationAdd}
           currentLocation={this.state.currentLocation}
         />
+        <ProfileView props={this.props} />
       </View>
     )
   }
