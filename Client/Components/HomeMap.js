@@ -1,7 +1,7 @@
 const styles = require('../Style/style.js')
 
 import React, { Component } from 'react'
-import { View, StyleSheet, MapView, TextInput } from 'react-native'
+import { View, StyleSheet, MapView, TextInput, Alert } from 'react-native'
 import CreateLocation from './CreateLocation'
 
 export default class HomeMap extends Component {
@@ -77,15 +77,20 @@ export default class HomeMap extends Component {
       .then((locationsAndCoords) => {
 
         if (!locationsAndCoords.coords) {
-
-          console.log('Not a valid address')
+          Alert.alert(
+          'Try Again',
+          'No address found at that location',
+          {text: 'OK', onPress: () => console.log('OK Pressed')}
+        )
 
         } else {
-
+          console.log('thisiisisi',locationsAndCoords)
           if (locationsAndCoords.locations.length === 0) {
-            console.log('no spots')
-            // Display a message "Sorry, no parking spot near that address"
-            // Prompt the user to search another area or add a parking spot
+            Alert.alert(
+              'Sorry',
+              'No parking spots found near that address',
+              {text: 'OK', onPress: () => console.log('OK Pressed')}
+            )
           }
 
 
