@@ -39,6 +39,7 @@ export default class App extends Component {
   }
 
   render () {
+    
     if(this.state.userToken) {
       return (
         <View style={styles.container}>
@@ -47,8 +48,8 @@ export default class App extends Component {
       )
     } else {
       return (
-        <View>
-         <LoginPage setUser={this.setUser.bind(this)}/>
+        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+          <LoginPage setUser={this.setUser.bind(this)}/>
         </View>
       )
     }
