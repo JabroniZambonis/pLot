@@ -76,35 +76,42 @@ export default class HomeMap extends Component {
       .then((response) => response.json())
       .then((locationsAndCoords) => {
 
-        if (locationsAndCoords.locations.length === 0) {
-          console.log('no spots')
-          // Display a message "Sorry, no parking spot near that address"
-          // Prompt the user to search another area or add a parking spot
+        if (!locationsAndCoords.coords) {
+
+          console.log('Not a valid address')
+
+        } else {
+
+          if (locationsAndCoords.locations.length === 0) {
+            console.log('no spots')
+            // Display a message "Sorry, no parking spot near that address"
+            // Prompt the user to search another area or add a parking spot
+          }
+
+
+          const nearby = []
+
+          locationsAndCoords.locations.forEach(function(location) {
+            let loca = {}
+            loca.latitude = location.loc[1]
+            loca.longitude = location.loc[0]
+            loca.title = location.address
+            loca.subtitle = location.description
+            loca.animateDrop = true
+            nearby.push(loca)
+          })
+
+          this.setState({
+            nearbyLocations: nearby,
+            currentLocation: {
+              latitude: locationsAndCoords.coords[0],
+              longitude: locationsAndCoords.coords[1],
+              latitudeDelta: 0.01,
+              longitudeDelta: 0.01
+            }
+          }) 
         }
 
-        // TODO: center the user's map on the address they searched
-
-        const nearby = []
-
-        locationsAndCoords.locations.forEach(function(location) {
-          let loca = {}
-          loca.latitude = location.loc[1]
-          loca.longitude = location.loc[0]
-          loca.title = location.address
-          loca.subtitle = location.description
-          loca.animateDrop = true
-          nearby.push(loca)
-        })
-
-        this.setState({
-          nearbyLocations: nearby,
-          currentLocation: {
-            latitude: locationsAndCoords.coords[0],
-            longitude: locationsAndCoords.coords[1],
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01
-          }
-        })
       })
       .catch((err) => {
         console.log('err', err)

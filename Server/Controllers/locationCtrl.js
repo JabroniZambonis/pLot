@@ -54,26 +54,26 @@ exports.findByAddr = function (req, res) {
     .then(function(response) {
       console.log('got here',response)
 
+      let locationsAndCoords = {}
       // TODO: handle case where there are no results
-      if (JSON.parse(response).results.length === 0) {
-        
-      }
-
-      const responseObj = JSON.parse(response).results[0]
-      
-      const long = responseObj.geometry.location.lng
-      const lat = responseObj.geometry.location.lat
-
-      Location.find().where('loc').near({ center: { coordinates: [long, lat], type: 'Point' }, maxDistance: 2000 })
-      .then((locations) => {
-
-        const locationsAndCoords = {}
-        locationsAndCoords.coords = [lat, long]
-        locationsAndCoords.locations = locations
-
+      if (JSON.parse(response).status === "ZERO_RESULTS") {
         res.json(locationsAndCoords)
-      })    
+      } else {
 
+        const responseObj = JSON.parse(response).results[0]
+        
+        const long = responseObj.geometry.location.lng
+        const lat = responseObj.geometry.location.lat
+
+        Location.find().where('loc').near({ center: { coordinates: [long, lat], type: 'Point' }, maxDistance: 2000 })
+        .then((locations) => {
+
+          locationsAndCoords.coords = [lat, long]
+          locationsAndCoords.locations = locations
+
+          res.json(locationsAndCoords)
+        })    
+      }
     })
 }
 
