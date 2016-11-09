@@ -50,9 +50,9 @@ export default class CreateLocation extends Component {
   }
 
   render () {
-    const limit = 30
+    const limit = 200
     let remainder = limit - this.state.description.length
-    let remainderColor = remainder > 5 ? 'blue' : 'red'
+    let remainderColor = remainder > 20 ? 'green' : 'red'
 
     return (
       <View>
@@ -80,13 +80,13 @@ export default class CreateLocation extends Component {
               <Text>{this.state.address}</Text>
 
               <TextInput
-                style={{height: 60, width: 300, borderColor: '#d7d7d7', borderWidth: 1}}
+                style={{height: 30, width: 300, borderColor: '#d7d7d7', borderWidth: 1}}
                 maxLength={limit}
                 onChange={(event) => this.setState({description: event.nativeEvent.text})}
                 placeholder={'Your thoughts go here...'}
               />
               <Text style={{color: remainderColor}}>
-                {remainder} characters remaining
+                {remainder}
               </Text>
 
               <TouchableHighlight>
