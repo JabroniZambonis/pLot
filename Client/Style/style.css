@@ -2,9 +2,54 @@
 @lightgrey: #efefef;
 @darkgrey: #d8d8d8;*/
 
-description {
-  margin-bottom: 20px;
-  font-size: 18px;
-  text-align: center;
-  color: #656656;
+/*App.js*/
+container {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: #efefef;
 }
+
+welcome {
+  font-size: 20;
+  text-align: center;
+  margin: 10;
+}
+
+instructions {
+  text-align: center;
+  color: #333333;
+  margin-bottom: 5;
+}
+/*App.js*/
+
+/*CreateLocation.js*/
+buttonStyle {
+  text-align: center;
+  background-color: #d8d8d8;
+  line-height: 50;
+  height: 50;
+}
+
+createForm {
+  background-color: #d8d8d8;
+  height: 150;
+}
+
+createFormHeader {
+  text-align: center;
+  font-size: 20;
+}
+
+createFormClose {
+  text-align: center;
+}
+/*CreateLocation.js*/
+
+/*LoginPage.js*/
+loginText {
+  font-size: 14px;
+  text-align: center;
+  color: #64AFCB;
+}
+/*LoginPage.js*/

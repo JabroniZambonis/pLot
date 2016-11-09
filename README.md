@@ -15,10 +15,13 @@ following information:
   GOOGLE_API_KEY=your google API key
   JWT_SECRET=your secret
 
-# css
+# react-native-css
 
 This application utilizes the react-native-css package
 (see https://github.com/sabeurthabti/react-native-css for more information). This
 makes it necessary, if any changes are made to the css file, that it be recompiled
 within the terminal to a styles.js before the changes are made available within
 the react-native components.
+
+run "react-native-css -i style.css -o style.js -w" from within the Style folder
+to compile.

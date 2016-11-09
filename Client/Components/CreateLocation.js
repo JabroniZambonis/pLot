@@ -1,3 +1,5 @@
+const styles = require('../Style/style.js')
+
 import React, { Component } from 'react'
 import { TouchableHighlight, Text, StyleSheet, View, Modal, TextInput } from 'react-native'
 
@@ -94,23 +96,3 @@ export default class CreateLocation extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  buttonStyle: {
-    textAlign: 'center',
-    backgroundColor: '#d8d8d8',
-    lineHeight: 50,
-    height: 50,
-  },
-  createForm: {
-    backgroundColor: '#F5FCFF',
-    height: 150
-  },
-  createFormHeader: {
-    textAlign: 'center',
-    fontSize: 20
-  },
-  createFormClose: {
-    textAlign: 'center'
-  }
-})
