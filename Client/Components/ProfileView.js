@@ -15,7 +15,7 @@ export default class HomeMap extends Component {
     return (
       <View>
         <Image
-          style={{width: 50, height: 50}}
+          style={styles.profileImageButton}
           source={{uri: this.props.props.props.userObj.photo}}
         />
       </View>
