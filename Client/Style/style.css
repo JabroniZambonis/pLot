@@ -89,8 +89,8 @@ profileImageButton {
   border-color: #64AFCB;
   border-radius: 20px;
   position: absolute;
-  right: 0;
-  bottom: -85;
+  right: 10;
+  top: 10;
   z-index: 1;
 }
 /*ProfileView.js*/
