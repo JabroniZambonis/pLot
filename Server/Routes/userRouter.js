@@ -14,9 +14,8 @@ const isAuthenticated = function(req, res, next) {
     res.status(200)
     next()
   } else {
-    console.log("ERROR, INCORRECT ACCESS TOKEN")
+    console.log('ERROR, INCORRECT ACCESS TOKEN')
     res.status(400).end()
-
   }
 
 }

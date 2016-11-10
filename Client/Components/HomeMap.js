@@ -26,65 +26,14 @@ export default class HomeMap extends Component {
   }
 
   componentDidMount () {
-    fetch('http://localhost:3000/auth/login', {
-      method: 'GET',
-      headers:{
-         'Accept': 'application/json',
-         'Content-Type': 'application/json',
-         'Authorization': this.props.userToken
-      }
-    })
-    .then( (response) => {
-      console.log("response: ", response)
-      return response.json()
-    })
-    .then( (data) => {
-      // console.log("DATA: ", data)
-      this.setState({currentUser: data})
-    })
-    .catch( (err) => {
-      console.log(err)
-    })
-
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        let currentLocation = {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          latitudeDelta: 0.01,
-          longitudeDelta: 0.01
-        }
-        console.log('got here')
-        this.setState({currentLocation: currentLocation})
-
-        fetch(`http://localhost:3000/locations/bycoords?long=${position.coords.longitude}&lat=${position.coords.latitude}`)
-          .then((response) => response.json())
-          .then((locations) => {
-
-            const nearby = []
-
-            locations.forEach(function(location) {
-              let loca = {}
-              loca.coordinate = {
-                latitude: location.loc[1],
-                longitude: location.loc[0]
-              }
-              loca.title = location.address
-              loca.description = location.description
-              nearby.push(loca)
-            })
-
-            this.setState({nearbyLocations: nearby})
-          })
-          .catch((err) => {
-            console.log('err', err)
-          })
-      },
-      (error) => alert(error.message),
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-    )
-
-    //Probably not needed for now
+    // if we don't have a user fetch the user belonging to current access token
+    if (!this.state.currentUser._id) {
+      this.getUserInfo()
+    }
+    // grab users location and nearby pins
+    this.setUserLocation()
+ 
+    // Probably not needed for now
     // this.watchID = navigator.geolocation.watchPosition((position) => {
     //   let lastPosition = JSON.stringify(position);
     //   this.setState({lastPosition});
@@ -97,16 +46,13 @@ export default class HomeMap extends Component {
     fetch(`http://localhost:3000/locations/byaddr?q=${searchString}`)
       .then((response) => response.json())
       .then((locationsAndCoords) => {
-
         if (!locationsAndCoords.coords) {
           Alert.alert(
-          'Try Again',
-          'No address found at that location',
-          {text: 'OK', onPress: () => console.log('OK Pressed')}
-        )
-
+            'Try Again',
+            'No address found at that location',
+            {text: 'OK', onPress: () => console.log('OK Pressed')}
+          )
         } else {
-          console.log('thisiisisi',locationsAndCoords)
           if (locationsAndCoords.locations.length === 0) {
             Alert.alert(
               'Sorry',
@@ -114,10 +60,7 @@ export default class HomeMap extends Component {
               {text: 'OK', onPress: () => console.log('OK Pressed')}
             )
           }
-
-
           const nearby = []
-
           locationsAndCoords.locations.forEach(function(location) {
             let loca = {}
             loca.coordinate = {
@@ -128,7 +71,6 @@ export default class HomeMap extends Component {
             loca.description = location.description
             nearby.push(loca)
           })
-
           this.setState({
             nearbyLocations: nearby,
             currentLocation: {
@@ -139,27 +81,89 @@ export default class HomeMap extends Component {
             }
           })
         }
-
       })
       .catch((err) => {
         console.log('err', err)
       })
   }
 
+  // grabs user on mounting if component doesn't have one
+  getUserInfo () {
+    fetch('http://localhost:3000/auth/login', {
+      method: 'GET',
+      headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json',
+         'Authorization': this.props.userToken
+      }
+    })
+    .then(response => response.json())
+    .then( (userData) => {
+      this.setState({currentUser: userData})
+    })
+    // catch any errors
+    .catch( (err) => {
+      console.log(err)
+    })
+  }
+
+  // finds users location and grabs nearby pins
+  setUserLocation () {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        let currentLocation = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01
+        }
+        this.setState({
+          currentLocation: currentLocation
+        })
+        // get pins near users location
+        this.getPinsForCoords(currentLocation.longitude, currentLocation.latitude)
+      },
+      // error finding users location
+      (error) => console.log(error),
+      // location finding settings
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    )
+  }
+
+  // given a long and a latitude this finds pins saved nearby
+  getPinsForCoords (long, lat) {
+    fetch(`http://localhost:3000/locations/bycoords?long=${long}&lat=${lat}`)
+      .then(response => response.json())
+      .then(locations => {
+        return locations.map(location => {
+          return {
+            title: location.address,
+            description: location.description,
+            coordinate: {
+              long: location.loc[0],
+              lat: location.loc[1]
+            },
+            rating: location.rating,
+            id: location._id
+          }
+        })
+        // set components nearby pins
+        this.setState({ nearbyLocations: nearby})
+      })
+      .catch(console.log)
+  }
+
   //adds a pins to the map if the user opens the create location form
   addLocation () {
     let lat = this.state.currentLocation.latitude
     let long = this.state.currentLocation.longitude
-
     let newPin = {
       coordinate: {
         latitude: lat,
         longitude: long
       }
     }
-
     let newNearby = this.state.nearbyLocations.slice()
-
     newNearby.push(newPin)
     this.setState({
       nearbyLocations: newNearby
@@ -176,7 +180,6 @@ export default class HomeMap extends Component {
   }
 
   render () {
-    // console.log("HomeMap.js this.props: ", this.state.currentUser)
     return (
       <View style={styles.container}>
         <TextInput
