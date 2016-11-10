@@ -29,17 +29,9 @@ export default class LocationListView extends Component {
           {this.state.nearbyLocations.map((location) => (
             <LocationListItem location={location}/>
           ))}
-          
+
         </Modal>
       </View>
     )
   }
 }
-
-loca.coordinate = {
-    latitude: location.loc[1],
-    longitude: location.loc[0]
-  }
-loca.title = location.address
-loca.description = location.description
-    

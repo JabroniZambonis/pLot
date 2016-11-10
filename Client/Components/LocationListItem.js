@@ -3,6 +3,7 @@ import { View, Text, TouchableHighlight } from 'react-native'
 
 const LocationListItem = (props) => (
   <View>
-    <Text>test</Text>
+    <Text>{props.location.title}</Text>
+    <Text>{props.location.address}</Text>
   </View>
 )
