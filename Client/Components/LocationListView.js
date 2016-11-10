@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Modal, TouchableHighlight } from 'react-native'
+import { View, Text, Modal, TouchableHighlight, ScrollView } from 'react-native'
 import styles  from '../Style/style.js'
 import LocationListItem from './LocationListItem'
 
@@ -37,15 +37,20 @@ export default class LocationListView extends Component {
           visible={this.state.modalVisible} 
         >
           <View style={styles.listViewContainer}>
-            { !this.state.nearbyLocations.length ? 
-                <Text>Loading</Text> :
+            <ScrollView
+              directionalLockEnabled={true} 
+              contentContainerStyle={styles.scrollModal}
+            >
+              { !this.state.nearbyLocations.length ? 
+                  <Text>Loading</Text> :
 
-              this.state.nearbyLocations.map((location, key) => (
-              <LocationListItem
-                location={location}
-                key={key}
-              />
-            ))}
+                this.state.nearbyLocations.map((location, key) => (
+                <LocationListItem
+                  location={location}
+                  key={key}
+                />
+              ))}
+            </ScrollView>
             <TouchableHighlight
               onPress={() => this.setModalVisible(!this.state.modalVisible)}
             >
