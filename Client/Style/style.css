@@ -37,6 +37,7 @@ searchBar {
 homeMap {
   flex: 4;
   height: 500;
+  z-index: -1;
 }
 /*HomeMap.js*/
 
@@ -83,9 +84,14 @@ loginText {
 profileImageButton {
   width: 50px;
   height: 50px;
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: #64AFCB;
   border-radius: 20px;
   position: absolute;
   right: 0;
+  bottom: -85;
+  z-index: 1;
 }
 /*ProfileView.js*/
 
@@ -97,6 +103,3 @@ splashText {
   height: 90px;
   padding-bottom: 100px;
 }
-
-
-
