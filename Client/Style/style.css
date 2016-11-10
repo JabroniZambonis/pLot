@@ -100,10 +100,26 @@ splashText {
 
 /*LocationListView*/
 listViewContainer {
-  padding: 15px;
+  padding: 25px 15px 15px 15px;
 }
+
+listViewToggle {
+  text-align: center;
+  color: #64AFCB;
+  font-weight: bold;
+  background-color: #efefef;
+  line-height: 50;
+  height: 50;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: #64AFCB;
+}
+/*LocationListView*/
 
 /*LocationListItem*/
 listItemView {
-  padding: 5px 0px 5px 0px 
+  padding: 5px 0px 5px 0px;
+  border-top: 1px solid #64AFCB
 }
+/*LocationListItem*/
