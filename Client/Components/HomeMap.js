@@ -189,7 +189,6 @@ export default class HomeMap extends Component {
         <MapView
           style={styles.homeMap}
           region={this.state.currentLocation}
-          style={{height: 500, width: 300}}
           showsUserLocation={true}
         >
           {this.state.nearbyLocations.map((marker, key) => (
