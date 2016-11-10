@@ -3,7 +3,7 @@ const styles = require('../Style/style.js')
 import React, { Component } from 'react'
 import { Image, TouchableHighlight, Text, StyleSheet, View, Modal, TextInput } from 'react-native'
 
-export default class HomeMap extends Component {
+export default class ProfileView extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -18,7 +18,7 @@ export default class HomeMap extends Component {
   }
 
   render () {
-    console.log("ProfileView.js this.props: ", this.props.currentUser.photo)
+    // console.log("ProfileView.js this.props: ", this.props.currentUser.photo)
     return (
       <View>
         <TouchableHighlight
