@@ -8,14 +8,19 @@ export default class ProfileView extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      modalVisible: false,
+      pressStatus: false
     }
 
-    this.setModalVisible = this.setModalVisible.bind(this)
+    this.onDisplayUnderlay = this.onDisplayUnderlay.bind(this)
   }
 
-  setModalVisible (visible) {
-    this.setState({modalVisible: visible})
+  onDisplayUnderlay(){
+    console.log("onDisplayUnderlay got hit")
+    if (this.state.pressStatus === true) {
+      this.setState({ pressStatus: false })
+    } else {
+      this.setState({ pressStatus: true })
+    }
   }
 
   finishedLogout (error, result) {
@@ -26,29 +31,22 @@ export default class ProfileView extends Component {
     return (
       <View>
         <TouchableHighlight
-          onPress={() => {
-            this.setModalVisible(!this.state.modalVisible);
-          }}
+          onPress={this.onDisplayUnderlay}
         >
           <Image
-            style={styles.profileImageButton}
+            style={styles.profileViewImageButton}
             source={{uri: this.props.currentUser.photo}}
           />
         </TouchableHighlight>
 
-        <Modal
-          transparent={false}
-          visible={this.state.modalVisible}
-        >
-          <View style={{marginTop: 22}} >
-            <TouchableHighlight onPress={() => {
-              this.setModalVisible(!this.state.modalVisible)
-              }}>
-              <Text>Hide Modal</Text>
-            </TouchableHighlight>
-            <FBlogin logOut={this.props.logOut} reanimator={this.props.reanimator}/>
-          </View>
-        </Modal>
+        <View style={ this.state.pressStatus ? styles.profileViewView1 : styles.profileViewView2 } >
+          <TouchableHighlight 
+            onPress={this.onDisplayUnderlay}
+          >
+            <Text>⨂</Text>
+          </TouchableHighlight>
+          <FBlogin logOut={this.props.logOut} reanimator={this.props.reanimator}/>
+        </View>
       </View>
     )
   }
