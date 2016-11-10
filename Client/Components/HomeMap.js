@@ -10,7 +10,7 @@ export default class HomeMap extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentUser: {},
+      currentUser: this.props.currentUser,
       currentLocation: {
         latitude: 30.2689941,
         longitude: -97.7405441,
@@ -135,13 +135,14 @@ export default class HomeMap extends Component {
     fetch(`http://localhost:3000/locations/bycoords?long=${long}&lat=${lat}`)
       .then(response => response.json())
       .then(locations => {
-        return locations.map(location => {
+        console.log('locations: ', locations)
+        const nearby = locations.map(location => {
           return {
             title: location.address,
             description: location.description,
             coordinate: {
-              long: location.loc[0],
-              lat: location.loc[1]
+              longitude: location.loc[0],
+              latitude: location.loc[1]
             },
             rating: location.rating,
             id: location._id
@@ -151,6 +152,22 @@ export default class HomeMap extends Component {
         this.setState({ nearbyLocations: nearby})
       })
       .catch(console.log)
+  }
+
+  getUserInfo () {
+    fetch('http://localhost:3000/auth/login', {
+      method: 'GET',
+      headers:{
+         'Accept': 'application/json',
+         'Content-Type': 'application/json',
+         'Authorization': this.props.userToken
+      }
+    })
+    .then(response => response.json())
+    .then(user => {
+      this.setState({ currentUser: user})
+    })
+    .catch(err => console.log('Error grabbing user: ', err))
   }
 
   //adds a pins to the map if the user opens the create location form
