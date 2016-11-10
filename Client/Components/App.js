@@ -20,11 +20,12 @@ export default class App extends Component {
   setUser (userInfo) {
     this.setState({
       userToken: userInfo.accessToken,
-      userObj: userInfo.user
+      userObj: userInfo.user,
+      animating: false
       })
     AsyncStorage.setItem('pLotLoginKey',userInfo.accessToken)
     console.log('this is the state after Set User', this.state)
-    }
+    } 
 
   logOut () {
     console.log('we make it into logout')
@@ -36,6 +37,12 @@ export default class App extends Component {
       })
     }).then( () => {
       console.log('userToken after logout',this.state)
+    })
+  }
+
+  reanimator () {
+    this.setState({
+      animating: true
     })
   }
 
@@ -74,7 +81,7 @@ export default class App extends Component {
     } else {
       return (
         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-          <LoginPage setUser={this.setUser.bind(this)} />
+          <LoginPage setUser={this.setUser.bind(this)} reanimator={this.reanimator.bind(this)} />
         </View>
       )
     }
