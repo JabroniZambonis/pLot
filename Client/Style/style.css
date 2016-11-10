@@ -70,15 +70,6 @@ createFormClose {
 }
 /*CreateLocation.js*/
 
-/*LoginPage.js*/
-
-loginText {
-  font-size: 14px;
-  font-weight: bold;
-  text-align: center;
-  color: #64AFCB;
-}
-/*LoginPage.js*/
 
 /*ProfileView.js*/
 profileImageButton {
@@ -95,13 +86,20 @@ profileImageButton {
 }
 /*ProfileView.js*/
 
-splashText {
+/*LoginPage.js*/
+loginText {
   font-weight: bold;
-  font-size: 50px;
+  font-size: 50;
   text-align: center;
-  color: gray;
+  color: orange;
   height: 90px;
   padding-bottom: 100px;
+}
+
+/*LoginPage.js*/
+logo {
+  width: 50;
+  height: 50;
 }
 
 /*LocationListView*/
