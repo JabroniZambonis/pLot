@@ -76,9 +76,8 @@ profileImageButton {
   width: 50px;
   height: 50px;
   border-width: 1px;
-  border-radius: 5px;
   border-color: #64AFCB;
-  border-radius: 20px;
+  border-radius: 25px;
   position: absolute;
   right: 10;
   top: 10;
