@@ -1,4 +1,4 @@
-const styles = require('../Style/style.js')
+import styles  from '../Style/style.js'
 import React, { Component } from 'react'
 import MapView from 'react-native-maps'
 import { View, StyleSheet, TextInput, Alert } from 'react-native'

@@ -98,5 +98,12 @@ splashText {
   padding-bottom: 100px;
 }
 
+/*LocationListView*/
+listViewContainer {
+  padding: 15px;
+}
 
-
+/*LocationListItem*/
+listItemView {
+  padding: 5px 0px 5px 0px 
+}
