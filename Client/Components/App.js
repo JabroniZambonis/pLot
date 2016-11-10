@@ -68,8 +68,7 @@ export default class App extends Component {
     } else if (this.state.userToken && !this.state.animating) {
       return (
         <View style={styles.container}>
-          <HomeMap currentUser={this.state.userObj} userToken={this.state.userToken} />
-          <FBlogin logOut={this.logOut.bind(this)} reanimator={this.reanimator.bind(this)}/>
+          <HomeMap currentUser={this.state.userObj} userToken={this.state.userToken} logOut={this.logOut.bind(this)} reanimator={this.reanimator.bind(this)}/>
         </View>
       )
     } else {
