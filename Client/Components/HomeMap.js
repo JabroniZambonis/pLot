@@ -1,9 +1,10 @@
-const styles = require('../Style/style.js')
+import styles  from '../Style/style.js'
 import React, { Component } from 'react'
 import MapView from 'react-native-maps'
 import { View, StyleSheet, TextInput, Alert } from 'react-native'
 import CreateLocation from './CreateLocation'
 import ProfileView from './ProfileView'
+import LocationListView from './LocationListView'
 
 export default class HomeMap extends Component {
   constructor(props) {
@@ -191,14 +192,20 @@ export default class HomeMap extends Component {
           region={this.state.currentLocation}
           showsUserLocation={true}
         >
-          {this.state.nearbyLocations.map(marker =>(
+          {this.state.nearbyLocations.map((marker, key) => (
             <MapView.Marker
+              key={key}
               coordinate={marker.coordinate}
               title={marker.title}
               description={marker.description}
             />
           ))}
         </MapView>
+
+        <LocationListView 
+          nearbyLocations={this.state.nearbyLocations}
+        />
+
         <CreateLocation
           addLocation={this.addLocation}
           cancelLocationAdd={this.cancelLocationAdd}
