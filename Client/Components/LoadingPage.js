@@ -39,7 +39,7 @@ const styles = StyleSheet.create ({
    loading: {
       flex: 1,
       justifyContent: 'flex-start',
-      color: 'gray',
+      color: '#666666',
       fontSize: 20,
       marginTop: 50,
       fontWeight: 'bold'
