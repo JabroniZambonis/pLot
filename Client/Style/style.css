@@ -72,7 +72,7 @@ createFormClose {
 
 
 /*ProfileView.js*/
-profileImageButton {
+profileViewImageButton {
   width: 50px;
   height: 50px;
   border-width: 1px;
@@ -82,6 +82,24 @@ profileImageButton {
   right: 10;
   top: 10;
   z-index: 1;
+}
+
+profileViewView1 {
+  background-color: #efefef;
+  top: 15;
+  width: 285;
+  height: 400;
+  position: absolute;
+  left: 10;
+}
+
+profileViewView2 {
+  background-color: #efefef;
+  top: 15;
+  width: 285;
+  height: 400;
+  position: absolute;
+  left: 500;
 }
 /*ProfileView.js*/
 
