@@ -11,7 +11,7 @@ export default class HomeMap extends Component {
   }
 
   render () {
-    // console.log("ProfileView.js this.props: ", this.props.currentUser.photo)
+    console.log("ProfileView.js this.props: ", this.props.currentUser.photo)
     return (
       <View>
         <Image

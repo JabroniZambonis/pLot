@@ -38,7 +38,7 @@ export default class HomeMap extends Component {
       return response.json()
     })
     .then( (data) => {
-      console.log("DATA: ", data)
+      // console.log("DATA: ", data)
       this.setState({currentUser: data})
     })
     .catch( (err) => {
@@ -175,7 +175,7 @@ export default class HomeMap extends Component {
   }
 
   render () {
-    console.log("HomeMap.js this.props: ", this.state.currentUser)
+    // console.log("HomeMap.js this.props: ", this.state.currentUser)
     return (
       <View style={styles.container}>
         <TextInput
@@ -185,7 +185,7 @@ export default class HomeMap extends Component {
           placeholder={this.state.searchText}
           onSubmitEditing={(event) => this.searchLocationSubmit(event)}
         />
-        <ProfileView currentUser={this.props.currentUser} />
+        <ProfileView currentUser={this.state.currentUser} />
         <MapView
           style={styles.homeMap}
           region={this.state.currentLocation}
