@@ -28,8 +28,7 @@ exports.searchGoogleByCoords = function(req, res) {
   const searchURL = baseGoogleURL + `&latlng=${lat},${long}`
   request(searchURL)
     .then((response) => {
-      const resultAddress = JSON.parse(response).results[0].formatted_address 
-      
+      const resultAddress = JSON.parse(response).results[0].formatted_address
       res.status(200).json(resultAddress)
     })
     .catch((err) => {
@@ -38,12 +37,10 @@ exports.searchGoogleByCoords = function(req, res) {
 }
 
 exports.findByCoords = function (req, res) {
-  
   const { long, lat } = req.query
-  
   Location.find().where('loc').near({ center: { coordinates: [long, lat], type: 'Point' }, maxDistance: 2000 })
   .then((locations) => {
-    res.json(locations)
+    res.status(200).json(locations)
   })
 }
 

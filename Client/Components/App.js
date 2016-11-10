@@ -22,21 +22,18 @@ export default class App extends Component {
       userToken: userInfo.accessToken,
       userObj: userInfo.user,
       animating: false
-      })
+    })
+    // set the accessToken into local storage
     AsyncStorage.setItem('pLotLoginKey',userInfo.accessToken)
-    console.log('this is the state after Set User', this.state)
-    } 
+  } 
 
   logOut () {
-    console.log('we make it into logout')
     AsyncStorage.removeItem('pLotLoginKey')
-    .then( () => {
+    .then(removed => {
       this.setState({
         userToken: '',
         userObj: '',
       })
-    }).then( () => {
-      console.log('userToken after logout',this.state)
     })
   }
 
@@ -47,10 +44,8 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-
     AsyncStorage.getItem('pLotLoginKey')
     .then( (userKey) => {
-      console.log('DOT THEN', userKey)
       if(userKey) {
         this.setState({
         userToken: userKey,
@@ -61,7 +56,6 @@ export default class App extends Component {
           animating: false
         })
       }
-      console.log('user key ?', this.state.userToken)
     })
   }
 
