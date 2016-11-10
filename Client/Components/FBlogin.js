@@ -21,6 +21,7 @@ export default class FBlogin extends Component {
     } else if (result.isCancelled) {
       alert('Login was cancelleed')
     } else {
+      this.props.reanimator()
       AccessToken.getCurrentAccessToken()
         .then( (data) => {
           fetch('http://localhost:3000/auth', {
