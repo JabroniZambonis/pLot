@@ -12,7 +12,7 @@ export default class LoadingPage extends Component {
   render() {
    return (
       <View style={styles.container}>
-         <ActivityIndicator animating = {this.props.animating}
+         <ActivityIndicator animating={this.props.animating}
            style = {styles.activityIndicator} size = "large"
          />
       </View>
