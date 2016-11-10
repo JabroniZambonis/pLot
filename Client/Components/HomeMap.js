@@ -23,6 +23,7 @@ export default class HomeMap extends Component {
     }
     this.addLocation = this.addLocation.bind(this)
     this.cancelLocationAdd = this.cancelLocationAdd.bind(this)
+    this.onRegionChange = this.onRegionChange.bind(this)
   }
 
   componentDidMount () {
@@ -118,7 +119,8 @@ export default class HomeMap extends Component {
           longitudeDelta: 0.01
         }
         this.setState({
-          currentLocation: currentLocation
+          currentLocation: currentLocation,
+          region: currentLocation
         })
         // get pins near users location
         this.getPinsForCoords(currentLocation.longitude, currentLocation.latitude)
@@ -199,6 +201,11 @@ export default class HomeMap extends Component {
     console.log(location)
   }
 
+  onRegionChange (currentLocation) {
+    this.setState({ currentLocation })
+    console.log(this.state.currentLocation)
+  }
+
   render () {
     return (
       <View style={styles.container}>
@@ -213,6 +220,7 @@ export default class HomeMap extends Component {
         <MapView
           style={styles.homeMap}
           region={this.state.currentLocation}
+          onRegionChange={this.onRegionChange}
           showsUserLocation={true}
           onPress={(evt) => console.log(evt.nativeEvent.coordinate)}
         >
