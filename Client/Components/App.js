@@ -53,7 +53,7 @@ export default class App extends Component {
       })
       } else {
         this.setState({
-          animating: false
+          animating: true
         })
       }
     })
