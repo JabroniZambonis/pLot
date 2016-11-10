@@ -33,12 +33,15 @@ export default class HomeMap extends Component {
         </TouchableHighlight>
 
         <Modal
-          animationType={"slide"}
-          transparent={true}
+          transparent={false}
           visible={this.state.modalVisible}
         >
-          <View style={{marginLeft: 22, backgroundColor: 'white'}}>
-            <Text>TEST</Text>
+          <View style={{marginTop: 22}} >
+            <TouchableHighlight onPress={() => {
+              this.setModalVisible(!this.state.modalVisible)
+              }}>
+              <Text>Hide Modal</Text>
+            </TouchableHighlight>
           </View>
         </Modal>
       </View>
