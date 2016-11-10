@@ -49,14 +49,14 @@ export default class LocationListView extends Component {
             <TouchableHighlight
               onPress={() => this.setModalVisible(!this.state.modalVisible)}
             >
-              <Text>{buttonText}</Text>
+              <Text style={styles.listViewToggle}>{buttonText}</Text>
             </TouchableHighlight> 
           </View>
         </Modal>
         <TouchableHighlight
           onPress={() => this.setModalVisible(!this.state.modalVisible)}
         >
-          <Text>{buttonText}</Text>
+          <Text style={styles.listViewToggle}>{buttonText}</Text>
         </TouchableHighlight>
       </View>
     )
