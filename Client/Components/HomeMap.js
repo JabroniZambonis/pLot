@@ -4,6 +4,7 @@ import MapView from 'react-native-maps'
 import { View, StyleSheet, TextInput, Alert } from 'react-native'
 import CreateLocation from './CreateLocation'
 import ProfileView from './ProfileView'
+import LocationListView from './LocationListView'
 
 export default class HomeMap extends Component {
   constructor(props) {
@@ -200,6 +201,11 @@ export default class HomeMap extends Component {
             />
           ))}
         </MapView>
+
+        <LocationListView 
+          nearbyLocations={this.state.nearbyLocations}
+        />
+
         <CreateLocation
           addLocation={this.addLocation}
           cancelLocationAdd={this.cancelLocationAdd}
