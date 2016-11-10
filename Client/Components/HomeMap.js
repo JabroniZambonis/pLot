@@ -209,7 +209,7 @@ export default class HomeMap extends Component {
           placeholder={this.state.searchText}
           onSubmitEditing={(event) => this.searchLocationSubmit(event)}
         />
-        <ProfileView currentUser={this.state.currentUser} />
+        <ProfileView currentUser={this.state.currentUser} logOut={this.props.logOut} logOut={this.props.logOut}/>
         <MapView
           style={styles.homeMap}
           region={this.state.currentLocation}

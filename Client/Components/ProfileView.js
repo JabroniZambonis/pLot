@@ -2,6 +2,7 @@ const styles = require('../Style/style.js')
 
 import React, { Component } from 'react'
 import { Image, TouchableHighlight, Text, StyleSheet, View, Modal, TextInput } from 'react-native'
+import FBlogin from './FBlogin'
 
 export default class ProfileView extends Component {
   constructor(props) {
@@ -15,6 +16,10 @@ export default class ProfileView extends Component {
 
   setModalVisible (visible) {
     this.setState({modalVisible: visible})
+  }
+
+  finishedLogout (error, result) {
+    this.props.logOut()
   }
 
   render () {
@@ -41,6 +46,7 @@ export default class ProfileView extends Component {
               }}>
               <Text>Hide Modal</Text>
             </TouchableHighlight>
+            <FBlogin logOut={this.props.logOut} reanimator={this.props.reanimator}/>
           </View>
         </Modal>
       </View>
