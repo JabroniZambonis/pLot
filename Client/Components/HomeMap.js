@@ -135,7 +135,6 @@ export default class HomeMap extends Component {
     fetch(`http://localhost:3000/locations/bycoords?long=${long}&lat=${lat}`)
       .then(response => response.json())
       .then(locations => {
-        console.log('locations: ', locations)
         const nearby = locations.map(location => {
           return {
             title: location.address,
@@ -196,6 +195,10 @@ export default class HomeMap extends Component {
     })
   }
 
+  handlePinPress (location, id) {
+    console.log(location)
+  }
+
   render () {
     return (
       <View style={styles.container}>
@@ -211,13 +214,15 @@ export default class HomeMap extends Component {
           style={styles.homeMap}
           region={this.state.currentLocation}
           showsUserLocation={true}
+          onPress={(evt) => console.log(evt.nativeEvent.coordinate)}
         >
           {this.state.nearbyLocations.map((marker, key) => (
             <MapView.Marker
-              key={key}
+              key={marker.id}
               coordinate={marker.coordinate}
               title={marker.title}
               description={marker.description}
+              onPress={(evt) => console.log('pressed ', evt)}
             />
           ))}
         </MapView>
