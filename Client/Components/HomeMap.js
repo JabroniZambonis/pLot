@@ -252,6 +252,7 @@ export default class HomeMap extends Component {
         />
 
         <CreateLocation
+          userToken={this.props.userToken}
           addLocation={this.addLocation}
           cancelLocationAdd={this.cancelLocationAdd}
           currentLocation={this.state.currentLocation}
