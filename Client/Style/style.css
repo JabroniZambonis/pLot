@@ -27,7 +27,8 @@ instructions {
 /*HomeMap.js*/
 
 searchBar {
-  flex: 2;
+  margin-top: 22px;
+  height: 35px;
   border-color: #64AFCB;
   color: #64AFCB;
   border-width: 1px;
