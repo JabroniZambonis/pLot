@@ -43,7 +43,7 @@ export default class ProfileView extends Component {
           <TouchableHighlight 
             onPress={this.onDisplayUnderlay}
           >
-            <Text>⨂</Text>
+            <Text>X</Text>
           </TouchableHighlight>
           <FBlogin logOut={this.props.logOut} reanimator={this.props.reanimator}/>
         </View>
