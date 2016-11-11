@@ -233,7 +233,6 @@ export default class HomeMap extends Component {
               description={marker.description}
               onPress={(evt) => console.log('pressed ', evt)}
               image={require('../Public/existingPins.png')}
-              style={pinStyle.pins}
               centerOffset={{x: 0, y: -20}}
 
             />
