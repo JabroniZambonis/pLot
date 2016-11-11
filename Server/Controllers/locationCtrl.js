@@ -2,6 +2,8 @@ const mongoose = require('mongoose')
 const Location = require('../Models/locations')
 const db = require('../db')
 const request = require('request-promise')
+const User = require('../Models/usersModel')
+const jwt = require('../Lib/jwt')
 
 const baseGoogleURL = 
   `https://maps.googleapis.com/maps/api/geocode/json?key=${process.env.GOOGLE_API_KEY}`
@@ -15,11 +17,24 @@ exports.create = function (req, res) {
     loc: req.body.location.loc
   })
   .save()
-  .then((data) => {
-    console.log('Created location: ', data)
+  .then((location) => {
+    // on location saved add it to users created pins
+    // grab user from Authorization header
+    const user = jwt.decode(req.get('Authorization'))
+    User.findOneAndUpdate(
+      { _id: user._id },
+      { $push: { createdPins: location._id } },
+      // return new updated user
+      { new: true}
+    )
+    .then(user => {
+      // user was saved send location to client to show write went through
+      return res.status(201).json(location)
+    })
   })
+  // any errors trying to save location
   .catch((err) => {
-    console.log('Location not saved: ',err)
+    return res.status(500).json(err)
   })
 }
 
