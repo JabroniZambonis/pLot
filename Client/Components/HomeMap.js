@@ -261,10 +261,3 @@ export default class HomeMap extends Component {
     )
   }
 }
-
-const pinStyle = StyleSheet.create ({
-  pins : {
-    height: 80,
-    width: 80
-  }
-})
