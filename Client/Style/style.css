@@ -88,11 +88,11 @@ profileViewImageButton {
 
 profileViewView1 {
   background-color: #efefef;
-  top: 15;
-  width: 285;
-  height: 400;
+  top: 20;
+/*  width: 285;
+  height: 400;*/
   position: absolute;
-  left: 10;
+  left: 110;
   border-width: 1px;
   border-style: solid;
   border-radius: 5px;
@@ -101,9 +101,9 @@ profileViewView1 {
 
 profileViewView2 {
   background-color: #efefef;
-  top: 15;
-  width: 285;
-  height: 400;
+  top: 20;
+/*  width: 285;
+  height: 400;*/
   position: absolute;
   left: 500;
   border-width: 1px;
