@@ -154,3 +154,33 @@ listItemView {
   border-top: 1px solid #64AFCB
 }
 /*LocationListItem*/
+
+/*Camera.js*/
+cameraContainer {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+cameraButtonBar {
+  flex-direction: row;
+  position: absolute;
+  bottom: 25;
+  right: 0;
+  left: 0;
+  justify-content: center;
+}
+
+cameraButton {
+  padding: 10;
+  color: #ffffff;
+  border-width: 1;
+  border-color: #ffffff;
+  margin: 5;
+}
+    
+cameraButtonText {
+  color: #ffffff;
+}
+/*Camera.js*/

@@ -24,14 +24,11 @@ export default class Camera extends Component {
     return (
       <Camera
         ref="cam"
-        style={styles.container}
+        style={styles.cameraContainer}
         type={this.state.cameraType}>
-        <View style={styles.buttonBar}>
-          <TouchableHighlight style={styles.button} onPress={this._switchCamera}>
-            <Text style={styles.buttonText}>Flip</Text>
-          </TouchableHighlight>
-          <TouchableHighlight style={styles.button} onPress={this._takePicture}>
-            <Text style={styles.buttonText}>Take</Text>
+        <View style={styles.cameraButtonBar}>
+          <TouchableHighlight style={styles.cameraButton} onPress={this.takePicture}>
+            <Text style={styles.cameraButtonText}>Take</Text>
           </TouchableHighlight>
         </View>
       </Camera>
