@@ -1,7 +1,7 @@
 import styles  from '../Style/style.js'
 import React, { Component } from 'react'
 import MapView from 'react-native-maps'
-import { View, StyleSheet, TextInput, Alert } from 'react-native'
+import { View, StyleSheet, TextInput, Alert, Image } from 'react-native'
 import CreateLocation from './CreateLocation'
 import ProfileView from './ProfileView'
 import LocationListView from './LocationListView'
@@ -231,11 +231,14 @@ export default class HomeMap extends Component {
               onPress={(evt) => console.log('pressed ', evt)}
             />
           ))}
-          <MapView.Marker
-            coordinate={this.state.currentLocation}
-            pinColor={'#0000ff'}
-          />
         </MapView>
+
+        <View style = { centerStyle.mapCenterMarkerView }>
+          <Image
+            style={centerStyle.mapCenterMarker}
+            source={require('../Public/parkinglogo.png')}
+          />
+        </View>
 
         <LocationListView 
           nearbyLocations={this.state.nearbyLocations}
@@ -250,3 +253,17 @@ export default class HomeMap extends Component {
     )
   }
 }
+
+const centerStyle = StyleSheet.create({
+  mapCenterMarkerView: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0)',
+  },
+
+  mapCenterMarker: {
+    width: 32,
+    height: 32,
+    backgroundColor: 'rgba(0,0,0,0)'
+  }
+})
