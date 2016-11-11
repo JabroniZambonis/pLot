@@ -91,6 +91,10 @@ profileViewView1 {
   height: 400;
   position: absolute;
   left: 10;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: #64AFCB;
 }
 
 profileViewView2 {
@@ -100,6 +104,10 @@ profileViewView2 {
   height: 400;
   position: absolute;
   left: 500;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: #64AFCB;
 }
 /*ProfileView.js*/
 
