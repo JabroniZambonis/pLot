@@ -12,7 +12,7 @@ export default class App extends Component {
     super(props)
     this.state = {
       userToken:'',
-      userObj: '',
+      userObj: {},
       animating: true
     }
   }
