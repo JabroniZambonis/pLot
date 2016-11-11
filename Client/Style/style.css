@@ -8,6 +8,7 @@ container {
   justify-content: center;
   align-items: stretch;
   background-color: #efefef;
+  margin-top: 22;
 }
 
 welcome {
@@ -27,13 +28,18 @@ instructions {
 /*HomeMap.js*/
 
 searchBar {
-  margin-top: 22px;
   height: 35px;
   border-color: #64AFCB;
   color: #64AFCB;
   border-width: 1px;
   border-style: solid;
   border-radius: 5px;
+}
+
+homeContainer {
+  flex: 1;
+  justify-content: center;
+  align-items: stretch;
 }
 
 homeMapContainer {
@@ -59,7 +65,7 @@ mapCenterMarkerView {
 
 mapCenterMarker {
   width: 40;
-  height: 40;
+  height: 54;
   background-color: rgba(0,0,0,0);
   right: 20;
   bottom: 20;

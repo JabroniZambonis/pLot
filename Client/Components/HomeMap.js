@@ -206,7 +206,7 @@ export default class HomeMap extends Component {
 
   render () {
     return (
-      <View style={styles.container}>
+      <View style={styles.homeContainer}>
         <TextInput
           returnKeyType="search"
           style={styles.searchBar}
@@ -239,7 +239,7 @@ export default class HomeMap extends Component {
           <View style = {styles.mapCenterMarkerView}>
             <Image
               style={styles.mapCenterMarker}
-              source={require('../Public/parkinglogo.png')}
+              source={require('../Public/centerMap.png')}
             />
           </View>
         </View>
