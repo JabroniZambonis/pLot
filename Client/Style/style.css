@@ -64,8 +64,8 @@ mapCenterMarkerView {
 }
 
 mapCenterMarker {
-  width: 40;
-  height: 54;
+  width: 30;
+  height: 40;
   background-color: rgba(0,0,0,0);
   right: 20;
   bottom: 20;

@@ -216,24 +216,27 @@ export default class HomeMap extends Component {
         />
 
         <ProfileView currentUser={this.state.currentUser} logOut={this.props.logOut} logOut={this.props.logOut}/>
-        
         <View style={styles.homeMapContainer}>
-          <MapView
-            style={styles.homeMapView}
-            region={this.state.currentLocation}
-            onRegionChange={this.onRegionChange}
-            showsUserLocation={true}
-            onPress={(evt) => console.log(evt.nativeEvent.coordinate)}
-          >
-            {this.state.nearbyLocations.map((marker, key) => (
-              <MapView.Marker
-                key={marker.id}
-                coordinate={marker.coordinate}
-                title={marker.title}
-                description={marker.description}
-                onPress={(evt) => console.log('pressed ', evt)}
-              />
-            ))}
+        
+        <MapView
+          style={styles.homeMapView}
+          region={this.state.currentLocation}
+          onRegionChange={this.onRegionChange}
+          showsUserLocation={true}
+          onPress={(evt) => console.log(evt.nativeEvent.coordinate)}
+        >
+          {this.state.nearbyLocations.map((marker, key) => (
+            <MapView.Marker
+              key={marker.id}
+              coordinate={marker.coordinate}
+              title={marker.title}
+              description={marker.description}
+              onPress={(evt) => console.log('pressed ', evt)}
+              image={require('../Public/existingPins.png')}
+              centerOffset={{x: 0, y: -20}}
+
+            />
+          ))}
           </MapView>
 
           <View style = {styles.mapCenterMarkerView}>
