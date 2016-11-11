@@ -214,30 +214,34 @@ export default class HomeMap extends Component {
           placeholder={this.state.searchText}
           onSubmitEditing={(event) => this.searchLocationSubmit(event)}
         />
-        <ProfileView currentUser={this.state.currentUser} logOut={this.props.logOut} reanimator={this.props.reanimator}/>
-        <MapView
-          style={styles.homeMap}
-          region={this.state.currentLocation}
-          onRegionChange={this.onRegionChange}
-          showsUserLocation={true}
-          onPress={(evt) => console.log(evt.nativeEvent.coordinate)}
-        >
-          {this.state.nearbyLocations.map((marker, key) => (
-            <MapView.Marker
-              key={marker.id}
-              coordinate={marker.coordinate}
-              title={marker.title}
-              description={marker.description}
-              onPress={(evt) => console.log('pressed ', evt)}
-            />
-          ))}
-        </MapView>
 
-        <View style = { centerStyle.mapCenterMarkerView }>
-          <Image
-            style={centerStyle.mapCenterMarker}
-            source={require('../Public/parkinglogo.png')}
-          />
+        <ProfileView currentUser={this.state.currentUser} logOut={this.props.logOut} logOut={this.props.logOut}/>
+        
+        <View style={styles.homeMapContainer}>
+          <MapView
+            style={styles.homeMapView}
+            region={this.state.currentLocation}
+            onRegionChange={this.onRegionChange}
+            showsUserLocation={true}
+            onPress={(evt) => console.log(evt.nativeEvent.coordinate)}
+          >
+            {this.state.nearbyLocations.map((marker, key) => (
+              <MapView.Marker
+                key={marker.id}
+                coordinate={marker.coordinate}
+                title={marker.title}
+                description={marker.description}
+                onPress={(evt) => console.log('pressed ', evt)}
+              />
+            ))}
+          </MapView>
+
+          <View style = {styles.mapCenterMarkerView}>
+            <Image
+              style={styles.mapCenterMarker}
+              source={require('../Public/parkinglogo.png')}
+            />
+          </View>
         </View>
 
         <LocationListView 
@@ -253,17 +257,3 @@ export default class HomeMap extends Component {
     )
   }
 }
-
-const centerStyle = StyleSheet.create({
-  mapCenterMarkerView: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'rgba(0,0,0,0)',
-  },
-
-  mapCenterMarker: {
-    width: 32,
-    height: 32,
-    backgroundColor: 'rgba(0,0,0,0)'
-  }
-})
