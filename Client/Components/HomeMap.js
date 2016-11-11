@@ -1,7 +1,7 @@
 import styles  from '../Style/style.js'
 import React, { Component } from 'react'
 import MapView from 'react-native-maps'
-import { View, StyleSheet, TextInput, Alert } from 'react-native'
+import { View, StyleSheet, TextInput, Alert, Image } from 'react-native'
 import CreateLocation from './CreateLocation'
 import ProfileView from './ProfileView'
 import LocationListView from './LocationListView'
@@ -214,28 +214,35 @@ export default class HomeMap extends Component {
           placeholder={this.state.searchText}
           onSubmitEditing={(event) => this.searchLocationSubmit(event)}
         />
-        <ProfileView currentUser={this.state.currentUser} logOut={this.props.logOut} reanimator={this.props.reanimator}/>
-        <MapView
-          style={styles.homeMap}
-          region={this.state.currentLocation}
-          onRegionChange={this.onRegionChange}
-          showsUserLocation={true}
-          onPress={(evt) => console.log(evt.nativeEvent.coordinate)}
-        >
-          {this.state.nearbyLocations.map((marker, key) => (
-            <MapView.Marker
-              key={marker.id}
-              coordinate={marker.coordinate}
-              title={marker.title}
-              description={marker.description}
-              onPress={(evt) => console.log('pressed ', evt)}
+
+        <ProfileView currentUser={this.state.currentUser} logOut={this.props.logOut} logOut={this.props.logOut}/>
+        
+        <View style={styles.homeMapContainer}>
+          <MapView
+            style={styles.homeMapView}
+            region={this.state.currentLocation}
+            onRegionChange={this.onRegionChange}
+            showsUserLocation={true}
+            onPress={(evt) => console.log(evt.nativeEvent.coordinate)}
+          >
+            {this.state.nearbyLocations.map((marker, key) => (
+              <MapView.Marker
+                key={marker.id}
+                coordinate={marker.coordinate}
+                title={marker.title}
+                description={marker.description}
+                onPress={(evt) => console.log('pressed ', evt)}
+              />
+            ))}
+          </MapView>
+
+          <View style = {styles.mapCenterMarkerView}>
+            <Image
+              style={styles.mapCenterMarker}
+              source={require('../Public/parkinglogo.png')}
             />
-          ))}
-          <MapView.Marker
-            coordinate={this.state.currentLocation}
-            pinColor={'#0000ff'}
-          />
-        </MapView>
+          </View>
+        </View>
 
         <LocationListView 
           nearbyLocations={this.state.nearbyLocations}
