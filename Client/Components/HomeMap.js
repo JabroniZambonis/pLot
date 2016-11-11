@@ -155,22 +155,6 @@ export default class HomeMap extends Component {
       .catch(console.log)
   }
 
-  getUserInfo () {
-    fetch('http://localhost:3000/auth/login', {
-      method: 'GET',
-      headers:{
-         'Accept': 'application/json',
-         'Content-Type': 'application/json',
-         'Authorization': this.props.userToken
-      }
-    })
-    .then(response => response.json())
-    .then(user => {
-      this.setState({ currentUser: user})
-    })
-    .catch(err => console.log('Error grabbing user: ', err))
-  }
-
   addLocationToUser (location) {
     const currentUser = Object.assign({}, this.state.currentUser)
     const newLocations = currentUser.createdPins.concat(location)
