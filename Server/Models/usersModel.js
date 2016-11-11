@@ -10,9 +10,8 @@ var userSchema = new Schema({
     fbAccessToken: {type: String},
     googleId: {type: String},
     createdPins: [{type: Schema.ObjectId, ref:'locations'}],
-    savedPins: [],
-    createdSpots: [],
-    savedSpots: [],
+    savedPins: [{type: Schema.ObjectId, ref: 'locations'}],
+    
 });
 
 var User = mongoose.model('User', userSchema)
