@@ -119,8 +119,7 @@ export default class HomeMap extends Component {
           longitudeDelta: 0.01
         }
         this.setState({
-          currentLocation: currentLocation,
-          region: currentLocation
+          currentLocation: currentLocation
         })
         // get pins near users location
         this.getPinsForCoords(currentLocation.longitude, currentLocation.latitude)
@@ -203,7 +202,6 @@ export default class HomeMap extends Component {
 
   onRegionChange (currentLocation) {
     this.setState({ currentLocation })
-    console.log(this.state.currentLocation)
   }
 
   render () {
@@ -233,6 +231,10 @@ export default class HomeMap extends Component {
               onPress={(evt) => console.log('pressed ', evt)}
             />
           ))}
+          <MapView.Marker
+            coordinate={this.state.currentLocation}
+            pinColor={'#0000ff'}
+          />
         </MapView>
 
         <LocationListView 
