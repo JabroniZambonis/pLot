@@ -24,6 +24,7 @@ export default class HomeMap extends Component {
     this.addLocation = this.addLocation.bind(this)
     this.cancelLocationAdd = this.cancelLocationAdd.bind(this)
     this.onRegionChange = this.onRegionChange.bind(this)
+    this.addLocationToUser = this.addLocationToUser.bind(this)
   }
 
   componentDidMount () {
@@ -154,20 +155,11 @@ export default class HomeMap extends Component {
       .catch(console.log)
   }
 
-  getUserInfo () {
-    fetch('http://localhost:3000/auth/login', {
-      method: 'GET',
-      headers:{
-         'Accept': 'application/json',
-         'Content-Type': 'application/json',
-         'Authorization': this.props.userToken
-      }
-    })
-    .then(response => response.json())
-    .then(user => {
-      this.setState({ currentUser: user})
-    })
-    .catch(err => console.log('Error grabbing user: ', err))
+  addLocationToUser (location) {
+    const currentUser = Object.assign({}, this.state.currentUser)
+    const newLocations = currentUser.createdPins.concat(location)
+    currentUser.createdPins = newLocations
+    this.setState({ currentUser: currentUser})
   }
 
   //adds a pins to the map if the user opens the create location form
@@ -194,10 +186,6 @@ export default class HomeMap extends Component {
     this.setState({
       nearbyLocations: nearby
     })
-  }
-
-  handlePinPress (location, id) {
-    console.log(location)
   }
 
   onRegionChange (currentLocation) {
@@ -252,6 +240,8 @@ export default class HomeMap extends Component {
         />
 
         <CreateLocation
+          addLocationToUser={this.addLocationToUser}
+          userToken={this.props.userToken}
           addLocation={this.addLocation}
           cancelLocationAdd={this.cancelLocationAdd}
           currentLocation={this.state.currentLocation}

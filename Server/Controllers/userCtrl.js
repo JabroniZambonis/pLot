@@ -65,20 +65,6 @@ exports.deletePin = function(req, res) {
   //There should be a good way to refactor this rather than using
 }
 
-exports.createSpot = function(req, res) {
-  let spotArray = [] //setPin variable
-
-  User.find({_id: req.body.userId}, function(err, result) { //Find user
-    if (!err) spotArray = result.createdSpots //set pinArray to existing
-    else console.log("ERROR getUser: ", err)
-  })
-
-  spotArray.push(req.body.createdSpots) //push in newly created Array
-
-  findOneAndUpdate({ _id: req.body.userID }, {createdSpots: SpotArray}) //set pins attribute to pinArray
-  //There should be a good way to refactor this rather than using
-}
-
 exports.deleteSpot = function(req, res) {
   let spotArray = [] //setPin variable
 
@@ -91,4 +77,24 @@ exports.deleteSpot = function(req, res) {
 
   findOneAndUpdate({ _id: req.body.userID }, {createdSpots: spotArray}) //set pins attribute to pinArray
   //There should be a good way to refactor this rather than using
+}
+
+exports.getSavedPins = function (req, res) {
+  User.findById(req.params.userId)
+    .populate('savedPins')
+    .then(user => {
+      // respond with users saved pins
+      return res.status(200).json(user.savedPins)
+    })
+    .catch(err => res.status(500).json(err))
+}
+
+exports.getCreatedPins = function (req, res) {
+  User.findById(req.params.userId)
+    .populate('createdPins')
+    .then(user => {
+      // respond with created pins
+      return res.status(200).json(user.createdPins)
+    })
+    .catch(err => res.status(500).json(err))
 }

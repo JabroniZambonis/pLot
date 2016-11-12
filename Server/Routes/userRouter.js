@@ -30,10 +30,12 @@ router.route('/:userId')
   .put(users.updateUser) //update user information
 
 router.route('/:userId/saved')
+  .get(users.getSavedPins)
   .post(users.createPin) //add new pin
   .delete(users.deletePin) //delete pin
 
 router.route('/:userId/created')
+  .get(users.getCreatedPins)
   .post(users.createSpot) //add new spot
   .delete(users.deleteSpot) //delete spot
 

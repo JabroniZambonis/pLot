@@ -26,20 +26,25 @@ exports.fbAuthenticate = function (req, res) {
         photo: parsed.picture.data.url,
         fbAccessToken: fbAccessToken
       }).save()
-      // user was successfully saved
-      // respond with jwt token to frontend
+      // user was successfully saved create a token and respond with
+      // subset of users information (name, email, photo, and id)
       .then(user => {
-        const token = jwt.create(user)
+        const partial = {
+          name: user.name,
+          email: user.name,
+          photo: user.photo,
+          _id: user._id
+        }
+        const token = jwt.create(partial)
         return res.status(201).json({
           accessToken: token,
-          user: user
+          user: partial
         })
       })
       // potential error creating user
       .catch(err => {
-        // if the err has a code of 11000
-        // it is a duplicate and in that case
-        // just update the users access token
+        // if the err has a code of 11000 then it is a mongodb duplicate
+        // just update the users access token in case it has changed
         if (err.code === 11000) {
           User.findOneAndUpdate(
             { email: parsed.email },
@@ -47,12 +52,19 @@ exports.fbAuthenticate = function (req, res) {
             // return updated user not old one
             { new: true }
           )
+          // user successfully updated now send partial user data as well
+          // as access token to client
           .then(user => {
-            // user has been updated now send jwt
-            const token = jwt.create(user)
+            const partial = {
+              name: user.name,
+              email: user.name,
+              photo: user.photo,
+              _id: user._id
+            }
+            const token = jwt.create(partial)
             return res.status(200).json({ 
               accessToken: token,
-              user: user
+              user: partial
             })   
           })
         } else {

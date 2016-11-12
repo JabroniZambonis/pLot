@@ -42,13 +42,22 @@ export default class CreateLocation extends Component {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': this.props.userToken
       },
       body: JSON.stringify({
         location: locationObj
       })
     })
-    .then(this.setModalVisible(!this.state.modalVisible))
+    .then(response => response.json())
+    .then(location => {
+      // add location to users state
+      this.props.addLocationToUser(location)
+      this.setModalVisible(!this.state.modalVisible)
+    })
+    // any errors posting the location
+    // This needs improvement!
+    .catch(err => console.log(err))
   }
 
   render () {
