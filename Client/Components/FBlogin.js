@@ -50,6 +50,7 @@ export default class FBlogin extends Component {
  
 
   render() {
+      console.log('this is the passed user state:',this.props.loggedIn)
     return (
       <View>
         <LoginButton

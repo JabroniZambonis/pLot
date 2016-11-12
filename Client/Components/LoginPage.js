@@ -18,7 +18,7 @@ export default class LoginPage extends Component {
     return (
       <View>
         <Text style={styles.loginText}><Image style={styles.logo} source={require('../Public/parkinglogo.png')}/>Lot </Text>
-        <FBlogin setUser={this.props.setUser} reanimator={this.props.reanimator} />
+        <FBlogin loggedIn={this.props.loggedIn} setUser={this.props.setUser} reanimator={this.props.reanimator} />
       </View>
     )
   }

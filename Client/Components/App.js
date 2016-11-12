@@ -78,7 +78,7 @@ export default class App extends Component {
     } else {
       return (
         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-          <LoginPage setUser={this.setUser.bind(this)} reanimator={this.reanimator.bind(this)} />
+          <LoginPage loggedIn={this.state.userToken} setUser={this.setUser.bind(this)} reanimator={this.reanimator.bind(this)} />
         </View>
       )
     }
