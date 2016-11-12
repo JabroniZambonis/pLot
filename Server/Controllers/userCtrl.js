@@ -92,3 +92,23 @@ exports.deleteSpot = function(req, res) {
   findOneAndUpdate({ _id: req.body.userID }, {createdSpots: spotArray}) //set pins attribute to pinArray
   //There should be a good way to refactor this rather than using
 }
+
+exports.getSavedPins = function (req, res) {
+  User.findById(req.params.userId)
+    .populate('savedPins')
+    .then(user => {
+      // respond with users saved pins
+      return res.status(200).json(user.savedPins)
+    })
+    .catch(err => res.status(500).json(err))
+}
+
+exports.getCreatedPins = function (req, res) {
+  User.findById(req.params.userId)
+    .populate('createdPins')
+    .then(user => {
+      // respond with created pins
+      return res.status(200).json(user.createdPins)
+    })
+    .catch(err => res.status(500).json(err))
+}
