@@ -65,20 +65,6 @@ exports.deletePin = function(req, res) {
   //There should be a good way to refactor this rather than using
 }
 
-exports.createSpot = function(req, res) {
-  let spotArray = [] //setPin variable
-
-  User.find({_id: req.body.userId}, function(err, result) { //Find user
-    if (!err) spotArray = result.createdSpots //set pinArray to existing
-    else console.log("ERROR getUser: ", err)
-  })
-
-  spotArray.push(req.body.createdSpots) //push in newly created Array
-
-  findOneAndUpdate({ _id: req.body.userID }, {createdSpots: SpotArray}) //set pins attribute to pinArray
-  //There should be a good way to refactor this rather than using
-}
-
 exports.deleteSpot = function(req, res) {
   let spotArray = [] //setPin variable
 
