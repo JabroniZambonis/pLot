@@ -303,17 +303,18 @@ parkingDetailsMapContainer {
 
 parkingDescriptionContainer {
   flex: 1;
-  padding: 3;
+  padding: 0 15 0 15;
 }
 
 parkingDescriptionText {
   font-size: 15px;
   font-family: Georgia;
   font-weight: bold;
-  margin-top: 30;
+  margin-top: 20;
 }
 
 parkingDescriptionImagesContainer {
   flex: 1;
+  padding: 0 20 0 20;
 }
 /*ParkingDetails.js*/
