@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import {
   View,
-  TouchableHighlight
+  Text,
+  Image
 } from 'react-native'
 import MapView from 'react-native-maps'
 import styles  from '../Style/style.js'
@@ -21,7 +22,8 @@ export default class ParkingDetails extends Component {
         longitude: -97.740536,
         latitudeDelta: .001,
         longitudeDelta: .001
-      }
+      },
+      parkingSpotDescription: "This parking spot may be one of the absolute best in Austin. If you are anywhere near downtown you will definitely want to check this spot out first."
     }
   }
 
@@ -40,9 +42,10 @@ render () {
     return (
     <View style={styles.parkingDetailsContainer}>        
       <MapView
-      style={styles.parkingDetailsMapContainer}
+        style={styles.parkingDetailsMapContainer}
         region={this.state.region}
         scrollEnabled={false}
+        zoomEnabled={false}
       >
        <MapView.Marker
               // key={}
@@ -53,8 +56,30 @@ render () {
               centerOffset={{x: 0, y: -20}}
 
             />
-      </MapView>      
-    </View>  
+      </MapView>
+      <View style={styles.parkingDescriptionContainer}>
+         <Text>
+         Description:
+         </Text>
+         <Text style={styles.parkingDescriptionText}>
+         {this.state.parkingSpotDescription}
+         </Text>
+      </View>
+      <View style={styles.parkingDescriptionImagesContainer}>
+        <Image 
+          source={require('../Public/reservedParkingSizeTest.jpg')}
+          style={styles.parkingDescriptionImages}
+         />
+        <Image 
+          source={require('../Public/anotherParkingImage.jpg')}
+          style={styles.parkingDescriptionImages}
+         />
+        <Image 
+          source={require('../Public/bikeParking.jpg')}
+          style={styles.parkingDescriptionImages}
+         />  
+      </View>  
+    </View>
     )
   }
 }

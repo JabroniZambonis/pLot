@@ -292,10 +292,36 @@ parkingDetailsContainer {
   flex: 1;
   justify-content: center;
   align-items: stretch;
+  background-color: white;
 }
 
 parkingDetailsMapContainer {
-  flex: 2;
+  flex: 1;
   justify-content: flex-start;
+  margin-bottom: 10;
 }
 
+parkingDescriptionContainer {
+  flex: 1;
+  padding: 3;
+}
+
+parkingDescriptionText {
+  font-size: 15px;
+  font-family: Georgia;
+  font-weight: bold;
+  margin-top: 30;
+}
+
+parkingDescriptionImagesContainer {
+  flex: 2;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+parkingDescriptionImages {
+  height: 200;
+  width: 250;
+}
+/*ParkingDetails.js*/
