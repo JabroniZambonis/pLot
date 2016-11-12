@@ -9,8 +9,8 @@ var userSchema = new Schema({
     fbId: {type: String},
     fbAccessToken: {type: String},
     googleId: {type: String},
-    createdPins: [{type: Schema.ObjectId, ref:'locations'}],
-    savedPins: [{type: Schema.ObjectId, ref: 'locations'}],
+    createdPins: [{type: Schema.ObjectId, ref:'Location'}],
+    savedPins: [{type: Schema.ObjectId, ref: 'Location'}],
     
 });
 
