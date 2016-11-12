@@ -29,10 +29,18 @@ exports.fbAuthenticate = function (req, res) {
       // user was successfully saved
       // respond with jwt token to frontend
       .then(user => {
-        const token = jwt.create(user)
+        // create a partial user that will get sent to client
+        // and used for access token creation
+        const partial = {
+          name: user.name,
+          email: user.name,
+          photo: user.photo
+          _id: user._id
+        }
+        const token = jwt.create(partial)
         return res.status(201).json({
           accessToken: token,
-          user: user
+          user: partial
         })
       })
       // potential error creating user
@@ -48,11 +56,18 @@ exports.fbAuthenticate = function (req, res) {
             { new: true }
           )
           .then(user => {
-            // user has been updated now send jwt
-            const token = jwt.create(user)
+            // user has been updated now send jwt based of partial user
+            // information
+            const partial = {
+              name: user.name,
+              email: user.name,
+              photo: user.photo
+              _id: user._id
+            }
+            const token = jwt.create(partial)
             return res.status(200).json({ 
               accessToken: token,
-              user: user
+              user: partial
             })   
           })
         } else {
