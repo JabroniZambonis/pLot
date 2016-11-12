@@ -292,7 +292,7 @@ parkingDetailsContainer {
   flex: 1;
   justify-content: center;
   align-items: stretch;
-  background-color: white;
+  /*background-color: white;*/
 }
 
 parkingDetailsMapContainer {
@@ -314,14 +314,6 @@ parkingDescriptionText {
 }
 
 parkingDescriptionImagesContainer {
-  flex: 2;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-parkingDescriptionImages {
-  height: 200;
-  width: 250;
+  flex: 1;
 }
 /*ParkingDetails.js*/

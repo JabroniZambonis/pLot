@@ -4,6 +4,7 @@ import {
   Text,
   Image
 } from 'react-native'
+import ImageSlider from 'react-native-image-slider'
 import MapView from 'react-native-maps'
 import styles  from '../Style/style.js'
 
@@ -14,8 +15,8 @@ export default class ParkingDetails extends Component {
       region: {
         latitude: 30.2385295,
         longitude: -97.740536,
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01
+        latitudeDelta: 0.002,
+        longitudeDelta: 0.002
       },
       pinLocation: {
         latitude: 30.2385295,
@@ -66,18 +67,10 @@ render () {
          </Text>
       </View>
       <View style={styles.parkingDescriptionImagesContainer}>
-        <Image 
-          source={require('../Public/reservedParkingSizeTest.jpg')}
-          style={styles.parkingDescriptionImages}
+        <ImageSlider images={[require('../Public/reservedParkingSizeTest.jpg'),
+                              require('../Public/anotherParkingImage.jpg'),
+                              require('../Public/bikeParking.jpg')]}
          />
-        <Image 
-          source={require('../Public/anotherParkingImage.jpg')}
-          style={styles.parkingDescriptionImages}
-         />
-        <Image 
-          source={require('../Public/bikeParking.jpg')}
-          style={styles.parkingDescriptionImages}
-         />  
       </View>  
     </View>
     )
