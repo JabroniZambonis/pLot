@@ -26,14 +26,25 @@ instructions {
 /*App.js*/
 
 /*HomeMap.js*/
+searchBarContainer {
+  padding: 0 5 0 5;
+  margin: 0 15 0 15;
+  align-items: stretch;
+  flex-direction: row;
+  flex: 1;
+  position: absolute;
+  z-index: 2;
+  border-width: 2;
+  border-radius: 15;
+  border-color: #64AFCB;
+  top: 15;
+  background-color: white;
+}
 
 searchBar {
-  height: 35px;
-  border-color: #64AFCB;
+  flex: 1;
+  height: 35;
   color: #64AFCB;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 5px;
 }
 
 homeContainer {
@@ -86,6 +97,29 @@ buttonStyle {
   border-color: #64AFCB;
 }
 
+addLocationButtonContainer {
+  width: 70;
+  height: 70;
+  border-radius: 35;
+  border-color: #64AFCB;
+  border-style: solid;
+  border-width: 3;
+  position: absolute;
+  z-index: 4;
+  background-color: #efefef;
+  justify-content: center;
+  align-items: center;
+  bottom: 40;
+  right: 40;
+}
+
+addLocationButtonText {
+  font-size: 45;
+  font-weight: bold;
+  color: #64AFCB;
+  line-height: 47;
+}
+
 createForm {
   background-color: #d8d8d8;
   height: 150;
@@ -106,39 +140,41 @@ createFormClose {
 profileViewImageButton {
   width: 50px;
   height: 50px;
-  border-width: 1px;
+  border-width: 2px;
   border-color: #64AFCB;
   border-radius: 25px;
   position: absolute;
-  right: 10;
-  top: 10;
-  z-index: 1;
+  right: 15;
+  top: 60;
+  z-index: 2;
 }
 
 profileViewView1 {
   background-color: #efefef;
   top: 20;
-/*  width: 285;
-  height: 400;*/
+  width: 285;
+  height: 400;
   position: absolute;
   left: 110;
   border-width: 1px;
   border-style: solid;
   border-radius: 5px;
   border-color: #64AFCB;
+  z-index: 1;
 }
 
 profileViewView2 {
   background-color: #efefef;
   top: 20;
-/*  width: 285;
-  height: 400;*/
+  width: 285;
+  height: 400;
   position: absolute;
   left: 500;
   border-width: 1px;
   border-style: solid;
   border-radius: 5px;
   border-color: #64AFCB;
+  z-index: 1;
 }
 /*ProfileView.js*/
 
@@ -161,19 +197,46 @@ logo {
 /*LocationListView*/
 listViewContainer {
   padding: 25px 15px 15px 15px;
+  align-items: center;
 }
 
-listViewToggle {
-  text-align: center;
-  color: #64AFCB;
-  font-weight: bold;
-  background-color: #efefef;
-  line-height: 50;
-  height: 50;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 5px;
+listViewToggleContainer {
+  width: 70;
+  height: 70;
+  border-radius: 35;
   border-color: #64AFCB;
+  border-width: 3;
+  position: absolute;
+  z-index: 4;
+  background-color: #efefef;
+  justify-content: center;
+  align-items: center;
+  bottom: 40;
+  left: 40;
+}
+
+listViewToggleText {
+  font-size: 20;
+  font-weight: bold;
+  color: #64AFCB;
+}
+
+listViewCloseContainer {
+  width: 200;
+  height: 50;
+  border-radius: 35;
+  border-color: #64AFCB;
+  border-width: 3;
+  background-color: #efefef;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15;
+}
+
+listViewCloseText {
+  font-size: 20;
+  font-weight: bold;
+  color: #64AFCB;
 }
 /*LocationListView*/
 
