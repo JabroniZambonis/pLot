@@ -36,7 +36,6 @@ router.route('/:userId/saved')
 
 router.route('/:userId/created')
   .get(users.getCreatedPins)
-  .post(users.createSpot) //add new spot
   .delete(users.deleteSpot) //delete spot
 
 module.exports = router
