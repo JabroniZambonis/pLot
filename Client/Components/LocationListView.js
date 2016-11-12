@@ -31,6 +31,14 @@ export default class LocationListView extends Component {
 
     return (
       <View>
+        <View style={styles.listViewToggleContainer}>
+          <TouchableHighlight
+            onPress={() => this.setModalVisible(!this.state.modalVisible)}
+          >
+            <Text style={styles.listViewToggleText}>{buttonText}</Text>
+          </TouchableHighlight>
+        </View>
+
         <Modal
           animationType={"slide"}
           transparent={false}
@@ -51,18 +59,15 @@ export default class LocationListView extends Component {
                 />
               ))}
             </ScrollView>
-            <TouchableHighlight
-              onPress={() => this.setModalVisible(!this.state.modalVisible)}
-            >
-              <Text style={styles.listViewToggle}>{buttonText}</Text>
-            </TouchableHighlight> 
+            <View style={styles.listViewCloseContainer}>
+              <TouchableHighlight
+                onPress={() => this.setModalVisible(!this.state.modalVisible)}
+              >
+                <Text style={styles.listViewCloseText}>{buttonText}</Text>
+              </TouchableHighlight> 
+            </View>
           </View>
         </Modal>
-        <TouchableHighlight
-          onPress={() => this.setModalVisible(!this.state.modalVisible)}
-        >
-          <Text style={styles.listViewToggle}>{buttonText}</Text>
-        </TouchableHighlight>
       </View>
     )
   }

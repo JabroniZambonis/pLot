@@ -58,16 +58,17 @@ export default class CreateLocation extends Component {
 
     return (
       <View>
-        <TouchableHighlight
-          onPress={() => {
-            this.props.addLocation();
-            this.setModalVisible(!this.state.modalVisible);
-            this.getAddressByCoords(this.props.currentLocation.latitude, this.props.currentLocation.longitude)
-          }}
-        >
-          <Text style={styles.buttonStyle}>Add</Text>
-        </TouchableHighlight>
-
+        <View style={styles.addLocationButtonContainer}>
+          <TouchableHighlight
+            onPress={() => {
+              this.props.addLocation();
+              this.setModalVisible(!this.state.modalVisible);
+              this.getAddressByCoords(this.props.currentLocation.latitude, this.props.currentLocation.longitude)
+            }}
+          >
+            <Text style={styles.addLocationButtonText}>+</Text>
+          </TouchableHighlight>
+        </View>
 
         <Modal
           animationType={"slide"}
