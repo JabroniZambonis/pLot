@@ -207,13 +207,15 @@ export default class HomeMap extends Component {
   render () {
     return (
       <View style={styles.homeContainer}>
-        <TextInput
-          returnKeyType="search"
-          style={styles.searchBar}
-          onChangeText={(text) => this.setState({text})}
-          placeholder={this.state.searchText}
-          onSubmitEditing={(event) => this.searchLocationSubmit(event)}
-        />
+        <View style={styles.searchBarContainer}>
+          <TextInput
+            returnKeyType="search"
+            style={styles.searchBar}
+            onChangeText={(text) => this.setState({text})}
+            placeholder={this.state.searchText}
+            onSubmitEditing={(event) => this.searchLocationSubmit(event)}
+          />
+        </View>
 
         <ProfileView currentUser={this.state.currentUser} logOut={this.props.logOut} logOut={this.props.logOut}/>
         <View style={styles.homeMapContainer}>
