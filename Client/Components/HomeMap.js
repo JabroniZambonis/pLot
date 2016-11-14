@@ -5,6 +5,7 @@ import { View, StyleSheet, TextInput, Alert, Image } from 'react-native'
 import CreateLocation from './CreateLocation'
 import ProfileView from './ProfileView'
 import LocationListView from './LocationListView'
+import LocationMarker from './LocationMarker'
 
 export default class HomeMap extends Component {
   constructor(props) {
@@ -213,9 +214,10 @@ export default class HomeMap extends Component {
                 title={marker.title}
                 description={marker.description}
                 onPress={(evt) => console.log('pressed ', evt.nativeEvent)}
-                image={require('../Public/existingPins.png')}
                 centerOffset={{x: 0, y: -20}}
-              />
+              >
+                <LocationMarker {...marker} />
+              </MapView.Marker>
             ))}
           </MapView>
 
