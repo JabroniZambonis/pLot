@@ -55,6 +55,7 @@ render () {
               // description={}
               image={require('../Public/existingPins.png')}
               centerOffset={{x: 0, y: -20}}
+              rotateEnabled={false}
 
             />
       </MapView>

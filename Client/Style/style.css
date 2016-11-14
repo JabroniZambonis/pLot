@@ -292,7 +292,7 @@ parkingDetailsContainer {
   flex: 1;
   justify-content: center;
   align-items: stretch;
-  /*background-color: white;*/
+  background-color: white;
 }
 
 parkingDetailsMapContainer {
@@ -310,7 +310,7 @@ parkingDescriptionText {
   font-size: 15px;
   font-family: Georgia;
   font-weight: bold;
-  margin-top: 20;
+  margin-top: 10;
 }
 
 parkingDescriptionImagesContainer {
