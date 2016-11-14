@@ -51,8 +51,6 @@ export default class CreateLocation extends Component {
     })
     .then(response => response.json())
     .then(location => {
-      // add location to users state
-      this.props.addLocationToUser(location)
       this.setModalVisible(!this.state.modalVisible)
     })
     // any errors posting the location
