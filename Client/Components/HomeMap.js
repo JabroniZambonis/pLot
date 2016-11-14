@@ -185,6 +185,7 @@ export default class HomeMap extends Component {
   }
 
   render () {
+    console.log("this.props homeMap: ", this.props)
     return (
       <View style={styles.homeContainer}>
         <View style={styles.searchBarContainer}>

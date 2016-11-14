@@ -1,11 +1,12 @@
 const styles = require('../Style/style.js')
 
 import React, { Component } from 'react'
-import { View, AsyncStorage, StyleSheet, Text } from 'react-native'
+import { AsyncStorage, Navigator, StyleSheet, Text, View } from 'react-native'
 import HomeMap from './HomeMap'
 import LoginPage from './LoginPage'
 import LoadingPage from './LoadingPage'
 import FBlogin from './FBlogin'
+import Router from './Router'
 
 export default class App extends Component {
   constructor(props) {
@@ -13,9 +14,12 @@ export default class App extends Component {
     this.state = {
       userToken:'',
       userObj: {},
-      animating: true
+      animating: true,
+      initialRoute: 'HomeMap'
     }
   }
+
+  
 
   setUser (userInfo) {
     this.setState({
@@ -60,15 +64,15 @@ export default class App extends Component {
   }
 
   render () {
-    if(this.state.animating) {
+    if (this.state.animating) {
       return (
       <LoadingPage
-            animating={this.state.animating}/>
+            animating = {this.state.animating}/>
       )
     } else if (this.state.userToken && !this.state.animating) {
       return (
         <View style={styles.container}>
-          <HomeMap currentUser={this.state.userObj} userToken={this.state.userToken} logOut={this.logOut.bind(this)} reanimator={this.reanimator.bind(this)}/>
+          <Router currentUser={this.state.userObj} userToken={this.state.userToken} logOut={this.logOut.bind(this)} reanimator={this.reanimator.bind(this)}/>
         </View>
       )
     } else {
