@@ -27,6 +27,16 @@ export default class HomeMap extends Component {
     this.onRegionChange = this.onRegionChange.bind(this)
   }
 
+  // navigate(route, name) {
+  //   this.props.navigator.push({
+  //     route: route
+  //     passProps: {
+  //       name: name
+  //     }
+
+  //   })
+  // }
+
   componentDidMount () {
     // if we don't have a user fetch the user belonging to current access token
     if (!this.state.currentUser._id) {

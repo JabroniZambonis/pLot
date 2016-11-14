@@ -13,7 +13,8 @@ export default class App extends Component {
     this.state = {
       userToken:'',
       userObj: {},
-      animating: true
+      animating: true,
+      initialRoute: 'HomeMap'
     }
   }
 
@@ -77,10 +78,10 @@ export default class App extends Component {
   }
 
   render () {
-    if(this.state.animating) {
+    if (this.state.animating) {
       return (
       <LoadingPage
-            animating={this.state.animating}/>
+            animating = {this.state.animating}/>
       )
     } else if (this.state.userToken && !this.state.animating) {
       return (
@@ -95,5 +96,13 @@ export default class App extends Component {
         </View>
       )
     }
+  }
+
+  render () {
+    if (this.state.animating) {this.state.initialRoute}
+    return (
+      <Navigator
+        renderScene = { this.renderScene } />
+    )
   }
 }
