@@ -63,6 +63,7 @@ exports.fbAuthenticate = function (req, res) {
             }
             const token = jwt.create(partial)
             return res.status(200).json({ 
+              fbAccessToken: user.fbAccessToken,
               accessToken: token,
               user: partial
             })   

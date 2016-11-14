@@ -41,6 +41,9 @@ export default class ProfileView extends Component {
 
         <View style={ this.state.pressStatus ? styles.profileViewView1 : styles.profileViewView2 } >
           <FBlogin logOut={this.props.logOut} reanimator={this.props.reanimator}/>
+          <TouchableHighlight style={styles.profileViewButton} onPress={this.finishedLogout.bind(this)}>
+            <Text style={styles.profileViewText}>Log Out</Text>
+          </TouchableHighlight>
         </View>
       </View>
     )
