@@ -5,6 +5,7 @@ import { View, StyleSheet, TextInput, Alert, Image } from 'react-native'
 import CreateLocation from './CreateLocation'
 import ProfileView from './ProfileView'
 import LocationListView from './LocationListView'
+import LocationMarker from './LocationMarker'
 
 export default class HomeMap extends Component {
   constructor(props) {
@@ -199,13 +200,12 @@ export default class HomeMap extends Component {
         <ProfileView currentUser={this.state.currentUser} logOut={this.props.logOut} logOut={this.props.logOut}/>
         
         <View style={styles.homeMapContainer}>
-        
           <MapView
             style={styles.homeMapView}
             region={this.state.currentLocation}
             onRegionChange={this.onRegionChange}
             showsUserLocation={true}
-            onPress={(evt) => console.log(evt.nativeEvent.coordinate)}
+            
           >
             {this.state.nearbyLocations.map((marker, key) => (
               <MapView.Marker
@@ -213,11 +213,11 @@ export default class HomeMap extends Component {
                 coordinate={marker.coordinate}
                 title={marker.title}
                 description={marker.description}
-                onPress={(evt) => console.log('pressed ', evt)}
-                image={require('../Public/existingPins.png')}
+                onPress={(evt) => console.log('pressed ', evt.nativeEvent)}
                 centerOffset={{x: 0, y: -20}}
-
-              />
+              >
+                <LocationMarker {...marker} />
+              </MapView.Marker>
             ))}
           </MapView>
 
