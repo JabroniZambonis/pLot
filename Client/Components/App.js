@@ -17,6 +17,23 @@ export default class App extends Component {
     }
   }
 
+  renderScene(route, navigator) {
+    switch (route.name) {
+      case 'LoadingPage':
+        return <LoadingPage navigator={navigator} {...route.passProps} />
+        break
+      case 'LoginPage':
+        return <LoadingPage navigator={navigator} {...route.passProps} />
+        break
+      case 'HomeMap':
+        return <HomeMap navigator={navigator} {...route.passProps} />
+        break
+      case 'Camera':
+        return <Camera navigator={navigator} {...route.passProps} />
+        break
+    }
+  }
+
   setUser (userInfo) {
     this.setState({
       userToken: userInfo.accessToken,
