@@ -60,7 +60,7 @@ render () {
               />
       </MapView>
       <View style={styles.parkingDescriptionContainer}>
-         <Text style={{fontFamily: 'Copperplate', fontWeight: 'bold', fontSize: 15}}>
+         <Text style={{fontFamily: 'Trebuchet MS', fontWeight: 'bold', fontSize: 15}}>
          Parking Details:
          </Text>
          <Text style={styles.parkingDescriptionText}>

@@ -216,8 +216,12 @@ export default class HomeMap extends Component {
                 description={marker.description}
                 onPress={(evt) => console.log('pressed ', evt.nativeEvent)}
                 centerOffset={{x: 0, y: -20}}
+
               >
                 <LocationMarker {...marker} />
+                <Mapview.Callout>
+                  <LocationMarkerCallout {...marker} navigator={this.props.navigator}/>
+                </Mapview.Callout>
               </MapView.Marker>
             ))}
           </MapView>
