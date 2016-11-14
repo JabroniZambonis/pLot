@@ -15,8 +15,8 @@ export default class ParkingDetails extends Component {
       region: {
         latitude: 30.2385295,
         longitude: -97.740536,
-        latitudeDelta: 0.002,
-        longitudeDelta: 0.002
+        latitudeDelta: 0.003,
+        longitudeDelta: 0.003
       },
       pinLocation: {
         latitude: 30.2385295,
@@ -56,12 +56,12 @@ render () {
               image={require('../Public/existingPins.png')}
               centerOffset={{x: 0, y: -20}}
               rotateEnabled={false}
-
-            />
+              pitchEnabled={false}
+              />
       </MapView>
       <View style={styles.parkingDescriptionContainer}>
-         <Text>
-         Description:
+         <Text style={{fontFamily: 'Copperplate', fontWeight: 'bold', fontSize: 15}}>
+         Parking Details:
          </Text>
          <Text style={styles.parkingDescriptionText}>
          {this.state.parkingSpotDescription}

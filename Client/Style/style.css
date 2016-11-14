@@ -303,14 +303,15 @@ parkingDetailsMapContainer {
 
 parkingDescriptionContainer {
   flex: 1;
-  padding: 0 15 0 15;
+  padding: 0 12 0 12;
 }
 
 parkingDescriptionText {
-  font-size: 15px;
-  font-family: Georgia;
-  font-weight: bold;
-  margin-top: 10;
+ /* font-size: 15px;*/
+  font-family: Heiti TC;
+  font-weight: normal;
+  font-size: small;
+  margin-top: 5;
 }
 
 parkingDescriptionImagesContainer {
