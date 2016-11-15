@@ -1,6 +1,6 @@
 import styles  from '../Style/style.js'
 import React from 'react'
-import { View, Text, TouchableHighlight } from 'react-native'
+import { View, Text, TouchableOpacity, Image } from 'react-native'
 
 export default LocationMarkerCallout = ( { description, navigator, key, coordinate, title, id }) => {
 
@@ -15,11 +15,14 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
   }
 
   return (
-   <View>
-     <Text>{description}</Text>
-     <TouchableHighlight onPress={ () => handleButtonPress() }>
-       <Text style={styles.parkingDetailsButton}>Parking Details</Text>
-     </TouchableHighlight>
+   <View style={styles.calloutContainer}>
+     <Text style={styles.calloutDescription}>{title}</Text>
+     <TouchableOpacity onPress={ () => handleButtonPress() } style={styles.parkingDetailsButton}>
+       <Image
+       style={{width: 40, height: 40, alignItems: 'center'}}
+       source={require('../Public/Arrow-Icon-test.png')}
+       />
+     </TouchableOpacity>
    </View>
   )
 }
