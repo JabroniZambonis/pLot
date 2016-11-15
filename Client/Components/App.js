@@ -21,7 +21,7 @@ export default class App extends Component {
       userToken:'',
       userObj: {},
       animating: true,
-      initialRoute: 'HomeMap'
+      initialRoute: 'HomeMap',
       fbAccessToken: ''
     }
   }
