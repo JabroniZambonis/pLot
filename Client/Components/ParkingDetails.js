@@ -28,16 +28,18 @@ export default class ParkingDetails extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   this.setState = ({
-  //     pinLocation: {
-  //       latitude: 30.264,
-  //       longitude: -97.742,
-  //       latitudeDelta: 0.01,
-  //       longitudeDelta: 0.01
-  //     }
-  //   })
-  // }
+  componentDidMount() {
+    // this.setState = ({
+    //   pinLocation: {
+    //     latitude: 30.264,
+    //     longitude: -97.742,
+    //     latitudeDelta: 0.01,
+    //     longitudeDelta: 0.01
+    //   }
+    // })
+    console.log('Coords?: ', this.props.coordinate)
+  }
+
 
 render () {
     return (
@@ -64,7 +66,7 @@ render () {
          Parking Details:
          </Text>
          <Text style={styles.parkingDescriptionText}>
-         {this.state.parkingSpotDescription}
+         {this.props.description}
          </Text>
       </View>
       <View style={styles.parkingDescriptionImagesContainer}>
