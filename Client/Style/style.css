@@ -151,7 +151,7 @@ profileViewImageButton {
 
 profileViewView1 {
   background-color: #efefef;
-  top: 20;
+  top: 110;
   width: 285;
   height: 400;
   position: absolute;
@@ -276,3 +276,14 @@ cameraButtonText {
   color: #ffffff;
 }
 /*Camera.js*/
+
+/*profileView.js*/
+profileViewButton {
+  align-items: center;
+}
+
+profileViewText {
+  color: gray;
+  font-size: 20;
+  justify-content: flex-end;
+}

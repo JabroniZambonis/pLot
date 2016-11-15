@@ -8,6 +8,12 @@ import LoadingPage from './LoadingPage'
 import FBlogin from './FBlogin'
 import Router from './Router'
 
+const FBSDK = require('react-native-fbsdk');
+const {
+  LoginButton,
+  AccessToken
+} = FBSDK;
+
 export default class App extends Component {
   constructor(props) {
     super(props)
@@ -15,7 +21,8 @@ export default class App extends Component {
       userToken:'',
       userObj: {},
       animating: true,
-      initialRoute: 'HomeMap'
+      initialRoute: 'HomeMap',
+      fbAccessToken: ''
     }
   }
 
@@ -25,18 +32,22 @@ export default class App extends Component {
     this.setState({
       userToken: userInfo.accessToken,
       userObj: userInfo.user,
-      animating: false
+      animating: false,
+      fbAccessToken: userInfo.fbAccessToken
     })
     // set the accessToken into local storage
     AsyncStorage.setItem('pLotLoginKey',userInfo.accessToken)
+    AsyncStorage.setItem('fbAccessToken',userInfo.fbAccessToken)
   } 
 
   logOut () {
     AsyncStorage.removeItem('pLotLoginKey')
+    AsyncStorage.removeItem('fbAccessToken')
     .then(removed => {
       this.setState({
         userToken: '',
-        userObj: '',
+        userObj: {},
+        fbAccessToken: '',  
       })
     })
   }
@@ -48,6 +59,10 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    AsyncStorage.getItem('fbAccessToken')
+    .then( (data) => {
+      console.log('fb token here',data)
+    })
     AsyncStorage.getItem('pLotLoginKey')
     .then( (userKey) => {
       if(userKey) {
@@ -78,7 +93,7 @@ export default class App extends Component {
     } else {
       return (
         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-          <LoginPage setUser={this.setUser.bind(this)} reanimator={this.reanimator.bind(this)} />
+          <LoginPage setUser={this.setUser.bind(this)} reanimator={this.reanimator.bind(this)}/>
         </View>
       )
     }
