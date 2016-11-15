@@ -5,6 +5,7 @@ import { Navigator } from 'react-native'
 import HomeMap from './HomeMap'
 import ParkingDetails from './ParkingDetails'
 import ReviewsList from './ReviewsList'
+import CreateReview from './CreateReview'
 
 export default class Router extends Component {
   constructor(props) {
@@ -27,6 +28,9 @@ export default class Router extends Component {
           break
         case 'ReviewsList':
           return <ReviewsList navigator={navigator} {...route} />
+          break
+        case 'CreateReview':
+          return <CreateReview navigator={navigator} {...route} userToken={this.props.userToken} />
           break
       }
   	}

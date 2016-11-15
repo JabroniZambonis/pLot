@@ -38,7 +38,9 @@ export default class ParkingDetails extends Component {
   showReviews () {
     this.props.navigator.push({
       name: 'ReviewsList',
-      reviews: this.props.reviews
+      reviews: this.props.reviews,
+      currentUser: this.props.currentUser,
+      locationId: this.props.id
     })
   }
 
@@ -76,7 +78,7 @@ render () {
            />
         </View>
         <TouchableHighlight onPress={ () => this.showReviews() }>
-          <Text>Show Reivews</Text>
+          <Text>Show Reviews</Text>
         </TouchableHighlight>
       </View>
     )

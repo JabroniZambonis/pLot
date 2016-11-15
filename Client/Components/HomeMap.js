@@ -221,7 +221,11 @@ export default class HomeMap extends Component {
               >
                 <LocationMarker {...marker} />
                 <MapView.Callout style={styles.locationMarkerCallout}>
-                  <LocationMarkerCallout  {...marker} navigator={this.props.navigator} />
+                  <LocationMarkerCallout 
+                    {...marker}
+                    navigator={this.props.navigator}
+                    currentUser={this.state.currentUser}
+                  />
                 </MapView.Callout>
               </MapView.Marker>
             ))}

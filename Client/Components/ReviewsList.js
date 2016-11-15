@@ -1,37 +1,35 @@
-import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import React from 'react'
+import { View, Text, TouchableHighlight } from 'react-native'
 import Review from './Review'
 
-export default class ReviewList extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      reviews: false
-    }
-  }
+export default ReviewList = (props) => {
 
-  componentDidMount () {
-    this.setState({
-      reviews: this.props.reviews
+  const createReview = () => {
+    props.navigator.push({
+      name: 'CreateReview',
+      locationId: props.locationId,
+      currentUser: props.currentUser
     })
   }
 
-  render () {
-    return (
+  return (
+    <View>
       <View>
-        <Text>Test</Text>
-        {!this.state.reviews ?
-          
-          <Text>Loading... </Text> :
-
-          this.state.reviews.map((review, key) => (
-            <Review 
-              rating={review.rating}
-              review={review.review}
-            />
-          ))
-        }
+        <TouchableHighlight onPress={createReview}>
+          <Text>Create Review</Text>
+        </TouchableHighlight>
       </View>
-    )
-  }
+      {!props.reviews ?
+
+        <Text>No Reviews Yet</Text> :
+
+        props.reviews.map((review, key) => (
+          <Review 
+            rating={review.rating}
+            review={review.review}
+          />
+        ))
+      }
+    </View>
+  )
 }
