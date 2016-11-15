@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import Review from './Review'
 
 export default class ReviewList extends Component {
@@ -19,15 +19,12 @@ export default class ReviewList extends Component {
   render () {
     return (
       <View>
-        {!this.state.reviews
-
-          ?
+        <Text>Test</Text>
+        {!this.state.reviews ?
           
-          <Text>Loading... </Text>
+          <Text>Loading... </Text> :
 
-          :
-
-          this.state.reviews.map((review) => (
+          this.state.reviews.map((review, key) => (
             <Review 
               rating={review.rating}
               review={review.review}
