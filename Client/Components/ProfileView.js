@@ -2,7 +2,6 @@ const styles = require('../Style/style.js')
 
 import React, { Component } from 'react'
 import { Image, TouchableHighlight, Text, StyleSheet, View, Modal, TextInput } from 'react-native'
-import FBlogin from './FBlogin'
 
 export default class ProfileView extends Component {
   constructor(props) {
@@ -40,7 +39,6 @@ export default class ProfileView extends Component {
         </TouchableHighlight>
 
         <View style={ this.state.pressStatus ? styles.profileViewView1 : styles.profileViewView2 } >
-          <FBlogin logOut={this.props.logOut} reanimator={this.props.reanimator}/>
           <TouchableHighlight style={styles.profileViewButton} onPress={this.finishedLogout.bind(this)}>
             <Text style={styles.profileViewText}>Log Out</Text>
           </TouchableHighlight>
