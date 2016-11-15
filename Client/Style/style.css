@@ -338,6 +338,6 @@ calloutDescription {
 parkingDetailsButton {
   flex: 1;
   justify-content: center;
-  padding-right: -20;
+  /*padding-right: -20;*/
 }
 /*LocationMarkerCallout.js*/
