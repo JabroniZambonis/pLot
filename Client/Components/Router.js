@@ -27,6 +27,22 @@ export default class Router extends Component {
       }
   	}
 
+    leftButton (route, navigator, index, navState) {
+      if (route.name !== 'HomeMap') {
+
+      } else {
+        return null
+      }
+    }
+
+    rightButton (route, navigator, index, navState) {
+      if (route.name !== 'HomeMap') {
+
+      } else {
+        return null
+      }
+    }
+
     render () {
     	return (
         <Navigator
@@ -39,7 +55,16 @@ export default class Router extends Component {
               reanimator: this.props.reanimator
             }
           }
-    		  renderScene= {this.renderScene}
+    		  renderScene={this.renderScene}
+          navigationBar={
+            <Navigation.NavigationBar
+              routeMapper={{
+                LeftButton: this.leftButton,
+                RightButton: this.rightButton,
+                Title: () => {}
+              }}
+            />
+          }
         />
       )
     }
