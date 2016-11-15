@@ -19,7 +19,9 @@ export default class HomeMap extends Component {
         latitudeDelta: 0.1,
         longitudeDelta: 0.1
       },
+      currentTime: ''
       nearbyLocations: [],
+      nearbyPaidLocations: [],
       searchText: 'Search for spots...',
       lastPosition: {}
     }
@@ -42,6 +44,9 @@ export default class HomeMap extends Component {
     //   this.setState({lastPosition});
     // })
     // console.log('watchID: ',this.watchID)
+    // 
+    
+    // TO DO: get time and format into a UNIX format
   }
 
   searchLocationSubmit (event) {
