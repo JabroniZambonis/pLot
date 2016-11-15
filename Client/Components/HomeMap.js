@@ -6,6 +6,7 @@ import CreateLocation from './CreateLocation'
 import ProfileView from './ProfileView'
 import LocationListView from './LocationListView'
 import LocationMarker from './LocationMarker'
+import LocationMarkerCallout from './LocationMarkerCallout'
 
 export default class HomeMap extends Component {
   constructor(props) {
@@ -219,9 +220,9 @@ export default class HomeMap extends Component {
 
               >
                 <LocationMarker {...marker} />
-                <Mapview.Callout>
-                  <LocationMarkerCallout {...marker} navigator={this.props.navigator}/>
-                </Mapview.Callout>
+                <MapView.Callout style={styles.locationMarkerCallout}>
+                  <LocationMarkerCallout  {...marker} navigator={this.props.navigator} />
+                </MapView.Callout>
               </MapView.Marker>
             ))}
           </MapView>

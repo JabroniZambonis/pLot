@@ -74,7 +74,7 @@ export default class App extends Component {
     if (this.state.animating) {
       return (
       <LoadingPage
-            animating = {this.state.animating}/>
+            animating={this.state.animating}/>
       )
     } else if (this.state.userToken && !this.state.animating) {
       return (
