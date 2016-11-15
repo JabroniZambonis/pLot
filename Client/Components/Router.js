@@ -3,6 +3,7 @@ const styles = require('../Style/style.js')
 import React, { Component } from 'react'
 import { Navigator } from 'react-native'
 import HomeMap from './HomeMap'
+import ParkingDetails from './ParkingDetails'
 
 export default class Router extends Component {
   constructor(props) {
@@ -19,6 +20,9 @@ export default class Router extends Component {
           break
         case 'Camera':
           return <Camera navigator={navigator} {...route} />
+          break
+        case 'ParkingDetails':
+          return <ParkingDetails navigator={navigator} {...route} />
           break
       }
   	}

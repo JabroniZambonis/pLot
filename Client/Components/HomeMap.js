@@ -6,6 +6,7 @@ import CreateLocation from './CreateLocation'
 import ProfileView from './ProfileView'
 import LocationListView from './LocationListView'
 import LocationMarker from './LocationMarker'
+import LocationMarkerCallout from './LocationMarkerCallout'
 
 export default class HomeMap extends Component {
   constructor(props) {
@@ -211,13 +212,18 @@ export default class HomeMap extends Component {
             {this.state.nearbyLocations.map((marker, key) => (
               <MapView.Marker
                 key={marker.id}
+                id={marker.id}
                 coordinate={marker.coordinate}
                 title={marker.title}
                 description={marker.description}
                 onPress={(evt) => console.log('pressed ', evt.nativeEvent)}
                 centerOffset={{x: 0, y: -20}}
+
               >
                 <LocationMarker {...marker} />
+                <MapView.Callout style={styles.locationMarkerCallout}>
+                  <LocationMarkerCallout  {...marker} navigator={this.props.navigator} />
+                </MapView.Callout>
               </MapView.Marker>
             ))}
           </MapView>
