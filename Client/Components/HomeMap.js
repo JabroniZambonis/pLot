@@ -60,6 +60,8 @@ export default class HomeMap extends Component {
   getPinsForCoords = Helper.getPinsForCoords
 
   getPaidPinsForCoords = Helper.getPaidPinsForCoords
+  
+  getAddressByCoords = Helper.getAddressByCoords
 
   //adds a pins to the map if the user opens the create location form
   addLocation = Helper.addLocation

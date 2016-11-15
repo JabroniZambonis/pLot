@@ -227,19 +227,15 @@ exports.getPaidPinsForCoords = function(long, lat) {
 }
 
 
-exports.addLocation = function() {
-  let lat = this.state.currentLocation.latitude
-  let long = this.state.currentLocation.longitude
-  let newPin = {
-    coordinate: {
-      latitude: lat,
-      longitude: long
-    }
-  }
-  let newNearby = this.state.nearbyLocations.slice()
-  newNearby.push(newPin)
-  this.setState({
-    nearbyLocations: newNearby
+exports.getAddressByCoords = function(lat, long) {
+  fetch(`http://localhost:3000/locations/googlebycoords?lat=${lat}&long=${long}`)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Got data: ', data)
+      this.setState({address: data})
+    })
+    .catch((err) => {
+      console.log('This did not work: ', err)
   })
 }
 
@@ -261,7 +257,24 @@ exports.addLocation = function() {
 }
 
 
-  //Removes the pin from the map if the user does not save the new location
+exports.addLocation = function() {
+  let lat = this.state.currentLocation.latitude
+  let long = this.state.currentLocation.longitude
+  let newPin = {
+    coordinate: {
+      latitude: lat,
+      longitude: long
+    }
+  }
+  let newNearby = this.state.nearbyLocations.slice()
+  newNearby.push(newPin)
+  this.setState({
+    nearbyLocations: newNearby
+  })
+}
+
+
+//Removes the pin from the map if the user does not save the new location
 exports.cancelLocationAdd = function() {
   let nearby = this.state.nearbyLocations.slice()
   nearby.pop()
