@@ -1,7 +1,7 @@
 const styles = require('../Style/style.js')
 
 import React, { Component } from 'react'
-import { Navigator } from 'react-native'
+import { Navigator, Text } from 'react-native'
 import HomeMap from './HomeMap'
 import ParkingDetails from './ParkingDetails'
 
@@ -29,7 +29,7 @@ export default class Router extends Component {
 
     leftButton (route, navigator, index, navState) {
       if (route.name !== 'HomeMap') {
-
+        
       } else {
         return null
       }
@@ -57,7 +57,7 @@ export default class Router extends Component {
           }
     		  renderScene={this.renderScene}
           navigationBar={
-            <Navigation.NavigationBar
+            <Navigator.NavigationBar
               routeMapper={{
                 LeftButton: this.leftButton,
                 RightButton: this.rightButton,
