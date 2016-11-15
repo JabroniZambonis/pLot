@@ -31,8 +31,8 @@ export default class Router extends Component {
               name: 'HomeMap',
               currentUser: this.props.currentUser,
               userToken: this.props.userToken,
-              logOut: this.logOut,
-              reanimator: this.reanimator
+              logOut: this.props.logOut,
+              reanimator: this.props.reanimator
             }
           }
     		  renderScene= {this.renderScene}
