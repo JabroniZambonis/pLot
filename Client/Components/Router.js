@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { Navigator } from 'react-native'
 import HomeMap from './HomeMap'
 
-export default class App extends Component {
+export default class Router extends Component {
   constructor(props) {
     super(props)
     this.state = {}
