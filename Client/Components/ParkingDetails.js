@@ -13,31 +13,25 @@ export default class ParkingDetails extends Component {
     super(props)
     this.state = {
       region: {
-        latitude: 30.2385295,
-        longitude: -97.740536,
+        latitude: this.props.coordinate.latitude,
+        longitude: this.props.coordinate.longitude,
         latitudeDelta: 0.003,
         longitudeDelta: 0.003
       },
       pinLocation: {
-        latitude: 30.2385295,
-        longitude: -97.740536,
+        latitude: this.props.coordinate.latitude,
+        longitude: this.props.coordinate.longitude,
         latitudeDelta: .001,
         longitudeDelta: .001
       },
-      parkingSpotDescription: "This parking spot may be one of the absolute best in Austin. If you are anywhere near downtown you will definitely want to check this spot out first."
+      parkingSpacePics: [require('../Public/reservedParkingSizeTest.jpg'),
+                         require('../Public/anotherParkingImage.jpg'),
+                         require('../Public/bikeParking.jpg')]
     }
   }
 
+  //Will need this later for fetching and loading images of parking spaces and reviews from the database
   componentDidMount() {
-    // this.setState = ({
-    //   pinLocation: {
-    //     latitude: 30.264,
-    //     longitude: -97.742,
-    //     latitudeDelta: 0.01,
-    //     longitudeDelta: 0.01
-    //   }
-    // })
-    console.log('Coords?: ', this.props.coordinate)
   }
 
 
@@ -51,7 +45,7 @@ render () {
         zoomEnabled={false}
       >
        <MapView.Marker
-              // key={}
+              key={this.props.key}
               coordinate={this.state.pinLocation}
               // title={}
               // description={}
@@ -70,9 +64,7 @@ render () {
          </Text>
       </View>
       <View style={styles.parkingDescriptionImagesContainer}>
-        <ImageSlider images={[require('../Public/reservedParkingSizeTest.jpg'),
-                              require('../Public/anotherParkingImage.jpg'),
-                              require('../Public/bikeParking.jpg')]}
+        <ImageSlider images={this.state.parkingSpacePics}
          />
       </View>  
     </View>

@@ -18,7 +18,7 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
    <View>
      <Text>{description}</Text>
      <TouchableHighlight onPress={ () => handleButtonPress() }>
-       <Text>Parking Details</Text>
+       <Text style={styles.parkingDetailsButton}>Parking Details</Text>
      </TouchableHighlight>
    </View>
   )
