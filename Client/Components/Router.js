@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { Navigator, Text } from 'react-native'
 import HomeMap from './HomeMap'
 import ParkingDetails from './ParkingDetails'
+import NavButton from './NavButton'
 
 export default class Router extends Component {
   constructor(props) {
@@ -29,7 +30,7 @@ export default class Router extends Component {
 
     leftButton (route, navigator, index, navState) {
       if (route.name !== 'HomeMap') {
-        
+        return <NavButton text="back" onPress={() => navigator.pop()}/>
       } else {
         return null
       }
