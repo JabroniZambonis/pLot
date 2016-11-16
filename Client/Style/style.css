@@ -291,7 +291,17 @@ listViewCloseText {
 /*LocationListItem*/
 listItemView {
   padding: 5px 0px 5px 0px;
-  border-top: 1px solid #64AFCB
+  border-top: 1px solid #64AFCB;
+  flex-direction: row;
+  flex: 1;
+}
+
+listItemText {
+  flex: 3;
+}
+
+listItemArrow {
+  flex: 1;
 }
 /*LocationListItem*/
 
