@@ -27,6 +27,7 @@ export default ReviewList = (props) => {
           <Review 
             rating={review.rating}
             content={review.content}
+            key={key}
           />
         ))
       }
