@@ -9,9 +9,11 @@ export default class LocationListView extends Component {
     super(props)
     this.state = {
       nearbyLocations: [],
-      modalVisible: false
+      modalVisible: false,
+      buttonPress: false
     }
     this.setModalVisible = this.setModalVisible.bind(this)
+    this.setButtonStyle = this.setButtonStyle.bind(this)
   }
 
   componentWillReceiveProps (nextProps) {
@@ -27,15 +29,25 @@ export default class LocationListView extends Component {
     })
   }
 
+  setButtonStyle (style) {
+    this.setState({
+      buttonPress: style
+    })
+  }
+
   render () {
     let buttonText = this.state.modalVisible ? 'Show Map' : 'List'
+    let listButtonStyle = this.state.buttonPress ? styles.listViewToggleContainerPress : styles.listViewToggleContainer
+    let mapButtonStyle = this.state.buttonPress ? styles.listViewCloseContainerPress : styles.listViewCloseContainer
 
     return (
       <View>
         <View>
-          <Button style={styles.listViewToggleContainer}
+          <Button style={listButtonStyle}
           textStyle={styles.listViewToggleText} 
-          onPress={() => this.setModalVisible(!this.state.modalVisible)}>
+          onPress={() => this.setModalVisible(!this.state.modalVisible)}
+          onPressIn={() => this.setButtonStyle(!this.state.buttonPress)} 
+          onPressOut={() => this.setButtonStyle(!this.state.buttonPress)}>
           {buttonText}
           </Button>
         </View>
@@ -61,9 +73,11 @@ export default class LocationListView extends Component {
               ))}
             </ScrollView>
             <View>
-              <Button style={styles.listViewCloseContainer}
+              <Button style={mapButtonStyle}
                 textStyle={styles.listViewCloseText} 
-                onPress={() => this.setModalVisible(!this.state.modalVisible)}>
+                onPress={() => this.setModalVisible(!this.state.modalVisible)} 
+                onPressIn={() => this.setButtonStyle(!this.state.buttonPress)} 
+                onPressOut={() => this.setButtonStyle(!this.state.buttonPress)}>
                 {buttonText}
               </Button>
             </View>
