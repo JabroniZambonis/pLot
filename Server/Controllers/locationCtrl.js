@@ -177,3 +177,15 @@ exports.addReview = function (req, res) {
     return res.status(500).json(err)
   })
 }
+
+exports.getReviews = function (req, res) {
+  console.log('got here', req.params.locationId)
+  Location.findOne({_id: req.params.locationId})
+  .then(location => {
+    let reviews = location.reviews
+    return res.status(200).json(reviews)
+  })
+  .catch((err) => {
+    return res.status(500).json(err)
+  })
+}
