@@ -2,6 +2,7 @@ const styles = require('../Style/style.js')
 
 import React, { Component } from 'react'
 import { TouchableHighlight, Text, StyleSheet, View, Modal, TextInput } from 'react-native'
+import Button from 'apsl-react-native-button'
 
 export default class CreateLocation extends Component {
   constructor(props) {
@@ -65,16 +66,16 @@ export default class CreateLocation extends Component {
 
     return (
       <View>
-        <View style={styles.addLocationButtonContainer}>
-          <TouchableHighlight
+        <View>
+          <Button
             onPress={() => {
               this.props.addLocation();
               this.setModalVisible(!this.state.modalVisible);
               this.getAddressByCoords(this.props.currentLocation.latitude, this.props.currentLocation.longitude)
             }}
-          >
-            <Text style={styles.addLocationButtonText}>+</Text>
-          </TouchableHighlight>
+            style={styles.addLocationButtonContainer}
+            textStyle={styles.addLocationButtonText}
+          >+</Button>
         </View>
 
         <Modal

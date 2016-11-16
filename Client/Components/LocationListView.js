@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, Modal, TouchableHighlight, ScrollView } from 'react-native'
 import styles  from '../Style/style.js'
 import LocationListItem from './LocationListItem'
+import Button from 'apsl-react-native-button'
 
 export default class LocationListView extends Component {
   constructor(props) {
@@ -31,12 +32,12 @@ export default class LocationListView extends Component {
 
     return (
       <View>
-        <View style={styles.listViewToggleContainer}>
-          <TouchableHighlight
-            onPress={() => this.setModalVisible(!this.state.modalVisible)}
-          >
-            <Text style={styles.listViewToggleText}>{buttonText}</Text>
-          </TouchableHighlight>
+        <View>
+          <Button style={styles.listViewToggleContainer}
+          textStyle={styles.listViewToggleText} 
+          onPress={() => this.setModalVisible(!this.state.modalVisible)}>
+          {buttonText}
+          </Button>
         </View>
 
         <Modal
@@ -59,12 +60,12 @@ export default class LocationListView extends Component {
                 />
               ))}
             </ScrollView>
-            <View style={styles.listViewCloseContainer}>
-              <TouchableHighlight
-                onPress={() => this.setModalVisible(!this.state.modalVisible)}
-              >
-                <Text style={styles.listViewCloseText}>{buttonText}</Text>
-              </TouchableHighlight> 
+            <View>
+              <Button style={styles.listViewCloseContainer}
+                textStyle={styles.listViewCloseText} 
+                onPress={() => this.setModalVisible(!this.state.modalVisible)}>
+                {buttonText}
+              </Button>
             </View>
           </View>
         </Modal>
