@@ -103,13 +103,13 @@ exports.addReview = function (req, res) {
   let review = {
     rating: req.body.review.rating,
     content: req.body.review.content,
-    userId: req.body.review.content
+    userId: req.body.review.userId
   }
 
   console.log('1: ',review)
   Location.findOneAndUpdate(
-    {_id: req.body.review.locaiontId},
-    { $push: { "reviews": review } },
+    {_id: req.body.review.locationId},
+    { $push: { reviews: review } },
     { new: true}
   )
   .then(response => {
