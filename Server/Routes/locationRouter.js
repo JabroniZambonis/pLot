@@ -11,6 +11,9 @@ router.route('/bycoords')
 router.route('/googlebycoords')
   .get(locations.searchGoogleByCoords)
 
+router.route('/parkwhizbycoords')
+  .get(locations.searchParkWhizByCoords)
+
 router.route('/byaddr')
   .get(locations.findByAddr)
 

@@ -8,6 +8,7 @@ const jwt = require('../Lib/jwt')
 const baseGoogleURL = 
   `https://maps.googleapis.com/maps/api/geocode/json?key=${process.env.GOOGLE_API_KEY}`
 
+
 exports.create = function (req, res) {
   new Location({
     address: req.body.location.address,
@@ -52,6 +53,29 @@ exports.searchGoogleByCoords = function(req, res) {
   // build up query
   const searchURL = baseGoogleURL + `&latlng=${lat},${long}`
   request(searchURL)
+    .then((response) => {
+      const resultAddress = JSON.parse(response).results[0].formatted_address
+      return res.status(200).json(resultAddress)
+    })
+    .catch((err) => {
+      console.log('search error: ', err)
+    })
+}
+
+exports.searchParkWhizByCoords = function(req, res) {
+  let startTime = Math.round(+new Date()/1000 - 10000)
+  let endTime = Math.round((+new Date()/1000) + 10000)
+  const { lat, long } = req.query
+  // if lat and long aren't provided send error
+  if (!lat || !long) {
+    const err = {
+      error: 'Route requires a lat and long query parameter, e.g: \'locations/googlebycoords?long=-97.7405441&lat=30.2689941\''
+    }
+    return res.status(400).json(err)
+  }
+  // lat and long query params exist
+  // build up query
+  request(`https://api.parkwhiz.com/search/?lat=${lat}&lng=${long}&start=${startTime}&end=${endTime}&key=${process.env.PARKWHIZ_API_KEY}`)
     .then((response) => {
       const resultAddress = JSON.parse(response).results[0].formatted_address
       return res.status(200).json(resultAddress)

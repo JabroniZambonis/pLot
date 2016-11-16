@@ -174,7 +174,7 @@ exports.setUserLocation = function() {
 
 
 exports.getPinsForCoords = function(long, lat) {
-  fetch(`http://localhost:3000/locations/bycoords?long=${long}&lat=${lat}`)
+  fetch(`http://localhost:3000/locations/parkwhizbycoords?long=${long}&lat=${lat}`)
     .then(response => response.json())
     .then(locations => {
       let nearby = locations.map(location => {
@@ -199,10 +199,7 @@ exports.getPinsForCoords = function(long, lat) {
 
 
 exports.getPaidPinsForCoords = function(long, lat) {
-  let startTime = Math.round(+new Date()/1000 - 10000)
-  let endTime = Math.round((+new Date()/1000) + 10000)
-  console.log("long: ", long, "lat: ", lat, "startTime: ", startTime, "endTime: ", endTime)
-  fetch(`https://api.parkwhiz.com/search/?lat=${lat}&lng=${long}&start=${startTime}&end=${endTime}&key=${process.env.PARKWHIZ_API_KEY}`)
+  fetch(`http://localhost:3000/locations/bycoords?long=${long}&lat=${lat}`)
     .then(response => response.json())
     .then(locations => {
       console.log("locations: ", locations)
