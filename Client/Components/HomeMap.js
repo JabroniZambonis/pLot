@@ -70,7 +70,6 @@ export default class HomeMap extends Component {
   onRegionChange = Helper.onRegionChange
 
   render () {
-    console.log("HomeMap this.state.nearbyPaidLocations: ", this.state.nearbyPaidLocations)
     return (
       <View style={styles.homeContainer}>
         <View style={styles.searchBarContainer}>
