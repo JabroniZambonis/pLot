@@ -8,6 +8,7 @@ import {
 import ImageSlider from 'react-native-image-slider'
 import MapView from 'react-native-maps'
 import styles  from '../Style/style.js'
+import Button from 'apsl-react-native-button'
 
 export default class ParkingDetails extends Component {
   constructor(props) {
@@ -61,6 +62,9 @@ export default class ParkingDetails extends Component {
 
 
   render () {
+    let buttonPress = false
+    let addButtonStyle = buttonPress ? styles.listViewCloseContainerPress : styles.listViewCloseContainer
+
     return (
       <View style={styles.parkingDetailsContainer}>        
         <MapView
@@ -91,9 +95,14 @@ export default class ParkingDetails extends Component {
         <View style={styles.parkingDescriptionImagesContainer}>
           <ImageSlider images={this.state.parkingSpacePics} />
         </View>
-        <TouchableHighlight onPress={ () => this.showReviews() }>
+        <Button
+          onPress={ () => this.showReviews() }
+          style={addButtonStyle}
+          onPressIn={() => buttonPress = true} 
+          onPressOut={() => buttonPress = false}
+        >
           <Text>Show Reviews</Text>
-        </TouchableHighlight>
+        </Button>
       </View>
     )
   }
