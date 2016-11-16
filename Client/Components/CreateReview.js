@@ -33,7 +33,7 @@ export default class CreateReview extends Component {
     .then(response => response.json())
     .then((res) => {
       console.log(res)
-      this.props.navigator.pop()
+      this.props.navigator.popN(2)
     })
     .catch((err) => {
       console.log('review not created: ',err)
