@@ -20,7 +20,7 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
      <TouchableOpacity onPress={ () => handleButtonPress() } style={styles.parkingDetailsButton}>
        <Image
        style={{width: 40, height: 20}}
-       source={require('../Public/Arrow-Icon-test.png')}
+       source={require('../Public/Arrow-Icon.png')}
        />
      </TouchableOpacity>
    </View>
