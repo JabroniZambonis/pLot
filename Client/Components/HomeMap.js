@@ -1,4 +1,5 @@
 import styles  from '../Style/style.js'
+import Helper from '../Lib/HomeMapHelperFns.js'
 import React, { Component } from 'react'
 import MapView from 'react-native-maps'
 import { View, StyleSheet, TextInput, Alert, Image } from 'react-native'
@@ -19,7 +20,9 @@ export default class HomeMap extends Component {
         latitudeDelta: 0.1,
         longitudeDelta: 0.1
       },
+      currentTime: '',
       nearbyLocations: [],
+      nearbyPaidLocations: [],
       searchText: 'Search for spots...',
       lastPosition: {}
     }
@@ -44,147 +47,27 @@ export default class HomeMap extends Component {
     // console.log('watchID: ',this.watchID)
   }
 
-  searchLocationSubmit (event) {
-    let searchString = event.nativeEvent.text
-    fetch(`http://localhost:3000/locations/byaddr?q=${searchString}`)
-      .then((response) => response.json())
-      .then((locationsAndCoords) => {
-        if (!locationsAndCoords.coords) {
-          Alert.alert(
-            'Try Again',
-            'No address found at that location',
-            {text: 'OK', onPress: () => console.log('OK Pressed')}
-          )
-        } else {
-          if (locationsAndCoords.locations.length === 0) {
-            Alert.alert(
-              'Sorry',
-              'No parking spots found near that address',
-              {text: 'OK', onPress: () => console.log('OK Pressed')}
-            )
-          }
-          const nearby = []
-          locationsAndCoords.locations.forEach(function(location) {
-            let loca = {}
-            loca.coordinate = {
-              latitude: location.loc[1],
-              longitude: location.loc[0]
-            }
-            loca.title = location.address
-            loca.description = location.description
-            nearby.push(loca)
-          })
-          this.setState({
-            nearbyLocations: nearby,
-            currentLocation: {
-              latitude: locationsAndCoords.coords[0],
-              longitude: locationsAndCoords.coords[1],
-              latitudeDelta: 0.01,
-              longitudeDelta: 0.01
-            }
-          })
-        }
-      })
-      .catch((err) => {
-        console.log('err', err)
-      })
-  }
+  searchLocationSubmit = Helper.searchLocationSubmit
 
   // grabs user on mounting if component doesn't have one
-  getUserInfo () {
-    fetch('http://localhost:3000/auth/login', {
-      method: 'GET',
-      headers: {
-         'Accept': 'application/json',
-         'Content-Type': 'application/json',
-         'Authorization': this.props.userToken
-      }
-    })
-    .then(response => response.json())
-    .then( (userData) => {
-      this.setState({currentUser: userData})
-    })
-    // catch any errors
-    .catch( (err) => {
-      console.log(err)
-    })
-  }
+  getUserInfo = Helper.getUserInfo
 
   // finds users location and grabs nearby pins
-  setUserLocation () {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        let currentLocation = {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          latitudeDelta: 0.01,
-          longitudeDelta: 0.01
-        }
-        this.setState({
-          currentLocation: currentLocation
-        })
-        // get pins near users location
-        this.getPinsForCoords(currentLocation.longitude, currentLocation.latitude)
-      },
-      // error finding users location
-      (error) => console.log(error),
-      // location finding settings
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-    )
-  }
+  setUserLocation = Helper.setUserLocation
+  
+  getPinsForCoords = Helper.getPinsForCoords
 
-  getPinsForCoords (long, lat) {
-    fetch(`http://localhost:3000/locations/bycoords?long=${long}&lat=${lat}`)
-      .then(response => response.json())
-      .then(locations => {
-        const nearby = locations.map(location => {
-          return {
-            title: location.address,
-            description: location.description,
-            coordinate: {
-              longitude: location.loc[0],
-              latitude: location.loc[1]
-            },
-            rating: location.rating,
-            reviews: location.reviews,
-            id: location._id
-          }
-        })
-        // set components nearby pins
-        this.setState({ nearbyLocations: nearby})
-      })
-      .catch(console.log)
-  }
+  getPaidPinsForCoords = Helper.getPaidPinsForCoords
+  
+  getAddressByCoords = Helper.getAddressByCoords
 
   //adds a pins to the map if the user opens the create location form
-  addLocation () {
-    let lat = this.state.currentLocation.latitude
-    let long = this.state.currentLocation.longitude
-    let newPin = {
-      coordinate: {
-        latitude: lat,
-        longitude: long
-      }
-    }
-    let newNearby = this.state.nearbyLocations.slice()
-    newNearby.push(newPin)
-    this.setState({
-      nearbyLocations: newNearby
-    })
-  }
+  addLocation = Helper.addLocation
 
   //Removes the pin from the map if the user does not save the new location
-  cancelLocationAdd () {
-    let nearby = this.state.nearbyLocations.slice()
-    nearby.pop()
-    this.setState({
-      nearbyLocations: nearby
-    })
-  }
+  cancelLocationAdd = Helper.cancelLocationAdd
 
-  onRegionChange (currentLocation) {
-    this.setState({ currentLocation })
-  }
+  onRegionChange = Helper.onRegionChange
 
   render () {
     return (
@@ -227,6 +110,26 @@ export default class HomeMap extends Component {
                     navigator={this.props.navigator}
                     currentUser={this.state.currentUser}
                   />
+                </MapView.Callout>
+              </MapView.Marker>
+            ))}
+
+
+            
+            {this.state.nearbyPaidLocations.map((marker, key) => (
+              <MapView.Marker
+                key={marker.id}
+                id={marker.id}
+                coordinate={marker.coordinate}
+                title={marker.title}
+                description={marker.description}
+                onPress={(evt) => console.log('pressed ', evt.nativeEvent)}
+                centerOffset={{x: 0, y: -20}}
+
+              >
+                <LocationMarker {...marker} />
+                <MapView.Callout style={styles.locationMarkerCallout}>
+                  <LocationMarkerCallout  {...marker} navigator={this.props.navigator} />
                 </MapView.Callout>
               </MapView.Marker>
             ))}
