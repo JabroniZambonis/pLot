@@ -45,8 +45,6 @@ export default class HomeMap extends Component {
     //   this.setState({lastPosition});
     // })
     // console.log('watchID: ',this.watchID)
-    // 
-    
   }
 
   searchLocationSubmit = Helper.searchLocationSubmit
