@@ -16,9 +16,10 @@ export default class CreateReview extends Component {
     let review = {
       rating: this.state.rating,
       content: this.state.content,
-      userId: this.props.currentUser._id 
+      userId: this.props.currentUser._id,
+      locationId: this.props.locationId
     }
-    fetch(`http://localhost:3000/locations/${props.locationId}/reviews`, {
+    fetch(`http://localhost:3000/locations/${this.props.locationId}/reviews`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -32,6 +33,9 @@ export default class CreateReview extends Component {
     .then(response => response.json())
     .then((res) => {
       console.log(res)
+    })
+    .catch((err) => {
+      console.log('review not created: ',err)
     })    
   }
 
