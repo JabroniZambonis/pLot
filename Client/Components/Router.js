@@ -28,22 +28,6 @@ export default class Router extends Component {
       }
   	}
 
-    leftButton (route, navigator, index, navState) {
-      if (route.name !== 'HomeMap') {
-        return <NavButton text="back" onPress={() => navigator.pop()}/>
-      } else {
-        return null
-      }
-    }
-
-    rightButton (route, navigator, index, navState) {
-      if (route.name !== 'HomeMap') {
-
-      } else {
-        return null
-      }
-    }
-
     render () {
     	return (
         <Navigator
@@ -57,15 +41,6 @@ export default class Router extends Component {
             }
           }
     		  renderScene={this.renderScene}
-          navigationBar={
-            <Navigator.NavigationBar
-              routeMapper={{
-                LeftButton: this.leftButton,
-                RightButton: this.rightButton,
-                Title: () => {}
-              }}
-            />
-          }
         />
       )
     }
