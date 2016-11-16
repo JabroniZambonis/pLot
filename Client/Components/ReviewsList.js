@@ -26,7 +26,7 @@ export default ReviewList = (props) => {
         props.reviews.map((review, key) => (
           <Review 
             rating={review.rating}
-            review={review.review}
+            content={review.content}
           />
         ))
       }

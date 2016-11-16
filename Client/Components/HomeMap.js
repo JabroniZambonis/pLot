@@ -146,6 +146,7 @@ export default class HomeMap extends Component {
               latitude: location.loc[1]
             },
             rating: location.rating,
+            reviews: location.reviews,
             id: location._id
           }
         })
@@ -217,7 +218,7 @@ export default class HomeMap extends Component {
                 description={marker.description}
                 onPress={(evt) => console.log('pressed ', evt.nativeEvent)}
                 centerOffset={{x: 0, y: -20}}
-
+                reviews={marker.reviews}
               >
                 <LocationMarker {...marker} />
                 <MapView.Callout style={styles.locationMarkerCallout}>

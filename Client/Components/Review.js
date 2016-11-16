@@ -3,7 +3,8 @@ import { View, Text } from 'react-native'
 
 const Review = (props) => (
   <View>
-    <Text></Text>
+    <Text>{props.rating}</Text>
+    <Text>{props.content}</Text>
   </View>
 )
 
