@@ -234,9 +234,7 @@ exports.getAddressByCoords = function(lat, long) {
       console.log('Got data: ', data)
       this.setState({address: data})
     })
-    .catch((err) => {
-      console.log('This did not work: ', err)
-  })
+  .catch(console.log)
 }
 
 
