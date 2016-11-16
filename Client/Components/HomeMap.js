@@ -113,6 +113,26 @@ export default class HomeMap extends Component {
                 </MapView.Callout>
               </MapView.Marker>
             ))}
+
+
+            
+            {this.state.nearbyPaidLocations.map((marker, key) => (
+              <MapView.Marker
+                key={marker.id}
+                id={marker.id}
+                coordinate={marker.coordinate}
+                title={marker.title}
+                description={marker.description}
+                onPress={(evt) => console.log('pressed ', evt.nativeEvent)}
+                centerOffset={{x: 0, y: -20}}
+
+              >
+                <LocationMarker {...marker} />
+                <MapView.Callout style={styles.locationMarkerCallout}>
+                  <LocationMarkerCallout  {...marker} navigator={this.props.navigator} />
+                </MapView.Callout>
+              </MapView.Marker>
+            ))}
           </MapView>
 
           <View style = {styles.mapCenterMarkerView}>
