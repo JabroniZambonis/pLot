@@ -83,8 +83,7 @@ mapCenterMarker {
 }
 
 locationMarkerCallout {
-  width: 150;
-  height: 60;
+  width: 175;
   z-index: 2;
 }
 /*HomeMap.js*/
@@ -327,5 +326,17 @@ parkingDescriptionImagesContainer {
 /*ParkingDetails.js*/
 
 /*LocationMarkerCallout.js*/
-parkingDetailsButton {
+calloutContainer {
+  flex-direction: row;
 }
+
+calloutDescription {
+  flex: 4;
+}
+
+parkingDetailsButton {
+  flex: 1;
+  justify-content: center;
+  /*padding-right: -20;*/
+}
+/*LocationMarkerCallout.js*/
