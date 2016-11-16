@@ -174,9 +174,10 @@ exports.setUserLocation = function() {
 
 
 exports.getPinsForCoords = function(long, lat) {
-  fetch(`http://localhost:3000/locations/parkwhizbycoords?long=${long}&lat=${lat}`)
+  fetch(`http://localhost:3000/locations/bycoords?long=${long}&lat=${lat}`)
     .then(response => response.json())
     .then(locations => {
+      console.log("getPinsForCoords locations: ", locations)
       let nearby = locations.map(location => {
         return {
           title: location.address,
@@ -198,8 +199,21 @@ exports.getPinsForCoords = function(long, lat) {
 }
 
 
-exports.getPaidPinsForCoords = function(long, lat) {
-  fetch(`http://localhost:3000/locations/bycoords?long=${long}&lat=${lat}`)
+exports.getAddressByCoords = function(lat, long) {
+  fetch(`http://localhost:3000/locations/googlebycoords?lat=${lat}&long=${long}`)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Got data: ', data)
+      this.setState({address: data})
+    })
+    .catch((err) => {
+      console.log('This did not work: ', err)
+  })
+}
+
+
+exports.getPaidPinsForCoords = function(lat, long) {
+  fetch(`http://localhost:3000/locations/parkwhizbycoords?lat=${lat}&long=${long}`)
     .then(response => response.json())
     .then(locations => {
       console.log("locations: ", locations)
