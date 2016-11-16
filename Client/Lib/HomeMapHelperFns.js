@@ -25,8 +25,8 @@ exports.getPinsForCoords = function(long, lat) {
 
 exports.getAddressByCoords = function(lat, long) {
   fetch(`http://localhost:3000/locations/googlebycoords?lat=${lat}&long=${long}`)
-    .then((response) => response.json())
-    .then((data) => {
+    .then(response => response.json())
+    .then(data => {
       console.log('Got data: ', data)
       this.setState({address: data})
     })
@@ -164,7 +164,7 @@ exports.setUserLocation = function() {
       this.getPinsForCoords(currentLocation.longitude, currentLocation.latitude)
 
       //get paid pins near users location
-      this.getPaidPinsForCoords(currentLocation.longitude, currentLocation.latitude)
+      this.getPaidPinsForCoords(currentLocation.latitude, currentLocation.longitude)
     })
     // error finding users location
     .catch((err) => {
@@ -177,7 +177,6 @@ exports.getPinsForCoords = function(long, lat) {
   fetch(`http://localhost:3000/locations/bycoords?long=${long}&lat=${lat}`)
     .then(response => response.json())
     .then(locations => {
-      console.log("getPinsForCoords locations: ", locations)
       let nearby = locations.map(location => {
         return {
           title: location.address,
@@ -199,24 +198,10 @@ exports.getPinsForCoords = function(long, lat) {
 }
 
 
-exports.getAddressByCoords = function(lat, long) {
-  fetch(`http://localhost:3000/locations/googlebycoords?lat=${lat}&long=${long}`)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log('Got data: ', data)
-      this.setState({address: data})
-    })
-    .catch((err) => {
-      console.log('This did not work: ', err)
-  })
-}
-
-
 exports.getPaidPinsForCoords = function(lat, long) {
   fetch(`http://localhost:3000/locations/parkwhizbycoords?lat=${lat}&long=${long}`)
     .then(response => response.json())
     .then(locations => {
-      console.log("locations: ", locations)
       let nearby = locations.parking_listings.map(location => {
         return {
           title: location.address,
@@ -245,23 +230,6 @@ exports.getAddressByCoords = function(lat, long) {
       console.log('Got data: ', data)
       this.setState({address: data})
     })
-}
-
-
-exports.addLocation = function() {
-  let lat = this.state.currentLocation.latitude
-  let long = this.state.currentLocation.longitude
-  let newPin = {
-    coordinate: {
-      latitude: lat,
-      longitude: long
-    }
-  }
-  let newNearby = this.state.nearbyLocations.slice()
-  newNearby.push(newPin)
-  this.setState({
-    nearbyLocations: newNearby
-  })
 }
 
 
