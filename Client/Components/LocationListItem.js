@@ -16,23 +16,20 @@ const LocationListItem = (props) => {
   }
 
   return (
-      <View style={styles.listItemView}>
         <TouchableOpacity onPress={ () => { handleButtonPress();
                                             props.setModalVisible(!props.modalState)
                                           }}
+                          style={styles.listItemView}
         >
           <View style={styles.listItemText}>
             <Text style={{fontWeight: 'bold'}}>{props.location.title}</Text>
             <Text>{props.location.description}</Text>
           </View>
-          <View style={styles.listItemArrow}>
             <Image
-              style={{height: 20}}
+              style={styles.listItemArrow}
               source={require('../Public/Arrow-Icon.png')}
             />
-          </View>
         </TouchableOpacity>
-      </View>
   )
 }
 

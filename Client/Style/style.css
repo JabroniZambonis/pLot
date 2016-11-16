@@ -293,14 +293,17 @@ listItemView {
   padding: 5px 0px 5px 0px;
   border-top: 1px solid #64AFCB;
   flex-direction: row;
-  flex: 1;
+  align-items: center;
 }
 
 listItemText {
-  flex: 3;
+  width: 280;
+  flex: 2;
 }
 
 listItemArrow {
+  height: 20;
+  align-items: center;
   flex: 1;
 }
 /*LocationListItem*/
