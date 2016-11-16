@@ -118,6 +118,22 @@ addLocationButtonContainer {
   right: 40;
 }
 
+addLocationButtonContainerPress {
+  width: 70;
+  height: 70;
+  border-radius: 35;
+  border-color: #64AFCB;
+  border-style: solid;
+  border-width: 3;
+  position: absolute;
+  z-index: 4;
+  background-color: #ffa500;
+  justify-content: center;
+  align-items: center;
+  bottom: 40;
+  right: 40;
+}
+
 addLocationButtonText {
   font-size: 45;
   font-weight: bold;
@@ -220,6 +236,21 @@ listViewToggleContainer {
   left: 40;
 }
 
+listViewToggleContainerPress {
+  width: 70;
+  height: 70;
+  border-radius: 35;
+  border-color: #64AFCB;
+  border-width: 3;
+  position: absolute;
+  z-index: 4;
+  background-color: #ffa500;
+  justify-content: center;
+  align-items: center;
+  bottom: 40;
+  left: 40;
+}
+
 listViewToggleText {
   font-size: 20;
   font-weight: bold;
@@ -233,6 +264,18 @@ listViewCloseContainer {
   border-color: #64AFCB;
   border-width: 3;
   background-color: #efefef;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15;
+}
+
+listViewCloseContainerPress {
+  width: 200;
+  height: 50;
+  border-radius: 35;
+  border-color: #64AFCB;
+  border-width: 3;
+  background-color: #ffa500;
   justify-content: center;
   align-items: center;
   margin-top: 15;

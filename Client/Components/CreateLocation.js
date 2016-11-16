@@ -10,15 +10,21 @@ export default class CreateLocation extends Component {
     this.state = {
       modalVisible: false,
       description: '',
-      address: 'fetching address...'
+      address: 'fetching address...',
+      buttonPress: false
     }
     this.setModalVisible = this.setModalVisible.bind(this)
     this.submitLocation = this.submitLocation.bind(this)
     this.getAddressByCoords = this.getAddressByCoords.bind(this)
+    this.setButtonStyle = this.setButtonStyle.bind(this)
   }
 
   setModalVisible (visible) {
     this.setState({modalVisible: visible})
+  }
+
+  setButtonStyle (style) {
+    this.setState({buttonPress: style})
   }
 
   getAddressByCoords (lat, long) {
@@ -63,6 +69,7 @@ export default class CreateLocation extends Component {
     const limit = 200
     let remainder = limit - this.state.description.length
     let remainderColor = remainder > 20 ? 'green' : 'red'
+    let addButtonStyle = this.state.buttonPress ? styles.addLocationButtonContainerPress : styles.addLocationButtonContainer
 
     return (
       <View>
@@ -73,8 +80,10 @@ export default class CreateLocation extends Component {
               this.setModalVisible(!this.state.modalVisible);
               this.getAddressByCoords(this.props.currentLocation.latitude, this.props.currentLocation.longitude)
             }}
-            style={styles.addLocationButtonContainer}
+            style={addButtonStyle}
             textStyle={styles.addLocationButtonText}
+            onPressIn={() => this.setButtonStyle(!this.state.buttonPress)} 
+            onPressOut={() => this.setButtonStyle(!this.state.buttonPress)}
           >+</Button>
         </View>
 
