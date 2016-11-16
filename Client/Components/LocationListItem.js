@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TouchableHighlight, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableHighlight, TouchableOpacity, Image } from 'react-native'
 import styles  from '../Style/style.js'
 
 const LocationListItem = (props) => {
@@ -17,14 +17,17 @@ const LocationListItem = (props) => {
 
   return (
       <View style={styles.listItemView}>
-        <Text>{props.location.title}</Text>
-        <Text>{props.location.description}</Text>
         <TouchableOpacity onPress={ () => { handleButtonPress();
                                             props.setModalVisible(!props.modalState)
                                           }}
         >
-           <Text>Parking Details</Text>
-         </TouchableOpacity>
+          <Text>{props.location.title}</Text>
+          <Text>{props.location.description}</Text>
+          <Image
+            style={{width: 40, height: 20}}
+            source={require('../Public/Arrow-Icon.png')}
+          />
+        </TouchableOpacity>
       </View>
   )
 }
