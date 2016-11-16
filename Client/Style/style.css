@@ -84,7 +84,6 @@ mapCenterMarker {
 
 locationMarkerCallout {
   width: 175;
-  height: 48;
   z-index: 2;
 }
 /*HomeMap.js*/
