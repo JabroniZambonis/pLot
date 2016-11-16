@@ -41,31 +41,61 @@ exports.create = function (req, res) {
 
 exports.searchGoogleByCoords = function(req, res) {
   const { lat, long } = req.query
+  // if lat and long aren't provided send error
+  if (!lat || !long) {
+    const err = {
+      error: 'Route requires a lat and long query parameter, e.g: \'locations/googlebycoords?long=-97.7405441&lat=30.2689941\''
+    }
+    return res.status(400).json(err)
+  }
+  // lat and long query params exist
+  // build up query
   const searchURL = baseGoogleURL + `&latlng=${lat},${long}`
   request(searchURL)
     .then((response) => {
       const resultAddress = JSON.parse(response).results[0].formatted_address
-      res.status(200).json(resultAddress)
+      return res.status(200).json(resultAddress)
     })
     .catch((err) => {
-      console.log('search error: ',err)
+      console.log('search error: ', err)
     })
 }
 
 exports.findByCoords = function (req, res) {
   const { long, lat } = req.query
-  Location.find().where('loc').near({ center: { coordinates: [long, lat], type: 'Point' }, maxDistance: 2000 })
+  // if no long or lat was given send an error message
+  if (!lat || !long) {
+    const err = {
+      error: 'Route requires a lat and long query parameter, e.g: \'locations/bycoords?long=-97.7405441&lat=30.2689941\''
+    }
+    return res.status(400).json(err)
+  }
+  Location.find()
+    .where('loc')
+    .near(
+      { center: { coordinates: [long, lat], type: 'Point' }, 
+      maxDistance: 2000 }
+    )
   .then((locations) => {
-    res.status(200).json(locations)
+    return res.status(200).json(locations)
   })
+  // error querying for locations
+  .catch(err => res.status(500).json(err))
 }
 
 exports.findByAddr = function (req, res) {
   const address = req.query.q
+  // if a query address is not provided route will fail
+  if (!address) {
+    const err = {
+      error: 'Route requires a query parameter q pointing to an address. E.G: \'locations/byaddr?address=1060 W Addison St, Chicago, IL 60613\''
+    }
+    return res.status(400).json(err)
+  }
+  // address was provided for query
   const query = baseGoogleURL + `&address=${address}`
   request(query)
     .then(function(response) {
-      console.log('got here',response)
 
       let locationsAndCoords = {}
       // TODO: handle case where there are no results
@@ -84,8 +114,10 @@ exports.findByAddr = function (req, res) {
           locationsAndCoords.coords = [lat, long]
           locationsAndCoords.locations = locations
 
-          res.json(locationsAndCoords)
-        })    
+          res.status(200).json(locationsAndCoords)
+        })
+        // error finding location
+        .catch(err => res.status(500).json(err))   
       }
     })
 }
