@@ -69,6 +69,9 @@ export default class LocationListView extends Component {
                 <LocationListItem
                   location={location}
                   key={key}
+                  navigator={this.props.navigator}
+                  setModalVisible={this.setModalVisible.bind(this)}
+                  modalState={this.state.modalVisible}
                 />
               ))}
             </ScrollView>

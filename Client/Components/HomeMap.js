@@ -242,6 +242,7 @@ export default class HomeMap extends Component {
 
         <LocationListView 
           nearbyLocations={this.state.nearbyLocations}
+          navigator={this.props.navigator}
         />
 
         <CreateLocation
