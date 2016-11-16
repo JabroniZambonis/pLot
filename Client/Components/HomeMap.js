@@ -60,7 +60,7 @@ export default class HomeMap extends Component {
   getPaidPinsForCoords = Helper.getPaidPinsForCoords
   
   getAddressByCoords = Helper.getAddressByCoords
-
+  
   //adds a pins to the map if the user opens the create location form
   addLocation = Helper.addLocation
 
@@ -90,7 +90,6 @@ export default class HomeMap extends Component {
             region={this.state.currentLocation}
             onRegionChange={this.onRegionChange}
             showsUserLocation={true}
-            
           >
             {this.state.nearbyLocations.map((marker, key) => (
               <MapView.Marker
@@ -101,7 +100,6 @@ export default class HomeMap extends Component {
                 description={marker.description}
                 onPress={(evt) => console.log('pressed ', evt.nativeEvent)}
                 centerOffset={{x: 0, y: -20}}
-                reviews={marker.reviews}
               >
                 <LocationMarker {...marker} />
                 <MapView.Callout style={styles.locationMarkerCallout}>

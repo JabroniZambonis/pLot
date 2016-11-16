@@ -86,6 +86,8 @@ exports.searchParkWhizByCoords = function(req, res) {
     })
 }
 
+// This will return all of a location's info
+// EXCEPT FOR THE REVIEWS
 exports.findByCoords = function (req, res) {
   const { long, lat } = req.query
   // if no long or lat was given send an error message
@@ -101,11 +103,23 @@ exports.findByCoords = function (req, res) {
       { center: { coordinates: [long, lat], type: 'Point' }, 
       maxDistance: 2000 }
     )
-  .then((locations) => {
-    return res.status(200).json(locations)
-  })
-  // error querying for locations
-  .catch(err => res.status(500).json(err))
+    .then((data) => {
+      const locations = data.map(location => {
+        return {
+          title: location.address,
+          description: location.description,
+          coordinate: {
+            longitude: location.loc[0],
+            latitude: location.loc[1]
+          },
+          rating: location.rating,
+          id: location._id
+        }
+      })
+      return res.status(200).json(locations)
+    })
+    // error querying for locations
+    .catch(err => res.status(500).json(err))
 }
 
 exports.findByAddr = function (req, res) {
@@ -122,7 +136,7 @@ exports.findByAddr = function (req, res) {
   request(query)
     .then(function(response) {
 
-      let locationsAndCoords = {}
+      const locationsAndCoords = {}
       // TODO: handle case where there are no results
       if (JSON.parse(response).status === "ZERO_RESULTS") {
         res.json(locationsAndCoords)
