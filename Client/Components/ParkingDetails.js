@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import {
   View,
   Text,
-  Image
+  Image,
+  TouchableHighlight
 } from 'react-native'
 import ImageSlider from 'react-native-image-slider'
 import MapView from 'react-native-maps'
@@ -34,40 +35,52 @@ export default class ParkingDetails extends Component {
   componentDidMount() {
   }
 
+  showReviews () {
+    this.props.navigator.push({
+      name: 'ReviewsList',
+      reviews: this.props.reviews,
+      currentUser: this.props.currentUser,
+      locationId: this.props.id
+    })
+  }
+
 
 render () {
     return (
-    <View style={styles.parkingDetailsContainer}>        
-      <MapView
-        style={styles.parkingDetailsMapContainer}
-        region={this.state.region}
-        scrollEnabled={false}
-        zoomEnabled={false}
-      >
-       <MapView.Marker
-              key={this.props.key}
-              coordinate={this.state.pinLocation}
-              // title={}
-              // description={}
-              image={require('../Public/existingPins.png')}
-              centerOffset={{x: 0, y: -20}}
-              rotateEnabled={false}
-              pitchEnabled={false}
-              />
-      </MapView>
-      <View style={styles.parkingDescriptionContainer}>
-         <Text style={{fontFamily: 'Trebuchet MS', fontWeight: 'bold', fontSize: 15}}>
-         Parking Details:
-         </Text>
-         <Text style={styles.parkingDescriptionText}>
-         {this.props.description}
-         </Text>
+      <View style={styles.parkingDetailsContainer}>        
+        <MapView
+          style={styles.parkingDetailsMapContainer}
+          region={this.state.region}
+          scrollEnabled={false}
+          zoomEnabled={false}
+        >
+         <MapView.Marker
+                key={this.props.key}
+                coordinate={this.state.pinLocation}
+                // title={}
+                // description={}
+                image={require('../Public/existingPins.png')}
+                centerOffset={{x: 0, y: -20}}
+                rotateEnabled={false}
+                pitchEnabled={false}
+                />
+        </MapView>
+        <View style={styles.parkingDescriptionContainer}>
+           <Text style={{fontFamily: 'Trebuchet MS', fontWeight: 'bold', fontSize: 15}}>
+           Parking Details:
+           </Text>
+           <Text style={styles.parkingDescriptionText}>
+           {this.props.description}
+           </Text>
+        </View>
+        <View style={styles.parkingDescriptionImagesContainer}>
+          <ImageSlider images={this.state.parkingSpacePics}
+           />
+        </View>
+        <TouchableHighlight onPress={ () => this.showReviews() }>
+          <Text>Show Reviews</Text>
+        </TouchableHighlight>
       </View>
-      <View style={styles.parkingDescriptionImagesContainer}>
-        <ImageSlider images={this.state.parkingSpacePics}
-         />
-      </View>  
-    </View>
     )
   }
 }

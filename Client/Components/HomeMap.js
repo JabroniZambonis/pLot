@@ -146,6 +146,7 @@ export default class HomeMap extends Component {
               latitude: location.loc[1]
             },
             rating: location.rating,
+            reviews: location.reviews,
             id: location._id
           }
         })
@@ -186,7 +187,6 @@ export default class HomeMap extends Component {
   }
 
   render () {
-    console.log("this.props homeMap: ", this.props)
     return (
       <View style={styles.homeContainer}>
         <View style={styles.searchBarContainer}>
@@ -218,11 +218,15 @@ export default class HomeMap extends Component {
                 description={marker.description}
                 onPress={(evt) => console.log('pressed ', evt.nativeEvent)}
                 centerOffset={{x: 0, y: -20}}
-
+                reviews={marker.reviews}
               >
                 <LocationMarker {...marker} />
                 <MapView.Callout style={styles.locationMarkerCallout}>
-                  <LocationMarkerCallout  {...marker} navigator={this.props.navigator} />
+                  <LocationMarkerCallout 
+                    {...marker}
+                    navigator={this.props.navigator}
+                    currentUser={this.state.currentUser}
+                  />
                 </MapView.Callout>
               </MapView.Marker>
             ))}

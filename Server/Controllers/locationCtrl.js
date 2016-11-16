@@ -11,6 +11,7 @@ const baseGoogleURL =
 exports.create = function (req, res) {
   new Location({
     address: req.body.location.address,
+    reviews: [],
     rating: 0,
     photos: [],
     description: req.body.location.description,
@@ -98,5 +99,24 @@ exports.addPhoto = function (req, res) {
 }
 
 exports.addReview = function (req, res) {
+ 
+  let review = {
+    rating: req.body.review.rating,
+    content: req.body.review.content,
+    userId: req.body.review.userId
+  }
 
+  console.log('1: ',review)
+  Location.findOneAndUpdate(
+    {_id: req.body.review.locationId},
+    { $push: { reviews: review } },
+    { new: true}
+  )
+  .then(response => {
+    console.log('success', response)
+      return res.status(201).json(response)
+  })
+  .catch((err) => {
+    return res.status(500).json(err)
+  })
 }
