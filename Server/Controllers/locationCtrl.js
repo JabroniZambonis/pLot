@@ -177,15 +177,13 @@ exports.addReview = function (req, res) {
     userId: req.body.review.userId
   }
 
-  console.log('1: ',review)
   Location.findOneAndUpdate(
     {_id: req.body.review.locationId},
     { $push: { reviews: review } },
     { new: true}
   )
   .then(response => {
-    console.log('success', response)
-      return res.status(201).json(response)
+    return res.status(201).json(response)
   })
   .catch((err) => {
     return res.status(500).json(err)
@@ -193,7 +191,6 @@ exports.addReview = function (req, res) {
 }
 
 exports.getReviews = function (req, res) {
-  console.log('got here', req.params.locationId)
   Location.findOne({_id: req.params.locationId})
   .then(location => {
     let reviews = location.reviews
