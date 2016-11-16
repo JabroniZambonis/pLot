@@ -33,6 +33,7 @@ export default class CreateReview extends Component {
     .then(response => response.json())
     .then((res) => {
       console.log(res)
+      this.props.navigator.pop()
     })
     .catch((err) => {
       console.log('review not created: ',err)
@@ -42,7 +43,7 @@ export default class CreateReview extends Component {
   render () {
     return (
       <View>
-        <Text>Test</Text>
+        <Text>Tell us your thoughts</Text>
         <TextInput
           style={{width: 200, height: 200}}
           onChange={(event) => this.setState({content: event.nativeEvent.text})}
