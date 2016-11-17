@@ -38,10 +38,38 @@ export default class Router extends Component {
           )
           break
         case 'ReviewsList':
-          return <ReviewsList navigator={navigator} {...route} />
+          return (
+            <View style={{flex: 1}}>
+              <Navbar
+                leftButton={
+                  <NavButton text="back" onPress={() => navigator.pop()}/>
+                }
+                rightButton={
+                  <NavButton
+                    text="+Review"
+                    onPress={() => navigator.push({
+                      name: 'CreateReview',
+                      locationId: route.locationId,
+                      currentUser: route.currentUser
+                    })}
+                  />
+                }
+              />
+              <ReviewsList navigator={navigator} {...route} />
+            </View>
+          )
           break
         case 'CreateReview':
-          return <CreateReview navigator={navigator} {...route} userToken={this.props.userToken} />
+          return (
+            <View style={{flex: 1}}>
+              <Navbar
+                leftButton={
+                  <NavButton text="Cancel" onPress={() => navigator.pop()}/>
+                }
+              />
+              <CreateReview navigator={navigator} {...route} userToken={this.props.userToken} />
+            </View>
+          )
           break
       }
   	}

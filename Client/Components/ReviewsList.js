@@ -1,24 +1,11 @@
 import React from 'react'
-import { View, Text, TouchableHighlight } from 'react-native'
+import { View, Text, TouchableHighlight, StyleSheet } from 'react-native'
 import Review from './Review'
 
 export default ReviewList = (props) => {
 
-  const createReview = () => {
-    props.navigator.push({
-      name: 'CreateReview',
-      locationId: props.locationId,
-      currentUser: props.currentUser
-    })
-  }
-
   return (
-    <View>
-      <View>
-        <TouchableHighlight onPress={createReview}>
-          <Text>Create Review</Text>
-        </TouchableHighlight>
-      </View>
+    <View style={style.reviewsListContainer}>
       {!props.reviews ?
 
         <Text>No Reviews Yet</Text> :
@@ -27,9 +14,18 @@ export default ReviewList = (props) => {
           <Review 
             rating={review.rating}
             content={review.content}
+            key={key}
           />
         ))
       }
     </View>
   )
 }
+
+const style = StyleSheet.create({
+  reviewsListContainer: {
+    flex: 1,
+    padding: 10,
+    alignItems: 'center'
+  }
+})
