@@ -7,6 +7,7 @@ import CreateLocation from './CreateLocation'
 import ProfileView from './ProfileView'
 import LocationListView from './LocationListView'
 import LocationMarker from './LocationMarker'
+import LocationMarkerPaid from './LocationMarkerPaid'
 import LocationMarkerCallout from './LocationMarkerCallout'
 
 export default class HomeMap extends Component {
@@ -125,7 +126,7 @@ export default class HomeMap extends Component {
                 centerOffset={{x: 0, y: -20}}
 
               >
-                <LocationMarker {...marker} />
+                <LocationMarkerPaid {...marker} />
                 <MapView.Callout style={styles.locationMarkerCallout}>
                   <LocationMarkerCallout  {...marker} navigator={this.props.navigator} />
                 </MapView.Callout>
