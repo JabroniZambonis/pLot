@@ -6,13 +6,15 @@ const s = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#64AFCB',
     height: 40,
-    alignItems: 'center',
     justifyContent: 'space-between',
+    alignItems: 'center',
     paddingRight: 10,
-    paddingLeft: 10
+    paddingLeft: 10,
+    paddingTop: 5
   },
   leftButton: {
-    flex: 1
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   rightButton: {
     flex: 1

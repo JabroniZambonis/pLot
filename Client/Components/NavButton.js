@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
-import { TouchableHighlight, Text, StyleSheet } from 'react-native'
+import { TouchableHighlight, Text, StyleSheet, Image } from 'react-native'
+import Button from 'apsl-react-native-button'
 
-const s = StyleSheet.create({
-  text: {
-    color: 'white'
-  }
-})
+const styles = require('../Style/style.js')
 
 export default ({ onPress, text }) => (
-  <TouchableHighlight onPress={onPress}>
-    <Text style={s.text}>{text}</Text>
-  </TouchableHighlight>
+  <Button onPress={onPress} style={styles.navButtonBack}>
+  	<Image source={require('../Public/back-Arrow.png')} style={styles.backArrow}/>
+  	<Text style={styles.navButtonBackText}>{text}</Text>
+  </Button>
 )

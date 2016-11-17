@@ -396,3 +396,23 @@ parkingDetailsButton {
   /*padding-right: -20;*/
 }
 /*LocationMarkerCallout.js*/
+
+/*NavButton.js*/
+navButtonBack {
+  width: 50;
+  height: 30;
+  border-radius: 8;
+  border-color: #64AFCB;
+  justify-content: center;
+  align-items: center;
+  
+}
+navButtonBackText {
+  color: white;
+  font-weight: bold;
+  font-size: 16;
+}
+backArrow {
+  height: 25;
+  width:25;
+}
