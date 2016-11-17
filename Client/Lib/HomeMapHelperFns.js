@@ -171,7 +171,8 @@ exports.getPaidPinsForCoords = function(lat, long) {
             longitude: location.lng
           },
           rating: location.recommendations,
-          id: location.location_id
+          id: location.location_id,
+          price: location.price_formatted
         }
       })
       //set components nearby pins

@@ -7,7 +7,9 @@ import CreateLocation from './CreateLocation'
 import ProfileView from './ProfileView'
 import LocationListView from './LocationListView'
 import LocationMarker from './LocationMarker'
+import LocationMarkerPaid from './LocationMarkerPaid'
 import LocationMarkerCallout from './LocationMarkerCallout'
+import LocationMarkerPaidCallout from './LocationMarkerPaidCallout'
 
 export default class HomeMap extends Component {
   constructor(props) {
@@ -121,13 +123,14 @@ export default class HomeMap extends Component {
                 coordinate={marker.coordinate}
                 title={marker.title}
                 description={marker.description}
+                price={marker.price}
                 onPress={(evt) => console.log('pressed ', evt.nativeEvent)}
                 centerOffset={{x: 0, y: -20}}
 
               >
-                <LocationMarker {...marker} />
+                <LocationMarkerPaid {...marker} />
                 <MapView.Callout style={styles.locationMarkerCallout}>
-                  <LocationMarkerCallout  {...marker} navigator={this.props.navigator} />
+                  <LocationMarkerPaidCallout  {...marker} navigator={this.props.navigator} />
                 </MapView.Callout>
               </MapView.Marker>
             ))}
