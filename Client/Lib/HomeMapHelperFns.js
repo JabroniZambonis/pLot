@@ -120,6 +120,7 @@ exports.setUserLocation = function() {
 
 
 exports.getPinsForCoords = function(long, lat) {
+  console.log('got here')
   fetch(`http://localhost:3000/locations/bycoords?long=${long}&lat=${lat}`)
     .then(response => response.json())
     .then(locations => {
