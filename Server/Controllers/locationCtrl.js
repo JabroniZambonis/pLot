@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Location = require('../models/locations')
 const db = require('../db')
 const request = require('request-promise')
-const User = require('../Models/usersModel')
+const User = require('../models/usersModel')
 const jwt = require('../lib/jwt')
 
 const baseGoogleURL = 
