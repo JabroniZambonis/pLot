@@ -26,6 +26,7 @@ const style = StyleSheet.create({
   reviewsListContainer: {
     flex: 1,
     padding: 10,
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#efefef'
   }
 })

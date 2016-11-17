@@ -67,7 +67,9 @@ export default class CreateReview extends Component {
 
 const style = StyleSheet.create({
   formContainer: {
-    padding: 10
+    flex: 1,
+    padding: 10,
+    backgroundColor: '#efefef'
   },
   inputContainer: {
     borderWidth: 1,
