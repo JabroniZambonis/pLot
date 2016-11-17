@@ -22,6 +22,7 @@ router.route('/:locationId/photos')
   .post(locations.addPhoto)
 
 router.route('/:locationId/reviews')
+  .get(locations.getReviews)
   .post(locations.addReview)
 
 module.exports = router

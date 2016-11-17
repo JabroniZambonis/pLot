@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { View, TextInput, Text, TouchableHighlight, Slider } from 'react-native'
+import { View, TextInput, Text, TouchableHighlight, Slider, StyleSheet } from 'react-native'
 
 export default class CreateReview extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      rating: false,
+      rating: 0,
       content: false
     }
     this.createReview = this.createReview.bind(this)
@@ -33,7 +33,7 @@ export default class CreateReview extends Component {
     .then(response => response.json())
     .then((res) => {
       console.log(res)
-      this.props.navigator.pop()
+      this.props.navigator.popN(2)
     })
     .catch((err) => {
       console.log('review not created: ',err)
@@ -42,19 +42,21 @@ export default class CreateReview extends Component {
 
   render () {
     return (
-      <View>
+      <View style={style.formContainer}>
         <Text>Tell us your thoughts</Text>
-        <TextInput
-          style={{width: 200, height: 200}}
-          onChange={(event) => this.setState({content: event.nativeEvent.text})}
-        >
-        </TextInput>
+        <View style={style.inputContainer}>
+          <TextInput
+            style={style.contentInput}
+            onChange={(event) => this.setState({content: event.nativeEvent.text})}
+          />
+        </View>
         <Slider 
           maximumValue={5}
           minimumValue={0}
           step={1}
           onValueChange={(value) => this.setState({rating: value})}
         />
+        <Text>{this.state.rating}</Text>
         <TouchableHighlight onPress={this.createReview}>
           <Text>Submit</Text>
         </TouchableHighlight>
@@ -62,3 +64,20 @@ export default class CreateReview extends Component {
     )
   }
 }
+
+const style = StyleSheet.create({
+  formContainer: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: '#efefef'
+  },
+  inputContainer: {
+    borderWidth: 1,
+    borderColor: '#64AFCB',
+    borderRadius: 10,
+    backgroundColor: 'white'
+  },
+  contentInput: {
+    height: 200,
+  }
+})
