@@ -11,31 +11,6 @@ exports.getAddressByCoords = function(lat, long) {
 }
 
 
-exports.setUserLocation = function() {
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      let currentLocation = {
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01
-      }
-      this.setState({
-        currentLocation: currentLocation
-      })
-      // get pins near users location
-      this.getPinsForCoords(currentLocation.longitude, currentLocation.latitude)
-
-      //TO DO: Call function with appropriate things
-    },
-    // error finding users location
-    (error) => console.log(error),
-    // location finding settings
-    {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-  )
-}
-
-
 exports.getUserInfo = function() {
   fetch('http://localhost:3000/auth/login', {
     method: 'GET',
@@ -140,10 +115,6 @@ exports.setUserLocation = function() {
 
       //get paid pins near users location
       this.getPaidPinsForCoords(currentLocation.latitude, currentLocation.longitude)
-    })
-    // error finding users location
-    .catch((err) => {
-      console.log("ERROR get setUserLocation in HomeMapHelperFns.js: ", err)
     })
 }
 
