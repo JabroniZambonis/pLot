@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const authCtrl = require('../Controllers/authController')
+const authCtrl = require('../controllers/authController')
 
 router.route('/')
   .post(authCtrl.fbAuthenticate)

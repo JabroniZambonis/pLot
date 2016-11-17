@@ -3,9 +3,9 @@ require('dotenv').config({silent: true})
 
 const express = require('express')
 const app = express()
-const userRouter = require('./Routes/userRouter')
-const locationRouter = require('./Routes/locationRouter')
-const authRouter = require('./Routes/authRouter')
+const userRouter = require('./routes/userRouter')
+const locationRouter = require('./routes/locationRouter')
+const authRouter = require('./routes/authRouter')
 const bodyParser = require('body-parser')
 
 //app level middleware
