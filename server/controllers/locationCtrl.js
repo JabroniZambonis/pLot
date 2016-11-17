@@ -171,23 +171,61 @@ exports.addPhoto = function (req, res) {
 
 exports.addReview = function (req, res) {
  
-  let review = {
+  const review = {
     rating: req.body.review.rating,
     content: req.body.review.content,
     userId: req.body.review.userId
   }
 
   Location.findOneAndUpdate(
-    {_id: req.body.review.locationId},
-    { $push: { reviews: review } },
-    { new: true}
-  )
-  .then(response => {
-    return res.status(201).json(response)
-  })
-  .catch((err) => {
-    return res.status(500).json(err)
-  })
+      {_id: req.body.review.locationId},
+      { $push: { reviews: review } },
+      { new: true}
+    )
+    .then(location => {
+      const len = location.reviews.length
+      average = (location.reviews.reduce(function(acc, rev) {
+        return acc + (rev.rating / len)
+      }, 0)).toFixed(2)
+      location.rating = average
+      return location.save()
+    })
+    .then(response => {
+      console.log('~~~~~~~~~~',response)
+      return res.status(201).json(response)
+    })
+    .catch((err) => {
+      return res.status(500).json(err)
+    })
+
+  // Location.findOne({_id: req.body.review.locationId})
+  // .then(location => {
+
+
+
+  //   const len = location.reviews.length
+  //   average = (location.reviews.reduce(function(acc, rev) {
+  //     return acc + (rev.rating / len)
+  //   }, 0)).toFixed(2)
+
+  //   console.log('average rating: ',average)
+
+  //   Location.findOneAndUpdate(
+  //     {_id: req.body.review.locationId},
+  //     { rating: average },
+  //     { new: true}
+  //   )
+  //   .then(response => {
+  //     return res.status(201).json(response)
+  //   })
+  //   .catch((err) => {
+  //     return res.status(500).json(err)
+  //   })
+  // })
+  // .catch((err) => {
+  //   return res.status(500).json(err)
+  // })
+  
 }
 
 exports.getReviews = function (req, res) {
