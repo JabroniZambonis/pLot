@@ -1,5 +1,5 @@
 const jwt = require('../lib/jwt')
-const User = require('../Models/usersModel')
+const User = require('../models/usersModel')
 const request = require('request-promise')
 const qs = require('querystring')
 

@@ -1,6 +1,6 @@
 const express = require('express')
-const users = require('../Controllers/userCtrl')
-const jwt = require('../Lib/jwt.js')
+const users = require('../controllers/userCtrl')
+const jwt = require('../lib/jwt.js')
 
 const router = express.Router()
 

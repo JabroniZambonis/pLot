@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const locations = require('../Controllers/locationCtrl')
+const locations = require('../controllers/locationCtrl')
 
 router.route('/')
   .post(locations.create)

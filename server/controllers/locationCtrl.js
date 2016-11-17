@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
-const Location = require('../Models/locations')
+const Location = require('../models/locations')
 const db = require('../db')
 const request = require('request-promise')
-const User = require('../Models/usersModel')
-const jwt = require('../Lib/jwt')
+const User = require('../models/usersModel')
+const jwt = require('../lib/jwt')
 
 const baseGoogleURL = 
   `https://maps.googleapis.com/maps/api/geocode/json?key=${process.env.GOOGLE_API_KEY}`
