@@ -412,3 +412,7 @@ navButtonBackText {
   font-weight: bold;
   font-size: 16;
 }
+backArrow {
+  height: 25;
+  width:25;
+}
