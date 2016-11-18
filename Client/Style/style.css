@@ -419,3 +419,16 @@ backArrow {
   height: 25;
   width:25;
 }
+/*NavButton.js*/
+
+/*ReturnToUser.js*/
+returnToUserButton {
+  width: 35;
+  height: 32;
+  position: absolute;
+  left: 17;
+  top: 65;
+  z-index: 2;
+  opacity: .8;
+}
+/*ReturnToUser.js*/

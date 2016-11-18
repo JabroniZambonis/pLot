@@ -187,3 +187,21 @@ exports.cancelLocationAdd = function() {
 exports.onRegionChange = function(currentLocation) {
   this.setState({ currentLocation })
 }
+
+exports.returnToUser = function () {
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      let userLocation = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01
+    }
+  this.setState({
+    userLocation: userLocation
+  })
+  this.refs.map.animateToCoordinate(this.state.userLocation, 500)
+  this.getPinsForCoords(userLocation.longitude, userLocation.latitude)
+  this.getPaidPinsForCoords(userLocation.latitude, userLocation.longitude)
+  })
+}

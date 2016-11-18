@@ -10,6 +10,7 @@ import LocationMarker from './LocationMarker'
 import LocationMarkerPaid from './LocationMarkerPaid'
 import LocationMarkerCallout from './LocationMarkerCallout'
 import LocationMarkerPaidCallout from './LocationMarkerPaidCallout'
+import ReturnToUser from './ReturnToUser'
 
 export default class HomeMap extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ export default class HomeMap extends Component {
         latitudeDelta: 0.1,
         longitudeDelta: 0.1
       },
+      userLocation: {},
       currentTime: '',
       nearbyLocations: [],
       nearbyPaidLocations: [],
@@ -31,6 +33,7 @@ export default class HomeMap extends Component {
     this.addLocation = this.addLocation.bind(this)
     this.cancelLocationAdd = this.cancelLocationAdd.bind(this)
     this.onRegionChange = this.onRegionChange.bind(this)
+    this.returnToUser = this.returnToUser.bind(this)
   }
 
   componentDidMount () {
@@ -71,6 +74,8 @@ export default class HomeMap extends Component {
 
   onRegionChange = Helper.onRegionChange
 
+  returnToUser = Helper.returnToUser
+
   render () {
     return (
       <View style={styles.homeContainer}>
@@ -85,6 +90,8 @@ export default class HomeMap extends Component {
         </View>
 
         <ProfileView currentUser={this.state.currentUser} logOut={this.props.logOut}/>
+
+        <ReturnToUser backToUser={this.returnToUser} />
         
         <View style={styles.homeMapContainer}>
           <MapView
@@ -92,6 +99,7 @@ export default class HomeMap extends Component {
             region={this.state.currentLocation}
             onRegionChange={this.onRegionChange}
             showsUserLocation={true}
+            ref="map"
           >
             {this.state.nearbyLocations.map((marker, key) => (
               <MapView.Marker
