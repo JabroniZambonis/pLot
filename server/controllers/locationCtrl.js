@@ -151,9 +151,20 @@ exports.findByAddr = function (req, res) {
         .then((locations) => {
 
           locationsAndCoords.coords = [lat, long]
-          locationsAndCoords.locations = locations
+          locationsAndCoords.locations = locations.map(location => {
 
-          res.status(200).json(locationsAndCoords)
+            return {
+              title: location.address,
+              description: location.description,
+              coordinate: {
+                longitude: location.loc[0],
+                latitude: location.loc[1]
+              },
+              rating: location.rating,
+              id: location._id
+            }
+          })
+          return res.status(200).json(locationsAndCoords)
         })
         // error finding location
         .catch(err => res.status(500).json(err))   
@@ -197,35 +208,6 @@ exports.addReview = function (req, res) {
     .catch((err) => {
       return res.status(500).json(err)
     })
-
-  // Location.findOne({_id: req.body.review.locationId})
-  // .then(location => {
-
-
-
-  //   const len = location.reviews.length
-  //   average = (location.reviews.reduce(function(acc, rev) {
-  //     return acc + (rev.rating / len)
-  //   }, 0)).toFixed(2)
-
-  //   console.log('average rating: ',average)
-
-  //   Location.findOneAndUpdate(
-  //     {_id: req.body.review.locationId},
-  //     { rating: average },
-  //     { new: true}
-  //   )
-  //   .then(response => {
-  //     return res.status(201).json(response)
-  //   })
-  //   .catch((err) => {
-  //     return res.status(500).json(err)
-  //   })
-  // })
-  // .catch((err) => {
-  //   return res.status(500).json(err)
-  // })
-  
 }
 
 exports.getReviews = function (req, res) {
