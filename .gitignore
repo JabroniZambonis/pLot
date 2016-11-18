@@ -46,3 +46,6 @@ android/keystores/debug.keystore
 __tests__/index.android.js
 android/
 index.android.js
+
+# temp folder for images
+uploads/
