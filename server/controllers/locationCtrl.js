@@ -202,7 +202,6 @@ exports.addReview = function (req, res) {
       return location.save()
     })
     .then(response => {
-      console.log('~~~~~~~~~~',response)
       return res.status(201).json(response)
     })
     .catch((err) => {

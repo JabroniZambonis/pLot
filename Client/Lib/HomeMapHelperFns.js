@@ -147,16 +147,6 @@ exports.getPaidPinsForCoords = function(lat, long) {
 }
 
 
-exports.getAddressByCoords = function(lat, long) {
-  fetch(`http://localhost:3000/locations/googlebycoords?lat=${lat}&long=${long}`)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log('Got data: ', data)
-      this.setState({address: data})
-    })
-}
-
-
 exports.addLocation = function() {
   let lat = this.state.currentLocation.latitude
   let long = this.state.currentLocation.longitude

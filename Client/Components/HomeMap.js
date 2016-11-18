@@ -2,7 +2,7 @@ import styles  from '../Style/style.js'
 import Helper from '../Lib/HomeMapHelperFns.js'
 import React, { Component } from 'react'
 import MapView from 'react-native-maps'
-import { View, StyleSheet, TextInput, Alert, Image } from 'react-native'
+import { View, StyleSheet, TextInput, Alert, Image, Text } from 'react-native'
 import CreateLocation from './CreateLocation'
 import ProfileView from './ProfileView'
 import LocationListView from './LocationListView'
@@ -11,6 +11,7 @@ import LocationMarkerPaid from './LocationMarkerPaid'
 import LocationMarkerCallout from './LocationMarkerCallout'
 import LocationMarkerPaidCallout from './LocationMarkerPaidCallout'
 import ReturnToUser from './ReturnToUser'
+import RedoSearchButton from './RedoSearchButton'
 
 export default class HomeMap extends Component {
   constructor(props) {
@@ -28,12 +29,14 @@ export default class HomeMap extends Component {
       nearbyLocations: [],
       nearbyPaidLocations: [],
       searchText: 'Search for spots...',
-      lastPosition: {}
+      lastPosition: {},
+      showRedoSearchButton: false
     }
     this.addLocation = this.addLocation.bind(this)
     this.cancelLocationAdd = this.cancelLocationAdd.bind(this)
     this.onRegionChange = this.onRegionChange.bind(this)
     this.returnToUser = this.returnToUser.bind(this)
+    this.getPinsForCoords = this.getPinsForCoords.bind(this)
   }
 
   componentDidMount () {
@@ -155,6 +158,10 @@ export default class HomeMap extends Component {
         <LocationListView 
           nearbyLocations={this.state.nearbyLocations}
           navigator={this.props.navigator}
+        />
+
+        <RedoSearchButton 
+          getPinsForCoords={this.getPinsForCoords}
         />
 
         <CreateLocation
