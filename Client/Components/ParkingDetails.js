@@ -84,10 +84,11 @@ export default class ParkingDetails extends Component {
           pitchEnabled={false}
         />
         </MapView>
-        <View style={styles.parkingDescriptionContainer}>
+          <Text style={styles.parkingDetailsAddress}>{this.props.title}</Text>
           <Text style={{fontFamily: 'Trebuchet MS', fontWeight: 'bold', fontSize: 15}}>
             Parking Details:
           </Text>
+        <View style={styles.parkingDescriptionContainer}>
           <Text style={styles.parkingDescriptionText}>
             {this.props.description}
           </Text>

@@ -359,12 +359,15 @@ parkingDetailsContainer {
 parkingDetailsMapContainer {
   flex: 1;
   justify-content: flex-start;
+}
+
+parkingDetailsAddress {
   margin-bottom: 10;
 }
 
 parkingDescriptionContainer {
   flex: 1;
-  padding: 0 12 0 12;
+  padding: 0 8 0 8;
 }
 
 parkingDescriptionText {
