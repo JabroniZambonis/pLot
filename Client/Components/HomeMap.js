@@ -11,7 +11,6 @@ import LocationMarkerPaid from './LocationMarkerPaid'
 import LocationMarkerCallout from './LocationMarkerCallout'
 import LocationMarkerPaidCallout from './LocationMarkerPaidCallout'
 import ReturnToUser from './ReturnToUser'
-import RedoSearchButton from './RedoSearchButton'
 import Button from 'apsl-react-native-button'
 
 
@@ -161,14 +160,15 @@ export default class HomeMap extends Component {
           navigator={this.props.navigator}
         />
 
-        <Button
-        
-          onPress={() => (
-            this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude)
-          )}
-        >
-          <Text>Redo Search</Text>
-        </Button>
+          <Button
+            textStyle={styles.listViewToggleText} 
+            style={btnStyle.redoSearchContainer}
+            onPress={() => (
+              this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude)
+            )}
+          >
+            Redo Search
+          </Button>
 
         <CreateLocation
           userToken={this.props.userToken}
@@ -180,3 +180,21 @@ export default class HomeMap extends Component {
     )
   }
 }
+
+const btnStyle = StyleSheet.create({
+  redoSearchContainer: {
+    width: 100,
+    height: 70,
+    borderRadius: 35,
+    borderColor: '#64AFCB',
+    borderStyle: 'solid',
+    borderWidth: 3,
+    position: 'absolute',
+    zIndex: 4,
+    backgroundColor: '#efefef',
+    justifyContent: 'center',
+    alignItems: 'center',
+    bottom: 40,
+    right: 135,
+  },
+})
