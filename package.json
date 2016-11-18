@@ -24,6 +24,7 @@
     "babel-preset-react": "^6.16.0",
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
+    "cloudinary": "^1.4.4",
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
     "formidable": "^1.0.17",
