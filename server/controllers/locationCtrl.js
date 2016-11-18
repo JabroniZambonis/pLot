@@ -1,9 +1,12 @@
+const { resolve } = require('path')
 const mongoose = require('mongoose')
 const Location = require('../models/locations')
 const db = require('../db')
 const request = require('request-promise')
 const User = require('../models/usersModel')
 const jwt = require('../lib/jwt')
+const formidable = require('formidable')
+const cloudinary = require('../lib/cloudinary')
 
 const baseGoogleURL = 
   `https://maps.googleapis.com/maps/api/geocode/json?key=${process.env.GOOGLE_API_KEY}`
@@ -166,6 +169,21 @@ exports.photos = function (req, res) {
 }
 
 exports.addPhoto = function (req, res) {
+  const { location } = req.params.locationId
+  const form = new formidable.IncomingForm()
+  form.uploadDir = resolve(__dirname, '../', 'uploads')
+  form
+    .on('file', function (name, file) {
+      // make sure it is an image
+      if (file.type === "image/jpeg") {
+        cloudinary.uploader.upload(file.path, console.log)
+      }
+    })
+    .on('end', function () {
+      console.log('all done here')
+      res.send('all done all done')
+    })
+  form.parse(req)
 
 }
 
