@@ -1,3 +1,5 @@
+import { Alert } from 'react-native'
+
 exports.getAddressByCoords = function(lat, long) {
   fetch(`http://localhost:3000/locations/googlebycoords?lat=${lat}&long=${long}`)
     .then(response => response.json())
@@ -50,17 +52,7 @@ exports.searchLocationSubmit = function(event) {
             {text: 'OK', onPress: () => console.log('OK Pressed')}
           )
         }
-        const nearby = []
-        locationsAndCoords.locations.forEach(function(location) {
-          let loca = {}
-          loca.coordinate = {
-            latitude: location.loc[1],
-            longitude: location.loc[0]
-          }
-          loca.title = location.address
-          loca.description = location.description
-          nearby.push(loca)
-        })
+        const nearby = locationsAndCoords.locations
         this.setState({
           nearbyLocations: nearby,
           currentLocation: {
@@ -120,7 +112,6 @@ exports.setUserLocation = function() {
 
 
 exports.getPinsForCoords = function(long, lat) {
-  console.log('got here')
   fetch(`http://localhost:3000/locations/bycoords?long=${long}&lat=${lat}`)
     .then(response => response.json())
     .then(locations => {
