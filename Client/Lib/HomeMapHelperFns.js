@@ -187,3 +187,16 @@ exports.cancelLocationAdd = function() {
 exports.onRegionChange = function(currentLocation) {
   this.setState({ currentLocation })
 }
+
+exports.returnToUser = function () {
+  let currentLocation = {
+        latitude: 30.264,
+        longitude: -97.742,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01
+      }
+  this.setState({
+    currentLocation: currentLocation
+  })
+  this.getPinsForCoords(currentLocation.longitude, currentLocation.latitude)
+}

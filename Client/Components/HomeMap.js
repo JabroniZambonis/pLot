@@ -32,6 +32,7 @@ export default class HomeMap extends Component {
     this.addLocation = this.addLocation.bind(this)
     this.cancelLocationAdd = this.cancelLocationAdd.bind(this)
     this.onRegionChange = this.onRegionChange.bind(this)
+    this.returnToUser = this.returnToUser.bind(this)
   }
 
   componentDidMount () {
@@ -72,6 +73,8 @@ export default class HomeMap extends Component {
 
   onRegionChange = Helper.onRegionChange
 
+  returnToUser = Helper.returnToUser
+
   render () {
     return (
       <View style={styles.homeContainer}>
@@ -87,7 +90,7 @@ export default class HomeMap extends Component {
 
         <ProfileView currentUser={this.state.currentUser} logOut={this.props.logOut}/>
 
-        <ReturnToUser backToUser={this.setUserLocation} />
+        <ReturnToUser backToUser={this.returnToUser} />
         
         <View style={styles.homeMapContainer}>
           <MapView
