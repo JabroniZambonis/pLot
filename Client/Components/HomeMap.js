@@ -10,6 +10,7 @@ import LocationMarker from './LocationMarker'
 import LocationMarkerPaid from './LocationMarkerPaid'
 import LocationMarkerCallout from './LocationMarkerCallout'
 import LocationMarkerPaidCallout from './LocationMarkerPaidCallout'
+import ReturnToUser from './ReturnToUser'
 
 export default class HomeMap extends Component {
   constructor(props) {
@@ -85,6 +86,8 @@ export default class HomeMap extends Component {
         </View>
 
         <ProfileView currentUser={this.state.currentUser} logOut={this.props.logOut}/>
+
+        <ReturnToUser backToUser={this.setUserLocation} />
         
         <View style={styles.homeMapContainer}>
           <MapView
