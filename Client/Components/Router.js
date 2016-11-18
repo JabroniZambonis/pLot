@@ -6,6 +6,7 @@ import HomeMap from './HomeMap'
 import ParkingDetails from './ParkingDetails'
 import ReviewsList from './ReviewsList'
 import CreateReview from './CreateReview'
+import NavButtonBack from './NavButtonBack'
 import NavButton from './NavButton'
 import Navbar from './Navbar'
 
@@ -30,7 +31,7 @@ export default class Router extends Component {
             <View style={{flex: 1}}>
               <Navbar
                 leftButton={
-                  <NavButton text="map" onPress={() => navigator.pop()}/>
+                  <NavButtonBack text="map" onPress={() => navigator.pop()}/>
                 }
               />
               <ParkingDetails navigator={navigator} {...route}/>
