@@ -23,6 +23,7 @@ export default class HomeMap extends Component {
         latitudeDelta: 0.1,
         longitudeDelta: 0.1
       },
+      userLocation: {},
       currentTime: '',
       nearbyLocations: [],
       nearbyPaidLocations: [],
@@ -98,6 +99,7 @@ export default class HomeMap extends Component {
             region={this.state.currentLocation}
             onRegionChange={this.onRegionChange}
             showsUserLocation={true}
+            ref="map"
           >
             {this.state.nearbyLocations.map((marker, key) => (
               <MapView.Marker

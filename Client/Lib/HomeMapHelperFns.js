@@ -189,14 +189,20 @@ exports.onRegionChange = function(currentLocation) {
 }
 
 exports.returnToUser = function () {
-  let currentLocation = {
-        latitude: 30.264,
-        longitude: -97.742,
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      let userLocation = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
         latitudeDelta: 0.01,
         longitudeDelta: 0.01
-      }
+    }
   this.setState({
-    currentLocation: currentLocation
+    userLocation: userLocation
   })
-  this.getPinsForCoords(currentLocation.longitude, currentLocation.latitude)
+  console.log('User state', this.state.userLocation)
+  this.refs.map.animateToCoordinate(this.state.userLocation, 3000)
+  // this.getPinsForCoords(userLocation.longitude, userLocation.latitude)
+  })
+  console.log('GOT HERE 2')
 }
