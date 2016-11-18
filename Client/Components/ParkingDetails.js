@@ -101,8 +101,8 @@ export default class ParkingDetails extends Component {
           style={addButtonStyle}
           onPressIn={() => buttonPress = true} 
           onPressOut={() => buttonPress = false}
-        >
-          <Text>Show Reviews</Text>
+          textStyle={styles.listViewToggleText} 
+        >Show Reviews
         </Button>
       </View>
     )
