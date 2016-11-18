@@ -115,6 +115,14 @@ exports.getPinsForCoords = function(long, lat) {
   fetch(`http://localhost:3000/locations/bycoords?long=${long}&lat=${lat}`)
     .then(response => response.json())
     .then(locations => {
+      console.log('~~~~~~',locations)
+      if (locations.length === 0) {
+          Alert.alert(
+            'Sorry',
+            'No parking spots found near that address',
+            {text: 'OK', onPress: () => console.log('OK Pressed')}
+          )
+        }
       this.setState({ nearbyLocations: locations})
     })
     .catch(console.log)

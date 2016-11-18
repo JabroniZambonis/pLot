@@ -2,7 +2,7 @@ import styles  from '../Style/style.js'
 import Helper from '../Lib/HomeMapHelperFns.js'
 import React, { Component } from 'react'
 import MapView from 'react-native-maps'
-import { View, StyleSheet, TextInput, Alert, Image, Text } from 'react-native'
+import { View, StyleSheet, TextInput, Alert, Image, Text, ActivityIndicator } from 'react-native'
 import CreateLocation from './CreateLocation'
 import ProfileView from './ProfileView'
 import LocationListView from './LocationListView'
@@ -12,6 +12,8 @@ import LocationMarkerCallout from './LocationMarkerCallout'
 import LocationMarkerPaidCallout from './LocationMarkerPaidCallout'
 import ReturnToUser from './ReturnToUser'
 import RedoSearchButton from './RedoSearchButton'
+import Button from 'apsl-react-native-button'
+
 
 export default class HomeMap extends Component {
   constructor(props) {
@@ -29,8 +31,7 @@ export default class HomeMap extends Component {
       nearbyLocations: [],
       nearbyPaidLocations: [],
       searchText: 'Search for spots...',
-      lastPosition: {},
-      showRedoSearchButton: false
+      lastPosition: {}
     }
     this.addLocation = this.addLocation.bind(this)
     this.cancelLocationAdd = this.cancelLocationAdd.bind(this)
@@ -160,9 +161,14 @@ export default class HomeMap extends Component {
           navigator={this.props.navigator}
         />
 
-        <RedoSearchButton 
-          getPinsForCoords={this.getPinsForCoords}
-        />
+        <Button
+        
+          onPress={() => (
+            this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude)
+          )}
+        >
+          <Text>Redo Search</Text>
+        </Button>
 
         <CreateLocation
           userToken={this.props.userToken}
