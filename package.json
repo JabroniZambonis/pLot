@@ -32,15 +32,15 @@
     "node-less-endpoint": "^0.2.0",
     "nodemon": "^1.11.0",
     "page": "^1.7.1",
-    "react": "^15.4.0",
-    "react-dom": "^15.3.2",
+    "react": "^15.3.2",
     "react-native": "0.36.1",
     "react-native-css": "^1.2.44",
     "react-native-fbsdk": "^0.4.0",
     "react-native-image-slider": "^1.1.5",
     "react-native-maps": "^0.11.0",
     "request-promise": "^4.1.1",
-    "webpack": "^1.13.3"
+    "webpack": "^1.13.3",
+    "whatwg-fetch": "^1.0.0"
   },
   "jest": {
     "preset": "jest-react-native"
