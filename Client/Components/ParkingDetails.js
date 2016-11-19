@@ -10,6 +10,7 @@ import MapView from 'react-native-maps'
 import styles  from '../Style/style.js'
 import Button from 'apsl-react-native-button'
 import Icon from 'react-native-vector-icons/Entypo'
+import serverURL from '../Lib/url'
 
 export default class ParkingDetails extends Component {
   constructor(props) {
@@ -39,7 +40,7 @@ export default class ParkingDetails extends Component {
 
   //Will need this later for fetching and loading images of parking spaces and reviews from the database
   componentDidMount() {
-    fetch(`http://localhost:3000/locations/${this.props.id}/reviews`)
+    fetch(`${serverURL}/locations/${this.props.id}/reviews`)
     .then(response => response.json())
     .then(reviews => {
       if(reviews.length > 0) {
