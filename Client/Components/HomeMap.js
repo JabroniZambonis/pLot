@@ -131,6 +131,7 @@ export default class HomeMap extends Component {
                     {...marker}
                     navigator={this.props.navigator}
                     currentUser={this.state.currentUser}
+                    userToken={this.props.userToken}
                   />
                 </MapView.Callout>
               </MapView.Marker>

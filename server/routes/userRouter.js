@@ -31,6 +31,7 @@ router.route('/:userId')
 
 router.route('/:userId/saved')
   .get(users.getSavedPins)
+  .put(users.addSavedPins)
   .post(users.createPin) //add new pin
   .delete(users.deletePin) //delete pin
 
