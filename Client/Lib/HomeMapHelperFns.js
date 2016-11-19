@@ -115,6 +115,14 @@ exports.getPinsForCoords = function(long, lat) {
   fetch(`http://localhost:3000/locations/bycoords?long=${long}&lat=${lat}`)
     .then(response => response.json())
     .then(locations => {
+      console.log('~~~~~~',locations)
+      if (locations.length === 0) {
+          Alert.alert(
+            'Sorry',
+            'No parking spots found near that address',
+            {text: 'OK', onPress: () => console.log('OK Pressed')}
+          )
+        }
       this.setState({ nearbyLocations: locations})
     })
     .catch(console.log)
@@ -143,16 +151,6 @@ exports.getPaidPinsForCoords = function(lat, long) {
     })
     .catch((err) => {
       console.log("ERROR getPaidPinsForCoords in HomeMapHelperFns.js: ", err)
-    })
-}
-
-
-exports.getAddressByCoords = function(lat, long) {
-  fetch(`http://localhost:3000/locations/googlebycoords?lat=${lat}&long=${long}`)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log('Got data: ', data)
-      this.setState({address: data})
     })
 }
 
@@ -203,5 +201,14 @@ exports.returnToUser = function () {
   this.refs.map.animateToCoordinate(this.state.userLocation, 500)
   this.getPinsForCoords(userLocation.longitude, userLocation.latitude)
   this.getPaidPinsForCoords(userLocation.latitude, userLocation.longitude)
+  })
+}
+
+//creates profile view 
+exports.createProfileNav = function() {
+  this.props.navigator.push({
+    name: 'ProfileView',
+    logOut: this.props.logOut,
+    navigator: this.props.navigator
   })
 }

@@ -281,10 +281,41 @@ listViewCloseContainerPress {
   margin-top: 15;
 }
 
-listViewCloseText {
-  font-size: 20;
+
+reviewsButton {
+  justify-content: center;
+  align-items: center;
+  width: 150;
+  height: 40;
+  border-radius: 35;
+  border-color: #64AFCB;
+  border-width: 3;
+  background-color: #efefef;
+  margin-top: 15;
+}
+
+reviewsButtonPress {
+  justify-content: center;
+  align-items: center;
+  width: 150;
+  height: 40;
+  border-radius: 35;
+  border-color: #64AFCB;
+  border-width: 3;
+  background-color: #ffa500;
+  margin-top: 15;
+}
+
+reviewButtonText {
+  font-size: 15;
   font-weight: bold;
   color: #64AFCB;
+}
+
+reviewButtonView {
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
 }
 /*LocationListView*/
 
