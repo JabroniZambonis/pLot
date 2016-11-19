@@ -109,6 +109,8 @@ exports.setUserLocation = function() {
 
       //get paid pins near users location
       this.getPaidPinsForCoords(currentLocation.latitude, currentLocation.longitude)
+
+      this.getAddressByCoords(currentLocation.latitude, currentLocation.longitude)
     })
 }
 
@@ -205,13 +207,14 @@ exports.returnToUser = function () {
   })
 }
 
-<<<<<<< a4846c388f4084f483862e372ef2027e3ed2bf91
 //creates profile view 
 exports.createProfileNav = function() {
   this.props.navigator.push({
     name: 'ProfileView',
     logOut: this.props.logOut,
-=======
+  })
+}
+
 exports.createLocationNav = function() {
   this.props.navigator.push({
     name: 'CreateLocation',
@@ -219,7 +222,7 @@ exports.createLocationNav = function() {
     addLocation: this.addLocation,
     cancelLocationAdd: this.cancelLocationAdd,
     currentLocation: this.state.currentLocation,
->>>>>>> Makes progress on CreateLocatio component
+    address: this.state.address,
     navigator: this.props.navigator
   })
 }

@@ -41,7 +41,16 @@ export default class Router extends Component {
           return <Camera navigator={navigator} {...route} />
           break
         case 'CreateLocation':
-          return <CreateLocation navigator={navigator} {...route} />
+          return (
+            <View style={{flex: 1}}>
+              <Navbar
+                leftButton={
+                  <NavButtonBack text="map" onPress={() => navigator.pop()}/>
+                }
+              />
+              <CreateLocation navigator={navigator} {...route} />
+            </View>
+          )
           break
         case 'ParkingDetails':
           return (

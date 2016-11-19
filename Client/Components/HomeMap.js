@@ -30,8 +30,10 @@ export default class HomeMap extends Component {
       nearbyLocations: [],
       nearbyPaidLocations: [],
       searchText: 'Search for spots...',
-      lastPosition: {}
+      lastPosition: {},
+      address: ''
     }
+    
     this.addLocation = this.addLocation.bind(this)
     this.cancelLocationAdd = this.cancelLocationAdd.bind(this)
     this.onRegionChange = this.onRegionChange.bind(this)
