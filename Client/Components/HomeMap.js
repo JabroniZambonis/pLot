@@ -176,7 +176,7 @@ export default class HomeMap extends Component {
 
         <Button
           textStyle={styles.listViewToggleText} 
-          style={btnStyle.redoSearchContainer}
+          style={styles.redoSearchButton}
           onPress={() => (
             this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude)
           )}
@@ -188,9 +188,9 @@ export default class HomeMap extends Component {
           onPress={() => {
             this.createLocationNav()
             this.addLocation()
-            this.getAddressByCoords(this.props.currentLocation.latitude, this.props.currentLocation.longitude)
+            this.getAddressByCoords(this.state.currentLocation.latitude, this.state.currentLocation.longitude)
           }}
-          style={addButtonStyle}
+          style={styles.createSpotButton}
           textStyle={styles.addLocationButtonText}
         >
           +
@@ -200,21 +200,3 @@ export default class HomeMap extends Component {
     )
   }
 }
-
-const btnStyle = StyleSheet.create({
-  redoSearchContainer: {
-    width: 100,
-    height: 70,
-    borderRadius: 35,
-    borderColor: '#64AFCB',
-    borderStyle: 'solid',
-    borderWidth: 3,
-    position: 'absolute',
-    zIndex: 4,
-    backgroundColor: '#efefef',
-    justifyContent: 'center',
-    alignItems: 'center',
-    bottom: 40,
-    right: 135,
-  },
-})
