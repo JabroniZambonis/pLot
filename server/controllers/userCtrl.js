@@ -102,7 +102,6 @@ exports.getCreatedPins = function (req, res) {
 
 exports.addSavedPins = function (req, res) {
   const locationId = req.body.location
-  console.log('LOC ID', locationId)
   const userId = req.params.userId
   //Check the users savedPins array to make sure location id does not exist already
   User.findOneAndUpdate(
