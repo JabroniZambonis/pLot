@@ -9,7 +9,7 @@ export default ReviewList = (props) => {
       <ScrollView
         directionalLockEnabled={true}
       >
-        {!props.reviews ?
+        {props.reviews.length === 0 ?
 
           <Text>No Reviews Yet</Text> :
 
