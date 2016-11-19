@@ -40,6 +40,7 @@
     "react-native-fbsdk": "^0.4.0",
     "react-native-image-slider": "^1.1.5",
     "react-native-maps": "^0.11.0",
+    "react-native-vector-icons": "^3.0.0",
     "request-promise": "^4.1.1",
     "webpack": "^1.13.3",
     "whatwg-fetch": "^1.0.0"
