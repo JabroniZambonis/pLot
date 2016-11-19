@@ -189,8 +189,6 @@ export default class HomeMap extends Component {
         <Button
           onPress={() => {
             this.createLocationNav()
-            // this.addLocation()
-            // this.getAddressByCoords(this.state.currentLocation.latitude, this.state.currentLocation.longitude)
           }}
           style={styles.addLocationButton}
           textStyle={styles.addLocationButtonText}
