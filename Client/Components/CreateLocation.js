@@ -44,18 +44,22 @@ export default class CreateLocation extends Component {
     console.log("CreateLocation.js this.props: ", this.props)
     return (
       <View style={styles.createForm}>
-        <Text style={styles.createFormHeader}>Tell us about this spot</Text>
+        
+          <Text style={styles.createFormHeader}>Tell us about this spot</Text>
+        
 
         <Text>{this.props.address}</Text>
 
-        <TextInput
-          style={styles.searchBar}
-          maxLength={limit}
-          onChange={(event) => this.setState({description: event.nativeEvent.text})}
-          placeholder={'Your thoughts go here...'}
-        />
+        <View style={styles.createBarContainer}>
+          <TextInput
+            style={styles.createSpotBar}
+            maxLength={limit}
+            onChange={(event) => this.setState({description: event.nativeEvent.text})}
+            placeholder={'Your thoughts go here...'}
+          />
+        </View>
 
-        <TouchableHighlight>
+        <TouchableHighlight style={styles.createSubmitBtnContainer}>
           <Text onPress={this.submitLocation}>Submit</Text>
         </TouchableHighlight>
       </View>
