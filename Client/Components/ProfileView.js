@@ -14,7 +14,7 @@ export default class ProfileView extends Component {
 
   render () {
     return (
-      <View>
+      <View style={{flex:1,backgroundColor:'white',}}>
         <TouchableHighlight style={styles.profileViewButton} onPress={this.finishedLogout.bind(this)}>
           <Text style={styles.profileViewText}>Log Out</Text>
         </TouchableHighlight>
