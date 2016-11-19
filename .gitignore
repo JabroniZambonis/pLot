@@ -48,4 +48,4 @@ android/
 index.android.js
 
 # temp folder for images
-uploads/
+uploads/*
