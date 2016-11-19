@@ -113,7 +113,8 @@ exports.addSavedPins = function (req, res) {
     Location.findById(locationId)
         .then(location => {
           return res.status(201).json(location)
-          })
+        })
+        .catch(err => res.status(500).json(err))
   })
   .catch(err => res.status(500).json(err))
 }

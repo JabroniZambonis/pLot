@@ -2,7 +2,7 @@ import styles  from '../Style/style.js'
 import React from 'react'
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 
-export default LocationMarkerCallout = ( { description, navigator, key, coordinate, title, id, reviews, currentUser, rating }) => {
+export default LocationMarkerCallout = ( { description, navigator, key, coordinate, title, id, reviews, currentUser, rating, userToken }) => {
 
   const handleDetailsButtonPress = () => {
     navigator.push({
@@ -17,21 +17,23 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
     })
   }
 
-  console.log('Current User', currentUser)
-
-  const handleFavoriteButtonPress = function (id) {
+  const handleFavoriteButtonPress = function () {
     fetch(`http://localhost:3000/users/${currentUser._id}/saved`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
+        'Authorization': userToken
       },
       body: JSON.stringify({
         location: id
       })
     })
+    .then(response => response.json())
     .then(console.log)
-    .catch(err)
+    .catch(err => {
+      console.log(err)
+    })
   }
 
 
@@ -44,6 +46,9 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
        style={{width: 40, height: 20}}
        source={require('../Public/Arrow-Icon.png')}
        />
+     </TouchableOpacity>
+     <TouchableOpacity onPress={ () => handleFavoriteButtonPress()}>
+       <Text>Add to Favorites</Text>
      </TouchableOpacity>
    </View>
   )
