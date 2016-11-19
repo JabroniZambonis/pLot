@@ -2,7 +2,7 @@ import styles  from '../Style/style.js'
 import React from 'react'
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 
-export default LocationMarkerCallout = ( { description, navigator, key, coordinate, title, id, reviews, currentUser }) => {
+export default LocationMarkerCallout = ( { description, navigator, key, coordinate, title, id, reviews, currentUser, rating }) => {
 
   const handleButtonPress = () => {
     navigator.push({
@@ -12,6 +12,7 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
       coordinate,
       title,
       reviews,
+      rating,
       currentUser
     })
   }
@@ -19,6 +20,7 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
   return (
    <View style={styles.calloutContainer}>
      <Text style={styles.calloutDescription}>{title}</Text>
+     <Text style={styles.calloutDescription}>{rating}</Text>
      <TouchableOpacity onPress={ () => handleButtonPress() } style={styles.parkingDetailsButton}>
        <Image
        style={{width: 40, height: 20}}

@@ -115,7 +115,6 @@ exports.getPinsForCoords = function(long, lat) {
   fetch(`http://localhost:3000/locations/bycoords?long=${long}&lat=${lat}`)
     .then(response => response.json())
     .then(locations => {
-      console.log('~~~~~~',locations)
       if (locations.length === 0) {
           Alert.alert(
             'Sorry',

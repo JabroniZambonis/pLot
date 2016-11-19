@@ -92,6 +92,7 @@ export default class ParkingDetails extends Component {
           <Text style={styles.parkingDescriptionText}>
             {this.props.description}
           </Text>
+          <Text>Rating: {this.props.rating}</Text>
         </View>
         <View style={styles.parkingDescriptionImagesContainer}>
           <ImageSlider images={this.state.parkingSpacePics} />
