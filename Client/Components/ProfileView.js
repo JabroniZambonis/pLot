@@ -1,27 +1,13 @@
 const styles = require('../Style/style.js')
 
 import React, { Component } from 'react'
-import { Image, TouchableHighlight, Text, StyleSheet, View, Modal, TextInput } from 'react-native'
+import { Image, TouchableHighlight, Text,View} from 'react-native'
 
 export default class ProfileView extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      pressStatus: false
-    }
-
-    this.onDisplayUnderlay = this.onDisplayUnderlay.bind(this)
   }
-
-  onDisplayUnderlay(){
-    console.log("onDisplayUnderlay got hit")
-    if (this.state.pressStatus === true) {
-      this.setState({ pressStatus: false })
-    } else {
-      this.setState({ pressStatus: true })
-    }
-  }
-
+  
   finishedLogout (error, result) {
     this.props.logOut()
   }
@@ -29,20 +15,9 @@ export default class ProfileView extends Component {
   render () {
     return (
       <View>
-        <TouchableHighlight
-          onPress={this.onDisplayUnderlay}
-        >
-          <Image
-            style={styles.profileViewImageButton}
-            source={{uri: this.props.currentUser.photo}}
-          />
+        <TouchableHighlight style={styles.profileViewButton} onPress={this.finishedLogout.bind(this)}>
+          <Text style={styles.profileViewText}>Log Out</Text>
         </TouchableHighlight>
-
-        <View style={ this.state.pressStatus ? styles.profileViewView1 : styles.profileViewView2 } >
-          <TouchableHighlight style={styles.profileViewButton} onPress={this.finishedLogout.bind(this)}>
-            <Text style={styles.profileViewText}>Log Out</Text>
-          </TouchableHighlight>
-        </View>
       </View>
     )
   }

@@ -2,7 +2,7 @@ import styles  from '../Style/style.js'
 import Helper from '../Lib/HomeMapHelperFns.js'
 import React, { Component } from 'react'
 import MapView from 'react-native-maps'
-import { View, StyleSheet, TextInput, Alert, Image, Text, ActivityIndicator } from 'react-native'
+import { View, StyleSheet, TextInput, Alert, Image, Text, ActivityIndicator, TouchableHighlight } from 'react-native'
 import CreateLocation from './CreateLocation'
 import ProfileView from './ProfileView'
 import LocationListView from './LocationListView'
@@ -79,6 +79,8 @@ export default class HomeMap extends Component {
 
   returnToUser = Helper.returnToUser
 
+  createProfileNav = Helper.createProfileNav
+
   render () {
     return (
       <View style={styles.homeContainer}>
@@ -92,7 +94,16 @@ export default class HomeMap extends Component {
           />
         </View>
 
-        <ProfileView currentUser={this.state.currentUser} logOut={this.props.logOut}/>
+        <TouchableHighlight
+          onPress={() => {
+            this.createProfileNav()
+          }}
+        >
+          <Image
+            style={styles.profileViewImageButton}
+            source={{uri: this.state.currentUser.photo}}
+          />
+        </TouchableHighlight>
 
         <ReturnToUser backToUser={this.returnToUser} />
         
