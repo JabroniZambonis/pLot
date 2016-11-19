@@ -17,6 +17,8 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
     })
   }
 
+  console.log('Current User', currentUser)
+
   const handleFavoriteButtonPress = function (id) {
     fetch(`http://localhost:3000/users/${currentUser._id}/saved`), {
       method: 'PUT',
@@ -27,7 +29,7 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
       body: JSON.stringify({
         location: id
       })
-    })
+    }
   }
 
 
