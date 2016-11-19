@@ -69,6 +69,21 @@ export default class ParkingDetails extends Component {
   render () {
 
     let reviewButtonStyle = this.state.buttonPress ? styles.reviewsButtonPress : styles.reviewsButton
+    
+    let stars = []
+      
+    for ( let i = 1; i < this.props.rating; i++) {
+      stars.push(1)
+    }
+
+    if (this.props.rating % 1 > 0.1) {
+      let fractn = (this.props.rating % 1).toFixed(2) * 1
+      stars.push(fractn)
+    }
+
+    const starWidth = 25
+
+    console.log(stars)
 
     return (
       <View style={styles.parkingDetailsContainer}>        
@@ -98,8 +113,12 @@ export default class ParkingDetails extends Component {
             {this.props.description}
           </Text>
           <Text>Rating: {this.props.rating}</Text>
-          <View style={{width: 20}}>
-            <Icon name="star" size={30} color="#900" />
+          <View style={{flexDirection: 'row', width: starWidth * stars.length}}>
+            {stars.map((star, key) => (
+              <View style={{width: starWidth * star, flex: 1}} key={key}>
+                <Icon name="star" size={starWidth} color="#ffa500" />
+              </View>
+            ))}
           </View>
         </View>
         <View style={styles.parkingDescriptionImagesContainer}>
