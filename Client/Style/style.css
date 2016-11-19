@@ -103,22 +103,7 @@ redoSearchButton {
   right: 135;
 }
 
-createSpotButton {
-  text-align: center;
-  color: #64AFCB;
-  font-weight: bold;
-  background-color: #efefef;
-  line-height: 50;
-  height: 50;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 5px;
-  border-color: #64AFCB;
-}
-/*HomeMap.js*/
-
-/*CreateLocation.js*/
-addLocationButtonContainer {
+addLocationButton {
   width: 70;
   height: 70;
   border-radius: 35;
@@ -156,7 +141,9 @@ addLocationButtonText {
   color: #64AFCB;
   line-height: 47;
 }
+/*HomeMap.js*/
 
+/*CreateLocation.js*/
 createForm {
   background-color: #d8d8d8;
   height: 150;

@@ -175,8 +175,8 @@ export default class HomeMap extends Component {
         />
 
         <Button
-          textStyle={styles.listViewToggleText} 
           style={styles.redoSearchButton}
+          textStyle={styles.listViewToggleText} 
           onPress={() => (
             this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude)
           )}
@@ -187,10 +187,10 @@ export default class HomeMap extends Component {
         <Button
           onPress={() => {
             this.createLocationNav()
-            this.addLocation()
-            this.getAddressByCoords(this.state.currentLocation.latitude, this.state.currentLocation.longitude)
+            // this.addLocation()
+            // this.getAddressByCoords(this.state.currentLocation.latitude, this.state.currentLocation.longitude)
           }}
-          style={styles.createSpotButton}
+          style={styles.addLocationButton}
           textStyle={styles.addLocationButtonText}
         >
           +
