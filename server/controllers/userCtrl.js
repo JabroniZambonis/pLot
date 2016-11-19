@@ -102,24 +102,19 @@ exports.getCreatedPins = function (req, res) {
 
 exports.addSavedPins = function (req, res) {
   const locationId = req.body.location
-  User.findById(req.params.userId)
-    //Check the users savedPins array to make sure location id does not exist already
-    .then(user => {
-      console.log('user pins: ', user.savedPins)
-      console.log('location id: ', locationId)
-      if(user.savedPins.indexOf(locationId !== -1)) {
-        user.savedPins.push(locationId)
-        user.save()
-        .then( () => {
-          Location.findById(locationId)
-          .then(location => {
+  console.log('LOC ID', locationId)
+  const userId = req.params.userId
+  //Check the users savedPins array to make sure location id does not exist already
+  User.findOneAndUpdate(
+    { _id: userId },
+    { $addToSet: { savedPins: locationId } },
+    { new: true }
+  )
+  .then( (user) => {
+    Location.findById(locationId)
+        .then(location => {
           return res.status(201).json(location)
           })
-        })
-        .catch(err => res.status(500).json(err))  
-      } else {
-          return res.status(200).json(location)
-      }
-    })
-    .catch(err => res.status(500).json(err))
+  })
+  .catch(err => res.status(500).json(err))
 }
