@@ -31,7 +31,8 @@ export default class ParkingDetails extends Component {
         require('../Public/anotherParkingImage.jpg'),
         require('../Public/bikeParking.jpg')
       ],
-      reviews: []
+      reviews: [],
+      buttonPress: false
     }
   }
 
@@ -60,10 +61,13 @@ export default class ParkingDetails extends Component {
     })
   }
 
+  setButtonStyle (style) {
+    this.setState({buttonPress: style})
+  }
 
   render () {
-    let buttonPress = false
-    let addButtonStyle = buttonPress ? styles.listViewCloseContainerPress : styles.listViewCloseContainer
+
+    let reviewButtonStyle = this.state.buttonPress ? styles.reviewsButtonPress : styles.reviewsButton
 
     return (
       <View style={styles.parkingDetailsContainer}>        
@@ -96,14 +100,16 @@ export default class ParkingDetails extends Component {
         <View style={styles.parkingDescriptionImagesContainer}>
           <ImageSlider images={this.state.parkingSpacePics} />
         </View>
-        <Button
-          onPress={ () => this.showReviews() }
-          style={addButtonStyle}
-          onPressIn={() => buttonPress = true} 
-          onPressOut={() => buttonPress = false}
-        >
-          <Text>Show Reviews</Text>
-        </Button>
+        <View style={styles.reviewButtonView}>
+          <Button
+            onPress={() => this.showReviews()}
+            style={reviewButtonStyle}
+            onPressIn={() => this.setButtonStyle(!this.state.buttonPress)} 
+            onPressOut={() => this.setButtonStyle(!this.state.buttonPress)}
+            textStyle={styles.reviewButtonText} 
+          >Show Reviews
+          </Button>
+        </View>
       </View>
     )
   }

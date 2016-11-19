@@ -77,7 +77,7 @@ export default class LocationListView extends Component {
             </ScrollView>
             <View>
               <Button style={mapButtonStyle}
-                textStyle={styles.listViewCloseText} 
+                textStyle={styles.listViewToggleText} 
                 onPress={() => this.setModalVisible(!this.state.modalVisible)} 
                 onPressIn={() => this.setButtonStyle(!this.state.buttonPress)} 
                 onPressOut={() => this.setButtonStyle(!this.state.buttonPress)}>
