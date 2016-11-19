@@ -203,3 +203,12 @@ exports.returnToUser = function () {
   this.getPaidPinsForCoords(userLocation.latitude, userLocation.longitude)
   })
 }
+
+//creates profile view 
+exports.createProfileNav = function() {
+  this.props.navigator.push({
+    name: 'ProfileView',
+    logOut: this.props.logOut,
+    navigator: this.props.navigator
+  })
+}
