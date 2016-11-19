@@ -41,7 +41,11 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
    <View style={styles.calloutContainer}>
      <Text style={styles.calloutDescription}>{title}</Text>
      <Text style={styles.calloutDescription}>{rating}</Text>
+<<<<<<< HEAD
      <TouchableOpacity onPress={ () => handleDetailsButtonPress() } style={styles.parkingDetailsButton}>
+=======
+     <TouchableOpacity onPress={ () => handleButtonPress() } style={styles.parkingDetailsButton}>
+>>>>>>> adds rating to the view
        <Image
        style={{width: 40, height: 20}}
        source={require('../Public/Arrow-Icon.png')}
