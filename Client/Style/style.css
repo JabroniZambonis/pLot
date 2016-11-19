@@ -158,6 +158,11 @@ createFormClose {
   text-align: center;
 }
 
+createFormAddress {
+  text-align: center;
+  font-size: 12;
+}
+
 createBarContainer {
   padding: 0 5 0 5;
   margin: 0 15 0 15;
@@ -181,7 +186,7 @@ createSpotBar {
 
 createSubmitBtnContainer {
   padding: 0 5 0 5;
-  margin: 0 15 0 15;
+  left: 30;
   align-items: stretch;
   flex-direction: row;
   flex: 1;
@@ -190,6 +195,19 @@ createSubmitBtnContainer {
   border-width: 2;
   border-radius: 15;
   border-color: #64AFCB;
+  top: 85;
+  background-color: white;
+}
+
+createPicBtnContainer {
+  padding: 0 5 0 5;
+  right: 30;
+  height: 30;
+  align-items: stretch;
+  flex-direction: row;
+  flex: 1;
+  position: absolute;
+  z-index: 2;
   top: 85;
   background-color: white;
 }

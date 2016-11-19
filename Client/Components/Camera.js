@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { Camera } from 'react-native-camera'
 import { AppRegistry, StyleSheet, Text, View, TextInput, TouchableHighlight, } from 'react-native'
 
-export default class Camera extends Component {
+export default class Cam extends Component {
   constructor(props) {
     super(props)
     this.state = {

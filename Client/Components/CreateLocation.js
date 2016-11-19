@@ -1,7 +1,7 @@
 const styles = require('../Style/style.js')
 
 import React, { Component } from 'react'
-import { TouchableHighlight, Text, StyleSheet, View, Modal, TextInput } from 'react-native'
+import { Image, TouchableHighlight, TouchableOpacity, Text, StyleSheet, View, Modal, TextInput } from 'react-native'
 import Button from 'apsl-react-native-button'
 import serverURL from '../Lib/url'
 
@@ -45,10 +45,10 @@ export default class CreateLocation extends Component {
     return (
       <View style={styles.createForm}>
         
-          <Text style={styles.createFormHeader}>Tell us about this spot</Text>
+        <Text style={styles.createFormHeader}>Tell us about this spot</Text>
         
 
-        <Text>{this.props.address}</Text>
+        <Text style={styles.createFormAddress}>{this.props.address}</Text>
 
         <View style={styles.createBarContainer}>
           <TextInput
@@ -62,6 +62,13 @@ export default class CreateLocation extends Component {
         <TouchableHighlight style={styles.createSubmitBtnContainer}>
           <Text onPress={this.submitLocation}>Submit</Text>
         </TouchableHighlight>
+
+        <TouchableOpacity style={styles.createPicBtnContainer}>
+          <Image
+          style={{width: 40, height: 30}}
+          source={require('../Public/camera-icon.png')}
+          />
+        </TouchableOpacity>
       </View>
     )
   }
