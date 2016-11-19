@@ -84,8 +84,6 @@ export default class ParkingDetails extends Component {
 
     const starWidth = 25
 
-    console.log(stars)
-
     return (
       <View style={styles.parkingDetailsContainer}>        
         <MapView
