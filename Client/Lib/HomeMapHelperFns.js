@@ -205,11 +205,21 @@ exports.returnToUser = function () {
   })
 }
 
+<<<<<<< a4846c388f4084f483862e372ef2027e3ed2bf91
 //creates profile view 
 exports.createProfileNav = function() {
   this.props.navigator.push({
     name: 'ProfileView',
     logOut: this.props.logOut,
+=======
+exports.createLocationNav = function() {
+  this.props.navigator.push({
+    name: 'CreateLocation',
+    userToken: this.props.userToken,
+    addLocation: this.addLocation,
+    cancelLocationAdd: this.cancelLocationAdd,
+    currentLocation: this.state.currentLocation,
+>>>>>>> Makes progress on CreateLocatio component
     navigator: this.props.navigator
   })
 }

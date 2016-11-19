@@ -9,24 +9,19 @@ export default class CreateLocation extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      modalVisible: false,
       description: '',
       address: 'fetching address...',
       buttonPress: false
     }
-    this.setModalVisible = this.setModalVisible.bind(this)
-    this.submitLocation = this.submitLocation.bind(this)
-    this.getAddressByCoords = this.getAddressByCoords.bind(this)
+
     this.setButtonStyle = this.setButtonStyle.bind(this)
+    this.getAddressByCoords = this.getAddressByCoords.bind(this)
+    this.submitLocation = this.submitLocation.bind(this)
   }
 
-  setModalVisible (visible) {
-    this.setState({modalVisible: visible})
-  }
-
-  setButtonStyle (style) {
-    this.setState({buttonPress: style})
-  }
+  // setButtonStyle (style) {
+  //   this.setState({buttonPress: style})
+  // }
 
   getAddressByCoords (lat, long) {
     fetch(`${serverURL}/locations/googlebycoords?lat=${lat}&long=${long}`)

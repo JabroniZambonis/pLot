@@ -79,6 +79,8 @@ export default class HomeMap extends Component {
 
   returnToUser = Helper.returnToUser
 
+  createLocationNav = Helper.createLocationNav
+
   createProfileNav = Helper.createProfileNav
 
   render () {
@@ -171,7 +173,6 @@ export default class HomeMap extends Component {
           nearbyLocations={this.state.nearbyLocations}
           navigator={this.props.navigator}
         />
-
           <Button
             textStyle={styles.listViewToggleText} 
             style={btnStyle.redoSearchContainer}
