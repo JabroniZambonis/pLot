@@ -19,10 +19,6 @@ export default class CreateLocation extends Component {
     this.submitLocation = this.submitLocation.bind(this)
   }
 
-  // setButtonStyle (style) {
-  //   this.setState({buttonPress: style})
-  // }
-
   getAddressByCoords (lat, long) {
     fetch(`${serverURL}/locations/googlebycoords?lat=${lat}&long=${long}`)
     .then((response) => response.json())
@@ -69,58 +65,39 @@ export default class CreateLocation extends Component {
 
     return (
       <View>
-        <View>
-          <Button
-            onPress={() => {
-              this.props.addLocation();
-              this.setModalVisible(!this.state.modalVisible);
-              this.getAddressByCoords(this.props.currentLocation.latitude, this.props.currentLocation.longitude)
-            }}
-            style={addButtonStyle}
-            textStyle={styles.addLocationButtonText}
-            onPressIn={() => this.setButtonStyle(!this.state.buttonPress)} 
-            onPressOut={() => this.setButtonStyle(!this.state.buttonPress)}
-          >+</Button>
-        </View>
 
-        <Modal
-          animationType={"slide"}
-          transparent={true}
-          visible={this.state.modalVisible}
-        >
-          <View style={{marginTop: 22}}>
-            <View style={styles.createForm}>
+        <View style={{marginTop: 22}}>
+          <View style={styles.createForm}>
 
-              <Text style={styles.createFormHeader}>Tell us about this spot</Text>
+            <Text style={styles.createFormHeader}>Tell us about this spot</Text>
 
-              <Text>{this.state.address}</Text>
+            <Text>{this.state.address}</Text>
 
-              <TextInput
-                style={{height: 30, width: 300, borderColor: '#d7d7d7', borderWidth: 1}}
-                maxLength={limit}
-                onChange={(event) => this.setState({description: event.nativeEvent.text})}
-                placeholder={'Your thoughts go here...'}
-              />
-              <Text style={{color: remainderColor}}>
-                {remainder}
-              </Text>
+            <TextInput
+              style={{height: 30, width: 300, borderColor: '#d7d7d7', borderWidth: 1}}
+              maxLength={limit}
+              onChange={(event) => this.setState({description: event.nativeEvent.text})}
+              placeholder={'Your thoughts go here...'}
+            />
+            <Text style={{color: remainderColor}}>
+              {remainder}
+            </Text>
 
-              <TouchableHighlight>
-                <Text onPress={this.submitLocation}>Submit</Text>
-              </TouchableHighlight>
+            <TouchableHighlight>
+              <Text onPress={this.submitLocation}>Submit</Text>
+            </TouchableHighlight>
 
-              <TouchableHighlight
-                onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
-                  this.props.cancelLocationAdd()
-                }}
-              >
-                <Text style={styles.createFormClose}>close</Text>
-              </TouchableHighlight>
+            <TouchableHighlight
+              onPress={() => {
+                this.setModalVisible(!this.state.modalVisible);
+                this.props.cancelLocationAdd()
+              }}
+            >
+              <Text style={styles.createFormClose}>close</Text>
+            </TouchableHighlight>
 
-            </View>
           </View>
-        </Modal>
+        </View>
       </View>
     )
   }

@@ -173,22 +173,29 @@ export default class HomeMap extends Component {
           nearbyLocations={this.state.nearbyLocations}
           navigator={this.props.navigator}
         />
-          <Button
-            textStyle={styles.listViewToggleText} 
-            style={btnStyle.redoSearchContainer}
-            onPress={() => (
-              this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude)
-            )}
-          >
-            Redo Search
-          </Button>
 
-        <CreateLocation
-          userToken={this.props.userToken}
-          addLocation={this.addLocation}
-          cancelLocationAdd={this.cancelLocationAdd}
-          currentLocation={this.state.currentLocation}
-        />
+        <Button
+          textStyle={styles.listViewToggleText} 
+          style={btnStyle.redoSearchContainer}
+          onPress={() => (
+            this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude)
+          )}
+        >
+          Redo Search
+        </Button>
+
+        <Button
+          onPress={() => {
+            this.createLocationNav()
+            this.addLocation()
+            this.getAddressByCoords(this.props.currentLocation.latitude, this.props.currentLocation.longitude)
+          }}
+          style={addButtonStyle}
+          textStyle={styles.addLocationButtonText}
+        >
+          +
+        </Button>
+
       </View>
     )
   }
