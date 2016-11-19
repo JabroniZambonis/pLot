@@ -180,19 +180,44 @@ exports.photos = function (req, res) {
 }
 
 exports.addPhoto = function (req, res) {
-  const { location } = req.params.locationId
+  // pull out id for location
+  const { locationId } = req.params
+  // create variable for image once it is read
+  let image
+  // configuration for formidable
   const form = new formidable.IncomingForm()
   form.uploadDir = resolve(__dirname, '../', 'uploads')
+  // events emitted by formidable module
   form
     .on('file', function (name, file) {
       // make sure it is an image
       if (file.type === "image/jpeg") {
-        cloudinary.uploader.upload(file.path, console.log)
+        image = file
       }
     })
+    .on('error', function (err) {
+      // error parsing image
+      res.status(500).json(err)
+    })
+    // event fired once req.body is done being parsed
     .on('end', function () {
-      console.log('all done here')
-      res.send('all done all done')
+      // upload image to cloudinary
+      cloudinary.uploader.upload(image.path)
+        .then(saved => {
+          // pull the secure_url out of cloudinary response and save
+          // to the Location
+          Location.findOneAndUpdate(
+            { _id: locationId },
+            { $push: { photos: saved.secure_url } },
+            // return new updated location
+            { new: true }
+          )
+          .then(location => res.status(201).json(location))
+          // error updating location
+          .catch(err => res.status(500).json(err))
+        })
+        // error saving image to cloudinary
+        .catch(err => res.status(500).json(err))
     })
   form.parse(req)
 
