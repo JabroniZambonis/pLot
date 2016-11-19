@@ -11,6 +11,7 @@ import NavButtonBack from './NavButtonBack'
 import NavButton from './NavButton'
 import Navbar from './Navbar'
 import ProfileView from './ProfileView'
+import Camera from'./Camera'
 
 export default class Router extends Component {
   constructor(props) {

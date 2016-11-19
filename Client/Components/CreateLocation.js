@@ -39,6 +39,12 @@ export default class CreateLocation extends Component {
     .catch(err => console.log(err))
   }
 
+  createProfileNav () {
+    this.props.navigator.push({
+      name: 'Camera',
+    })
+  }
+
   render () {
     const limit = 200
     console.log("CreateLocation.js this.props: ", this.props)
@@ -63,7 +69,8 @@ export default class CreateLocation extends Component {
           <Text onPress={this.submitLocation}>Submit</Text>
         </TouchableHighlight>
 
-        <TouchableOpacity style={styles.createPicBtnContainer}>
+        <TouchableOpacity onPress={ () => this.createProfileNav() } 
+          style={styles.createPicBtnContainer}>
           <Image
           style={{width: 40, height: 30}}
           source={require('../Public/camera-icon.png')}
