@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, TextInput, Text, TouchableHighlight, Slider, StyleSheet } from 'react-native'
+import serverURL from '../Lib/url'
 
 export default class CreateReview extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ export default class CreateReview extends Component {
       userId: this.props.currentUser._id,
       locationId: this.props.locationId
     }
-    fetch(`http://localhost:3000/locations/${this.props.locationId}/reviews`, {
+    fetch(`${serverURL}/locations/${this.props.locationId}/reviews`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

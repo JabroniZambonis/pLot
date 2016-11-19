@@ -3,6 +3,7 @@ const styles = require('../Style/style.js')
 import React, { Component } from 'react'
 import { TouchableHighlight, Text, StyleSheet, View, Modal, TextInput } from 'react-native'
 import Button from 'apsl-react-native-button'
+import serverURL from '../Lib/url'
 
 export default class CreateLocation extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ export default class CreateLocation extends Component {
   }
 
   getAddressByCoords (lat, long) {
-    fetch(`http://localhost:3000/locations/googlebycoords?lat=${lat}&long=${long}`)
+    fetch(`${serverURL}/locations/googlebycoords?lat=${lat}&long=${long}`)
     .then((response) => response.json())
     .then((data) => {
       console.log('Got data: ', data)
@@ -45,7 +46,7 @@ export default class CreateLocation extends Component {
     locationObj.description = this.state.description
     locationObj.loc = [this.props.currentLocation.longitude, this.props.currentLocation.latitude]
 
-    fetch('http://localhost:3000/locations', {
+    fetch(`${serverURL}/locations`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

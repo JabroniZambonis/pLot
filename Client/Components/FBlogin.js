@@ -7,7 +7,8 @@ const {
 import React, { Component } from 'react'
 import {
   View  
-} from 'react-native' 
+} from 'react-native'
+import serverURL from '../Lib/url'
       
 export default class FBlogin extends Component {
 
@@ -24,7 +25,7 @@ export default class FBlogin extends Component {
       this.props.reanimator()
       AccessToken.getCurrentAccessToken()
         .then( (data) => {
-          fetch('http://localhost:3000/auth', {
+          fetch(`${serverURL}/auth`, {
             method: 'POST',
             headers:{
                'Accept': 'application/json',
