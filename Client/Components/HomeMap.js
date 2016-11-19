@@ -2,7 +2,7 @@ import styles  from '../Style/style.js'
 import Helper from '../Lib/HomeMapHelperFns.js'
 import React, { Component } from 'react'
 import MapView from 'react-native-maps'
-import { View, StyleSheet, TextInput, Alert, Image } from 'react-native'
+import { View, StyleSheet, TextInput, Alert, Image, Text, ActivityIndicator } from 'react-native'
 import CreateLocation from './CreateLocation'
 import ProfileView from './ProfileView'
 import LocationListView from './LocationListView'
@@ -11,6 +11,8 @@ import LocationMarkerPaid from './LocationMarkerPaid'
 import LocationMarkerCallout from './LocationMarkerCallout'
 import LocationMarkerPaidCallout from './LocationMarkerPaidCallout'
 import ReturnToUser from './ReturnToUser'
+import Button from 'apsl-react-native-button'
+
 
 export default class HomeMap extends Component {
   constructor(props) {
@@ -34,6 +36,7 @@ export default class HomeMap extends Component {
     this.cancelLocationAdd = this.cancelLocationAdd.bind(this)
     this.onRegionChange = this.onRegionChange.bind(this)
     this.returnToUser = this.returnToUser.bind(this)
+    this.getPinsForCoords = this.getPinsForCoords.bind(this)
   }
 
   componentDidMount () {
@@ -157,6 +160,16 @@ export default class HomeMap extends Component {
           navigator={this.props.navigator}
         />
 
+          <Button
+            textStyle={styles.listViewToggleText} 
+            style={btnStyle.redoSearchContainer}
+            onPress={() => (
+              this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude)
+            )}
+          >
+            Redo Search
+          </Button>
+
         <CreateLocation
           userToken={this.props.userToken}
           addLocation={this.addLocation}
@@ -167,3 +180,21 @@ export default class HomeMap extends Component {
     )
   }
 }
+
+const btnStyle = StyleSheet.create({
+  redoSearchContainer: {
+    width: 100,
+    height: 70,
+    borderRadius: 35,
+    borderColor: '#64AFCB',
+    borderStyle: 'solid',
+    borderWidth: 3,
+    position: 'absolute',
+    zIndex: 4,
+    backgroundColor: '#efefef',
+    justifyContent: 'center',
+    alignItems: 'center',
+    bottom: 40,
+    right: 135,
+  },
+})
