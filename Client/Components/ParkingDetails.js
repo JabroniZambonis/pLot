@@ -76,7 +76,7 @@ export default class ParkingDetails extends Component {
       stars.push(1)
     }
 
-    if (this.props.rating % 1 > 0.1) {
+    if (this.props.rating % 1 > 0) {
       let fractn = (this.props.rating % 1).toFixed(2) * 1
       stars.push(fractn)
     }
