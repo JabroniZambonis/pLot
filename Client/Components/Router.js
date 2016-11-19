@@ -9,6 +9,7 @@ import CreateReview from './CreateReview'
 import NavButtonBack from './NavButtonBack'
 import NavButton from './NavButton'
 import Navbar from './Navbar'
+import ProfileView from './ProfileView'
 
 export default class Router extends Component {
   constructor(props) {
@@ -22,6 +23,18 @@ export default class Router extends Component {
       switch (route.name) {
         case 'HomeMap':
           return <HomeMap navigator={navigator} {...route} />
+          break
+        case 'ProfileView':
+          return (
+            <View style={{flex: 1}}>
+              <Navbar
+                leftButton={
+                  <NavButtonBack text="map" onPress={() => navigator.pop()}/>
+                }
+              />
+              <ProfileView navigator={navigator} {...route}/>
+            </View>
+          )
           break
         case 'Camera':
           return <Camera navigator={navigator} {...route} />

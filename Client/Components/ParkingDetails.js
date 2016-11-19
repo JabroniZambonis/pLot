@@ -9,6 +9,7 @@ import ImageSlider from 'react-native-image-slider'
 import MapView from 'react-native-maps'
 import styles  from '../Style/style.js'
 import Button from 'apsl-react-native-button'
+import Icon from 'react-native-vector-icons/Entypo'
 
 export default class ParkingDetails extends Component {
   constructor(props) {
@@ -31,7 +32,8 @@ export default class ParkingDetails extends Component {
         require('../Public/anotherParkingImage.jpg'),
         require('../Public/bikeParking.jpg')
       ],
-      reviews: []
+      reviews: [],
+      buttonPress: false
     }
   }
 
@@ -60,10 +62,28 @@ export default class ParkingDetails extends Component {
     })
   }
 
+  setButtonStyle (style) {
+    this.setState({buttonPress: style})
+  }
 
   render () {
-    let buttonPress = false
-    let addButtonStyle = buttonPress ? styles.listViewCloseContainerPress : styles.listViewCloseContainer
+
+    let reviewButtonStyle = this.state.buttonPress ? styles.reviewsButtonPress : styles.reviewsButton
+    
+    let stars = []
+      
+    for ( let i = 1; i < this.props.rating; i++) {
+      stars.push(1)
+    }
+
+    if (this.props.rating % 1 > 0) {
+      let fractn = (this.props.rating % 1).toFixed(2) * 1
+      stars.push(fractn)
+    }
+
+    const starWidth = 25
+
+    console.log(stars)
 
     return (
       <View style={styles.parkingDetailsContainer}>        
@@ -93,18 +113,28 @@ export default class ParkingDetails extends Component {
             {this.props.description}
           </Text>
           <Text>Rating: {this.props.rating}</Text>
+
+          <View style={{flexDirection: 'row', width: starWidth * stars.length}}>
+            {stars.map((star, key) => (
+              <View style={{width: starWidth * star, flex: 1}} key={key}>
+                <Icon name="star" size={starWidth} color="#ffa500" />
+              </View>
+            ))}
+          </View>
         </View>
         <View style={styles.parkingDescriptionImagesContainer}>
           <ImageSlider images={this.state.parkingSpacePics} />
         </View>
-        <Button
-          onPress={ () => this.showReviews() }
-          style={addButtonStyle}
-          onPressIn={() => buttonPress = true} 
-          onPressOut={() => buttonPress = false}
-        >
-          <Text>Show Reviews</Text>
-        </Button>
+        <View style={styles.reviewButtonView}>
+          <Button
+            onPress={() => this.showReviews()}
+            style={reviewButtonStyle}
+            onPressIn={() => this.setButtonStyle(!this.state.buttonPress)} 
+            onPressOut={() => this.setButtonStyle(!this.state.buttonPress)}
+            textStyle={styles.reviewButtonText} 
+          >Show Reviews
+          </Button>
+        </View>
       </View>
     )
   }

@@ -1,9 +1,12 @@
+const { resolve } = require('path')
 const mongoose = require('mongoose')
 const Location = require('../models/locations')
 const db = require('../db')
 const request = require('request-promise')
 const User = require('../models/usersModel')
 const jwt = require('../lib/jwt')
+const formidable = require('formidable')
+const cloudinary = require('../lib/cloudinary')
 
 const baseGoogleURL = 
   `https://maps.googleapis.com/maps/api/geocode/json?key=${process.env.GOOGLE_API_KEY}`
@@ -177,6 +180,46 @@ exports.photos = function (req, res) {
 }
 
 exports.addPhoto = function (req, res) {
+  // pull out id for location
+  const { locationId } = req.params
+  // create variable for image once it is read
+  let image
+  // configuration for formidable
+  const form = new formidable.IncomingForm()
+  form.uploadDir = resolve(__dirname, '../', 'uploads')
+  // events emitted by formidable module
+  form
+    .on('file', function (name, file) {
+      // make sure it is an image
+      if (file.type === "image/jpeg") {
+        image = file
+      }
+    })
+    .on('error', function (err) {
+      // error parsing image
+      res.status(500).json(err)
+    })
+    // event fired once req.body is done being parsed
+    .on('end', function () {
+      // upload image to cloudinary
+      cloudinary.uploader.upload(image.path)
+        .then(saved => {
+          // pull the secure_url out of cloudinary response and save
+          // to the Location
+          Location.findOneAndUpdate(
+            { _id: locationId },
+            { $push: { photos: saved.secure_url } },
+            // return new updated location
+            { new: true }
+          )
+          .then(location => res.status(201).json(location))
+          // error updating location
+          .catch(err => res.status(500).json(err))
+        })
+        // error saving image to cloudinary
+        .catch(err => res.status(500).json(err))
+    })
+  form.parse(req)
 
 }
 

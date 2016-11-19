@@ -24,8 +24,10 @@
     "babel-preset-react": "^6.16.0",
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
+    "cloudinary": "^1.4.4",
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
+    "formidable": "^1.0.17",
     "jwt-simple": "^0.5.0",
     "mongoose": "^4.6.6",
     "native": "^0.2.0",
@@ -38,6 +40,7 @@
     "react-native-fbsdk": "^0.4.0",
     "react-native-image-slider": "^1.1.5",
     "react-native-maps": "^0.11.0",
+    "react-native-vector-icons": "^3.0.0",
     "request-promise": "^4.1.1",
     "webpack": "^1.13.3",
     "whatwg-fetch": "^1.0.0"
