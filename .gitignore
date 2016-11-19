@@ -49,4 +49,4 @@ index.android.js
 
 # temp folder for images
 
-uploads/*
+server/uploads/*
