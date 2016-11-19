@@ -9,6 +9,7 @@ import ImageSlider from 'react-native-image-slider'
 import MapView from 'react-native-maps'
 import styles  from '../Style/style.js'
 import Button from 'apsl-react-native-button'
+import Icon from 'react-native-vector-icons/Entypo'
 
 export default class ParkingDetails extends Component {
   constructor(props) {
@@ -97,6 +98,9 @@ export default class ParkingDetails extends Component {
             {this.props.description}
           </Text>
           <Text>Rating: {this.props.rating}</Text>
+          <View style={{width: 20}}>
+            <Icon name="star" size={30} color="#900" />
+          </View>
         </View>
         <View style={styles.parkingDescriptionImagesContainer}>
           <ImageSlider images={this.state.parkingSpacePics} />
