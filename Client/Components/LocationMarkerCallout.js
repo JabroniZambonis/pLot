@@ -40,7 +40,7 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
 
   return (
     <View style={styles.calloutContainer}>
-      <View style={styles.parkingDetailsButton}>
+      <View style={styles.calloutFavorite}>
         <TouchableOpacity onPress={ () => handleFavoriteButtonPress()}>
           <View style={{width: 30}}>
             <Icon name="heart" size={30} color="red" />
@@ -51,7 +51,7 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
         <Text>{title}</Text>
         <Text>Rating: {rating} / 5</Text>
       </View>
-      <View style={styles.parkingDetailsButton}>
+      <View style={styles.calloutParkingDetails}>
         <TouchableOpacity onPress={() => handleDetailsButtonPress()}>
           <View style={{width: 30}}>
             <Icon name="chevron-thin-right" size={30} color="#d7d7d7" />

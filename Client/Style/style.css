@@ -479,13 +479,21 @@ calloutContainer {
 
 calloutDescription {
   flex: 4;
+  margin: 0 15 0 15;
 }
 
-parkingDetailsButton {
+calloutParkingDetails {
   flex: 1;
   justify-content: center;
   /*padding-right: -20;*/
 }
+
+calloutFavorite {
+  flex: 1;
+  justify-content: center;
+}
+
+
 /*LocationMarkerCallout.js*/
 
 /*NavButton.js*/
