@@ -18,7 +18,14 @@ export default class FavoritesListView extends Component {
   componentDidMount () {
    console.log('Should have the current user info in FavoritesList', this.props.currentUser)
    console.log('THIS SHOULD BE USER TOKEN', this.props.userToken)
-    fetch(`${serverURL}/users/${this.props.currentUser._id}/saved`)
+    fetch(`${serverURL}/users/${this.props.currentUser._id}/saved`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': this.props.userToken
+      }
+    })
       .then(response => response.json())
       .then(console.log) 
   }
