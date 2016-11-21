@@ -111,6 +111,19 @@ export default class Router extends Component {
       }
   	}
 
+    configureScene (route, routeStack) {
+      switch (route.transition) {
+        case 'fromRight' :
+          return Navigator.SceneConfigs.FloatFromRight
+        case 'fromLeft' :
+          return Navigator.SceneConfigs.FloatFromLeft
+        case 'fromBottom' :
+          return Navigator.SceneConfigs.FloatFromBottom
+        default :
+          return Navigator.SceneConfigs.FloatFromRight
+      }
+    }
+
     render () {
     	return (
         <Navigator
@@ -124,6 +137,7 @@ export default class Router extends Component {
             }
           }
     		  renderScene={this.renderScene}
+          configureScene={this.configureScene}
         />
       )
     }
