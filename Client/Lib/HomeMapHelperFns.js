@@ -192,6 +192,7 @@ exports.onRegionChange = function(currentLocation) {
 exports.returnToUser = function () {
   navigator.geolocation.getCurrentPosition(
     (position) => {
+      console.log('user location: ', position)
       let userLocation = {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
@@ -201,7 +202,8 @@ exports.returnToUser = function () {
   this.setState({
     userLocation: userLocation
   })
-  this.refs.map.animateToCoordinate(this.state.userLocation, 500)
+  console.log('User location State: ', userLocation)
+  this.refs.map.animateToCoordinate(userLocation, 500)
   this.getPinsForCoords(userLocation.longitude, userLocation.latitude)
   this.getPaidPinsForCoords(userLocation.latitude, userLocation.longitude)
   })
