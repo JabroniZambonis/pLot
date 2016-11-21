@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('../models/usersModel')
+const Location = require('../models/locations')
 const db = require('../db.js')
 
 exports.createUser = function(req, res) {
@@ -97,4 +98,23 @@ exports.getCreatedPins = function (req, res) {
       return res.status(200).json(user.createdPins)
     })
     .catch(err => res.status(500).json(err))
+}
+
+exports.addSavedPins = function (req, res) {
+  const locationId = req.body.location
+  const userId = req.params.userId
+  //Check the users savedPins array to make sure location id does not exist already
+  User.findOneAndUpdate(
+    { _id: userId },
+    { $addToSet: { savedPins: locationId } },
+    { new: true }
+  )
+  .then( (user) => {
+    Location.findById(locationId)
+        .then(location => {
+          return res.status(201).json(location)
+        })
+        .catch(err => res.status(500).json(err))
+  })
+  .catch(err => res.status(500).json(err))
 }

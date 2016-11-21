@@ -1,42 +1,19 @@
 const styles = require('../Style/style.js')
 
 import React, { Component } from 'react'
-import { TouchableHighlight, Text, StyleSheet, View, Modal, TextInput } from 'react-native'
+import { Image, TouchableHighlight, TouchableOpacity, Text, StyleSheet, View, Modal, TextInput } from 'react-native'
 import Button from 'apsl-react-native-button'
+import serverURL from '../Lib/url'
 
 export default class CreateLocation extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      modalVisible: false,
       description: '',
-      address: 'fetching address...',
-      buttonPress: false
+      address: 'Error fetching address...',
     }
-    this.setModalVisible = this.setModalVisible.bind(this)
+
     this.submitLocation = this.submitLocation.bind(this)
-    this.getAddressByCoords = this.getAddressByCoords.bind(this)
-    this.setButtonStyle = this.setButtonStyle.bind(this)
-  }
-
-  setModalVisible (visible) {
-    this.setState({modalVisible: visible})
-  }
-
-  setButtonStyle (style) {
-    this.setState({buttonPress: style})
-  }
-
-  getAddressByCoords (lat, long) {
-    fetch(`http://localhost:3000/locations/googlebycoords?lat=${lat}&long=${long}`)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log('Got data: ', data)
-      this.setState({address: data})
-    })
-    .catch((err) => {
-      console.log('This did not work: ', err)
-    })
   }
 
   submitLocation () {
@@ -45,7 +22,7 @@ export default class CreateLocation extends Component {
     locationObj.description = this.state.description
     locationObj.loc = [this.props.currentLocation.longitude, this.props.currentLocation.latitude]
 
-    fetch('http://localhost:3000/locations', {
+    fetch(`${serverURL}/locations`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -57,74 +34,48 @@ export default class CreateLocation extends Component {
       })
     })
     .then(response => response.json())
-    .then(location => {
-      this.setModalVisible(!this.state.modalVisible)
-    })
     // any errors posting the location
     // This needs improvement!
     .catch(err => console.log(err))
   }
 
+  createProfileNav () {
+    this.props.navigator.push({
+      name: 'Camera',
+    })
+  }
+
   render () {
     const limit = 200
-    let remainder = limit - this.state.description.length
-    let remainderColor = remainder > 20 ? 'green' : 'red'
-    let addButtonStyle = this.state.buttonPress ? styles.addLocationButtonContainerPress : styles.addLocationButtonContainer
-
+    console.log("CreateLocation.js this.props: ", this.props)
     return (
-      <View>
-        <View>
-          <Button
-            onPress={() => {
-              this.props.addLocation();
-              this.setModalVisible(!this.state.modalVisible);
-              this.getAddressByCoords(this.props.currentLocation.latitude, this.props.currentLocation.longitude)
-            }}
-            style={addButtonStyle}
-            textStyle={styles.addLocationButtonText}
-            onPressIn={() => this.setButtonStyle(!this.state.buttonPress)} 
-            onPressOut={() => this.setButtonStyle(!this.state.buttonPress)}
-          >+</Button>
+      <View style={styles.createForm}>
+        
+        <Text style={styles.createFormHeader}>Tell us about this spot</Text>
+        
+
+        <Text style={styles.createFormAddress}>{this.props.address}</Text>
+
+        <View style={styles.createBarContainer}>
+          <TextInput
+            style={styles.createSpotBar}
+            maxLength={limit}
+            onChange={(event) => this.setState({description: event.nativeEvent.text})}
+            placeholder={'Your thoughts go here...'}
+          />
         </View>
 
-        <Modal
-          animationType={"slide"}
-          transparent={true}
-          visible={this.state.modalVisible}
-        >
-          <View style={{marginTop: 22}}>
-            <View style={styles.createForm}>
+        <TouchableHighlight style={styles.createSubmitBtnContainer}>
+          <Text onPress={this.submitLocation}>Submit</Text>
+        </TouchableHighlight>
 
-              <Text style={styles.createFormHeader}>Tell us about this spot</Text>
-
-              <Text>{this.state.address}</Text>
-
-              <TextInput
-                style={{height: 30, width: 300, borderColor: '#d7d7d7', borderWidth: 1}}
-                maxLength={limit}
-                onChange={(event) => this.setState({description: event.nativeEvent.text})}
-                placeholder={'Your thoughts go here...'}
-              />
-              <Text style={{color: remainderColor}}>
-                {remainder}
-              </Text>
-
-              <TouchableHighlight>
-                <Text onPress={this.submitLocation}>Submit</Text>
-              </TouchableHighlight>
-
-              <TouchableHighlight
-                onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
-                  this.props.cancelLocationAdd()
-                }}
-              >
-                <Text style={styles.createFormClose}>close</Text>
-              </TouchableHighlight>
-
-            </View>
-          </View>
-        </Modal>
+        <TouchableOpacity onPress={ () => this.createProfileNav() } 
+          style={styles.createPicBtnContainer}>
+          <Image
+          style={{width: 40, height: 30}}
+          source={require('../Public/camera-icon.png')}
+          />
+        </TouchableOpacity>
       </View>
     )
   }

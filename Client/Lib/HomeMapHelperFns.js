@@ -1,7 +1,9 @@
 import { Alert } from 'react-native'
+import serverURL from './url'
+
 
 exports.getAddressByCoords = function(lat, long) {
-  fetch(`http://localhost:3000/locations/googlebycoords?lat=${lat}&long=${long}`)
+  fetch(`${serverURL}/locations/googlebycoords?lat=${lat}&long=${long}`)
     .then(response => response.json())
     .then(data => {
       console.log('Got data: ', data)
@@ -14,7 +16,7 @@ exports.getAddressByCoords = function(lat, long) {
 
 
 exports.getUserInfo = function() {
-  fetch('http://localhost:3000/auth/login', {
+  fetch(`${serverURL}/auth/login`, {
     method: 'GET',
     headers: {
        'Accept': 'application/json',
@@ -35,7 +37,7 @@ exports.getUserInfo = function() {
 
 exports.searchLocationSubmit = function(event) {
   let searchString = event.nativeEvent.text
-  fetch(`http://localhost:3000/locations/byaddr?q=${searchString}`)
+  fetch(`${serverURL}/locations/byaddr?q=${searchString}`)
     .then((response) => response.json())
     .then((locationsAndCoords) => {
       if (!locationsAndCoords.coords) {
@@ -71,7 +73,7 @@ exports.searchLocationSubmit = function(event) {
 
 
 exports.getUserInfo = function() {
-  fetch('http://localhost:3000/auth/login', {
+  fetch(`${serverURL}/auth/login`, {
     method: 'GET',
     headers: {
        'Accept': 'application/json',
@@ -107,12 +109,14 @@ exports.setUserLocation = function() {
 
       //get paid pins near users location
       this.getPaidPinsForCoords(currentLocation.latitude, currentLocation.longitude)
+
+      this.getAddressByCoords(currentLocation.latitude, currentLocation.longitude)
     })
 }
 
 
 exports.getPinsForCoords = function(long, lat) {
-  fetch(`http://localhost:3000/locations/bycoords?long=${long}&lat=${lat}`)
+  fetch(`${serverURL}/locations/bycoords?long=${long}&lat=${lat}`)
     .then(response => response.json())
     .then(locations => {
       if (locations.length === 0) {
@@ -129,7 +133,7 @@ exports.getPinsForCoords = function(long, lat) {
 
 
 exports.getPaidPinsForCoords = function(lat, long) {
-  fetch(`http://localhost:3000/locations/parkwhizbycoords?lat=${lat}&long=${long}`)
+  fetch(`${serverURL}/locations/parkwhizbycoords?lat=${lat}&long=${long}`)
     .then(response => response.json())
     .then(locations => {
       let nearby = locations.parking_listings.map(location => {
@@ -197,7 +201,7 @@ exports.returnToUser = function () {
   this.setState({
     userLocation: userLocation
   })
-  this.refs.map.animateToCoordinate(this.state.userLocation, 500)
+  this.refs.map.animateToCoordinate(userLocation, 500)
   this.getPinsForCoords(userLocation.longitude, userLocation.latitude)
   this.getPaidPinsForCoords(userLocation.latitude, userLocation.longitude)
   })
@@ -208,6 +212,17 @@ exports.createProfileNav = function() {
   this.props.navigator.push({
     name: 'ProfileView',
     logOut: this.props.logOut,
+  })
+}
+
+exports.createLocationNav = function() {
+  this.props.navigator.push({
+    name: 'CreateLocation',
+    userToken: this.props.userToken,
+    addLocation: this.addLocation,
+    cancelLocationAdd: this.cancelLocationAdd,
+    currentLocation: this.state.currentLocation,
+    address: this.state.address,
     navigator: this.props.navigator
   })
 }

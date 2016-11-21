@@ -86,23 +86,24 @@ locationMarkerCallout {
   width: 175;
   z-index: 2;
 }
-/*HomeMap.js*/
 
-/*CreateLocation.js*/
-buttonStyle {
-  text-align: center;
-  color: #64AFCB;
-  font-weight: bold;
-  background-color: #efefef;
-  line-height: 50;
-  height: 50;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 5px;
+redoSearchButton {
+  width: 100;
+  height: 70;
+  border-radius: 35;
   border-color: #64AFCB;
+  border-style: solid;
+  border-width: 3;
+  position: absolute;
+  z-index: 4;
+  background-color: #efefef;
+  justify-content: center;
+  align-items: center;
+  bottom: 40;
+  right: 135;
 }
 
-addLocationButtonContainer {
+addLocationButton {
   width: 70;
   height: 70;
   border-radius: 35;
@@ -140,10 +141,12 @@ addLocationButtonText {
   color: #64AFCB;
   line-height: 47;
 }
+/*HomeMap.js*/
 
+/*CreateLocation.js*/
 createForm {
-  background-color: #d8d8d8;
-  height: 150;
+  background-color: #ffffff;
+  height: 600;
 }
 
 createFormHeader {
@@ -153,6 +156,60 @@ createFormHeader {
 
 createFormClose {
   text-align: center;
+}
+
+createFormAddress {
+  text-align: center;
+  font-size: 12;
+}
+
+createBarContainer {
+  padding: 0 5 0 5;
+  margin: 0 15 0 15;
+  align-items: stretch;
+  flex-direction: row;
+  flex: 1;
+  position: absolute;
+  z-index: 2;
+  border-width: 2;
+  border-radius: 15;
+  border-color: #64AFCB;
+  top: 45;
+  background-color: white;
+}
+
+createSpotBar {
+  flex: 1;
+  height: 35;
+  color: #64AFCB;
+}
+
+createSubmitBtnContainer {
+  padding: 0 5 0 5;
+  left: 30;
+  align-items: stretch;
+  flex-direction: row;
+  flex: 1;
+  position: absolute;
+  z-index: 2;
+  border-width: 2;
+  border-radius: 15;
+  border-color: #64AFCB;
+  top: 85;
+  background-color: white;
+}
+
+createPicBtnContainer {
+  padding: 0 5 0 5;
+  right: 30;
+  height: 30;
+  align-items: stretch;
+  flex-direction: row;
+  flex: 1;
+  position: absolute;
+  z-index: 2;
+  top: 85;
+  background-color: white;
 }
 /*CreateLocation.js*/
 
@@ -422,13 +479,21 @@ calloutContainer {
 
 calloutDescription {
   flex: 4;
+  margin: 0 15 0 15;
 }
 
-parkingDetailsButton {
+calloutParkingDetails {
   flex: 1;
   justify-content: center;
   /*padding-right: -20;*/
 }
+
+calloutFavorite {
+  flex: 1;
+  justify-content: center;
+}
+
+
 /*LocationMarkerCallout.js*/
 
 /*NavButton.js*/
