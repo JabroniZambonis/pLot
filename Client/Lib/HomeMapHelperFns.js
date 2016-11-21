@@ -202,8 +202,6 @@ exports.returnToUser = function () {
     userLocation: userLocation
   })
   this.refs.map.animateToCoordinate(userLocation, 500)
-  this.getPinsForCoords(userLocation.longitude, userLocation.latitude)
-  this.getPaidPinsForCoords(userLocation.latitude, userLocation.longitude)
   })
 }
 
