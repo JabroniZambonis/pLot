@@ -11,7 +11,8 @@ export default class ProfileView extends Component {
   showFavoritesList () {
     this.props.navigator.push({
       name: 'FavoritesList',
-      currentUser: this.props.currentUser
+      currentUser: this.props.currentUser,
+      userToken: this.props.userToken
     })
   }
   

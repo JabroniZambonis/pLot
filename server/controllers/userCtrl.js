@@ -85,6 +85,7 @@ exports.getSavedPins = function (req, res) {
     .populate('savedPins')
     .then(user => {
       // respond with users saved pins
+      console.log('User saved pins?: ', user)
       return res.status(200).json(user.savedPins)
     })
     .catch(err => res.status(500).json(err))

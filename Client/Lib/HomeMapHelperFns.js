@@ -210,7 +210,8 @@ exports.createProfileNav = function() {
   this.props.navigator.push({
     name: 'ProfileView',
     logOut: this.props.logOut,
-    currentUser: this.state.currentUser
+    currentUser: this.state.currentUser,
+    userToken: this.props.userToken
   })
 }
 
