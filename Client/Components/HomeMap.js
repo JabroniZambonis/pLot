@@ -187,36 +187,36 @@ export default class HomeMap extends Component {
             />
           </View>
         </View>
+          <LocationListView 
+            nearbyLocations={this.state.nearbyLocations}
+            navigator={this.props.navigator}
+          />
 
-        <LocationListView 
-          nearbyLocations={this.state.nearbyLocations}
-          navigator={this.props.navigator}
-        />
+          <Button
+            style={redoSearchButton}
+            textStyle={styles.reviewButtonText} 
+            onPress={() => (
+              this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude)
+            )}
+            onPressIn={() => this.setRedoButtonStyle(!this.state.redoButtonPress)}
+            onPressOut={() => this.setRedoButtonStyle(!this.state.redoButtonPress)}
+            activeOpacity={1}
+          >
+            Redo Search
+          </Button>
 
-        <Button
-          style={redoSearchButton}
-          textStyle={styles.reviewButtonText} 
-          onPress={() => (
-            this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude)
-          )}
-          onPressIn={() => this.setRedoButtonStyle(!this.state.redoButtonPress)}
-          onPressOut={() => this.setRedoButtonStyle(!this.state.redoButtonPress)}
-        >
-          Redo Search
-        </Button>
-
-        <Button
-          onPress={() => {
-            this.createLocationNav()
-          }}
-          onPressIn={() => this.setAddButtonStyle(!this.state.addButtonPress)}
-          onPressOut={() => this.setAddButtonStyle(!this.state.addButtonPress)}
-          style={addButtonStyle}
-          textStyle={styles.addLocationButtonText}
-        >
-          +
-        </Button>
-
+          <Button
+            onPress={() => {
+              this.createLocationNav()
+            }}
+            onPressIn={() => this.setAddButtonStyle(!this.state.addButtonPress)}
+            onPressOut={() => this.setAddButtonStyle(!this.state.addButtonPress)}
+            style={addButtonStyle}
+            textStyle={styles.addLocationButtonText}
+            activeOpacity={1}
+          >
+            +
+          </Button>
       </View>
     )
   }
