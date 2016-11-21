@@ -31,7 +31,8 @@ export default class HomeMap extends Component {
       nearbyPaidLocations: [],
       searchText: 'Search for spots...',
       lastPosition: {},
-      address: ''
+      address: '',
+      buttonPress: false
     }
     
     this.addLocation = this.addLocation.bind(this)
@@ -39,6 +40,7 @@ export default class HomeMap extends Component {
     this.onRegionChange = this.onRegionChange.bind(this)
     this.returnToUser = this.returnToUser.bind(this)
     this.getPinsForCoords = this.getPinsForCoords.bind(this)
+    this.setButtonStyle = this.setButtonStyle.bind(this)
   }
 
   componentDidMount () {
@@ -85,7 +87,15 @@ export default class HomeMap extends Component {
 
   createProfileNav = Helper.createProfileNav
 
+  setButtonStyle (style) {
+    this.setState({
+      buttonPress: style
+    })
+  }
+
   render () {
+    let addButtonStyle = this.state.buttonPress ? styles.addLocationButtonPress : styles.addLocationButton
+
     return (
       <View style={styles.homeContainer}>
         <View style={styles.searchBarContainer}>
@@ -190,7 +200,9 @@ export default class HomeMap extends Component {
           onPress={() => {
             this.createLocationNav()
           }}
-          style={styles.addLocationButton}
+          onPressIn={() => this.setButtonStyle(!this.state.buttonPress)}
+          onPressOut={() => this.setButtonStyle(!this.state.buttonPress)}
+          style={addButtonStyle}
           textStyle={styles.addLocationButtonText}
         >
           +

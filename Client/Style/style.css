@@ -119,7 +119,7 @@ addLocationButton {
   right: 40;
 }
 
-addLocationButtonContainerPress {
+addLocationButtonPress {
   width: 70;
   height: 70;
   border-radius: 35;
