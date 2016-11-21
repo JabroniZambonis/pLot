@@ -53,8 +53,13 @@ export default class CreateLocation extends Component {
         
         <Text style={styles.createFormHeader}>Tell us about this spot</Text>
         
-
-        <Text style={styles.createFormAddress}>{this.props.address}</Text>
+        <View style={styles.addressContainerAdd}>
+          <Image
+              style={{width: 40, height: 40, marginRight: 15}}
+              source={require('../Public/addressicon.png')}
+            />
+          <Text style={styles.createFormAddress}>{this.props.address}</Text>
+        </View>
 
         <View style={styles.createBarContainer}>
           <TextInput
@@ -65,9 +70,12 @@ export default class CreateLocation extends Component {
           />
         </View>
 
-        <TouchableHighlight style={styles.createSubmitBtnContainer}>
-          <Text onPress={this.submitLocation}>Submit</Text>
-        </TouchableHighlight>
+        <Button
+            onPress={this.submitLocation}
+            style={styles.reviewsButton}
+            textStyle={styles.reviewButtonText} 
+          >Submit
+        </Button>
 
         <TouchableOpacity onPress={ () => this.createProfileNav() } 
           style={styles.createPicBtnContainer}>

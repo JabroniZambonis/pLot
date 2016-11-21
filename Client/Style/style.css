@@ -174,9 +174,21 @@ createFormClose {
   text-align: center;
 }
 
+addressContainerAdd {
+  flex-direction: row;
+  flex:1;
+  align-items: center;
+  justify-content: center;
+  border-bottom-width: 3;
+  border-bottom-color: lightgray;
+  margin-right: 10;
+  margin-left: 10;
+  padding-left: 10;
+}
+
 createFormAddress {
-  text-align: center;
-  font-size: 12;
+  flex:1;
+  font-size: 14;
 }
 
 createBarContainer {
@@ -185,8 +197,6 @@ createBarContainer {
   align-items: stretch;
   flex-direction: row;
   flex: 1;
-  position: absolute;
-  z-index: 2;
   border-width: 2;
   border-radius: 15;
   border-color: #64AFCB;
@@ -201,29 +211,19 @@ createSpotBar {
 }
 
 createSubmitBtnContainer {
-  padding: 0 5 0 5;
-  left: 30;
-  align-items: stretch;
   flex-direction: row;
   flex: 1;
-  position: absolute;
-  z-index: 2;
   border-width: 2;
   border-radius: 15;
   border-color: #64AFCB;
-  top: 85;
   background-color: white;
 }
 
 createPicBtnContainer {
   padding: 0 5 0 5;
-  right: 30;
-  height: 30;
-  align-items: stretch;
+  height: 30;  
   flex-direction: row;
-  flex: 1;
-  position: absolute;
-  z-index: 2;
+  flex: 1; 
   top: 85;
   background-color: white;
 }
@@ -431,7 +431,6 @@ cameraButtonBar {
 
 cameraButton {
   padding: 10;
-  color: #ffffff;
   border-width: 1;
   border-color: #ffffff;
   margin: 5;

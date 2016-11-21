@@ -43,7 +43,7 @@ export default class Router extends Component {
             <View style={{flex: 1}}>
               <Navbar
                 leftButton={
-                  <NavButtonBack text="create" onPress={() => navigator.pop()}/>
+                  <NavButtonBack text="back" onPress={() => navigator.pop()}/>
                 }
               />
               <Camera navigator={navigator} {...route}/>
