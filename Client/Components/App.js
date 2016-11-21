@@ -30,7 +30,7 @@ export default class App extends Component {
     // set the accessToken into local storage
     AsyncStorage.setItem('pLotLoginKey',userInfo.accessToken)
     AsyncStorage.setItem('fbAccessToken',userInfo.fbAccessToken)
-  } 
+  }
 
   logOut () {
     AsyncStorage.removeItem('pLotLoginKey')
@@ -39,7 +39,7 @@ export default class App extends Component {
       this.setState({
         userToken: '',
         userObj: {},
-        fbAccessToken: '',  
+        fbAccessToken: '',
       })
     })
   }

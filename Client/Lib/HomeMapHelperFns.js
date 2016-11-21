@@ -3,15 +3,12 @@ import serverURL from './url'
 
 
 exports.getAddressByCoords = function(lat, long) {
-  fetch(`${serverURL}/locations/googlebycoords?lat=${lat}&long=${long}`)
+  return fetch(`${serverURL}/locations/googlebycoords?lat=${lat}&long=${long}`)
     .then(response => response.json())
     .then(data => {
       console.log('Got data: ', data)
       this.setState({address: data})
     })
-    .catch((err) => {
-      console.log('This did not work: ', err)
-  })
 }
 
 
@@ -158,29 +155,19 @@ exports.getPaidPinsForCoords = function(lat, long) {
 }
 
 
-exports.addLocation = function() {
-  let lat = this.state.currentLocation.latitude
-  let long = this.state.currentLocation.longitude
+exports.addLocation = function({lat, long, address, description}) {
   let newPin = {
     coordinate: {
       latitude: lat,
       longitude: long
-    }
+    },
+    title: address,
+    description: description
   }
   let newNearby = this.state.nearbyLocations.slice()
   newNearby.push(newPin)
   this.setState({
     nearbyLocations: newNearby
-  })
-}
-
-
-//Removes the pin from the map if the user does not save the new location
-exports.cancelLocationAdd = function() {
-  let nearby = this.state.nearbyLocations.slice()
-  nearby.pop()
-  this.setState({
-    nearbyLocations: nearby
   })
 }
 
@@ -205,7 +192,7 @@ exports.returnToUser = function () {
   })
 }
 
-//creates profile view 
+//creates profile view
 exports.createProfileNav = function() {
   this.props.navigator.push({
     name: 'ProfileView',
@@ -220,9 +207,7 @@ exports.createLocationNav = function() {
     name: 'CreateLocation',
     userToken: this.props.userToken,
     addLocation: this.addLocation,
-    cancelLocationAdd: this.cancelLocationAdd,
     currentLocation: this.state.currentLocation,
-    address: this.state.address,
     navigator: this.props.navigator
   })
 }

@@ -4,16 +4,27 @@ import React, { Component } from 'react'
 import { Image, TouchableHighlight, TouchableOpacity, Text, StyleSheet, View, Modal, TextInput } from 'react-native'
 import Button from 'apsl-react-native-button'
 import serverURL from '../Lib/url'
+import { getAddressByCoords } from '../Lib/HomeMapHelperFns'
 
 export default class CreateLocation extends Component {
   constructor(props) {
     super(props)
     this.state = {
       description: '',
-      address: 'Error fetching address...',
+      address: 'Fetching address...',
     }
 
     this.submitLocation = this.submitLocation.bind(this)
+    this.getAddressByCoords = getAddressByCoords.bind(this)
+  }
+
+  componentDidMount () {
+    // get the address for this location coords
+    const { latitude, longitude } = this.props.currentLocation
+    // set state for address
+    this.getAddressByCoords(latitude, longitude)
+      .catch(err => this.setState({ address: 'Error fetching address'}))
+
   }
 
   submitLocation () {
@@ -33,9 +44,16 @@ export default class CreateLocation extends Component {
         location: locationObj
       })
     })
-    .then(response => response.json())
-    // any errors posting the location
-    // This needs improvement!
+    // location saved addLocation to UI
+    .then(response => {
+      const location = {
+        address: this.state.address,
+        description: '',
+        lat: this.props.currentLocation.latitude,
+        long: this.props.currentLocation.longitude
+      }
+      this.props.addLocation(location)
+    })
     .catch(err => console.log(err))
   }
 
@@ -47,12 +65,11 @@ export default class CreateLocation extends Component {
 
   render () {
     const limit = 200
-    console.log("CreateLocation.js this.props: ", this.props)
     return (
       <View style={styles.createForm}>
-        
+
         <Text style={styles.createFormHeader}>Drop a pin and share your spot</Text>
-        
+
         <View style={styles.addressContainerAdd}>
           <Image
               style={{width: 40, height: 40, marginRight: 15}}
@@ -61,7 +78,7 @@ export default class CreateLocation extends Component {
           <Text style={styles.createFormAddress}>{this.props.address}</Text>
         </View>
 
-        <TouchableOpacity onPress={ () => this.createProfileNav() } 
+        <TouchableOpacity onPress={ () => this.createProfileNav() }
           style={styles.createPicBtnContainer}>
           <Text style={{fontSize:20, color: '#999999', fontWeight:'bold'}}>+ </Text>
           <Image
@@ -82,7 +99,7 @@ export default class CreateLocation extends Component {
             <Button
               onPress={this.submitLocation}
               style={styles.reviewsButton}
-              textStyle={styles.reviewButtonText} 
+              textStyle={styles.reviewButtonText}
             >Submit
             </Button>
           </View>

@@ -35,9 +35,8 @@ export default class HomeMap extends Component {
       addButtonPress: false,
       redoButtonPress: false
     }
-    
+
     this.addLocation = this.addLocation.bind(this)
-    this.cancelLocationAdd = this.cancelLocationAdd.bind(this)
     this.onRegionChange = this.onRegionChange.bind(this)
     this.returnToUser = this.returnToUser.bind(this)
     this.getPinsForCoords = this.getPinsForCoords.bind(this)
@@ -50,7 +49,7 @@ export default class HomeMap extends Component {
     }
     // grab users location and nearby pins
     this.setUserLocation()
- 
+
     // Probably not needed for now
     // this.watchID = navigator.geolocation.watchPosition((position) => {
     //   let lastPosition = JSON.stringify(position);
@@ -66,13 +65,13 @@ export default class HomeMap extends Component {
 
   // finds users location and grabs nearby pins
   setUserLocation = Helper.setUserLocation
-  
+
   getPinsForCoords = Helper.getPinsForCoords
 
   getPaidPinsForCoords = Helper.getPaidPinsForCoords
-  
+
   getAddressByCoords = Helper.getAddressByCoords
-  
+
   //adds a pins to the map if the user opens the create location form
   addLocation = Helper.addLocation
 
@@ -127,7 +126,7 @@ export default class HomeMap extends Component {
         </TouchableHighlight>
 
         <ReturnToUser backToUser={this.returnToUser} />
-        
+
         <View style={styles.homeMapContainer}>
           <MapView
             style={styles.homeMapView}
@@ -148,7 +147,7 @@ export default class HomeMap extends Component {
               >
                 <LocationMarker {...marker} />
                 <MapView.Callout style={styles.locationMarkerCallout}>
-                  <LocationMarkerCallout 
+                  <LocationMarkerCallout
                     {...marker}
                     navigator={this.props.navigator}
                     currentUser={this.state.currentUser}
@@ -159,7 +158,7 @@ export default class HomeMap extends Component {
             ))}
 
 
-            
+
             {this.state.nearbyPaidLocations.map((marker, key) => (
               <MapView.Marker
                 key={marker.id}
@@ -187,14 +186,13 @@ export default class HomeMap extends Component {
             />
           </View>
         </View>
-          <LocationListView 
+          <LocationListView
             nearbyLocations={this.state.nearbyLocations}
             navigator={this.props.navigator}
           />
-
           <Button
             style={redoSearchButton}
-            textStyle={styles.reviewButtonText} 
+            textStyle={styles.reviewButtonText}
             onPress={() => (
               this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude)
             )}

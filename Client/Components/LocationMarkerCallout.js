@@ -40,7 +40,7 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
   }
 
   let stars = []
-      
+
   for ( let i = 1; i <= rating; i++) {
     stars.push(1)
   }
@@ -78,7 +78,7 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
             <Icon name="chevron-thin-right" size={30} color="#d7d7d7" />
           </View>
         </TouchableOpacity>
-      </View> 
+      </View>
     </View>
   )
 }
