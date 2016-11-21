@@ -209,7 +209,8 @@ exports.returnToUser = function () {
 exports.createProfileNav = function() {
   this.props.navigator.push({
     name: 'ProfileView',
-    logOut: this.props.logOut
+    logOut: this.props.logOut,
+    currentUser: this.state.currentUser
   })
 }
 

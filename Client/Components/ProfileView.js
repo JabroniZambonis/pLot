@@ -7,6 +7,13 @@ export default class ProfileView extends Component {
   constructor(props) {
     super(props)
   }
+
+  showFavoritesList () {
+    this.props.navigator.push({
+      name: 'FavoritesList',
+      currentUser: this.props.currentUser
+    })
+  }
   
   finishedLogout (error, result) {
     this.props.logOut()
@@ -18,6 +25,9 @@ export default class ProfileView extends Component {
           <TouchableOpacity style={styles.profileViewButton}>
             <Text style={styles.profileViewText}>Created Pins</Text>
           </TouchableOpacity>
+          <TouchableHighlight onPress={this.showFavoritesList.bind(this)}>
+            <Text style={styles.profileViewText}>Favorites</Text>
+          </TouchableHighlight>
           <TouchableOpacity style={styles.profileViewButton}>
             <Text style={styles.profileViewText}>Help</Text>
           </TouchableOpacity>
