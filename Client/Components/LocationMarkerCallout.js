@@ -37,6 +37,18 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
     })
   }
 
+  let stars = []
+      
+  for ( let i = 1; i <= rating; i++) {
+    stars.push(1)
+  }
+
+  if (rating % 1 > 0) {
+    let fractn = (rating % 1).toFixed(2) * 1
+    stars.push(fractn)
+  }
+
+  const starWidth = 25
 
   return (
     <View style={styles.calloutContainer}>
@@ -50,6 +62,13 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
       <View style={styles.calloutDescription}>
         <Text>{title}</Text>
         <Text>Rating: {rating} / 5</Text>
+        <View style={{flexDirection: 'row', width: starWidth * stars.length}}>
+            {stars.map((star, key) => (
+              <View style={{width: starWidth * star, flex: 1}} key={key}>
+                <Icon name="star" size={starWidth} color="#ffa500" />
+              </View>
+            ))}
+          </View>
       </View>
       <View style={styles.calloutParkingDetails}>
         <TouchableOpacity onPress={() => handleDetailsButtonPress()}>

@@ -73,7 +73,7 @@ export default class ParkingDetails extends Component {
     
     let stars = []
       
-    for ( let i = 1; i < this.props.rating; i++) {
+    for ( let i = 1; i <= this.props.rating; i++) {
       stars.push(1)
     }
 
