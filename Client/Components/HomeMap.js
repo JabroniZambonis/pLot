@@ -31,7 +31,9 @@ export default class HomeMap extends Component {
       nearbyPaidLocations: [],
       searchText: 'Search for spots...',
       lastPosition: {},
-      address: ''
+      address: '',
+      addButtonPress: false,
+      redoButtonPress: false
     }
     
     this.addLocation = this.addLocation.bind(this)
@@ -85,7 +87,22 @@ export default class HomeMap extends Component {
 
   createProfileNav = Helper.createProfileNav
 
+  setAddButtonStyle (style) {
+    this.setState({
+      addButtonPress: style
+    })
+  }
+
+  setRedoButtonStyle (style) {
+    this.setState({
+      redoButtonPress: style
+    })
+  }
+
   render () {
+    let addButtonStyle = this.state.addButtonPress ? styles.addLocationButtonPress : styles.addLocationButton
+    let redoSearchButton = this.state.redoButtonPress ? styles.redoSearchButtonPress : styles.redoSearchButton
+
     return (
       <View style={styles.homeContainer}>
         <View style={styles.searchBarContainer}>
@@ -170,32 +187,36 @@ export default class HomeMap extends Component {
             />
           </View>
         </View>
+          <LocationListView 
+            nearbyLocations={this.state.nearbyLocations}
+            navigator={this.props.navigator}
+          />
 
-        <LocationListView 
-          nearbyLocations={this.state.nearbyLocations}
-          navigator={this.props.navigator}
-        />
+          <Button
+            style={redoSearchButton}
+            textStyle={styles.reviewButtonText} 
+            onPress={() => (
+              this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude)
+            )}
+            onPressIn={() => this.setRedoButtonStyle(!this.state.redoButtonPress)}
+            onPressOut={() => this.setRedoButtonStyle(!this.state.redoButtonPress)}
+            activeOpacity={1}
+          >
+            Redo Search
+          </Button>
 
-        <Button
-          style={styles.redoSearchButton}
-          textStyle={styles.listViewToggleText} 
-          onPress={() => (
-            this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude)
-          )}
-        >
-          Redo Search
-        </Button>
-
-        <Button
-          onPress={() => {
-            this.createLocationNav()
-          }}
-          style={styles.addLocationButton}
-          textStyle={styles.addLocationButtonText}
-        >
-          +
-        </Button>
-
+          <Button
+            onPress={() => {
+              this.createLocationNav()
+            }}
+            onPressIn={() => this.setAddButtonStyle(!this.state.addButtonPress)}
+            onPressOut={() => this.setAddButtonStyle(!this.state.addButtonPress)}
+            style={addButtonStyle}
+            textStyle={styles.addLocationButtonText}
+            activeOpacity={1}
+          >
+            +
+          </Button>
       </View>
     )
   }

@@ -47,7 +47,8 @@ export default class LocationListView extends Component {
           textStyle={styles.listViewToggleText} 
           onPress={() => this.setModalVisible(!this.state.modalVisible)}
           onPressIn={() => this.setButtonStyle(!this.state.buttonPress)} 
-          onPressOut={() => this.setButtonStyle(!this.state.buttonPress)}>
+          onPressOut={() => this.setButtonStyle(!this.state.buttonPress)}
+          activeOpacity={1}>
           {buttonText}
           </Button>
         </View>
@@ -80,7 +81,8 @@ export default class LocationListView extends Component {
                 textStyle={styles.listViewToggleText} 
                 onPress={() => this.setModalVisible(!this.state.modalVisible)} 
                 onPressIn={() => this.setButtonStyle(!this.state.buttonPress)} 
-                onPressOut={() => this.setButtonStyle(!this.state.buttonPress)}>
+                onPressOut={() => this.setButtonStyle(!this.state.buttonPress)}
+                activeOpacity={1}>
                 {buttonText}
               </Button>
             </View>
