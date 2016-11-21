@@ -2,6 +2,7 @@ import styles  from '../Style/style.js'
 import React from 'react'
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import Icon from 'react-native-vector-icons/Entypo'
+import serverURL from '../Lib/url'
 
 export default LocationMarkerCallout = ( { description, navigator, key, coordinate, title, id, reviews, currentUser, rating, userToken }) => {
 
@@ -19,7 +20,8 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
   }
 
   const handleFavoriteButtonPress = function () {
-    fetch(`http://localhost:3000/users/${currentUser._id}/saved`, {
+    console.log('PUT userToken', userToken)
+    fetch(`${serverURL}/users/${currentUser._id}/saved`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
