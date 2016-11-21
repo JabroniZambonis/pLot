@@ -30,8 +30,10 @@ export default class HomeMap extends Component {
       nearbyLocations: [],
       nearbyPaidLocations: [],
       searchText: 'Search for spots...',
-      lastPosition: {}
+      lastPosition: {},
+      address: ''
     }
+    
     this.addLocation = this.addLocation.bind(this)
     this.cancelLocationAdd = this.cancelLocationAdd.bind(this)
     this.onRegionChange = this.onRegionChange.bind(this)
@@ -78,6 +80,8 @@ export default class HomeMap extends Component {
   onRegionChange = Helper.onRegionChange
 
   returnToUser = Helper.returnToUser
+
+  createLocationNav = Helper.createLocationNav
 
   createProfileNav = Helper.createProfileNav
 
@@ -172,41 +176,27 @@ export default class HomeMap extends Component {
           navigator={this.props.navigator}
         />
 
-          <Button
-            textStyle={styles.listViewToggleText} 
-            style={btnStyle.redoSearchContainer}
-            onPress={() => (
-              this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude)
-            )}
-          >
-            Redo Search
-          </Button>
+        <Button
+          style={styles.redoSearchButton}
+          textStyle={styles.listViewToggleText} 
+          onPress={() => (
+            this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude)
+          )}
+        >
+          Redo Search
+        </Button>
 
-        <CreateLocation
-          userToken={this.props.userToken}
-          addLocation={this.addLocation}
-          cancelLocationAdd={this.cancelLocationAdd}
-          currentLocation={this.state.currentLocation}
-        />
+        <Button
+          onPress={() => {
+            this.createLocationNav()
+          }}
+          style={styles.addLocationButton}
+          textStyle={styles.addLocationButtonText}
+        >
+          +
+        </Button>
+
       </View>
     )
   }
 }
-
-const btnStyle = StyleSheet.create({
-  redoSearchContainer: {
-    width: 100,
-    height: 70,
-    borderRadius: 35,
-    borderColor: '#64AFCB',
-    borderStyle: 'solid',
-    borderWidth: 3,
-    position: 'absolute',
-    zIndex: 4,
-    backgroundColor: '#efefef',
-    justifyContent: 'center',
-    alignItems: 'center',
-    bottom: 40,
-    right: 135,
-  },
-})

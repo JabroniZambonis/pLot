@@ -109,6 +109,8 @@ exports.setUserLocation = function() {
 
       //get paid pins near users location
       this.getPaidPinsForCoords(currentLocation.latitude, currentLocation.longitude)
+
+      this.getAddressByCoords(currentLocation.latitude, currentLocation.longitude)
     })
 }
 
@@ -210,6 +212,17 @@ exports.createProfileNav = function() {
   this.props.navigator.push({
     name: 'ProfileView',
     logOut: this.props.logOut,
+  })
+}
+
+exports.createLocationNav = function() {
+  this.props.navigator.push({
+    name: 'CreateLocation',
+    userToken: this.props.userToken,
+    addLocation: this.addLocation,
+    cancelLocationAdd: this.cancelLocationAdd,
+    currentLocation: this.state.currentLocation,
+    address: this.state.address,
     navigator: this.props.navigator
   })
 }

@@ -3,6 +3,7 @@ const styles = require('../Style/style.js')
 import React, { Component } from 'react'
 import { Navigator, Text, View } from 'react-native'
 import HomeMap from './HomeMap'
+import CreateLocation from './CreateLocation'
 import ParkingDetails from './ParkingDetails'
 import ReviewsList from './ReviewsList'
 import CreateReview from './CreateReview'
@@ -10,6 +11,7 @@ import NavButtonBack from './NavButtonBack'
 import NavButton from './NavButton'
 import Navbar from './Navbar'
 import ProfileView from './ProfileView'
+// import Camera from'./Camera'
 
 export default class Router extends Component {
   constructor(props) {
@@ -37,7 +39,28 @@ export default class Router extends Component {
           )
           break
         case 'Camera':
-          return <Camera navigator={navigator} {...route} />
+          return (
+            <View style={{flex: 1}}>
+              <Navbar
+                leftButton={
+                  <NavButtonBack text="create" onPress={() => navigator.pop()}/>
+                }
+              />
+              <Camera navigator={navigator} {...route}/>
+            </View>
+          )
+          break
+        case 'CreateLocation':
+          return (
+            <View style={{flex: 1}}>
+              <Navbar
+                leftButton={
+                  <NavButtonBack text="map" onPress={() => navigator.pop()}/>
+                }
+              />
+              <CreateLocation navigator={navigator} {...route} />
+            </View>
+          )
           break
         case 'ParkingDetails':
           return (
