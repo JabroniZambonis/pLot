@@ -36,6 +36,7 @@
     "page": "^1.7.1",
     "react": "~15.3.2",
     "react-native": "0.36.1",
+    "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
     "react-native-css": "^1.2.44",
     "react-native-fbsdk": "^0.4.0",
     "react-native-image-slider": "^1.1.5",

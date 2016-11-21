@@ -32,7 +32,8 @@ export default class HomeMap extends Component {
       searchText: 'Search for spots...',
       lastPosition: {},
       address: '',
-      buttonPress: false
+      addButtonPress: false,
+      redoButtonPress: false
     }
     
     this.addLocation = this.addLocation.bind(this)
@@ -40,7 +41,6 @@ export default class HomeMap extends Component {
     this.onRegionChange = this.onRegionChange.bind(this)
     this.returnToUser = this.returnToUser.bind(this)
     this.getPinsForCoords = this.getPinsForCoords.bind(this)
-    this.setButtonStyle = this.setButtonStyle.bind(this)
   }
 
   componentDidMount () {
@@ -87,14 +87,21 @@ export default class HomeMap extends Component {
 
   createProfileNav = Helper.createProfileNav
 
-  setButtonStyle (style) {
+  setAddButtonStyle (style) {
     this.setState({
-      buttonPress: style
+      addButtonPress: style
+    })
+  }
+
+  setRedoButtonStyle (style) {
+    this.setState({
+      redoButtonPress: style
     })
   }
 
   render () {
-    let addButtonStyle = this.state.buttonPress ? styles.addLocationButtonPress : styles.addLocationButton
+    let addButtonStyle = this.state.addButtonPress ? styles.addLocationButtonPress : styles.addLocationButton
+    let redoSearchButton = this.state.redoButtonPress ? styles.redoSearchButtonPress : styles.redoSearchButton
 
     return (
       <View style={styles.homeContainer}>
@@ -187,11 +194,13 @@ export default class HomeMap extends Component {
         />
 
         <Button
-          style={styles.redoSearchButton}
-          textStyle={styles.listViewToggleText} 
+          style={redoSearchButton}
+          textStyle={styles.reviewButtonText} 
           onPress={() => (
             this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude)
           )}
+          onPressIn={() => this.setRedoButtonStyle(!this.state.redoButtonPress)}
+          onPressOut={() => this.setRedoButtonStyle(!this.state.redoButtonPress)}
         >
           Redo Search
         </Button>
@@ -200,8 +209,8 @@ export default class HomeMap extends Component {
           onPress={() => {
             this.createLocationNav()
           }}
-          onPressIn={() => this.setButtonStyle(!this.state.buttonPress)}
-          onPressOut={() => this.setButtonStyle(!this.state.buttonPress)}
+          onPressIn={() => this.setAddButtonStyle(!this.state.addButtonPress)}
+          onPressOut={() => this.setAddButtonStyle(!this.state.addButtonPress)}
           style={addButtonStyle}
           textStyle={styles.addLocationButtonText}
         >
