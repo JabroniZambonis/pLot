@@ -111,6 +111,7 @@ export default class HomeMap extends Component {
             onChangeText={(text) => this.setState({text})}
             placeholder={this.state.searchText}
             onSubmitEditing={(event) => this.searchLocationSubmit(event)}
+            clearButtonMode={'while-editing'}
           />
         </View>
 
