@@ -17,10 +17,11 @@ const LocationListItem = (props) => {
   }
 
   return (
-        <TouchableOpacity onPress={ () => { handleButtonPress();
-                                            props.setModalVisible(!props.modalState)
-                                          }}
-                          style={styles.listItemView}
+        <TouchableOpacity
+          onPress={ () => { handleButtonPress();
+                            props.setModalVisible(!props.modalState)
+                          }}
+          style={styles.listItemView}
         >
           <View style={styles.listItemText}>
             <Text style={{fontWeight: 'bold'}}>{props.location.title}</Text>
