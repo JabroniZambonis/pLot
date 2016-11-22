@@ -130,7 +130,8 @@ export default class ParkingDetails extends Component {
             style={reviewButtonStyle}
             onPressIn={() => this.setButtonStyle(!this.state.buttonPress)} 
             onPressOut={() => this.setButtonStyle(!this.state.buttonPress)}
-            textStyle={styles.reviewButtonText} 
+            textStyle={styles.reviewButtonText}
+            activeOpacity={1} 
           >Show Reviews
           </Button>
         </View>
