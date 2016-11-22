@@ -112,6 +112,7 @@ export default class ParkingDetails extends Component {
             {this.props.description}
           </Text>
           <Text>Rating: {this.props.rating}</Text>
+
           <View style={{flexDirection: 'row', width: starWidth * stars.length}}>
             {stars.map((star, key) => (
               <View style={{width: starWidth * star, flex: 1}} key={key}>
