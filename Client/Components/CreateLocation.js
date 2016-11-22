@@ -48,7 +48,7 @@ export default class CreateLocation extends Component {
     .then(response => {
       const location = {
         address: this.state.address,
-        description: '',
+        description: this.state.description,
         lat: this.props.currentLocation.latitude,
         long: this.props.currentLocation.longitude
       }
