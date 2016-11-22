@@ -1,7 +1,7 @@
 const styles = require('../Style/style.js')
 
 import React, { Component } from 'react'
-import { Image, TouchableOpacity, Text,View} from 'react-native'
+import { Image, TouchableOpacity, Text, View } from 'react-native'
 
 export default class ProfileView extends Component {
   constructor(props) {
@@ -26,9 +26,9 @@ export default class ProfileView extends Component {
           <TouchableOpacity style={styles.profileViewButton}>
             <Text style={styles.profileViewText}>Created Pins</Text>
           </TouchableOpacity>
-          <TouchableHighlight onPress={this.showFavoritesList.bind(this)}>
+          <TouchableOpacity onPress={this.showFavoritesList.bind(this)} style={styles.profileViewButton}>
             <Text style={styles.profileViewText}>Favorites</Text>
-          </TouchableHighlight>
+          </TouchableOpacity>
           <TouchableOpacity style={styles.profileViewButton}>
             <Text style={styles.profileViewText}>Help</Text>
           </TouchableOpacity>

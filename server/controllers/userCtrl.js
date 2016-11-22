@@ -107,7 +107,7 @@ exports.addSavedPins = function (req, res) {
   console.log('server userid: ', userId)
   //Check the users savedPins array to make sure location id does not exist already
   User.findByIdAndUpdate(
-    { _id: userId },
+    userId,
     { $addToSet: { savedPins: locationId } },
     { new: true }
   )
