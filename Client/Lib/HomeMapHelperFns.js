@@ -112,19 +112,34 @@ exports.setUserLocation = function() {
 
 
 exports.getPinsForCoords = function(long, lat) {
+  this.setState({
+    animating: true
+  })
   fetch(`${serverURL}/locations/bycoords?long=${long}&lat=${lat}`)
     .then(response => response.json())
     .then(locations => {
-      if (locations.length === 0) {
-          Alert.alert(
-            'Sorry',
-            'No parking spots found near that address',
-            {text: 'OK', onPress: () => console.log('OK Pressed')}
-          )
+
+      // This setTimeout slows down the request so the user gets some
+      // feedback with the ActivityIndicator
+      setTimeout(() => {
+        if (locations.length === 0) {
+          this.setState({
+            animating: false
+          })
         }
-      this.setState({ nearbyLocations: locations})
+        this.setState({
+          nearbyLocations: locations,
+          animating: false
+        })
+      }, 600)
     })
-    .catch(console.log)
+    .catch((err) => {
+      this.setState({
+        animating: false
+      })
+      console.log(err)
+    })
+
 }
 
 

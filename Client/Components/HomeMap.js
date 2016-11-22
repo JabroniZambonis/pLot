@@ -3,7 +3,7 @@ import Helper from '../Lib/HomeMapHelperFns.js'
 import React, { Component } from 'react'
 import MapView from 'react-native-maps'
 import { View, StyleSheet, TextInput, Alert, Image, Text, ActivityIndicator,
- TouchableHighlight, TouchableWithoutFeedback, Keyboard } from 'react-native'
+ TouchableHighlight, TouchableWithoutFeedback, Keyboard, Modal } from 'react-native'
 import CreateLocation from './CreateLocation'
 import ProfileView from './ProfileView'
 import LocationListView from './LocationListView'
@@ -34,7 +34,8 @@ export default class HomeMap extends Component {
       lastPosition: {},
       address: '',
       addButtonPress: false,
-      redoButtonPress: false
+      redoButtonPress: false,
+      animating: false
     }
 
     this.addLocation = this.addLocation.bind(this)
@@ -98,6 +99,8 @@ export default class HomeMap extends Component {
       redoButtonPress: style
     })
   }
+
+  
 
   render () {
     let addButtonStyle = this.state.addButtonPress ? styles.addLocationButtonPress : styles.addLocationButton
@@ -194,10 +197,20 @@ export default class HomeMap extends Component {
           />
           <Button
             style={redoSearchButton}
-            textStyle={styles.reviewButtonText}
-            onPress={() => (
-              this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude)
-            )}
+            textStyle={styles.reviewButtonText} 
+            onPress={() => {
+              this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude);
+              this.getPaidPinsForCoords(this.state.currentLocation.latitude, this.state.currentLocation.longitude);
+              
+              this.setState({
+                currentLocation: {
+                  latitude: this.state.currentLocation.latitude,
+                  longitude: this.state.currentLocation.longitude,
+                  latitudeDelta: 0.03,
+                  longitudeDelta: 0.03
+                }
+              })
+            }}
             onPressIn={() => this.setRedoButtonStyle(!this.state.redoButtonPress)}
             onPressOut={() => this.setRedoButtonStyle(!this.state.redoButtonPress)}
             activeOpacity={1}
@@ -217,7 +230,32 @@ export default class HomeMap extends Component {
           >
             +
           </Button>
+          <Modal
+            animationType={"none"}
+            transparent={true}
+            visible={this.state.animating}
+          >
+            <View style={actInd.centering}>
+              <ActivityIndicator
+                animating={this.state.animating}
+                size="large"
+                color="orange"
+                style={actInd.indicator}
+              />
+            </View>
+        </Modal>
       </View>
     )
   }
 }
+
+const actInd = StyleSheet.create({
+  centering: {
+    justifyContent: 'center',
+    flex: 1,
+    backgroundColor: 'rgba(255, 255, 255, 0.6)',
+  },
+  indicator: {
+    paddingBottom: 100
+  }
+})

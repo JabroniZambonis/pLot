@@ -104,7 +104,7 @@ exports.findByCoords = function (req, res) {
     .where('loc')
     .near(
       { center: { coordinates: [long, lat], type: 'Point' }, 
-      maxDistance: 2000 }
+      maxDistance: 500 }
     )
     .then((data) => {
       const locations = data.map(location => {
@@ -150,7 +150,7 @@ exports.findByAddr = function (req, res) {
         const long = responseObj.geometry.location.lng
         const lat = responseObj.geometry.location.lat
 
-        Location.find().where('loc').near({ center: { coordinates: [long, lat], type: 'Point' }, maxDistance: 2000 })
+        Location.find().where('loc').near({ center: { coordinates: [long, lat], type: 'Point' }, maxDistance: 500 })
         .then((locations) => {
 
           locationsAndCoords.coords = [lat, long]
