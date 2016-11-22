@@ -40,8 +40,12 @@ export default class FavoritesListView extends Component {
 
   render() {
     return (
-      <View>
-        <Text>This will be a list of favorites</Text>
+      <View style={styles.favoritesViewContainer}>
+        <ScrollView>
+          {this.state.savedLocations.map((location, key) => ()
+          <FavoritesListItem location={location} key={key} />
+          ))}
+        </ScrollView>  
       </View>  
     )
   }

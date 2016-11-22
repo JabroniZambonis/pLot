@@ -12,7 +12,7 @@ import NavButton from './NavButton'
 import Navbar from './Navbar'
 import ProfileView from './ProfileView'
 import Camera from'./Camera'
-import FavoritesList from './FavoritesList'
+import FavoritesListView from './FavoritesListView'
 
 export default class Router extends Component {
   constructor(props) {
@@ -109,7 +109,7 @@ export default class Router extends Component {
             </View>
           )
           break
-        case 'FavoritesList':
+        case 'FavoritesListView':
           return (
             <View style={{flex: 1}}>
               <Navbar
@@ -117,7 +117,7 @@ export default class Router extends Component {
                   <NavButtonBack text="back" onPress={() => navigator.pop()}/>
                 }
               />
-              <FavoritesList navigator={navigator} {...route}/>
+              <FavoritesListView navigator={navigator} {...route}/>
             </View>
           )
           break
