@@ -9,7 +9,7 @@ export default class FavoritesListView extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      savedLocations: {},
+      savedLocations: [],
     }
   }
 
@@ -27,8 +27,14 @@ export default class FavoritesListView extends Component {
       }
     })
       .then(response => response.json())
-      .then( response => {
-        console.log(response)
+      .then(favorites => {
+        this.setState({
+          savedLocations: favorites
+        })
+        console.log(this.state)
+      })
+      .catch( (err) => {
+        console.log(err)
       })
   }
 
