@@ -168,6 +168,9 @@ createForm {
 createFormHeader {
   text-align: center;
   font-size: 20;
+  top:10;
+  color: orange;
+  font-weight: bold;
 }
 
 createFormClose {
@@ -176,7 +179,7 @@ createFormClose {
 
 addressContainerAdd {
   flex-direction: row;
-  flex:1;
+  flex:.5;
   align-items: center;
   justify-content: center;
   border-bottom-width: 3;
@@ -194,18 +197,15 @@ createFormAddress {
 createBarContainer {
   padding: 0 5 0 5;
   margin: 0 15 0 15;
-  align-items: stretch;
-  flex-direction: row;
-  flex: 1;
+  flex: 2;
   border-width: 2;
-  border-radius: 15;
+  border-radius: 10;
   border-color: #64AFCB;
-  top: 45;
+  top: 20;
   background-color: white;
 }
 
 createSpotBar {
-  flex: 1;
   height: 35;
   color: #64AFCB;
 }
@@ -220,12 +220,15 @@ createSubmitBtnContainer {
 }
 
 createPicBtnContainer {
-  padding: 0 5 0 5;
-  height: 30;  
+  padding: 0 5 0 10;
+  height: 50;  
   flex-direction: row;
-  flex: 1; 
-  top: 85;
+  top: 10;
   background-color: white;
+  border-bottom-width: 3;
+  border-bottom-color: lightgray;
+  margin-right: 10;
+  margin-left: 10;
 }
 /*CreateLocation.js*/
 

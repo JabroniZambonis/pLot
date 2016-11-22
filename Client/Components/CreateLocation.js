@@ -51,7 +51,7 @@ export default class CreateLocation extends Component {
     return (
       <View style={styles.createForm}>
         
-        <Text style={styles.createFormHeader}>Tell us about this spot</Text>
+        <Text style={styles.createFormHeader}>Drop a pin and share your spot</Text>
         
         <View style={styles.addressContainerAdd}>
           <Image
@@ -61,22 +61,6 @@ export default class CreateLocation extends Component {
           <Text style={styles.createFormAddress}>{this.props.address}</Text>
         </View>
 
-        <View style={styles.createBarContainer}>
-          <TextInput
-            style={styles.createSpotBar}
-            maxLength={limit}
-            onChange={(event) => this.setState({description: event.nativeEvent.text})}
-            placeholder={'Your thoughts go here...'}
-          />
-        </View>
-
-        <Button
-            onPress={this.submitLocation}
-            style={styles.reviewsButton}
-            textStyle={styles.reviewButtonText} 
-          >Submit
-        </Button>
-
         <TouchableOpacity onPress={ () => this.createProfileNav() } 
           style={styles.createPicBtnContainer}>
           <Image
@@ -84,6 +68,21 @@ export default class CreateLocation extends Component {
           source={require('../Public/camera-icon.png')}
           />
         </TouchableOpacity>
+
+        <View style={styles.createBarContainer}>
+          <TextInput
+            style={styles.createSpotBar}
+            maxLength={limit}
+            onChange={(event) => this.setState({description: event.nativeEvent.text})}
+            placeholder={'Your thoughts go here...'}
+          />
+          <Button
+            onPress={this.submitLocation}
+            style={styles.reviewsButton}
+            textStyle={styles.reviewButtonText} 
+          >Submit
+          </Button>
+        </View>
       </View>
     )
   }
