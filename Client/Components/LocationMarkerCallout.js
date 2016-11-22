@@ -15,7 +15,8 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
       title,
       reviews,
       rating,
-      currentUser
+      currentUser,
+      backButtonText: 'map'
     })
   }
 

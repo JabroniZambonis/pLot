@@ -10,7 +10,8 @@ const LocationListItem = (props) => {
       description: props.location.description,
       id: props.location.id,
       coordinate: props.location.coordinate,
-      title: props.location.title
+      title: props.location.title,
+      backButtonText: 'map'
     });
 
   }

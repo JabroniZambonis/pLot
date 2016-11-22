@@ -68,7 +68,7 @@ export default class Router extends Component {
             <View style={{flex: 1}}>
               <Navbar
                 leftButton={
-                  <NavButtonBack text="map" onPress={() => navigator.pop()}/>
+                  <NavButtonBack text={route.backButtonText} onPress={() => navigator.pop()}/>
                 }
               />
               <ParkingDetails navigator={navigator} {...route}/>

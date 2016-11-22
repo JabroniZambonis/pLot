@@ -13,7 +13,8 @@ export default FavoritesListItem = (props) => {
       description: props.location.description,
       id: props.location.id,
       coordinate: {latitude: lat, longitude: long},
-      title: props.location.address
+      title: props.location.address,
+      backButtonText: 'favorites'
     });
   }
 
