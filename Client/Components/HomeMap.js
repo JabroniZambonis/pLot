@@ -2,7 +2,8 @@ import styles  from '../Style/style.js'
 import Helper from '../Lib/HomeMapHelperFns.js'
 import React, { Component } from 'react'
 import MapView from 'react-native-maps'
-import { View, StyleSheet, TextInput, Alert, Image, Text, ActivityIndicator, TouchableHighlight } from 'react-native'
+import { View, StyleSheet, TextInput, Alert, Image, Text, ActivityIndicator,
+ TouchableHighlight, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import CreateLocation from './CreateLocation'
 import ProfileView from './ProfileView'
 import LocationListView from './LocationListView'
@@ -111,6 +112,7 @@ export default class HomeMap extends Component {
             onChangeText={(text) => this.setState({text})}
             placeholder={this.state.searchText}
             onSubmitEditing={(event) => this.searchLocationSubmit(event)}
+            clearButtonMode={'while-editing'}
           />
         </View>
 
