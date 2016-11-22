@@ -14,26 +14,14 @@ export default class Cam extends Component {
 
   takePicture() {
     this.camera.capture()
-      .then(data => {
-        fetch(`${serverURL}/locations/${this.props.locationId}/photos`, {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': this.props.userToken
-          },
-          body: JSON.stringify({
-            image: data 
-          })
-        })
-        .then(response => response.json())
-        // any errors posting the location
-        // This needs improvement!
-        .catch(err => console.log(err))
+      .then(photo => {
+        this.props.addPhoto(photo)
       })
       .catch(err => {
         console.error("ERROR Camera.js takePicture failed: ", err)
       })
+
+    navigator.pop()
   }
   
   render () {

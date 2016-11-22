@@ -6,7 +6,6 @@ exports.getAddressByCoords = function(lat, long) {
   return fetch(`${serverURL}/locations/googlebycoords?lat=${lat}&long=${long}`)
     .then(response => response.json())
     .then(data => {
-      console.log('Got data: ', data)
       this.setState({address: data})
     })
 }
