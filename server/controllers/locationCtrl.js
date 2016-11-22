@@ -181,6 +181,7 @@ exports.photos = function (req, res) {
 
 exports.addPhoto = function (req, res) {
   // pull out id for location
+  console.log("locationCtrl.js addPhoto req.params: ", req.params)
   const { locationId } = req.params
   // create variable for image once it is read
   let image

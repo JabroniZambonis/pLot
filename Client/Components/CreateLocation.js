@@ -11,11 +11,14 @@ export default class CreateLocation extends Component {
     super(props)
     this.state = {
       description: '',
-      address: 'Fetching address...',
+      address: 'Error fetching address...',
+      createdAddressId: null,
+      currentPhoto: {}
     }
 
     this.submitLocation = this.submitLocation.bind(this)
-    this.getAddressByCoords = getAddressByCoords.bind(this)
+    this.getAddressByCoords = this.getAddressByCoords.bind(this)
+    this.addPhoto = this.addPhoto.bind(this)
   }
 
   componentDidMount () {
@@ -24,7 +27,6 @@ export default class CreateLocation extends Component {
     // set state for address
     this.getAddressByCoords(latitude, longitude)
       .catch(err => this.setState({ address: 'Error fetching address'}))
-
   }
 
   submitLocation () {
@@ -45,6 +47,7 @@ export default class CreateLocation extends Component {
       })
     })
     // location saved addLocation to UI
+    .then(response => response.json())
     .then(response => {
       const location = {
         address: this.state.address,
@@ -53,6 +56,26 @@ export default class CreateLocation extends Component {
         long: this.props.currentLocation.longitude
       }
       this.props.addLocation(location)
+      this.setState({createdAddressId: location.op._id})
+    })
+    .then(() => {
+
+      fetch(`${serverURL}/locations/${this.props.locationId}/photos`, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': this.props.userToken
+          },
+          body: JSON.stringify({
+            image: this.state.currentPhoto 
+          })
+        })
+        .then(response => response.json())
+        // any errors posting the location
+        // This needs improvement!
+        .catch(err => console.log(err))
+
     })
     .catch(err => console.log(err))
   }
@@ -60,7 +83,12 @@ export default class CreateLocation extends Component {
   createProfileNav () {
     this.props.navigator.push({
       name: 'Camera',
+      addphoto: this.addPhoto,
     })
+  }
+
+  addPhoto (photo) {
+    this.setState({currentPhoto: photo})
   }
 
   render () {
@@ -75,7 +103,7 @@ export default class CreateLocation extends Component {
               style={{width: 40, height: 40, marginRight: 15}}
               source={require('../Public/addressicon.png')}
             />
-          <Text style={styles.createFormAddress}>{this.props.address}</Text>
+          <Text style={styles.createFormAddress}>{this.state.address}</Text>
         </View>
 
         <TouchableOpacity onPress={ () => this.createProfileNav() }

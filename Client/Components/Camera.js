@@ -9,13 +9,21 @@ export default class Cam extends Component {
     this.state = {
       cameraType: Camera.constants.Type.back
     }
-    // this.takePicture = this.takePicture.bind(this)
+    this.takePicture = this.takePicture.bind(this)
   }
-  // takePicture() {
-  //   this.refs.cam.capture(function(err, data) {
-  //     console.log(err, data);
-  //   });
-  // }
+
+  takePicture() {
+    this.camera.capture()
+      .then(photo => {
+        this.props.addPhoto(photo)
+      })
+      .catch(err => {
+        console.error("ERROR Camera.js takePicture failed: ", err)
+      })
+
+    navigator.pop()
+  }
+  
   render () {
     return (
       <Camera
