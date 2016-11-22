@@ -16,8 +16,6 @@ export default class FavoritesListView extends Component {
   //Here we will use the current user info to make a query to the DB and grab all of their savedLocations. Then set the state of 
   //Saved pins to these locations. 
   componentDidMount () {
-   console.log('Should have the current user info in FavoritesList', this.props.currentUser)
-   console.log('THIS SHOULD BE USER TOKEN', this.props.userToken)
     fetch(`${serverURL}/users/${this.props.currentUser._id}/saved`, {
       method: 'GET',
       headers: {
@@ -31,7 +29,6 @@ export default class FavoritesListView extends Component {
         this.setState({
           savedLocations: favorites
         })
-        console.log(this.state)
       })
       .catch( (err) => {
         console.log(err)
@@ -52,6 +49,5 @@ export default class FavoritesListView extends Component {
       </View>  
     )
   }
-
 }  
 

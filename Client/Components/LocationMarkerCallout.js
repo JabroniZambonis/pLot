@@ -21,7 +21,6 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
   }
 
   const handleFavoriteButtonPress = function () {
-    console.log('PUT userToken', userToken)
     fetch(`${serverURL}/users/${currentUser._id}/saved`, {
       method: 'PUT',
       headers: {

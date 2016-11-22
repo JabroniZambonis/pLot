@@ -19,8 +19,9 @@ export default FavoritesListItem = (props) => {
   }
 
   return (
-    <TouchableOpacity onPress={ () => { handleButtonPress() } }
-                      style={styles.listItemView}
+    <TouchableOpacity
+      onPress={ () => { handleButtonPress() } }
+      style={styles.listItemView}
     >
       <View style={styles.listItemText}>
         <Text style={{fontWeight: 'bold'}}>{props.location.address}</Text>
