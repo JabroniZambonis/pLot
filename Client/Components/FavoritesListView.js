@@ -38,6 +38,7 @@ export default class FavoritesListView extends Component {
   render() {
     return (
       <View style={styles.listViewContainer}>
+        <Text style={{fontWeight:'bold', fontSize: 20, marginBottom: 15}}>Favorites</Text>
         <ScrollView
           directionalLockEnabled={true}
           contentContainerStyle={styles.scrollModal}
