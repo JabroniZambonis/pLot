@@ -27,7 +27,9 @@ export default class FavoritesListView extends Component {
       }
     })
       .then(response => response.json())
-      .then(console.log) 
+      .then( response => {
+        console.log(response)
+      })
   }
 
   render() {

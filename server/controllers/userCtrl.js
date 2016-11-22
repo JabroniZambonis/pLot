@@ -104,13 +104,15 @@ exports.getCreatedPins = function (req, res) {
 exports.addSavedPins = function (req, res) {
   const locationId = req.body.location
   const userId = req.params.userId
+  console.log('server userid: ', userId)
   //Check the users savedPins array to make sure location id does not exist already
-  User.findOneAndUpdate(
+  User.findByIdAndUpdate(
     { _id: userId },
     { $addToSet: { savedPins: locationId } },
     { new: true }
   )
   .then( (user) => {
+    console.log('Server user', user)
     Location.findById(locationId)
         .then(location => {
           return res.status(201).json(location)
