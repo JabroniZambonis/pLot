@@ -87,15 +87,12 @@ export default class CreateLocation extends Component {
     })
   }
 
-
   addPhoto (photo) {
     this.setState({currentPhoto: photo})
   }
 
   render () {
     const limit = 200
-    console.log("CreateLocation.js this.props: ", this.props)
-
     return (
       <View style={styles.createForm}>
 
@@ -129,11 +126,8 @@ export default class CreateLocation extends Component {
           <View>
             <Button
               onPress={this.submitLocation}
-              style={submitButtonStyle}
+              style={styles.reviewsButton}
               textStyle={styles.reviewButtonText}
-              activeOpacity={1} 
-              onPressIn={() => this.setButtonStyle(!this.state.buttonPress)}
-              onPressOut={() => this.setButtonStyle(!this.state.buttonPress)}
             >Submit
             </Button>
           </View>
