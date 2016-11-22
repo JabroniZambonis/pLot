@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, Modal, TouchableHighlight, ScrollView } from 'react-native'
 import styles  from '../Style/style.js'
-import LocationListItem from './LocationListItem'
+import FavoritesListItem from './FavoritesListItem'
 import Button from 'apsl-react-native-button'
 import serverURL from '../Lib/url'
 
@@ -40,12 +40,15 @@ export default class FavoritesListView extends Component {
 
   render() {
     return (
-      <View style={styles.favoritesViewContainer}>
-        <ScrollView>
-          {this.state.savedLocations.map((location, key) => ()
-          <FavoritesListItem location={location} key={key} />
+      <View style={styles.listViewContainer}>
+        <ScrollView
+          directionalLockEnabled={true}
+          contentContainerStyle={styles.scrollModal}
+        >
+          {this.state.savedLocations.map((location, key) => (
+          <FavoritesListItem location={location} key={key} navigator={this.props.navigator}/>
           ))}
-        </ScrollView>  
+        </ScrollView>
       </View>  
     )
   }
