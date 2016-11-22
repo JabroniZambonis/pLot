@@ -10,16 +10,18 @@ const LocationListItem = (props) => {
       description: props.location.description,
       id: props.location.id,
       coordinate: props.location.coordinate,
-      title: props.location.title
+      title: props.location.title,
+      backButtonText: 'map'
     });
 
   }
 
   return (
-        <TouchableOpacity onPress={ () => { handleButtonPress();
-                                            props.setModalVisible(!props.modalState)
-                                          }}
-                          style={styles.listItemView}
+        <TouchableOpacity
+          onPress={ () => { handleButtonPress();
+                            props.setModalVisible(!props.modalState)
+                          }}
+          style={styles.listItemView}
         >
           <View style={styles.listItemText}>
             <Text style={{fontWeight: 'bold'}}>{props.location.title}</Text>

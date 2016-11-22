@@ -480,11 +480,11 @@ calloutFavorite {
 
 /*NavButton.js*/
 navButtonBack {
-  width: 50;
+  width: 80;
   height: 30;
   border-radius: 8;
   border-color: #64AFCB;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 

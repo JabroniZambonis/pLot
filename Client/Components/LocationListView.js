@@ -60,7 +60,7 @@ export default class LocationListView extends Component {
         >
           <View style={styles.listViewContainer}>
             <ScrollView
-              directionalLockEnabled={true} 
+              directionalLockEnabled={true}
               contentContainerStyle={styles.scrollModal}
             >
               { !this.state.nearbyLocations.length ? 

@@ -9,7 +9,7 @@ const s = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingRight: 10,
-    paddingLeft: 10,
+    paddingLeft: 5,
     paddingTop: 5
   },
   leftButton: {
