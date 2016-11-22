@@ -194,10 +194,11 @@ export default class HomeMap extends Component {
           />
           <Button
             style={redoSearchButton}
-            textStyle={styles.reviewButtonText}
-            onPress={() => (
-              this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude)
-            )}
+            textStyle={styles.reviewButtonText} 
+            onPress={() => {
+              this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude);
+              this.getPaidPinsForCoords(this.state.currentLocation.latitude, this.state.currentLocation.longitude)
+            }}
             onPressIn={() => this.setRedoButtonStyle(!this.state.redoButtonPress)}
             onPressOut={() => this.setRedoButtonStyle(!this.state.redoButtonPress)}
             activeOpacity={1}
