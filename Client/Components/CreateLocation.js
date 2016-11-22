@@ -71,10 +71,11 @@ export default class CreateLocation extends Component {
 
         <View style={styles.createBarContainer}>
           <TextInput
+            multiline={true}
             style={styles.createSpotBar}
             maxLength={limit}
             onChange={(event) => this.setState({description: event.nativeEvent.text})}
-            placeholder={'Your thoughts go here...'}
+            placeholder={'Tell us about the spot...'}
           />
           <Button
             onPress={this.submitLocation}

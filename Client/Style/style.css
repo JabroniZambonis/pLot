@@ -168,18 +168,15 @@ createForm {
 createFormHeader {
   text-align: center;
   font-size: 20;
-  top:10;
+  height: 50;
+  top: 30;
   color: orange;
   font-weight: bold;
 }
 
-createFormClose {
-  text-align: center;
-}
-
 addressContainerAdd {
   flex-direction: row;
-  flex:.5;
+  flex: .8;
   align-items: center;
   justify-content: center;
   border-bottom-width: 3;
@@ -195,35 +192,37 @@ createFormAddress {
 }
 
 createBarContainer {
-  padding: 0 5 0 5;
-  margin: 0 15 0 15;
+  margin: 0 15 30 15;
   flex: 2;
-  border-width: 2;
-  border-radius: 10;
-  border-color: #64AFCB;
   top: 20;
   background-color: white;
+  align-items: center;
 }
 
 createSpotBar {
-  height: 35;
+  height: 150;
   color: #64AFCB;
+  border-width: 2;
+  border-radius: 10;
+  border-color: #64AFCB;
+  padding-left: 10;
+  justify-content: flex-start;
+  font-size: 16;
 }
 
-createSubmitBtnContainer {
-  flex-direction: row;
+/*createSubmitBtnContainer {
   flex: 1;
   border-width: 2;
   border-radius: 15;
   border-color: #64AFCB;
   background-color: white;
-}
+}*/
 
 createPicBtnContainer {
-  padding: 0 5 0 10;
-  height: 50;  
+  align-items: center;
+  padding: 0 0 0 10;
+  flex:.5;  
   flex-direction: row;
-  top: 10;
   background-color: white;
   border-bottom-width: 3;
   border-bottom-color: lightgray;
