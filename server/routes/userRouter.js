@@ -30,8 +30,9 @@ router.route('/:userId')
   .put(users.updateUser) //update user information
 
 router.route('/:userId/saved')
-  .get(users.getSavedPins)
-  .put(users.addSavedPins)
+  .get(users.getSavedPins) //get user favorites
+  .put(users.addSavedPins) //add new favorite
+  .delete(users.deleteSavedPins) //delete favorites
   .post(users.createPin) //add new pin
   .delete(users.deletePin) //delete pin
 
