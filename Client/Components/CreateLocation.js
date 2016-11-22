@@ -63,6 +63,7 @@ export default class CreateLocation extends Component {
 
         <TouchableOpacity onPress={ () => this.createProfileNav() } 
           style={styles.createPicBtnContainer}>
+          <Text style={{fontSize:20, color: '#999999', fontWeight:'bold'}}>+ </Text>
           <Image
           style={{width: 40, height: 30}}
           source={require('../Public/camera-icon.png')}
@@ -77,12 +78,14 @@ export default class CreateLocation extends Component {
             onChange={(event) => this.setState({description: event.nativeEvent.text})}
             placeholder={'Tell us about the spot...'}
           />
-          <Button
-            onPress={this.submitLocation}
-            style={styles.reviewsButton}
-            textStyle={styles.reviewButtonText} 
-          >Submit
-          </Button>
+          <View>
+            <Button
+              onPress={this.submitLocation}
+              style={styles.reviewsButton}
+              textStyle={styles.reviewButtonText} 
+            >Submit
+            </Button>
+          </View>
         </View>
       </View>
     )
