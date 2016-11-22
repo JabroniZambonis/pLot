@@ -25,6 +25,10 @@ export default FavoritesListItem = (props) => {
         <Text style={{fontWeight: 'bold'}}>{props.location.address}</Text>
         <Text>{props.location.description}</Text>
       </View>
+      <Image
+        style={styles.listItemArrow}
+        source={require('../Public/Arrow-Icon.png')}
+      />
     </TouchableOpacity>
   )
 }
