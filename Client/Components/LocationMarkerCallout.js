@@ -51,7 +51,6 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
   const starWidth = 25
 
   return (
-<<<<<<< HEAD
     <View style={styles.calloutContainer}>
       <View style={styles.calloutFavorite}>
         <TouchableOpacity onPress={ () => handleFavoriteButtonPress()}>
@@ -79,17 +78,5 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
         </TouchableOpacity>
       </View> 
     </View>
-=======
-   <View style={styles.calloutContainer}>
-     <Text style={styles.calloutDescription}>{title}</Text>
-     <Text style={styles.calloutDescription}>{rating}</Text>
-     <TouchableOpacity onPress={ () => handleButtonPress() } style={styles.parkingDetailsButton}>
-       <Image
-       style={{width: 40, height: 20}}
-       source={require('../Public/Arrow-Icon.png')}
-       />
-     </TouchableOpacity>
-   </View>
->>>>>>> adds rating to the view
   )
 }

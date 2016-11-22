@@ -51,23 +51,15 @@ export default class CreateLocation extends Component {
     return (
       <View style={styles.createForm}>
         
-        <Text style={styles.createFormHeader}>Tell us about this spot</Text>
+        <Text style={styles.createFormHeader}>Drop a pin and share your spot</Text>
         
-
-        <Text style={styles.createFormAddress}>{this.props.address}</Text>
-
-        <View style={styles.createBarContainer}>
-          <TextInput
-            style={styles.createSpotBar}
-            maxLength={limit}
-            onChange={(event) => this.setState({description: event.nativeEvent.text})}
-            placeholder={'Your thoughts go here...'}
-          />
+        <View style={styles.addressContainerAdd}>
+          <Image
+              style={{width: 40, height: 40, marginRight: 15}}
+              source={require('../Public/addressicon.png')}
+            />
+          <Text style={styles.createFormAddress}>{this.props.address}</Text>
         </View>
-
-        <TouchableHighlight style={styles.createSubmitBtnContainer}>
-          <Text onPress={this.submitLocation}>Submit</Text>
-        </TouchableHighlight>
 
         <TouchableOpacity onPress={ () => this.createProfileNav() } 
           style={styles.createPicBtnContainer}>
@@ -76,6 +68,22 @@ export default class CreateLocation extends Component {
           source={require('../Public/camera-icon.png')}
           />
         </TouchableOpacity>
+
+        <View style={styles.createBarContainer}>
+          <TextInput
+            multiline={true}
+            style={styles.createSpotBar}
+            maxLength={limit}
+            onChange={(event) => this.setState({description: event.nativeEvent.text})}
+            placeholder={'Tell us about the spot...'}
+          />
+          <Button
+            onPress={this.submitLocation}
+            style={styles.reviewsButton}
+            textStyle={styles.reviewButtonText} 
+          >Submit
+          </Button>
+        </View>
       </View>
     )
   }
