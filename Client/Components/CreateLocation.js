@@ -87,18 +87,13 @@ export default class CreateLocation extends Component {
     })
   }
 
-<<<<<<< 7fb5b7be6328f940dd94782c0bed7b51bfb9f5ac
+
   addPhoto (photo) {
     this.setState({currentPhoto: photo})
-=======
-  setButtonStyle (style) {
-    this.setState({buttonPress: style})
->>>>>>> working on submit pin
   }
 
   render () {
     const limit = 200
-    let submitButtonStyle = this.state.buttonPress ? styles.reviewsButtonPress : styles.reviewsButton
     console.log("CreateLocation.js this.props: ", this.props)
 
     return (
@@ -134,16 +129,11 @@ export default class CreateLocation extends Component {
           <View>
             <Button
               onPress={this.submitLocation}
-<<<<<<< f8dfafd1ac92242fd21f31d48de035975981e25d
-              style={styles.reviewsButton}
-              textStyle={styles.reviewButtonText}
-=======
               style={submitButtonStyle}
               textStyle={styles.reviewButtonText}
               activeOpacity={1} 
               onPressIn={() => this.setButtonStyle(!this.state.buttonPress)}
               onPressOut={() => this.setButtonStyle(!this.state.buttonPress)}
->>>>>>> working on submit pin
             >Submit
             </Button>
           </View>
