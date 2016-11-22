@@ -45,6 +45,7 @@ searchBar {
   flex: 1;
   height: 35;
   color: #64AFCB;
+  padding-left: 10;
 }
 
 homeContainer {
