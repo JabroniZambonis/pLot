@@ -8,13 +8,13 @@ populated areas where parking can be manually added by users.
 
 To run this application locally, it's necessary to create a .env file with the
 following information:
-
-  PORT=3000
-  DB_NAME=pLot
-  DB_HOST=localhost
-  GOOGLE_API_KEY=your google API key
-  JWT_SECRET=your secret
-
+```txt
+PORT=3000
+DB_NAME=plot
+DB_HOST=localhost
+GOOGLE_API_KEY=your google API key
+JWT_SECRET=your secret
+```
 # react-native-css
 
 This application utilizes the react-native-css package
