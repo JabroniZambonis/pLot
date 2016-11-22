@@ -11,7 +11,8 @@ export default class CreateLocation extends Component {
     super(props)
     this.state = {
       description: '',
-      address: 'Fetching address...',
+      address: 'Error fetching address...',
+      createdAddressId: null
     }
 
     this.submitLocation = this.submitLocation.bind(this)
@@ -45,6 +46,7 @@ export default class CreateLocation extends Component {
       })
     })
     // location saved addLocation to UI
+    .then(response => response.json())
     .then(response => {
       const location = {
         address: this.state.address,
@@ -53,6 +55,7 @@ export default class CreateLocation extends Component {
         long: this.props.currentLocation.longitude
       }
       this.props.addLocation(location)
+      this.setState({createdAddressId: location.op._id})
     })
     .catch(err => console.log(err))
   }
@@ -60,6 +63,7 @@ export default class CreateLocation extends Component {
   createProfileNav () {
     this.props.navigator.push({
       name: 'Camera',
+      locationId: this.state.createdAddressId,
     })
   }
 

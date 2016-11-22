@@ -23,7 +23,7 @@ export default class Cam extends Component {
             'Authorization': this.props.userToken
           },
           body: JSON.stringify({
-            location: 
+            image: data 
           })
         })
         .then(response => response.json())
@@ -34,7 +34,6 @@ export default class Cam extends Component {
       .catch(err => {
         console.error("ERROR Camera.js takePicture failed: ", err)
       })
-    }
   }
   
   render () {
