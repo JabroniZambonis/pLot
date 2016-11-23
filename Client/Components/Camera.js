@@ -21,18 +21,19 @@ export default class Cam extends Component {
         console.error("ERROR Camera.js takePicture failed: ", err)
       })
 
-    navigator.pop()
+    this.props.navigator.pop()
   }
-  
+
   render () {
     return (
       <Camera
-        ref="cam"
+        ref={(cam) => this.camera = cam}
+        aspect={Camera.constants.Aspect.fill}
         style={styles.cameraContainer}
         type={this.state.cameraType}>
         <View style={styles.cameraButtonBar}>
           <TouchableHighlight style={styles.cameraButton}>
-            <Text style={styles.cameraButtonText} onPress={this.takePicture()}>Take</Text>
+            <Text style={styles.cameraButtonText} onPress={this.takePicture}>Take</Text>
           </TouchableHighlight>
         </View>
       </Camera>

@@ -12,10 +12,12 @@ export default class CreateLocation extends Component {
     this.state = {
       description: '',
       address: 'Error fetching address...',
+      currentPhoto: ''
     }
 
     this.submitLocation = this.submitLocation.bind(this)
     this.getAddressByCoords = getAddressByCoords.bind(this)
+    this.addPhoto = this.addPhoto.bind(this)
   }
 
   componentDidMount () {
@@ -25,6 +27,10 @@ export default class CreateLocation extends Component {
     this.getAddressByCoords(latitude, longitude)
       .catch(err => this.setState({ address: 'Error fetching address'}))
 
+  }
+
+  addPhoto (photo) {
+    this.setState({ currentPhoto: photo})
   }
 
   submitLocation () {
@@ -41,7 +47,8 @@ export default class CreateLocation extends Component {
         'Authorization': this.props.userToken
       },
       body: JSON.stringify({
-        location: locationObj
+        location: locationObj,
+        image: this.state.currentPhoto
       })
     })
     // location saved addLocation to UI
@@ -56,12 +63,13 @@ export default class CreateLocation extends Component {
     })
     .catch(err => console.log(err))
 
-    navigator.pop()
+    // navigator.pop()
   }
 
   createProfileNav () {
     this.props.navigator.push({
       name: 'Camera',
+      addPhoto: this.addPhoto
     })
   }
 
