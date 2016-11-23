@@ -63,12 +63,14 @@ export default class CreateReview extends Component {
           />
           <Text>{this.state.rating}</Text>
         </View>
-        <Button
-          onPress={this.createReview}
-          style={styles.reviewsButton}
-          textStyle={styles.reviewButtonText}
-        >Submit
-        </Button>
+        <View style={{ flexDirection:'row',justifyContent:'center'}}>
+          <Button
+            onPress={this.createReview}
+            style={styles.reviewsButton}
+            textStyle={styles.reviewButtonText}
+          >Submit
+          </Button>
+        </View>
       </View>
     )
   }
@@ -87,8 +89,7 @@ const style = StyleSheet.create({
   formContainer: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#efefef',
-    alignItems:'center'
+    backgroundColor: '#efefef'
   },
 
   contentInput: {
