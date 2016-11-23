@@ -44,7 +44,7 @@ export default class FavoritesListView extends Component {
           contentContainerStyle={styles.scrollModal}
         >
           {this.state.savedLocations.map((location, key) => (
-          <FavoritesListItem location={location} key={key} navigator={this.props.navigator}/>
+          <FavoritesListItem location={location} key={key} navigator={this.props.navigator} currentUser={this.props.currentUser} userToken={this.props.userToken}/>
           ))}
         </ScrollView>
       </View>  

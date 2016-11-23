@@ -126,7 +126,7 @@ exports.deleteSavedPins = function (req, res) {
   //Check users savedPins array to find location we want to remove from favorites list
   User.findByIdAndUpdate(
     userId,
-    { $pull: {savedPins: locationId } },
+    { $pull: { savedPins: locationId } },
     { new: true }
   )
   .then( (user) => {
