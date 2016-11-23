@@ -34,7 +34,7 @@ router.route('/:userId/saved')
   .put(users.addSavedPins) //add new favorite
   .delete(users.deleteSavedPins) //delete favorites
   .post(users.createPin) //add new pin
-  .delete(users.deletePin) //delete pin
+  // .delete(users.deletePin) //delete pin
 
 router.route('/:userId/created')
   .get(users.getCreatedPins)

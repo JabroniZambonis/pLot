@@ -20,7 +20,7 @@ export default FavoritesListItem = (props) => {
   }
 
   const handleRemoveFavorites = function () {
-    console.log('Favorites List Item Props', props)
+    console.log('Favorites List Item Props', props.location._id)
     fetch(`${serverURL}/users/${props.currentUser._id}/saved`, {
       method: 'DELETE',
       headers: {
@@ -33,7 +33,9 @@ export default FavoritesListItem = (props) => {
       })
     })
     .then(response => response.json())
-    .then(console.log)
+    .then(json => {
+      return json
+    })
     .catch(err => {
       console.log(err)
     })
