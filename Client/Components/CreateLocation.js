@@ -1,7 +1,7 @@
 const styles = require('../Style/style.js')
 
 import React, { Component } from 'react'
-import { Image, TouchableHighlight, TouchableOpacity, Text, StyleSheet, View, Modal, TextInput } from 'react-native'
+import { Image, TouchableHighlight, TouchableOpacity, Text, StyleSheet, View, Modal, TextInput, Keyboard, TouchableWithoutFeedback} from 'react-native'
 import Button from 'apsl-react-native-button'
 import serverURL from '../Lib/url'
 import { getAddressByCoords } from '../Lib/HomeMapHelperFns'
@@ -77,45 +77,48 @@ export default class CreateLocation extends Component {
   render () {
     const limit = 200
     return (
-      <View style={styles.createForm}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.createForm}>
 
-        <Text style={styles.createFormHeader}>Drop a pin and share your spot</Text>
+          <Text style={styles.createFormHeader}>Drop a pin and share your spot</Text>
 
-        <View style={styles.addressContainerAdd}>
-          <Image
-              style={{width: 40, height: 40, marginRight: 15}}
-              source={require('../Public/addressicon.png')}
+          <View style={styles.addressContainerAdd}>
+            <Image
+                style={{width: 40, height: 40, marginRight: 15}}
+                source={require('../Public/addressicon.png')}
+              />
+            <Text style={styles.createFormAddress}>{this.state.address}</Text>
+          </View>
+          <View style={styles.createPicBtnContainer}>
+          <TouchableOpacity onPress={ () => this.createProfileNav() }
+            style={{flexDirection:'row'}}>
+            <Text style={{fontSize:20, color: '#999999', fontWeight:'bold'}}>+ </Text>
+            <Image
+            style={{width: 40, height: 30}}
+            source={require('../Public/camera-icon.png')}
             />
-          <Text style={styles.createFormAddress}>{this.state.address}</Text>
-        </View>
+          </TouchableOpacity>
+          </View>
 
-        <TouchableOpacity onPress={ () => this.createProfileNav() }
-          style={styles.createPicBtnContainer}>
-          <Text style={{fontSize:20, color: '#999999', fontWeight:'bold'}}>+ </Text>
-          <Image
-          style={{width: 40, height: 30}}
-          source={require('../Public/camera-icon.png')}
-          />
-        </TouchableOpacity>
-
-        <View style={styles.createBarContainer}>
-          <TextInput
-            multiline={true}
-            style={styles.createSpotBar}
-            maxLength={limit}
-            onChange={(event) => this.setState({description: event.nativeEvent.text})}
-            placeholder={'Tell us about the spot...'}
-          />
-          <View>
-            <Button
-              onPress={this.submitLocation}
-              style={styles.reviewsButton}
-              textStyle={styles.reviewButtonText}
-            >Submit
-            </Button>
+          <View style={styles.createBarContainer}>
+            <TextInput
+              multiline={true}
+              style={styles.createSpotBar}
+              maxLength={limit}
+              onChange={(event) => this.setState({description: event.nativeEvent.text})}
+              placeholder={'Tell us about the spot...'}
+            />
+            <View>
+              <Button
+                onPress={this.submitLocation}
+                style={styles.reviewsButton}
+                textStyle={styles.reviewButtonText}
+              >Submit
+              </Button>
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     )
   }
 }
