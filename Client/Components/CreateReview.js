@@ -1,6 +1,9 @@
+const styles = require('../Style/style.js')
+
 import React, { Component } from 'react'
-import { View, TextInput, Text, TouchableHighlight, Slider, StyleSheet } from 'react-native'
+import { View, TextInput, Text, TouchableHighlight, Slider, StyleSheet} from 'react-native'
 import serverURL from '../Lib/url'
+import Button from 'apsl-react-native-button'
 
 export default class CreateReview extends Component {
   constructor(props) {
@@ -44,41 +47,59 @@ export default class CreateReview extends Component {
   render () {
     return (
       <View style={style.formContainer}>
-        <Text>Tell us your thoughts</Text>
+        <Text style={style.createFormHeader}>Review the spot</Text>
         <View style={style.inputContainer}>
           <TextInput
             style={style.contentInput}
+            multiline={true}
             onChange={(event) => this.setState({content: event.nativeEvent.text})}
+            placeholder={'Give us your feedback on the spot...'}
           />
+          <Slider 
+            maximumValue={5}
+            minimumValue={0}
+            step={1}
+            onValueChange={(value) => this.setState({rating: value})}
+          />
+          <Text>{this.state.rating}</Text>
         </View>
-        <Slider 
-          maximumValue={5}
-          minimumValue={0}
-          step={1}
-          onValueChange={(value) => this.setState({rating: value})}
-        />
-        <Text>{this.state.rating}</Text>
-        <TouchableHighlight onPress={this.createReview}>
-          <Text>Submit</Text>
-        </TouchableHighlight>
+        <View style={{ flexDirection:'row',justifyContent:'center'}}>
+          <Button
+            onPress={this.createReview}
+            style={styles.reviewsButton}
+            textStyle={styles.reviewButtonText}
+          >Submit
+          </Button>
+        </View>
       </View>
     )
   }
 }
 
 const style = StyleSheet.create({
+  createFormHeader: {
+  textAlign: 'center',
+  fontSize: 22,
+  height: 50,
+  color: '#ffa500',
+  fontWeight: 'bold',
+  alignItems: 'center'
+  },
+
   formContainer: {
     flex: 1,
     padding: 10,
     backgroundColor: '#efefef'
   },
-  inputContainer: {
-    borderWidth: 1,
-    borderColor: '#64AFCB',
-    borderRadius: 10,
-    backgroundColor: 'white'
-  },
+
   contentInput: {
+    borderRadius: 10,
+    borderColor: '#64AFCB',
+    borderWidth: 1,
     height: 200,
+    fontSize: 16,
+    paddingLeft: 10,
+    backgroundColor: 'white',
+    color: '#64AFCB'
   }
 })
