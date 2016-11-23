@@ -52,8 +52,6 @@ export default LocationMarkerCallout = ( { description, navigator, key, coordina
 
   const starWidth = 25
 
-  const ratingText = rating ? rating : 'No reviews yet'
-
   return (
     <View style={styles.calloutContainer}>
       <View style={styles.calloutFavorite}>
