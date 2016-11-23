@@ -459,6 +459,7 @@ parkingDescriptionImagesContainer {
 /*LocationMarkerCallout.js*/
 calloutContainer {
   flex-direction: row;
+  z-index: 2;
 }
 
 calloutDescription {
