@@ -121,8 +121,6 @@ exports.addSavedPins = function (req, res) {
 
 exports.deleteSavedPins = function (req, res) {
   const locationId = req.body.location
-  // const userId = mongoose.mongo.ObjectID(req.params.userId);
-  // const locationId = mongoose.mongo.ObjectID(req.body.location);
   const userId = req.params.userId
   //Check users savedPins array to find location we want to remove from favorites list
   User.findOneAndUpdate(

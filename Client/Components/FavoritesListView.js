@@ -35,6 +35,15 @@ export default class FavoritesListView extends Component {
       })
   }
 
+  updateStateOfFavorites (locationId) {
+    const newFavs = this.state.savedLocations.filter(function (id) {
+      return id._id !== locationId
+    })
+    this.setState({
+      savedLocations: newFavs
+    })
+  }
+
   render() {
     return (
       <View style={[styles.listViewContainer, {flex:1, backgroundColor:'white'}]}>
@@ -44,7 +53,14 @@ export default class FavoritesListView extends Component {
           contentContainerStyle={styles.scrollModal}
         >
           {this.state.savedLocations.map((location, key) => (
-          <FavoritesListItem location={location} key={key} navigator={this.props.navigator} currentUser={this.props.currentUser} userToken={this.props.userToken}/>
+          <FavoritesListItem
+            location={location}
+            key={key}
+            navigator={this.props.navigator}
+            currentUser={this.props.currentUser}
+            userToken={this.props.userToken}
+            updateStateOfFavorites={this.updateStateOfFavorites.bind(this)}
+          />
           ))}
         </ScrollView>
       </View>  
