@@ -150,6 +150,7 @@ export default class HomeMap extends Component {
                   description={marker.description}
                   onPress={(evt) => console.log('pressed ', evt.nativeEvent)}
                   centerOffset={{x: 0, y: -20}}
+                  style={{zIndex:0}}
                 >
                   <LocationMarker {...marker} />
                   <MapView.Callout style={styles.locationMarkerCallout}>
@@ -175,7 +176,7 @@ export default class HomeMap extends Component {
                   price={marker.price}
                   onPress={(evt) => console.log('pressed ', evt.nativeEvent)}
                   centerOffset={{x: 0, y: -20}}
-
+                  style={{zIndex:0}}
                 >
                   <LocationMarkerPaid {...marker} />
                   <MapView.Callout style={styles.locationMarkerCallout}>

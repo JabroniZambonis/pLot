@@ -58,7 +58,7 @@ homeMapContainer {
   flex: 1;
   align-items: center;
   background-color: rgba(0,0,0,0);
-  z-index: -1;
+  
 }
 
 homeMapView {
@@ -85,7 +85,7 @@ mapCenterMarker {
 
 locationMarkerCallout {
   width: 175;
-  z-index: 2;
+  z-index: 3;
 }
 
 redoSearchButton {
