@@ -85,7 +85,6 @@ exports.getSavedPins = function (req, res) {
     .populate('savedPins')
     .then(user => {
       // respond with users saved pins
-      console.log('User saved pins?: ', user)
       return res.status(200).json(user.savedPins)
     })
     .catch(err => res.status(500).json(err))
@@ -104,20 +103,37 @@ exports.getCreatedPins = function (req, res) {
 exports.addSavedPins = function (req, res) {
   const locationId = req.body.location
   const userId = req.params.userId
-  console.log('server userid: ', userId)
   //Check the users savedPins array to make sure location id does not exist already
-  User.findByIdAndUpdate(
-    userId,
+  User.findOneAndUpdate(
+    {_id: userId},
     { $addToSet: { savedPins: locationId } },
     { new: true }
   )
   .then( (user) => {
-    console.log('Server user', user)
     Location.findById(locationId)
         .then(location => {
           return res.status(201).json(location)
         })
         .catch(err => res.status(500).json(err))
+  })
+  .catch(err => res.status(500).json(err))
+}
+
+exports.deleteSavedPins = function (req, res) {
+  const locationId = req.body.location
+  const userId = req.params.userId
+  //Check users savedPins array to find location we want to remove from favorites list
+  User.findOneAndUpdate(
+    {_id: userId},
+    { $pull: { savedPins: locationId } },
+    { new: true }
+  )
+  .then( (user) => {
+    Location.findById(locationId)
+      .then(location => {
+        return res.status(200).json(location)
+      })
+      .catch(err => res.status(500).json(err))
   })
   .catch(err => res.status(500).json(err))
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, TouchableHighlight, TouchableOpacity, Image } from 'react-native'
 import styles  from '../Style/style.js'
+import serverURL from '../Lib/url'
 
 export default FavoritesListItem = (props) => {
 
@@ -11,14 +12,40 @@ export default FavoritesListItem = (props) => {
     props.navigator.push({
       name: 'ParkingDetails',
       description: props.location.description,
-      id: props.location.id,
+      id: props.location._id,
       coordinate: {latitude: lat, longitude: long},
       title: props.location.address,
       backButtonText: 'favorites'
     });
   }
 
+  const handleRemoveFavorites = function () {
+    fetch(`${serverURL}/users/${props.currentUser._id}/saved`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': props.userToken
+      },
+      body: JSON.stringify({
+        location: props.location._id
+      })
+    })
+    .then(response => response.json())
+    .then(json => {
+      props.updateStateOfFavorites(json._id)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+
   return (
+    <View>
+    <TouchableHighlight onPress={ () => {handleRemoveFavorites()}}>
+      <Text>Remove from favs</Text>
+    </TouchableHighlight>
     <TouchableOpacity
       onPress={ () => { handleButtonPress() } }
       style={styles.listItemView}
@@ -32,5 +59,6 @@ export default FavoritesListItem = (props) => {
         source={require('../Public/Arrow-Icon.png')}
       />
     </TouchableOpacity>
+    </View>
   )
 }
