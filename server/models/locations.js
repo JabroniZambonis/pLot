@@ -3,7 +3,7 @@ const { Schema } = mongoose
 
 const locationSchema = new Schema({
   address: { type: String, unique: true, required: true },
-  rating: Number,
+  rating: { type: Number, default: 0 },
   reviews: [{rating: Number, content: String, userId: String}],
   photos: [],
   description: String,
