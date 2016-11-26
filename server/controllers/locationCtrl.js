@@ -17,6 +17,7 @@ exports.create = function (req, res) {
   if (req.image) {
     cloudinary.uploader.upload(req.image.path)
       .then(savedImage => {
+        // create location and pass in image url
         return new Location({
           address: req.body.location.address,
           reviews: [],
@@ -28,8 +29,7 @@ exports.create = function (req, res) {
       })
       // location saved
       .then(location => {
-        // on location saved add it to users created pins
-        // grab user from Authorization header
+        // now add location to users created pins
         const user = jwt.decode(req.get('Authorization'))
         User.findOneAndUpdate(
           { _id: user._id },
@@ -58,8 +58,7 @@ exports.create = function (req, res) {
     })
     .save()
     .then((location) => {
-      // on location saved add it to users created pins
-      // grab user from Authorization header
+      // add location to users createdPins
       const user = jwt.decode(req.get('Authorization'))
       User.findOneAndUpdate(
         { _id: user._id },
