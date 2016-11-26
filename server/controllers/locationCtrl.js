@@ -79,6 +79,12 @@ exports.create = function (req, res) {
   }
 }
 
+exports.getLocation = function (req, res) {
+  Location.findById(req.params.locationId)
+    .then(location => res.status(200).json(location))
+    .catch(err => res.status(400).json(err))
+}
+
 exports.searchGoogleByCoords = function(req, res) {
   const { lat, long } = req.query
   // if lat and long aren't provided send error
