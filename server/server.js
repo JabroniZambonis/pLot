@@ -7,11 +7,13 @@ const userRouter = require('./routes/userRouter')
 const locationRouter = require('./routes/locationRouter')
 const authRouter = require('./routes/authRouter')
 const bodyParser = require('body-parser')
+const imageParser = require('./lib/imageParser')
 
 //app level middleware
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
+app.use(imageParser)
 
 app.get('/test', function (req, res) {
   res.send('Hey there')
