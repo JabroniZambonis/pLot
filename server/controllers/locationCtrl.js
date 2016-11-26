@@ -13,34 +13,70 @@ const baseGoogleURL =
 
 
 exports.create = function (req, res) {
-  new Location({
-    address: req.body.location.address,
-    reviews: [],
-    rating: 0,
-    photos: [],
-    description: req.body.location.description,
-    loc: req.body.location.loc
-  })
-  .save()
-  .then((location) => {
-    // on location saved add it to users created pins
-    // grab user from Authorization header
-    const user = jwt.decode(req.get('Authorization'))
-    User.findOneAndUpdate(
-      { _id: user._id },
-      { $push: { createdPins: location._id } },
-      // return new updated user
-      { new: true}
-    )
-    .then(user => {
-      // user was saved send location to client to show write went through
-      return res.status(201).json(location)
+  // check for image
+  if (req.image) {
+    cloudinary.uploader.upload(req.image.path)
+      .then(savedImage => {
+        return new Location({
+          address: req.body.location.address,
+          reviews: [],
+          photos: [ savedImage.secure_url ],
+          description: req.body.location.description,
+          loc: rec.body.location.loc
+        })
+        .save()
+      })
+      // location saved
+      .then(location => {
+        // on location saved add it to users created pins
+        // grab user from Authorization header
+        const user = jwt.decode(req.get('Authorization'))
+        User.findOneAndUpdate(
+          { _id: user._id },
+          { $push: { createdPins: location._id } },
+          // return new updated user
+          { new: true }
+        )
+        .then(user => {
+          // user was saved send location to client to show write went through
+          return res.status(201).json(location)
+        })
+        // error saving user
+        .catch(err => res.status(500).json(err))
+      })
+      // catch for saving image
+      .catch(err => res.status(500).json(err))
+  } else {
+    // image not included with location creation
+    new Location({
+      address: req.body.location.address,
+      reviews: [],
+      rating: 0,
+      photos: [],
+      description: req.body.location.description,
+      loc: req.body.location.loc
     })
-  })
-  // any errors trying to save location
-  .catch((err) => {
-    return res.status(500).json(err)
-  })
+    .save()
+    .then((location) => {
+      // on location saved add it to users created pins
+      // grab user from Authorization header
+      const user = jwt.decode(req.get('Authorization'))
+      User.findOneAndUpdate(
+        { _id: user._id },
+        { $push: { createdPins: location._id } },
+        // return new updated user
+        { new: true}
+      )
+      .then(user => {
+        // user was saved send location to client to show write went through
+        return res.status(201).json(location)
+      })
+    })
+    // any errors trying to save location
+    .catch((err) => {
+      return res.status(500).json(err)
+    })
+  }
 }
 
 exports.searchGoogleByCoords = function(req, res) {
@@ -180,48 +216,30 @@ exports.photos = function (req, res) {
 }
 
 exports.addPhoto = function (req, res) {
-  // pull out id for location
-  console.log("locationCtrl.js addPhoto req.params: ", req.params)
   const { locationId } = req.params
-  // create variable for image once it is read
-  let image
-  // configuration for formidable
-  const form = new formidable.IncomingForm()
-  form.uploadDir = resolve(__dirname, '../', 'uploads')
-  // events emitted by formidable module
-  form
-    .on('file', function (name, file) {
-      // make sure it is an image
-      if (file.type === "image/jpeg") {
-        image = file
-      }
+  if (!req.image) {
+    const err = {
+      error: 'This route requires an image to post to the given location id'
+    }
+    res.status(400).json(err)
+  } else {
+    cloudinary.uploader.upload(req.image.path)
+    .then(saved => {
+      // pull the secure_url out of cloudinary response and save
+      // to the Location
+      Location.findOneAndUpdate(
+        { _id: locationId },
+        { $push: { photos: saved.secure_url } },
+        // return new updated location
+        { new: true }
+      )
+      .then(location => res.status(201).json(location))
+      // error updating location
+      .catch(err => res.status(500).json(err))
     })
-    .on('error', function (err) {
-      // error parsing image
-      res.status(500).json(err)
-    })
-    // event fired once req.body is done being parsed
-    .on('end', function () {
-      // upload image to cloudinary
-      cloudinary.uploader.upload(image.path)
-        .then(saved => {
-          // pull the secure_url out of cloudinary response and save
-          // to the Location
-          Location.findOneAndUpdate(
-            { _id: locationId },
-            { $push: { photos: saved.secure_url } },
-            // return new updated location
-            { new: true }
-          )
-          .then(location => res.status(201).json(location))
-          // error updating location
-          .catch(err => res.status(500).json(err))
-        })
-        // error saving image to cloudinary
-        .catch(err => res.status(500).json(err))
-    })
-  form.parse(req)
-
+    // error saving image to cloudinary
+    .catch(err => res.status(500).json(err))
+  }
 }
 
 exports.addReview = function (req, res) {
