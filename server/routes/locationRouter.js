@@ -5,6 +5,7 @@ const locations = require('../controllers/locationCtrl')
 router.route('/')
   .post(locations.create)
 
+
 router.route('/bycoords')
   .get(locations.findByCoords)
 
@@ -16,6 +17,9 @@ router.route('/parkwhizbycoords')
 
 router.route('/byaddr')
   .get(locations.findByAddr)
+
+router.route('/:locationId')
+  .get(locations.getLocation)
 
 router.route('/:locationId/photos')
   .get(locations.photos)
