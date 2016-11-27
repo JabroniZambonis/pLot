@@ -207,6 +207,7 @@ createSpotBar {
   border-radius: 10;
   border-color: #64AFCB;
   padding-left: 10;
+  padding-top: 5;
   justify-content: flex-start;
   font-size: 16;
 }
@@ -458,6 +459,7 @@ parkingDescriptionImagesContainer {
 /*LocationMarkerCallout.js*/
 calloutContainer {
   flex-direction: row;
+  z-index: 2;
 }
 
 calloutDescription {

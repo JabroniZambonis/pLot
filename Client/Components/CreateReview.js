@@ -1,7 +1,7 @@
 const styles = require('../Style/style.js')
 
 import React, { Component } from 'react'
-import { View, TextInput, Text, TouchableHighlight, Slider, StyleSheet} from 'react-native'
+import { View, TextInput, Text, TouchableHighlight, Slider, StyleSheet, Keyboard, TouchableWithoutFeedback} from 'react-native'
 import serverURL from '../Lib/url'
 import Button from 'apsl-react-native-button'
 
@@ -46,32 +46,34 @@ export default class CreateReview extends Component {
 
   render () {
     return (
-      <View style={style.formContainer}>
-        <Text style={style.createFormHeader}>Review the spot</Text>
-        <View style={style.inputContainer}>
-          <TextInput
-            style={style.contentInput}
-            multiline={true}
-            onChange={(event) => this.setState({content: event.nativeEvent.text})}
-            placeholder={'Give us your feedback on the spot...'}
-          />
-          <Slider 
-            maximumValue={5}
-            minimumValue={0}
-            step={1}
-            onValueChange={(value) => this.setState({rating: value})}
-          />
-          <Text>{this.state.rating}</Text>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={style.formContainer}>
+          <Text style={style.createFormHeader}>Review the spot</Text>
+          <View style={style.inputContainer}>
+            <TextInput
+              style={style.contentInput}
+              multiline={true}
+              onChange={(event) => this.setState({content: event.nativeEvent.text})}
+              placeholder={'Give us your feedback on the spot...'}
+            />
+            <Slider 
+              maximumValue={5}
+              minimumValue={0}
+              step={1}
+              onValueChange={(value) => this.setState({rating: value})}
+            />
+            <Text>{this.state.rating}</Text>
+          </View>
+          <View style={{ flexDirection:'row',justifyContent:'center'}}>
+            <Button
+              onPress={this.createReview}
+              style={styles.reviewsButton}
+              textStyle={styles.reviewButtonText}
+            >Submit
+            </Button>
+          </View>
         </View>
-        <View style={{ flexDirection:'row',justifyContent:'center'}}>
-          <Button
-            onPress={this.createReview}
-            style={styles.reviewsButton}
-            textStyle={styles.reviewButtonText}
-          >Submit
-          </Button>
-        </View>
-      </View>
+      </TouchableWithoutFeedback>
     )
   }
 }
@@ -99,6 +101,7 @@ const style = StyleSheet.create({
     height: 200,
     fontSize: 16,
     paddingLeft: 10,
+    paddingTop:5,
     backgroundColor: 'white',
     color: '#64AFCB'
   }

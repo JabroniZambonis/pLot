@@ -107,144 +107,146 @@ export default class HomeMap extends Component {
     let redoSearchButton = this.state.redoButtonPress ? styles.redoSearchButtonPress : styles.redoSearchButton
 
     return (
-      <View style={styles.homeContainer}>
-        <View style={styles.searchBarContainer}>
-          <TextInput
-            returnKeyType="search"
-            style={styles.searchBar}
-            onChangeText={(text) => this.setState({text})}
-            placeholder={this.state.searchText}
-            onSubmitEditing={(event) => this.searchLocationSubmit(event)}
-            clearButtonMode={'while-editing'}
-          />
-        </View>
-
-        <TouchableHighlight
-          onPress={() => {
-            this.createProfileNav()
-          }}
-        >
-          <Image
-            style={styles.profileViewImageButton}
-            source={{uri: this.state.currentUser.photo}}
-          />
-        </TouchableHighlight>
-
-        <ReturnToUser backToUser={this.returnToUser} />
-
-        <View style={styles.homeMapContainer}>
-          <MapView
-            style={styles.homeMapView}
-            region={this.state.currentLocation}
-            onRegionChange={this.onRegionChange}
-            showsUserLocation={true}
-            ref="map"
-          >
-            {this.state.nearbyLocations.map((marker, key) => (
-              <MapView.Marker
-                key={marker.id}
-                id={marker.id}
-                coordinate={marker.coordinate}
-                title={marker.title}
-                description={marker.description}
-                onPress={(evt) => console.log('pressed ', evt.nativeEvent)}
-                centerOffset={{x: 0, y: -20}}
-              >
-                <LocationMarker {...marker} />
-                <MapView.Callout style={styles.locationMarkerCallout}>
-                  <LocationMarkerCallout
-                    {...marker}
-                    navigator={this.props.navigator}
-                    currentUser={this.state.currentUser}
-                    userToken={this.props.userToken}
-                  />
-                </MapView.Callout>
-              </MapView.Marker>
-            ))}
-
-
-
-            {this.state.nearbyPaidLocations.map((marker, key) => (
-              <MapView.Marker
-                key={marker.id}
-                id={marker.id}
-                coordinate={marker.coordinate}
-                title={marker.title}
-                description={marker.description}
-                price={marker.price}
-                onPress={(evt) => console.log('pressed ', evt.nativeEvent)}
-                centerOffset={{x: 0, y: -20}}
-
-              >
-                <LocationMarkerPaid {...marker} />
-                <MapView.Callout style={styles.locationMarkerCallout}>
-                  <LocationMarkerPaidCallout  {...marker} navigator={this.props.navigator} />
-                </MapView.Callout>
-              </MapView.Marker>
-            ))}
-          </MapView>
-
-          <View style = {styles.mapCenterMarkerView}>
-            <Image
-              style={styles.mapCenterMarker}
-              source={require('../Public/centerMap.png')}
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.homeContainer}>
+          <View style={styles.searchBarContainer}>
+            <TextInput
+              returnKeyType="search"
+              style={styles.searchBar}
+              onChangeText={(text) => this.setState({text})}
+              placeholder={this.state.searchText}
+              onSubmitEditing={(event) => this.searchLocationSubmit(event)}
+              clearButtonMode={'while-editing'}
             />
           </View>
-        </View>
-          <LocationListView
-            nearbyLocations={this.state.nearbyLocations}
-            navigator={this.props.navigator}
-          />
-          <Button
-            style={redoSearchButton}
-            textStyle={styles.reviewButtonText} 
-            onPress={() => {
-              this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude);
-              this.getPaidPinsForCoords(this.state.currentLocation.latitude, this.state.currentLocation.longitude);
-              
-              this.setState({
-                currentLocation: {
-                  latitude: this.state.currentLocation.latitude,
-                  longitude: this.state.currentLocation.longitude,
-                  latitudeDelta: 0.03,
-                  longitudeDelta: 0.03
-                }
-              })
-            }}
-            onPressIn={() => this.setRedoButtonStyle(!this.state.redoButtonPress)}
-            onPressOut={() => this.setRedoButtonStyle(!this.state.redoButtonPress)}
-            activeOpacity={1}
-          >
-            Redo Search
-          </Button>
 
-          <Button
+          <TouchableHighlight
             onPress={() => {
-              this.createLocationNav()
+              this.createProfileNav()
             }}
-            onPressIn={() => this.setAddButtonStyle(!this.state.addButtonPress)}
-            onPressOut={() => this.setAddButtonStyle(!this.state.addButtonPress)}
-            style={addButtonStyle}
-            textStyle={styles.addLocationButtonText}
-            activeOpacity={1}
           >
-            +
-          </Button>
-          <Modal
-            animationType={"none"}
-            transparent={true}
-            visible={this.state.animating}
-          >
-            <View style={actInd.centering}>
-              <ActivityIndicator
-                animating={this.state.animating}
-                size="large"
-                color="orange"
-                style={actInd.indicator}
+            <Image
+              style={styles.profileViewImageButton}
+              source={{uri: this.state.currentUser.photo}}
+            />
+          </TouchableHighlight>
+
+          <ReturnToUser backToUser={this.returnToUser} />
+
+          <View style={styles.homeMapContainer}>
+            <MapView
+              style={styles.homeMapView}
+              region={this.state.currentLocation}
+              onRegionChange={this.onRegionChange}
+              showsUserLocation={true}
+              ref="map"
+            >
+              {this.state.nearbyLocations.map((marker, key) => (
+                <MapView.Marker
+                  key={marker.id}
+                  id={marker.id}
+                  coordinate={marker.coordinate}
+                  title={marker.title}
+                  description={marker.description}
+                  onPress={(evt) => console.log('pressed ', evt.nativeEvent)}
+                  centerOffset={{x: 0, y: -20}}
+                >
+                  <LocationMarker {...marker} />
+                  <MapView.Callout style={styles.locationMarkerCallout}>
+                    <LocationMarkerCallout
+                      {...marker}
+                      navigator={this.props.navigator}
+                      currentUser={this.state.currentUser}
+                      userToken={this.props.userToken}
+                    />
+                  </MapView.Callout>
+                </MapView.Marker>
+              ))}
+
+
+
+              {this.state.nearbyPaidLocations.map((marker, key) => (
+                <MapView.Marker
+                  key={marker.id}
+                  id={marker.id}
+                  coordinate={marker.coordinate}
+                  title={marker.title}
+                  description={marker.description}
+                  price={marker.price}
+                  onPress={(evt) => console.log('pressed ', evt.nativeEvent)}
+                  centerOffset={{x: 0, y: -20}}
+
+                >
+                  <LocationMarkerPaid {...marker} />
+                  <MapView.Callout style={styles.locationMarkerCallout}>
+                    <LocationMarkerPaidCallout  {...marker} navigator={this.props.navigator} />
+                  </MapView.Callout>
+                </MapView.Marker>
+              ))}
+            </MapView>
+
+            <View style={styles.mapCenterMarkerView}>
+              <Image
+                style={styles.mapCenterMarker}
+                source={require('../Public/centerMap.png')}
               />
             </View>
-        </Modal>
-      </View>
+          </View>
+            <LocationListView
+              nearbyLocations={this.state.nearbyLocations}
+              navigator={this.props.navigator}
+            />
+            <Button
+              style={redoSearchButton}
+              textStyle={styles.reviewButtonText} 
+              onPress={() => {
+                this.getPinsForCoords(this.state.currentLocation.longitude, this.state.currentLocation.latitude);
+                this.getPaidPinsForCoords(this.state.currentLocation.latitude, this.state.currentLocation.longitude);
+                
+                this.setState({
+                  currentLocation: {
+                    latitude: this.state.currentLocation.latitude,
+                    longitude: this.state.currentLocation.longitude,
+                    latitudeDelta: 0.03,
+                    longitudeDelta: 0.03
+                  }
+                })
+              }}
+              onPressIn={() => this.setRedoButtonStyle(!this.state.redoButtonPress)}
+              onPressOut={() => this.setRedoButtonStyle(!this.state.redoButtonPress)}
+              activeOpacity={1}
+            >
+              Redo Search
+            </Button>
+
+            <Button
+              onPress={() => {
+                this.createLocationNav()
+              }}
+              onPressIn={() => this.setAddButtonStyle(!this.state.addButtonPress)}
+              onPressOut={() => this.setAddButtonStyle(!this.state.addButtonPress)}
+              style={addButtonStyle}
+              textStyle={styles.addLocationButtonText}
+              activeOpacity={1}
+            >
+              +
+            </Button>
+            <Modal
+              animationType={"none"}
+              transparent={true}
+              visible={this.state.animating}
+            >
+              <View style={actInd.centering}>
+                <ActivityIndicator
+                  animating={this.state.animating}
+                  size="large"
+                  color="orange"
+                  style={actInd.indicator}
+                />
+              </View>
+          </Modal>
+        </View>
+      </TouchableWithoutFeedback>
     )
   }
 }
