@@ -40,14 +40,18 @@ export default class ParkingDetails extends Component {
 
   //Will need this later for fetching and loading images of parking spaces and reviews from the database
   componentDidMount() {
-    fetch(`${serverURL}/locations/${this.props.id}/reviews`)
+    fetch(`${serverURL}/locations/${this.props.id}`)
     .then(response => response.json())
-    .then(reviews => {
-      if(reviews.length > 0) {
+    .then(location => {
+      console.log(location)
+      if(location.reviews.length > 0) {
         this.setState({
-          reviews: reviews
+          reviews: location.reviews
         })
       }
+      this.setState({
+        photos: location.photos
+      })
     })
     .catch(err => {
       console.log(err)
@@ -122,7 +126,9 @@ export default class ParkingDetails extends Component {
           </View>
         </View>
         <View style={styles.parkingDescriptionImagesContainer}>
-          <ImageSlider images={this.state.parkingSpacePics} />
+          <ImageSlider 
+            images={this.state.photos || this.state.parkingSpacePics} 
+          />
         </View>
         <View style={styles.reviewButtonView}>
           <Button
