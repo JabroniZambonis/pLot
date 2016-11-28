@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, TouchableHighlight, TouchableOpacity, Image } from 'react-native'
 import styles  from '../Style/style.js'
 import serverURL from '../Lib/url'
+import Icon from 'react-native-vector-icons/Entypo'
 
 export default FavoritesListItem = (props) => {
 
@@ -43,9 +44,11 @@ export default FavoritesListItem = (props) => {
 
   return (
     <View>
-    <TouchableHighlight onPress={ () => {handleRemoveFavorites()}}>
-      <Text>Remove from favs</Text>
-    </TouchableHighlight>
+    <TouchableOpacity onPress={ () => {handleRemoveFavorites()}}>
+      <View style={{width: 25}}>
+        <Icon name="trash" size={25} color={'gray'}/>
+      </View>
+    </TouchableOpacity>
     <TouchableOpacity
       onPress={ () => { handleButtonPress() } }
       style={styles.listItemView}
