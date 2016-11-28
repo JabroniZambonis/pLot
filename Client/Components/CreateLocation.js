@@ -60,10 +60,11 @@ export default class CreateLocation extends Component {
         long: this.props.currentLocation.longitude
       }
       this.props.addLocation(location)
+      this.props.navigator.pop()
     })
     .catch(err => console.log(err))
 
-    // navigator.pop()
+    
   }
 
   createProfileNav () {
