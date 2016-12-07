@@ -4,6 +4,10 @@ pLot is a partially crowd sourced, partially API supported parking application,
 for iOS and Android, intended to help users find a parking spot in heavily
 populated areas where parking can be manually added by users.
 
+The stack implemented to build this application is react native for the front end,
+node/express for server side development, webpack for bundling and deployment, 
+and mongo/mongoose for the database.
+
 # .env
 
 To run this application locally, it's necessary to create a .env file with the
@@ -27,3 +31,7 @@ run "react-native-css -i style.css -o style.js -w" from within the Style folder
 to compile.
 
 ![Main Screen](/ss1.png?raw=true)
+
+![Main Screen](/ss2.png?raw=true)
+
+![Main Screen](/ss3.png?raw=true)
