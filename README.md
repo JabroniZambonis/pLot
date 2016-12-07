@@ -25,3 +25,5 @@ the react-native components.
 
 run "react-native-css -i style.css -o style.js -w" from within the Style folder
 to compile.
+
+![Main Screen](/ss1.png?raw=true)
