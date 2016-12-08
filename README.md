@@ -30,8 +30,4 @@ the react-native components.
 run "react-native-css -i style.css -o style.js -w" from within the Style folder
 to compile.
 
-![Main Screen](/ss1.png?raw=true)
-
-![Main Screen](/ss2.png?raw=true)
-
-![Main Screen](/ss3.png?raw=true)
+![Main Screen](/Client/Public/shots_720.png?raw=true)
