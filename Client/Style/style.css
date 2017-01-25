@@ -361,7 +361,7 @@ reviewButtonView {
 /*LocationListItem*/
 listItemView {
   padding: 5px 0px 5px 0px;
-  border-top: 1px solid #64AFCB;
+  border-bottom: 1px solid #64AFCB;
   flex-direction: row;
   align-items: center;
 }
