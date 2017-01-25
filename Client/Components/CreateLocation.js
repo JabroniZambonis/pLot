@@ -56,7 +56,7 @@ export default class CreateLocation extends Component {
     })
     .catch(err => console.log(err))
 
-    navigator.pop()
+    this.props.navigator.pop()
   }
 
   createProfileNav () {
