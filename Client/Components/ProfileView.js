@@ -15,6 +15,14 @@ export default class ProfileView extends Component {
       userToken: this.props.userToken
     })
   }
+
+  showCreatedPins () {
+    this.props.navigator.push({
+      name: 'CreatedListView',
+      currentUser: this.props.currentUser,
+      userToken: this.props.userToken
+    })
+  }
   
   finishedLogout (error, result) {
     this.props.logOut()
@@ -23,7 +31,7 @@ export default class ProfileView extends Component {
   render () {
     return (
         <View style={{flex:1,backgroundColor:'white',}}>
-          <TouchableOpacity style={styles.profileViewButton}>
+          <TouchableOpacity onPress={this.showCreatedPins.bind(this)} style={styles.profileViewButton}>
             <Text style={styles.profileViewText}>Created Pins</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={this.showFavoritesList.bind(this)} style={styles.profileViewButton}>
